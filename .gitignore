@@ -1,0 +1,24 @@
+# Compiled class files
+*.class
+*.tasty
+
+# Build directories
+target/
+project/target/
+project/project/target/
+
+# IDE and build tool files
+.idea/
+.vscode/
+.metals/
+.bloop/
+.bsp/
+.scala-build/
+
+# Logs and outputs
+*.log
+output.log
+
+# OS metadata
+.DS_Store
+Thumbs.db
