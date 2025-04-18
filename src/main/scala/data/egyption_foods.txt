@@ -1,0 +1,21 @@
+# name|is_vegetarian|ingredients
+koshari|true|rice, lentils, pasta, chickpeas, fried onions, tomato sauce
+ful medames|true|fava beans, garlic, lemon juice, olive oil
+molokhia|false|jute leaves, chicken broth, garlic, coriander
+taameya|true|fava beans, parsley, cilantro, onion, spices
+mahshi|true|zucchini, eggplant, rice, tomatoes, herbs
+fatta|false|rice, meat, garlic, toasted bread, yogurt
+basbousa|true|semolina, yogurt, coconut, sugar syrup
+konafa|true|shredded pastry, sugar syrup, cream or nuts
+hamam mahshi|false|stuffed pigeon, rice, spices
+sayadeya|false|fish, rice, onions, spices
+shakshuka|false|eggs, tomatoes, bell peppers, onions, spices
+bamia|false|okra, lamb or beef, tomato sauce, garlic
+fattah bil laban|false|rice, meat, yogurt, garlic, crispy bread
+roz bel laban|false|rice, milk, sugar, cinnamon, raisins
+samak mashwy|false|grilled fish, spices, lemon, garlic
+batates bil forno|true|potatoes, garlic, olive oil, herbs
+lentil soup|true|lentils, carrots, onions, cumin
+hawawshi|false|spiced minced meat, bread, onions, peppers
+gibna domiati|false|Domiati cheese, milk, salt
+atayef|true|pancakes, nuts , sugar syrup

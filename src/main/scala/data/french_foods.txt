@@ -1,0 +1,11 @@
+# name|is_vegetarian|ingredients
+ratatouille|true|zucchini,eggplant,tomato,pepper,onion,garlic,olive oil,herbs
+coq au vin|false|chicken,red wine,mushrooms,onion,garlic,bacon,thyme
+quiche lorraine|false|eggs,cream,bacon,cheese,pie crust
+tarte tatin|true|apples,sugar,butter,pastry
+pain au chocolat|false|flour,butter,yeast,sugar,salt,milk,dark chocolate
+boeuf bourguignon|false|beef,red wine,carrots,onions,garlic,mushrooms,thyme
+croissant|false|flour,butter,yeast,sugar,salt,milk
+cassoulet|false|white beans,duck,sausage,garlic,onion,carrot,herbs
+crème brûlée|false|cream,egg yolks,sugar,vanilla
+soupe à l'oignon|false|onions,beef broth,bread,cheese,butter,thyme

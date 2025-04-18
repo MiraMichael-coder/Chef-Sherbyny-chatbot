@@ -1,0 +1,21 @@
+# Format: Question | Choice1,Choice2,Choice3,Choice4 | CorrectAnswer
+What is the main ingredient in Koshari? | Rice,Lentils,Potatoes,Beans | Rice
+Which of these Egyptian dishes is always vegetarian? | Molokhia,Hamam Mahshi,Taameya,Sayadeya | Taameya
+What protein is used in Molokhia? | Beef,Chicken,Fish,Lamb | Chicken
+Which dish contains fried onions as a key ingredient? | Koshari,Ful Medames,Bamia,Shakshuka | Koshari
+What is the base ingredient of Ful Medames? | Chickpeas,Lentils,Fava Beans,Peas | Fava Beans
+Which Egyptian dish features stuffed vegetables? | Mahshi,Fatta,Shakshuka,Batates bil Forno | Mahshi
+Which of these is NOT typically vegetarian? | Taameya,Ful Medames,Hamam Mahshi,Mahshi | Hamam Mahshi
+Which of these is NOT an ingredient in traditional Koshari? | Rice,Pasta,Chickpeas,Eggplant | Eggplant
+Which of these is NOT usually sweet? | Basbousa,Konafa,Atayef,Fatta | Fatta
+Which of these is NOT a main protein source in Egyptian cuisine? | Pigeon,Fava Beans,Chicken,Fish | Fava Beans
+Which of these is NOT typically served during Ramadan? | Ful Medames,Qatayef,Konafa,Hamam Mahshi | Hamam Mahshi
+What gives Molokhia its distinctive texture? | Jute Leaves,Okra,Spinach,Eggplant | Jute Leaves
+Which herb is essential in Taameya? | Parsley,Basil,Mint,Oregano | Parsley
+What makes Basbousa moist? | Yogurt,Milk,Honey,Butter | Yogurt
+Which spice is prominent in Hawawshi? | Cumin,Cinnamon,Turmeric,Paprika | Cumin
+What is the crispy element in Fattah bil Laban? | Fried Onions,Toasted Bread,Fried Garlic,Nuts | Toasted Bread
+What's the difference between Taameya and Falafel? | Same thing,Egyptian vs Lebanese,Egyptian uses fava beans,No difference | Egyptian uses fava beans
+How does Egyptian Koshari differ from Indian Khichdi? | Uses pasta,More spicy,No lentils,Sweeter | Uses pasta
+What distinguishes Egyptian Ful from Lebanese Ful? | Creamier texture,No garlic,Served cold,No lemon | Creamier texture
+What makes street food Taameya different from restaurant versions? | Smaller size,More herbs,Fried longer,No garlic | More herbs

@@ -1,0 +1,11 @@
+# name|is_vegetarian|ingredients
+tabbouleh|true|parsley,bulgur,tomato,green onion,mint,lemon juice,olive oil
+hummus|true|chickpeas,tahini,garlic,lemon juice,olive oil,salt
+kibbeh|false|bulgur,ground beef,onion,spices,pine nuts
+fattoush|true|lettuce,radish,tomato,cucumber,crispy pita,lemon juice,sumac
+shawarma|false|beef,garlic,yogurt,spices,onion,olive oil
+mujadara|true|lentils,bulgur,onion,olive oil,spices
+kafta|false|ground lamb,parsley,onion,spices
+manakish|true|za'atar,olive oil,flatbread,sesame seeds
+falafel|true|chickpeas,parsley,onion,garlic,cumin,coriander
+sambousek|false|ground meat,onion,spices,pine nuts,pastry dough

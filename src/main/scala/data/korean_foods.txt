@@ -1,0 +1,9 @@
+# name|is_vegetarian|ingredients
+bibimbap|false|rice,beef,egg,spinach,carrot,zucchini,gochujang
+kimchi|true|napa cabbage,radish,garlic,ginger,gochugaru,fish sauce
+japchae|true|glass noodles,spinach,carrot,onion,mushroom,soy sauce
+bulgogi|false|beef,soy sauce,sesame oil,garlic,onion,sugar
+tteokbokki|true|rice cakes,gochujang,sugar,garlic,green onion
+samgyeopsal|false|pork belly,garlic,sesame oil,salt,pepper
+haemul pajeon|false|green onion,flour,egg,seafood,soy sauce
+soondubu jjigae|false|soft tofu,seafood,gochujang,egg,green onion,garlic
