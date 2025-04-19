@@ -1,21 +1,20 @@
-# name|is_vegetarian|ingredients
-koshari|true|rice, lentils, pasta, chickpeas, fried onions, tomato sauce
-ful medames|true|fava beans, garlic, lemon juice, olive oil
-molokhia|false|jute leaves, chicken broth, garlic, coriander
-taameya|true|fava beans, parsley, cilantro, onion, spices
-mahshi|true|zucchini, eggplant, rice, tomatoes, herbs
-fatta|false|rice, meat, garlic, toasted bread, yogurt
-basbousa|true|semolina, yogurt, coconut, sugar syrup
-konafa|true|shredded pastry, sugar syrup, cream or nuts
-hamam mahshi|false|stuffed pigeon, rice, spices
-sayadeya|false|fish, rice, onions, spices
-shakshuka|false|eggs, tomatoes, bell peppers, onions, spices
-bamia|false|okra, lamb or beef, tomato sauce, garlic
-fattah bil laban|false|rice, meat, yogurt, garlic, crispy bread
-roz bel laban|false|rice, milk, sugar, cinnamon, raisins
-samak mashwy|false|grilled fish, spices, lemon, garlic
-batates bil forno|true|potatoes, garlic, olive oil, herbs
-lentil soup|true|lentils, carrots, onions, cumin
-hawawshi|false|spiced minced meat, bread, onions, peppers
-gibna domiati|false|Domiati cheese, milk, salt
-atayef|true|pancakes, nuts , sugar syrup
+name|is_vegetarian|ingredients|recipe_steps|recipe_link
+koshari|true|rice, lentils, pasta, chickpeas, fried onions, tomato sauce|Cook rice, Cook lentils, Boil pasta, Fry onions until golden, Mix chickpeas with pasta and lentils, Layer everything and top with tomato sauce and fried onions|https://www.themediterraneandish.com/egyptian-koshari-recipe/
+ful medames|true|fava beans, garlic, lemon juice, olive oil|Soak fava beans overnight, Boil beans until soft, Mash lightly, Mix with crushed garlic, lemon juice, and olive oil, Serve warm|https://www.bbcgoodfood.com/recipes/ful-medames
+molokhia|false|jute leaves, chicken broth, garlic, coriander|Chop molokhia leaves, Boil chicken broth, Add molokhia and simmer, Fry garlic and coriander, Stir into soup before serving|https://feelgoodfoodie.net/recipe/molokhia/
+taameya|true|fava beans, parsley, cilantro, onion, spices|Soak and grind fava beans, Mix with herbs, onion, and spices, Form into patties, Deep fry until golden|https://www.allrecipes.com/recipe/254743/taameya-egyptian-falafel/
+mahshi|true|zucchini, eggplant, rice, tomatoes, herbs|Hollow vegetables, Mix rice with chopped tomatoes and herbs, Stuff vegetables, Simmer in tomato sauce until cooked|https://www.196flavors.com/egypt-mahshi/
+fatta|false|rice, meat, garlic, toasted bread, yogurt|Cook rice and meat separately, Toast bread and layer in dish, Mix garlic with yogurt, Layer meat and rice, Top with yogurt mixture|https://www.seriouseats.com/egyptian-fatta-recipe-7109578
+basbousa|true|semolina, yogurt, coconut, sugar syrup|Mix semolina with yogurt and coconut, Pour into baking dish, Bake until golden, Soak with sugar syrup while hot|https://www.themediterraneandish.com/basbousa-almond-coconut-semolina-cake/
+konafa|true|shredded pastry, sugar syrup, cream or nuts|Layer half the pastry in a pan, Add cream or nuts, Cover with remaining pastry, Bake until crisp, Pour sugar syrup on top|https://amiraspantry.com/knafeh/
+hamam mahshi|false|stuffed pigeon, rice, spices|Clean and stuff pigeons with spiced rice, Sew closed, Boil briefly, Roast or fry until golden|https://www.internationalcuisine.com/egypt-squab/
+sayadeya|false|fish, rice, onions, spices|Fry onions until caramelized, Cook fish with spices, Layer fish and onions with rice, Simmer until done|https://feelgoodfoodie.net/recipe/sayadieh/
+shakshuka|false|eggs, tomatoes, bell peppers, onions, spices|Sauté onions and peppers, Add tomatoes and spices, Simmer sauce, Crack eggs on top, Cover and cook until eggs set|https://www.themediterraneandish.com/shakshuka-recipe/
+bamia|false|okra, lamb or beef, tomato sauce, garlic|Brown meat with garlic, Add tomato sauce and cook, Add okra and simmer until tender|https://everylittlecrumb.com/bamia-%D8%A8%D8%A7%D9%85%D9%8A%D8%A9-middle-eastern-okra-and-meat-stew/
+fattah bil laban|false|rice, meat, yogurt, garlic, crispy bread|Cook rice and meat, Toast bread and place in dish, Mix yogurt with garlic, Layer rice and meat, Top with yogurt|https://mediterraneaneatz.com/recipe/fatteh-bi-laban/
+roz bel laban|false|rice, milk, sugar, cinnamon, raisins|Boil rice in milk until soft, Add sugar and cinnamon, Stir in raisins, Simmer until creamy|https://afrifoodnetwork.com/recipes/dessert-recipes/roz-bi-laban/
+samak mashwy|false|grilled fish, spices, lemon, garlic|Marinate fish with spices, lemon, and garlic, Grill until cooked through|https://yummymideast.com/fish-dishes/samak-mashwi/
+batates bil forno|true|potatoes, garlic, olive oil, herbs|Slice potatoes, Toss with garlic, olive oil, and herbs, Bake until golden and crispy|https://amiraspantry.com/oven-roasted-potatoes/
+lentil soup|true|lentils, carrots, onions, cumin|Sauté onions and carrots, Add lentils and water, Simmer until soft, Blend if desired, Season with cumin|https://www.simplyleb.com/recipe/lentil-soup/
+hawawshi|false|spiced minced meat, bread, onions, peppers|Mix meat with spices, onions, and peppers, Stuff into pita or bread, Bake or grill until crispy|https://www.simplyleb.com/recipe/hawawshi/
+atayef|true|pancakes, nuts , sugar syrup|Fill pancakes with nuts, Seal edges, Fry or bake until golden, Dip in sugar syrup|https://www.simplyleb.com/recipe/atayef/

@@ -56,8 +56,9 @@ object FoodDB {
         List.empty
     }.get
   }
-
-
+  def getAllDishes: List[Dish] = {
+    dishesByCategory.values.flatten.toList
+  }
   def getDishesByCategory(category: String): List[Dish] = {
     dishesByCategory.getOrElse(category.toLowerCase, {
       println(s"Warning: Category '$category' not found")
