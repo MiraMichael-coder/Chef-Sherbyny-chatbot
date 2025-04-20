@@ -18,16 +18,17 @@ object FoodDB {
   
   val categories: List[CuisineCategory] = List(
     CuisineCategory("egyptian", s"${basePath}egyption_foods.txt"),
-    CuisineCategory("lebanese", s"${basePath}lebanese_foods.txt"),
-    CuisineCategory("korean", s"${basePath}korean_foods.txt"),
-    CuisineCategory("french", s"${basePath}french_foods.txt")
+    //CuisineCategory("lebanese", s"${basePath}lebanese_foods.txt"),
+    //CuisineCategory("korean", s"${basePath}korean_foods.txt"),
+    //CuisineCategory("french", s"${basePath}french_foods.txt")
     //CuisineCategory("Lebaneese", s"${basePath}lebanon_foods.txt")
   )
 
   // Load all dishes by category with error handling
-  val dishesByCategory: Map[String, List[Dish]] = categories.map { category =>
-    category.name -> loadDishesFromFile(category.filePath)
-  }.toMap
+  // will be in the format (categoryName, List(Dish))
+  val dishesByCategory: List[(String, List[Dish])] = categories.map { 
+  category => (category.name, loadDishesFromFile(category.filePath)) 
+}
 
   private def loadDishesFromFile(filePath: String): List[Dish] = {
     Try {
@@ -37,6 +38,7 @@ object FoodDB {
           .filterNot(_.trim.isEmpty)
           .filterNot(_.startsWith("#"))
           .filter(_.contains("|"))
+          .drop(1) 
           .map { line =>
             val parts = line.split("\\|").map(_.trim)
             Dish(
@@ -57,19 +59,24 @@ object FoodDB {
     }.get
   }
   def getAllDishes: List[Dish] = {
-    dishesByCategory.values.flatten.toList
+    dishesByCategory.foldLeft(List.empty[Dish]) {  case (acc, (_,dishes)) =>
+      acc ++ dishes
+    }
   }
   def getDishesByCategory(category: String): List[Dish] = {
-    dishesByCategory.getOrElse(category.toLowerCase, {
+  dishesByCategory.find {
+    case (cat, _) => cat.equalsIgnoreCase(category)
+  } match {
+    case Some((_, dishes)) => dishes
+    case None =>
       println(s"Warning: Category '$category' not found")
       List.empty
-    })
   }
+}
 
   def findDishesByIngredient(ingredient: String): List[Dish] = {
-    dishesByCategory.values.flatten
-      .filter(_.ingredients.exists(_.equalsIgnoreCase(ingredient)))
-      .toList
+    val dishes=getAllDishes.filter(_.ingredients.exists(_.equalsIgnoreCase(ingredient))).toList
+     dishes
   }
   /* def startInteractiveQuiz(cuisine: String): Unit = {
   val questions = Quizez.getQuizByCategory(cuisine)

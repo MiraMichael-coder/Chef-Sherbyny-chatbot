@@ -14,6 +14,7 @@ object Quizez
     //CusineQuestions("lebanese", s"${basePath}lebanese_foods.txt"),
     //CusineQuestions("korean", s"${basePath}korean_foods.txt"),
     //CusineQuestions("french", s"${basePath}french_foods.txt")
+    //CusineQuestions("General ", s"${basePath}general_questions.txt")
   )
   val quizezbyCategory: Map[String, List[QuizQuestion]] = categories.map { category =>
     category.name -> loadQuizFromFile(category.filePath)
@@ -67,10 +68,14 @@ object Quizez
 
     s"$questionPart\n\n$choicesPart"
 }
-    def checkAnswer(question: QuizQuestion, userAnswer: String): Boolean = {
+    def checkAnswer(question: QuizQuestion, userAnswer: String): Boolean = { // lo 3ayez yanswer by index 
         question.correctAnswer== userAnswer.toLowerCase 
     }
 }
+
+//generate random 5 question s
+// save answers score
+// 
 /* object EgyptianQuizPrinter {
   def main(args: Array[String]): Unit = {
     // Initialize the quiz system
