@@ -111,7 +111,7 @@ object FoodDB {
 }
   }
 }
-    def allTokensMatch(tokens: List[String], dishName: String): Boolean = tokens match {
+  def allTokensMatch(tokens: List[String], dishName: String): Boolean = tokens match {
   case Nil => true
   case head :: tail => dishName.contains(head) && allTokensMatch(tail, dishName)
 }

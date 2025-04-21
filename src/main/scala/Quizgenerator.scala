@@ -3,8 +3,10 @@ import scala.util.{Try, Success, Failure}
 import java.nio.file.{Paths, Files}
 import java.io.File
 import scala.util.Random
+
 case class QuizQuestion( question: String,choices: List[String], correctAnswer: String)
 case class CusineQuestions(name: String, filePath: String)
+
 object Quizez
 {
   private val basePath = "C:\\Users\\Mira\\Desktop\\uni\\year 2\\Semster 2\\Advanced Prog\\Project\\chatbot\\src\\main\\scala\\data\\"
@@ -75,7 +77,7 @@ object Quizez
         question.correctAnswer== userAnswer.toLowerCase 
     }
 
-def startquiz(cuisine: String ="general", handleTypos: String => String): Unit = {
+  def startquiz(cuisine: String ="general", handleTypos: String => String): Unit = {
   val questions = Quizez.getQuizByCategory(cuisine)
   if (questions.isEmpty) {
     println(s"No questions available for $cuisine cuisine.")

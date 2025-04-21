@@ -146,7 +146,7 @@ object Main  {
   // taking input and checking for typos
   // and returning a valid command type and tokens
   def parseInput(input: String): (String, List[String]) = {
-  val tokens = input.toLowerCase.split("\\s+").toList
+  val tokens = input.toLowerCase.replaceAll("""[^\w\s]""", "").split("\\s+").toList
   val correctedTokens = tokens.map(handleTypos) // Correct typos in each token
   
   // Identify command type based on keywords
@@ -186,7 +186,9 @@ object Main  {
     // Function to handle user input and provide responses
     // This function will be called when the user provides input
     // It will parse the input and check for valid commands   
-  def handleUserInput(input: String): Unit = {
+  
+  def handleUserInput(input: String): Unit = 
+  {
   val (command, tokens) = parseInput(input)
   
   command match {
@@ -205,12 +207,10 @@ object Main  {
     case "unknown" => // yerg3 llchat tany 
       val corrected = handleTypos(input)
       println(s"Did you mean: $corrected? Or try asking about a cuisine or type 'quiz'.") //need to handle this type pf error 
+    }
   }
-}
-  // Function to handle dish requests and show details
-  // This function will be called when the user asks about a dish
-  def handleDishRequest(tokens: List[String]): Unit = {
-  // Find dish name in tokens
+   def handleRecipeRequest(tokens: List[String]): Unit = {
+  // Similar to dish request but with recipe-specific response
   val allDishes = FoodDB.getAllDishes
   val maybeDish = tokens.collectFirst {
     case t => allDishes.find(_.name.toLowerCase == handleTypos(t))
@@ -218,20 +218,23 @@ object Main  {
   
   maybeDish match {
     case Some(dish) =>
-      showDishDetails(dish)
-    case None =>//need to tetzabt 
-      println("Which dish would you like to know about?")
+      showRecipe(dish)
+    case None => // need to tetzabt 
+      println("Which recipe would you like?")
       // Could show list of available dishes here
       val dishName = scala.io.StdIn.readLine().trim
       val corrected = handleTypos(dishName)
       allDishes.find(_.name.toLowerCase == corrected) match {
-        case Some(d) => showDishDetails(d)
-        case None => println(s"Sorry, I don't know about '$dishName'")
+        case Some(d) => showRecipe(d)
+        case None => println(s"Sorry, I don't have a recipe for '$dishName'")
       }
   }
 }
-  def handleRecipeRequest(tokens: List[String]): Unit = {
-  // Similar to dish request but with recipe-specific response
+  // Function to handle dish requests and show details
+  // This function will be called when the user asks about a dish
+  def handleDishRequest(tokens: List[String]): Unit = {
+  // Find dish name in tokens
+  // If dish is found, show details
   val allDishes = FoodDB.getAllDishes
   val maybeDish = tokens.collectFirst {
     case t => allDishes.find(_.name.toLowerCase == handleTypos(t))
@@ -283,7 +286,7 @@ object Main  {
   } 
   println("Enjoy your cooking!") // after this part return to the main chat 
 }
-def mainChat(): Unit = {
+  def mainChat(): Unit = {
   println(greetUser()) // Show initial greeting
   
   var shouldContinue = true
