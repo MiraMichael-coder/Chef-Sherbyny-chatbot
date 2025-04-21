@@ -1,0 +1,37 @@
+# Format: Question | Choice1,Choice2,Choice3,Choice4 | CorrectAnswer
+What is the main vegetable in Ratatouille? | Carrot,Potato,Zucchini,Spinach | Zucchini
+What meat is used in Coq au Vin? | Duck,Chicken,Beef,Pork | Chicken
+Which dish includes wine as a key cooking ingredient? | Boeuf Bourguignon,Crème Brûlée,Tarte Tatin,Croissant | Boeuf Bourguignon
+Which of these is not a dessert? | Tarte Tatin,Croissant,Crème Brûlée,Cassoulet | Cassoulet
+What is a key feature of Crème Brûlée? | Flaky crust,Creamy filling,Caramelized sugar top,Chopped nuts | Caramelized sugar top
+Which dish is famously caramelized upside down? | Crème Brûlée,Tarte Tatin,Croissant,Quiche Lorraine | Tarte Tatin
+What is the main ingredient in a Croissant dough? | Eggs,Sugar,Butter,Yeast | Butter
+Which of these French dishes typically uses onions as the main ingredient? | Cassoulet,Tarte Tatin,Soupe à l'oignon,Boeuf Bourguignon | Soupe à l'oignon
+What ingredient gives Quiche Lorraine its creaminess? | Milk,Yogurt,Cream,Butter | Cream
+What makes French onion soup unique? | Cold broth,Raw onions,Caramelized onions and cheese,No seasoning | Caramelized onions and cheese
+Which French dish is often eaten during colder months? | Ratatouille,Tarte Tatin,Cassoulet,Crème Brûlée | Cassoulet
+What makes Croissants flaky? | Rolling technique,Egg wash,Sugar content,Baking temperature | Rolling technique
+Which French dessert is torched before serving? | Crème Brûlée,Tarte Tatin,Quiche Lorraine,Pain au Chocolat | Crème Brûlée
+Which French dish is known for being caramelized in sugar and butter before baking? | Ratatouille,Tarte Tatin,Croissant,Boeuf Bourguignon | Tarte Tatin
+What kind of beans are used in Cassoulet? | Black beans,Pinto beans,White beans,Red kidney beans | White beans
+What makes the top of Crème Brûlée crispy? | Ice,Caramel drizzle,Baking powder,Blow-torched sugar | Blow-torched sugar
+What does “au vin” mean in French? | With cream,With cheese,With wine,With herbs | With wine
+Which is a typical flavoring in Ratatouille? | Vanilla,Thyme,Cinnamon,Curry | Thyme
+Which of these is a breakfast pastry? | Cassoulet,Boeuf Bourguignon,Pain au Chocolat,Tarte Tatin | Pain au Chocolat
+What is the best way to describe Cassoulet? | Light and crunchy,Cold and sweet,Hearty and rich,Spicy and fried | Hearty and rich
+Which ingredient do you NOT find in Crème Brûlée? | Egg yolks,Vanilla,Cream,Flour | Flour
+How are croissants shaped? | Rectangles,Circles,Crescents,Triangles | Crescents
+Which dish requires slow cooking for several hours? | Boeuf Bourguignon,Pain au Chocolat,Tarte Tatin,Crème Brûlée | Boeuf Bourguignon
+What is the purpose of laminating croissant dough? | Add color,Add flavor,Create layers,Make it rise | Create layers
+What kind of chocolate is used in Pain au Chocolat? | Milk chocolate,White chocolate,Dark chocolate,Hazelnut chocolate | Dark chocolate
+Which is considered a rustic countryside dish in France? | Crème Brûlée,Coq au Vin,Ratatouille,Pain au Chocolat | Coq au Vin
+What is the main filling in an éclair? | Whipped cream,Pastry cream,Chocolate ganache,Lemon curd | Pastry cream
+Which ingredient is NOT typically found in salade niçoise? | Tuna,Anchovies,Bacon,Green beans | Bacon
+Bouillabaisse is best described as: | A creamy chicken stew,A seafood stew from Marseille,A baked vegetable dish,A cold soup | A seafood stew from Marseille
+Which fruit is traditionally used in clafoutis? | Apples,Blueberries,Cherries,Pears | Cherries
+What type of dish is gratin dauphinois? | A sweet pastry,A potato and cream casserole,A type of quiche,A stuffed vegetable dish | A potato and cream casserole
+Galette des rois is traditionally filled with: | Apple compote,Whipped cream,Almond cream (frangipane),Chocolate mousse | Almond cream (frangipane)
+What is typically served with steak frites? | Mashed potatoes,Pasta,French fries,Couscous | French fries
+What makes crêpes different from pancakes? | They're thicker and fluffier,They're baked in the oven,They’re thinner and cooked on a skillet,They contain yeast | They’re thinner and cooked on a skillet
+What ingredient gives mousse au chocolat its airy texture? | Baking soda,Egg yolks,Beaten egg whites,Gelatin | Beaten egg whites
+What kind of animal is traditionally used in a French Coq au Vin? | Duck,Goose,Chicken,Beef | Chicken  

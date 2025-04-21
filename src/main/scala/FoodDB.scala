@@ -15,12 +15,33 @@ case class CuisineCategory(name: String, filePath: String)
 object FoodDB {
   // Use relative paths for better portability
   private val basePath = "C:\\Users\\Mira\\Desktop\\uni\\year 2\\Semster 2\\Advanced Prog\\Project\\chatbot\\src\\main\\scala\\data\\"
-  
+  val foodTrivia: Map[String, List[String]] = Map(
+    "🇪🇬 Egyptian Cuisine" -> List(
+      "Ancient Fast Food: Taameya (Egyptian falafel) dates back to the Pharaohs!",
+      "Bread as Currency: Pyramid workers were paid in bread and beer.",
+      "Koshari’s Global Roots: Fusion of Italian, Indian, and Middle Eastern flavors."
+    ),
+    "🇰🇷 Korean Cuisine" -> List(
+      "Kimchi in Space: Specially developed for astronauts in 2008.",
+      "Bibimbap’s Lucky Leftovers: Originally a Lunar New Year cleanup dish.",
+      "Tteokbokki’s Royal Upgrade: Started as a mild palace dish."
+    ),
+    "🇫🇷 French Cuisine" -> List(
+      "Croissant Conspiracy: Actually Austrian in origin!",
+      "Cheese Drama: France has over 1,000 cheeses.",
+      "Soup for Rebels: Onion soup was 'soup of drunkards'."
+    ),
+    "🇱🇧 Lebanese Cuisine" -> List(
+      "Hummus Wars: Lebanon made a 4-ton platter to claim ownership.",
+      "Za’atar Secrets: Some blends include crushed rose petals!",
+      "Falafel’s Holy Roots: Possibly invented by Coptic Christians."
+    )
+  )
   val categories: List[CuisineCategory] = List(
     CuisineCategory("egyptian", s"${basePath}egyption_foods.txt"),
-    //CuisineCategory("lebanese", s"${basePath}lebanese_foods.txt"),
-    //CuisineCategory("korean", s"${basePath}korean_foods.txt"),
-    //CuisineCategory("french", s"${basePath}french_foods.txt")
+    CuisineCategory("lebanese", s"${basePath}lebanese_foods.txt"),
+    CuisineCategory("korean", s"${basePath}korean_foods.txt"),
+    CuisineCategory("french", s"${basePath}french_foods.txt")
     //CuisineCategory("Lebaneese", s"${basePath}lebanon_foods.txt")
   )
 
@@ -78,44 +99,22 @@ object FoodDB {
     val dishes=getAllDishes.filter(_.ingredients.exists(_.equalsIgnoreCase(ingredient))).toList
      dishes
   }
-  /* def startInteractiveQuiz(cuisine: String): Unit = {
-  val questions = Quizez.getQuizByCategory(cuisine)
-  if (questions.isEmpty) {
-    println(s"No questions available for $cuisine cuisine.")
+  def getDish(tokens: List[String]): Option[Dish] = {
+  // 1. First try exact match by combining all tokens
+  val exactMatch = getAllDishes.find(_.name.toLowerCase == tokens.mkString(" ").toLowerCase)
+  
+  if (exactMatch.isDefined) {
+    exactMatch
   } else {
-    println(s"\nStarting $cuisine quiz (${questions.size} questions)...")
-    println("Type your answer (A/B/C/D) or the full answer. Type 'quit' to exit.\n")
-    
-    var score = 0
-    var shouldContinue = true
-    var questionIndex = 0
-
-    while (shouldContinue && questionIndex < questions.size) {
-      val question = questions(questionIndex)
-      println(s"Question ${questionIndex + 1}:")
-      println(Quizez.formatQuestion(question))
-      
-      val userAnswer = scala.io.StdIn.readLine().trim.toLowerCase
-      val correctedInput = handleTypos(userAnswer)
-      if (correctedInput == "quit") {
-        shouldContinue = false
-      } else {
-        if (Quizez.checkAnswer(question, correctedInput)) {
-          println("Correct!\n")
-          score += 1
-        } else {
-          println(s"Incorrect. The correct answer was: ${question.correctAnswer}\n")
-        }
-        questionIndex += 1
-      }
-    }
-
-    if (shouldContinue) {
-      println(s"Quiz complete! Your score: $score/${questions.size}")
-    } else {
-      println(s"Quiz stopped. Partial score: $score")
-    }
-  }
-} */
-
+    // 2. If no exact match, look for dishes that contain all the tokens
+    getAllDishes.find { dish => allTokensMatch(tokens, dish.name.toLowerCase)
 }
+  }
+}
+    def allTokensMatch(tokens: List[String], dishName: String): Boolean = tokens match {
+  case Nil => true
+  case head :: tail => dishName.contains(head) && allTokensMatch(tail, dishName)
+}
+  }
+  
+

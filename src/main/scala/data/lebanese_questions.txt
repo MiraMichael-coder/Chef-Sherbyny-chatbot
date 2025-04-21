@@ -1,0 +1,21 @@
+Question | Choice1,Choice2,Choice3,Choice4 | CorrectAnswer
+What is the main ingredient in Tabbouleh? | Bulgur,Parsley,Lettuce,Cucumber | Parsley
+Which dip is made from chickpeas and tahini? | Baba Ghanoush,Hummus,Labneh,Moutabal | Hummus
+What type of meat is traditionally used in Kibbeh? | Chicken,Beef,Fish,Lamb | Beef
+Which salad features crispy pita chips? | Fattoush,Tabbouleh,Caesar,Greek | Fattoush
+What is typically served with Shawarma? | Rice,Bread,Pickles,All of the above | All of the above
+What is a key protein in Mujadara? | Beef,Lentils,Chicken,Fish | Lentils
+What is Kafta usually made from? | Chicken,Lamb,Beef,Fish | Lamb
+What herb is essential in Manakish Za’atar? | Thyme,Mint,Oregano,Basil | Thyme
+Which Lebanese dish is made from ground chickpeas and deep-fried? | Sambousek,Falafel,Kafta,Manakish | Falafel
+What type of filling is commonly found in Sambousek? | Cheese,Spinach,Ground Meat,Tomatoes | Ground Meat
+Which dish uses za’atar and flatbread? | Kafta,Manakish,Hummus,Fattoush | Manakish
+What is a common ingredient in Lebanese garlic sauce (toum)? | Egg,Garlic,Onion,Yogurt | Garlic
+What gives Fattoush its tangy flavor? | Sumac,Lemon zest,Vinegar,Pomegranate | Sumac
+Which Lebanese dish is shaped like a torpedo and fried or baked? | Kafta,Kibbeh,Shawarma,Falafel | Kibbeh
+What makes Hummus creamy? | Butter,Olive Oil,Tahini,Milk | Tahini
+Which dish combines lentils and bulgur topped with fried onions? | Mujadara,Kafta,Kibbeh,Fattoush | Mujadara
+What is traditionally sprinkled over Manakish? | Sumac,Za’atar,Cumin,Paprika | Za’atar
+What bread is commonly served with Lebanese meals? | Naan,Pita,Baguette,Focaccia | Pita
+What is a typical Lebanese dessert made with semolina and syrup? | Konafa,Baklava,Basbousa,Mahalabia | Basbousa
+Which of these is NOT usually vegetarian? | Falafel,Hummus,Fattoush,Kafta | Kafta

@@ -1,0 +1,21 @@
+# Format: Question | Choice1,Choice2,Choice3,Choice4 | CorrectAnswer
+What is the main ingredient in Bibimbap? | Rice,Noodles,Tofu,Seaweed | Rice  
+Which Korean dish is always vegetarian? | Japchae,Bulgogi,Gyeran Jjim,Hotteok | Hotteok  
+What protein is commonly used in Bulgogi? | Pork,Beef,Chicken,Tofu | Beef  
+Which dish features glass noodles? | Japchae,Tteokbokki,Bibimbap,Kimchi Jjigae | Japchae  
+What is the spicy red paste used in many Korean dishes? | Doenjang,Gochujang,Ssamjang,Soy Sauce | Gochujang  
+Which dish is a soft tofu stew? | Kimchi Jjigae,Doenjang Jjigae,Soondubu Jjigae,Galbi | Soondubu Jjigae  
+What ingredient gives Kimchi its spiciness? | Chili Powder,Pepper Paste,Gochugaru,Sriracha | Gochugaru  
+Which of these is a Korean pancake with seafood? | Hotteok,Haemul Pajeon,Gyeran Mari,Tteok | Haemul Pajeon  
+Which dish is typically eaten cold? | Kimchi Jjigae,Naengmyeon,Galbi,Bibimbap | Naengmyeon  
+What gives Bingsu its sweetness? | Soy Sauce,Red Bean,Condensed Milk,Chili Paste | Condensed Milk  
+What is used to wrap meat in Samgyeopsal? | Seaweed,Napa Cabbage,Lettuce,Rice Paper | Lettuce  
+Which Korean dish includes sweet rice cakes? | Tteokbokki,Bingsu,Gamja Jorim,Dakgalbi | Tteokbokki  
+What kind of noodles are used in Japchae? | Udon,Glass Noodles,Rice Noodles,Buckwheat | Glass Noodles  
+Which dish contains fermented cabbage? | Kimchi,Samgyeopsal,Dakgalbi,Naengmyeon | Kimchi  
+What dessert is made from shaved ice? | Hotteok,Bingsu,Bokkeumbap,Hobakjuk | Bingsu  
+Which of these dishes is typically grilled? | Galbi,Gamja Jorim,Kimchi Jjigae,Hobakjuk | Galbi  
+What kind of stew is made with aged kimchi and pork? | Soondubu Jjigae,Kimchi Jjigae,Doenjang Jjigae,Galbitang | Kimchi Jjigae  
+Which of these dishes is commonly eaten for breakfast? | Gyeran Jjim,Bulgogi,Dakgalbi,Tteokbokki | Gyeran Jjim  
+What is the filling in Mandu usually made of? | Tofu,Beef,Pork and Veggies,Only Rice | Pork and Veggies  
+Which of these is NOT typically spicy? | Bingsu,Kimchi,Bulgogi,Tteokbokki | Bingsu  

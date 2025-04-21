@@ -2,7 +2,7 @@ import scala.io.Source
 import scala.util.{Try, Success, Failure}
 import java.nio.file.{Paths, Files}
 import java.io.File
-
+import scala.util.Random
 case class QuizQuestion( question: String,choices: List[String], correctAnswer: String)
 case class CusineQuestions(name: String, filePath: String)
 object Quizez
@@ -11,10 +11,10 @@ object Quizez
   
   val categories: List[CusineQuestions] = List(
     CusineQuestions("egyptian", s"${basePath}egyption_questions.txt"),
-    //CusineQuestions("lebanese", s"${basePath}lebanese_foods.txt"),
-    //CusineQuestions("korean", s"${basePath}korean_foods.txt"),
-    //CusineQuestions("french", s"${basePath}french_foods.txt")
-    //CusineQuestions("General ", s"${basePath}general_questions.txt")
+    CusineQuestions("lebanese", s"${basePath}lebanese_foods.txt"),
+    CusineQuestions("korean", s"${basePath}korean_foods.txt"),
+    CusineQuestions("french", s"${basePath}french_foods.txt"),
+    CusineQuestions("general", s"${basePath}general_questions.txt")
   )
   val quizezbyCategory: Map[String, List[QuizQuestion]] = categories.map { category =>
     category.name -> loadQuizFromFile(category.filePath)
@@ -68,29 +68,48 @@ object Quizez
 
     s"$questionPart\n\n$choicesPart"
 }
+    def getRandomQuestions(questions: List[QuizQuestion]): List[QuizQuestion] = {
+        scala.util.Random.shuffle(questions).take(5)
+    }
     def checkAnswer(question: QuizQuestion, userAnswer: String): Boolean = { // lo 3ayez yanswer by index 
         question.correctAnswer== userAnswer.toLowerCase 
     }
-}
 
-//generate random 5 question s
-// save answers score
-// 
-/* object EgyptianQuizPrinter {
-  def main(args: Array[String]): Unit = {
-    // Initialize the quiz system
-    val quizSystem = Quizez
+def startquiz(cuisine: String ="general", handleTypos: String => String): Unit = {
+  val questions = Quizez.getQuizByCategory(cuisine)
+  if (questions.isEmpty) {
+    println(s"No questions available for $cuisine cuisine.")
+  } else {
+    println(s"\nStarting $cuisine quiz (${questions.size} questions)...")
+    println("Type your answer (A/B/C/D) or the full answer. Type 'quit' to exit.\n")
     
-    // Get all Egyptian cuisine questions
-    val egyptianQuestions = quizSystem.getQuizByCategory("egyptian")
-    
-    // Print all questions with formatted choices
-    egyptianQuestions.foreach { question =>
-      println(quizSystem.formatQuestion(question))
-      println() // Add space between questions
+    // Get random questions
+    val randomQuestions = Quizez.getRandomQuestions(questions)
+
+    var score = 0
+    randomQuestions.foreach{ question =>
+      println(Quizez.formatQuestion(question))
+      val userAnswer = scala.io.StdIn.readLine("Your answer: ").toLowerCase
+      val normalizedAnswer = userAnswer.toLowerCase match {
+        case "a" if question.choices.size > 0 => question.choices(0).toLowerCase
+        case "b" if question.choices.size > 1 => question.choices(1).toLowerCase
+        case "c" if question.choices.size > 2 => question.choices(2).toLowerCase
+        case "d" if question.choices.size > 3 => question.choices(3).toLowerCase
+        case _ => handleTypos(userAnswer) 
+      
+      }
+      if (normalizedAnswer == "quit") {
+        println("Exiting the quiz.")
+        println(s"Your partial score: $score/${randomQuestions.size}")
+      }
+      if (Quizez.checkAnswer(question, normalizedAnswer)) {
+        println("Correct!")
+        score += 1
+      } else {
+        println(s"Wrong! The correct answer is: ${question.correctAnswer}")
+      }
     }
-    
-    // Print total count
-    println(s"\nTotal questions: ${egyptianQuestions.size}")
+    println(s"\nYour final score: $score/${randomQuestions.size}")
   }
-} */
+}
+}

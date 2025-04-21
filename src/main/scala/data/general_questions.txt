@@ -1,0 +1,73 @@
+Format: Question | Choice1,Choice2,Choice3,Choice4 | CorrectAnswer
+What is the main ingredient in hummus? | Lentils,Chickpeas,Beans,Peas | Chickpeas
+Which Lebanese dish is made with parsley, bulgur, and tomatoes? | Tabbouleh,Fattoush,Kibbeh,Shawarma | Tabbouleh
+What is the primary spice used in Korean kimchi? | Turmeric,Cumin,Gochugaru,Paprika | Gochugaru
+Which French dish is a slow-cooked beef stew with red wine? | Ratatouille,Boeuf bourguignon,Cassoulet,Coq au vin | Boeuf bourguignon
+What is the main ingredient in Egyptian koshari? | Rice,Lentils,Pasta,All of the above | All of the above
+Which Lebanese dessert is made with semolina and sugar syrup? | Baklava,Knefeh,Basbousa,Atayef | Knefeh
+What is the Korean rice cake dish called? | Tteokbokki,Bibimbap,Kimchi,Japchae | Tteokbokki
+Which Egyptian dish is made with fava beans and garlic? | Ful medames,Molokhia,Taameya,Mahshi | Ful medames
+What is the French term for a caramelized apple tart? | Tarte Tatin,Crème brûlée,Clafoutis,Mille-feuille | Tarte Tatin
+Which Lebanese dish features stuffed grape leaves? | Warak enab,Mujadara,Falafel,Sambousek | Warak enab
+What is the Korean fermented cabbage dish called? | Japchae,Bibimbap,Kimchi,Tteokbokki | Kimchi
+Which Egyptian dessert is a semolina cake soaked in syrup? | Basbousa,Konafa,Atayef,Roz bel laban | Basbousa
+What is the French puff pastry dessert layered with cream called? | Éclair,Mille-feuille,Galette des rois,Crêpes | Mille-feuille
+Which Lebanese dish is a spiced meat mixture grilled on skewers? | Kafta,Shawarma,Kibbeh,Mujadara | Kafta
+What is the Korean cold noodle dish called? | Naengmyeon,Japchae,Bibimbap,Samgyeopsal | Naengmyeon
+Which Egyptian dish is made with jute leaves and chicken broth? | Molokhia,Fatta,Bamia,Hamam mahshi | Molokhia
+What is the French onion soup topped with bread and cheese called? | Soupe à l'oignon,Cassoulet,Ratatouille,Coq au vin | Soupe à l'oignon
+Which Lebanese dish is a fried chickpea patty? | Falafel,Taameya,Hummus,Shawarma | Falafel
+What is the Korean pancake made with green onions called? | Pajeon,Hotteok,Bindaetteok,Kimchijeon | Pajeon
+Which Egyptian dish is a stuffed pigeon? | Hamam mahshi,Fatta,Mahshi,Bamia | Hamam mahshi
+What is the French dessert made with cherries and batter? | Clafoutis,Crème brûlée,Tarte Tatin,Mousse au chocolat | Clafoutis
+Which Lebanese dish is a lentil and bulgur mixture? | Mujadara,Tabbouleh,Kibbeh,Fattoush | Mujadara
+What is the Korean beef barbecue dish called? | Bulgogi,Galbi,Samgyeopsal,Dakgalbi | Bulgogi
+Which Egyptian dish is a layered bread, meat, and yogurt casserole? | Fatta,Koshari,Molokhia,Bamia | Fatta
+What is the French custard dessert with a caramelized sugar top? | Crème brûlée,Clafoutis,Mousse au chocolat,Éclair | Crème brûlée
+Which Lebanese dish is a fried cheese roll? | Sambousek,Rekakat,Manakish,Knefeh | Rekakat
+What is the Korean spicy soft tofu stew called? | Soondubu jjigae,Kimchi jjigae,Dakgalbi,Galbi | Soondubu jjigae
+Which Egyptian dish is a stuffed vegetable dish? | Mahshi,Ful medames,Taameya,Bamia | Mahshi
+What is the French sandwich made with ham and cheese? | Croque-monsieur,Quiche Lorraine,Pain au chocolat,Croissant | Croque-monsieur
+Which Lebanese dish is a crispy bread salad? | Fattoush,Tabbouleh,Mujadara,Kibbeh | Fattoush
+What is the Korean sweet pancake filled with brown sugar and nuts called? | Hotteok,Bindaetteok,Pajeon,Kimchijeon | Hotteok
+Which Egyptian dish is a sweet pastry filled with nuts? | Konafa,Basbousa,Atayef,Roz bel laban | Atayef
+What is the French dish made with layers of potatoes and cream? | Gratin dauphinois,Ratatouille,Cassoulet,Coq au vin | Gratin dauphinois
+Which Lebanese dish is a spiced meat pie? | Lahm bi ajeen,Manakish,Sambousek,Knefeh | Lahm bi ajeen
+What is the Korean steamed egg dish called? | Gyeran jjim,Hobakjuk,Bingsu,Gamja jorim | Gyeran jjim
+Which Egyptian dish is a lentil soup? | Ful medames,Lentil soup,Molokhia,Bamia | Lentil soup
+What is the French dish made with zucchini, eggplant, and tomatoes? | Ratatouille,Boeuf bourguignon,Cassoulet,Coq au vin | Ratatouille
+Which Lebanese dish is a yogurt-based drink? | Ayran,Laban,Knefeh,Falafel | Laban
+What is the Korean shaved ice dessert called? | Bingsu,Hotteok,Hobakjuk,Gamja jorim | Bingsu
+Which Egyptian dish is a fried fish? | Samak mashwy,Fatta,Bamia,Hamam mahshi | Samak mashwy
+What is the French dish made with duck and white beans? | Cassoulet,Coq au vin,Boeuf bourguignon,Ratatouille | Cassoulet
+Which Lebanese dish is a spiced meat and bulgur mixture? | Kibbeh,Kafta,Shawarma,Mujadara | Kibbeh
+What is the Korean braised potato dish called? | Gamja jorim,Hobakjuk,Bingsu,Gyeran jjim | Gamja jorim
+Which Egyptian dish is a sweet rice pudding? | Roz bel laban,Basbousa,Konafa,Atayef | Roz bel laban
+What is the French dish made with chicken and red wine? | Coq au vin,Boeuf bourguignon,Cassoulet,Ratatouille | Coq au vin
+Which Lebanese dish is a flatbread topped with za'atar? | Manakish,Sambousek,Rekakat,Knefeh | Manakish
+What is the Korean stuffed dumpling called? | Mandu,Kimchi,Tteokbokki,Japchae | Mandu
+Which Egyptian dish is a spicy okra stew? | Bamia,Molokhia,Fatta,Hamam mahshi | Bamia
+What is the French dessert made with chocolate and whipped cream? | Mousse au chocolat,Crème brûlée,Clafoutis,Éclair | Mousse au chocolat
+Which Lebanese dish is a yogurt and cucumber salad? | Tabbouleh,Fattoush,Kibbeh,Kafta | Fattoush
+What is the Korean grilled pork belly dish called? | Samgyeopsal,Galbi,Bulgogi,Dakgalbi | Samgyeopsal
+Which Egyptian dish is a sweet coconut semolina cake? | Basbousa,Konafa,Atayef,Roz bel laban | Basbousa
+What is gochujang in Korean cuisine? | Fermented soybean paste,Spicy chili paste,Sweet rice vinegar,Garlic sauce | Spicy chili paste
+Which herb is essential in Lebanese tabbouleh? | Parsley,Mint,Cilantro,Basil | Parsley
+What is the primary grain in Egyptian koshari? | Rice,Bulgur,Lentils,Quinoa | Rice
+Which French sauce is made with butter, egg yolks, and lemon? | Béchamel,Hollandaise,Velouté,Espagnole | Hollandaise
+Which dish is a Korean spicy stir-fried rice cake? | Bibimbap,Tteokbokki,Kimchi,Japchae | Tteokbokki
+What is molokhia in Egyptian cuisine? | A jute-leaf soup,A fried bean patty,A stuffed pigeon,A yogurt dessert | A jute-leaf soup
+Which French dessert is a caramelized upside-down apple tart? | Crème brûlée,Tarte Tatin,Clafoutis,Éclair | Tarte Tatin
+Which Lebanese dish is a fried chickpea patty? | Falafel,Tabbouleh,Kibbeh,Shawarma | Falafel
+How is shawarma traditionally cooked? | Grilled on a spit,Deep-fried,Steamed,Baked | Grilled on a spit
+What technique is used for French sous vide? | Slow-cooking in vacuum-sealed bags,Flash-frying in woks,Steaming in bamboo,Open-fire roasting | Slow-cooking in vacuum-sealed bags
+Which Egyptian dish involves stuffing vegetables with rice? | Mahshi,Ful medames,Taameya,Bamia | Mahshi
+How is Korean kimchi preserved? | Fermentation,Freezing,Drying,Pickling in vinegar | Fermentation
+Which country is coq au vin from? | Italy,France,Spain,Germany | France
+What is banchan in Korean meals? | Main course,Side dishes,Desserts,Drinks | Side dishes
+Which Lebanese dish is eaten during Lent? | Kibbeh,Mujadara,Shawarma,Kafta | Mujadara
+What street food is Egypt famous for? | Taameya (falafel),Crepes,Tacos,Sushi | Taameya
+What is za'atar commonly used on in Lebanon? | Bread,Meat,Fish,Desserts | Bread
+Which Egyptian dish includes fried onions and tomato sauce? | Koshari,Ful medames,Molokhia,Bamia | Koshari
+What is the French term for "everything in its place" in cooking? | Mise en place,Al dente,Julienne,Sous vide | Mise en place
+Which Korean meal is served in a sizzling stone bowl? | Bibimbap,Kimchi jjigae,Samgyeopsal,Japchae | Bibimbap

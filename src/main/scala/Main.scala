@@ -105,8 +105,8 @@ object Main  {
 
   // Find the correct word if the input matches any typo
   // find is higher function for Map 
-  commonTypos.find { case (correct, typos) =>
-  typos.foldLeft(false) { (found, typ) =>
+  commonTypos.find { 
+    case (correct, typos) =>typos.foldLeft(false) { (found, typ) =>
     if (found) true else typ.toLowerCase == lowerInput} }.map(_._1).getOrElse(input)
  }
   def greetUser(): String = {
@@ -124,7 +124,8 @@ object Main  {
   val wave = "👋"
 
   s"""$timeGreeting, foodie! $wave I'm *Chef Sherbyny* the Chatbot $chefHat
-     |Welcome to your personal kitchen assistant! $sparkles
+  
+     |Welcome to your personal kitchen assistant! $chefHat
      |I can whip up facts, tips, and fun about these cuisines: $availableCuisines
      |
      |Ask me about a dish, explore ingredients, or type 'quiz' to test your food knowledge! $fire""".stripMargin
@@ -146,15 +147,41 @@ object Main  {
   // and returning a valid command type and tokens
   def parseInput(input: String): (String, List[String]) = {
   val tokens = input.toLowerCase.split("\\s+").toList
-  tokens.foreach(token => handleTypos(token)) // Correct typos in each token
+  val correctedTokens = tokens.map(handleTypos) // Correct typos in each token
+  
   // Identify command type based on keywords
-  val command = tokens match {
-    case t if t.contains("quiz") => "quiz"
-    case t if t.contains("tell") || t.contains("about")|| t.contains("what")||t.contains("recipe") => "info"
-    case t if t.contains("bye") || t.contains("exit") => "bye"
+  val command = correctedTokens match {
+    // Quiz commands
+    case t if t.contains("quiz") || t.contains("test") || t.contains("question") => "quiz"
+    
+    // Information requests
+    case t if (t.contains("tell") || t.contains("about") || t.contains("what") || t.contains("explain") || t.contains("describe")) && 
+              (t.contains("ingredient") || t.contains("make") || t.contains("contains")) => "ingredients"
+              
+    case t if (t.contains("how") && t.contains("make")) || 
+              t.contains("recipe") || 
+              (t.contains("steps") && (t.contains("make") || t.contains("prepare"))) => "recipe"
+              
+    case t if t.contains("knowledge") || t.contains("fact") || 
+              t.contains("trivia") || t.contains("interesting") => "trivia"
+    
+    // Dish information
+    case t if (t.contains("what") || t.contains("tell") || t.contains("about")) && 
+              !t.contains("ingredient") && !t.contains("recipe") => "dish_info"
+    
+    // Exit commands
+    case t if t.contains("bye") || t.contains("exit") || t.contains("quit") || t.contains("stop") => "bye"
+    
     case _ => "unknown"
   }
-  (command, tokens)
+  
+  // Extract cuisine or dish name from tokens
+  val keywords = correctedTokens.filterNot(token => 
+    Set("what", "tell", "me", "about", "the", "how", "make", "recipe", 
+        "ingredients", "of", "dish", "food", "steps", "to", "prepare",
+        "knowledge", "fact", "trivia", "quiz", "test", "question").contains(token) )
+  
+  (command, keywords)
 }
     // Function to handle user input and provide responses
     // This function will be called when the user provides input
@@ -164,64 +191,24 @@ object Main  {
   
   command match {
     case "bye" => 
-      println("Goodbye!")
-    
+      println("Goodbye! Happy cooking!")
     case "quiz" =>
       //(tokens)
-    
-    case "info" =>
-      handleInfoRequest(tokens)
-    
-    case "unknown" =>
+    case"recipe" =>
+      handleRecipeRequest(tokens)
+    case "trivia" =>
+      println("I don't have trivia yet, but stay tuned!")
+    case "dish_info" =>
+      handleDishRequest(tokens)
+    case "ingredients" =>
+      handleDishRequest(tokens)
+    case "unknown" => // yerg3 llchat tany 
       val corrected = handleTypos(input)
       println(s"Did you mean: $corrected? Or try asking about a cuisine or type 'quiz'.") //need to handle this type pf error 
   }
 }
-  def handleInfoRequest(tokens: List[String]): Unit = {
-  // First check if they're asking about a specific dish
-  val maybeDishRequest = tokens match {
-    case t if t.contains("recipe") || t.contains("make") || t.contains("cook") => "recipe"
-    case t if t.exists(token => 
-  FoodDB.getAllDishes.exists(_.name==handleTypos(token))) => "dish"
-    case t if t.exists(token =>   
-  FoodDB.categories.exists(_.name == handleTypos(token))) => "cuisine"
-  case _ => "cuisine"
-  }
-
-  maybeDishRequest match {
-    case "recipe" =>
-      handleRecipeRequest(tokens)
-    
-    case "dish" =>
-      handleDishRequest(tokens)
-    
-    case "cuisine" =>
-      handleCuisineRequest(tokens)
-  }
-}
-
-  def handleCuisineRequest(tokens: List[String]): Unit = { //needto tetzabt
-  // Find the cuisine name in the tokens
-  val maybeCuisine = tokens.collectFirst {
-    case t if FoodDB.categories.exists(_.name == handleTypos(t)) => handleTypos(t)
-  }
-  
-  maybeCuisine match {
-    case Some(cuisine) =>
-      //showCuisineInformation(cuisine)
-    case None =>
-      println("Which cuisine would you like to know about? Available options:")
-      println(FoodDB.categories.map(_.name.capitalize).mkString(", "))
-      val cuisine = scala.io.StdIn.readLine().trim.toLowerCase
-      val corrected = handleTypos(cuisine)
-      if (FoodDB.categories.exists(_.name == corrected)) {
-        //showCuisineInformation(corrected)
-      } else {
-        println(s"Sorry, '$cuisine' is not available.")
-      }
-  }
-}
-
+  // Function to handle dish requests and show details
+  // This function will be called when the user asks about a dish
   def handleDishRequest(tokens: List[String]): Unit = {
   // Find dish name in tokens
   val allDishes = FoodDB.getAllDishes
@@ -232,7 +219,7 @@ object Main  {
   maybeDish match {
     case Some(dish) =>
       showDishDetails(dish)
-    case None =>//need to teyzabt 
+    case None =>//need to tetzabt 
       println("Which dish would you like to know about?")
       // Could show list of available dishes here
       val dishName = scala.io.StdIn.readLine().trim
@@ -268,7 +255,7 @@ object Main  {
   val vegStatus = if (dish.isVegetarian) "Vegetarian" else "Non-vegetarian"
   println(s"\n◎ ${dish.name} ($vegStatus)")
   println(s"   Ingredients: ${dish.ingredients.mkString(", ")}")
-  println("\nWould you like the recipe for this dish? (yes/no)")
+  println("\nWould you like me to show you the recipe for this dish?")
   val answer = readLine().trim.toLowerCase
   val corrected= handleTypos(answer)
   if (corrected == "no" || corrected == "n" || corrected == "nope" || corrected == "nah") {
@@ -296,78 +283,31 @@ object Main  {
   } 
   println("Enjoy your cooking!") // after this part return to the main chat 
 }
-  def main(args: Array[String]): Unit = {
-  println(greetUser())
-    //FoodDB.getAllDishes.foreach(d => println(s"- ${d.name}"))
-  val input= readLine("What would you like to know? ").trim.toLowerCase
-  handleUserInput(input)
-
- }
-}  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // Example usage:
-  //showDishes("egyptian")
-  //showDishes("french")
-  //showDishes("lebanese")
-
-  /* println("\n=== Vegetarian Dishes ===")
-  FoodDB.dishesByCategory.values.flatten.filter(n=>n.isVegetarian).foreach(n=>println(n.name)) */
-
-  /* println("\n=== Vegetarian Dishes by Cuisine ===")
-  FoodDB.dishesByCategory.foreach { 
-    case (category, dishes) =>
-    val vegDishes = dishes.filter(_.isVegetarian)
-    if (vegDishes.nonEmpty) {
-      println(s"\n--- ${category.capitalize} Cuisine ---")
-      vegDishes.foreach { dish =>
-        println(s"• ${dish.name}")
+def mainChat(): Unit = {
+  println(greetUser()) // Show initial greeting
+  
+  var shouldContinue = true
+  
+  while (shouldContinue) {
+    print("\nWhat would you like to know? > ")
+    val input = readLine().trim
+    
+    if (input.isEmpty) {
+      println("Please enter a command or type 'quit' to exit")
+    } else {
+      val (command, _) = parseInput(input)
+      
+      // First check if it's a quit command
+      if (command == "bye") {
+        println("Goodbye! Happy cooking!")
+        shouldContinue = false
+      } else {
+        handleUserInput(input)
       }
     }
   }
-  } */
-  // println("\n=== Dishes with Rice ===")
-  // FoodDB.findDishesByIngredient("rice").foreach(println)}
+}
+  def main(args: Array[String]): Unit = {
+mainChat()
+  }
+}
