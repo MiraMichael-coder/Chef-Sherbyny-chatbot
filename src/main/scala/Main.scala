@@ -1,114 +1,7 @@
 import java.time.LocalTime
 import scala.io.StdIn.readLine
 object Main  {
-  def handleTypos(input: String): String = {
-  val commonTypos = Map(
-    // General words
-    "hello" -> List("helo", "hallo", "heloo", "hel", "elo", "heo", "helloo", "hlo"),
-    "hi" -> List("hiii", "hai", "hhi", "hii", "hee", "hy"),
-    "how" -> List("hoow", "hwo", "howw", "ho", "howare", "howr"),
-    "are" -> List("ar", "re", "rae", "aare", "arre"),
-    "you" -> List("yuo", "yo", "yoo", "yu", "youu"),
-    "what" -> List("wht", "waht", "wat", "whaat", "whatt", "whut"),
-    "is" -> List("si", "iss", "iis", "s", "iz"),
-    "the" -> List("teh", "th", "tge", "hte", "thhe", "da"),
-    "food" -> List("fod", "foood", "fud", "foood", "fod", "fode"),
-    "cuisine" -> List("cusine", "cuisin", "cuisne", "cuisene", "cuisnie", "quisine"),
-    "bye" -> List("bi","bey", "byee"),
-    "vegetarian" -> List("vegitarian", "vegeterian", "veggie", "vegatarian", "veggitarian"),
-    "ingredients" -> List("ingridients", "ingreedients", "ingrediants", "ingridiants", "ingrs"),
-    "quiz" -> List("quizz", "quize", "quz", "quizzze", "qiz"),
-    "dish" -> List("dsh", "dissh", "dich", "dissh", "dishh"),   
-    "egyptian" -> List("egyption","egiptian", "egiptian", "egypitan", "egyptian", "egypitian"),
-    "french" -> List("frensh", "frenche", "frnch", "frensh", "frnch"),
-    "lebanese" -> List("lebanes", "lebanesee", "lebanes", "lebanessee", "lebanes"),
-    "korean" -> List("koreean", "koreaan", "koreean", "koreean", "korean"),
-    "quit" -> List("quitt", "quitt", "quitte", "quitt", "quit","quizt","qui","qut"),
-    "sure" -> List("shure", "suree", "surr", "shure", "shur"),
-    "please" -> List("plese", "pleas", "pleese", "pleas", "plese"),
-    "thank" -> List("thx", "thnks", "thanx", "thxk", "thx"),
-    "thanks" -> List("thx", "thnks", "thanx", "thxk", "thx"),
-    "welcome" -> List("welcom", "welcme", "welcom", "welccome", "welcom"),
-    "recipe" -> List("recpie", "recip", "recipie", "recpiee", "recipie","reciepe?", "recipie"),
-    "make" -> List("mak", "maek", "maake", "mke", "mae"),
-    "cook" -> List("cok", "cokk", "cokie", "cokkk", "cok"),
-    "tell" -> List("tel", "tll", "tll", "tll", "tll"),
-    "about" -> List("abou", "abaut", "abouut", "abouut", "abou"),
-    "yes" -> List("yea", "yess", "yees", "yesss", "ye"),
-    "no" -> List("noo", "n", "nooo", "nno", "nnoo"),
 
-    // Egyptian food terms
-    "koshari" -> List("koshary", "koshare", "koshari", "kushari", "kosheri"),
-    "ful medames" -> List("foul medames", "ful medammes", "fool medames", "ful mudammes"),
-    "molokhia" -> List("mulukhiya", "molohiya", "molokhiya", "mulukhia", "melokhia"),
-    "taameya" -> List("tameya", "ta'meya", "tamiya", "taameia", "taamya"),
-    "mahshi" -> List("mashi", "mahshy", "mahshe", "mashy", "mahshie"),
-    "fatta" -> List("fata", "fattah", "fatah", "fatte", "fataa"),
-    
-    // French food terms
-    "ratatouille" -> List("ratatui", "ratatooie", "ratatouile", "ratatouillee", "ratatouil"),
-    "coq au vin" -> List("coqauvain", "coq au vain", "coqovin", "coq a vin", "coqauvin"),
-    "quiche lorraine" -> List("quish lorraine", "quiche loren", "quiche lorain", "quiche lorrraine"),
-    "tarte tatin" -> List("tart tatin", "tarte tatinne", "tarte tatin", "tartetatin", "tart tatin"),
-    "croissant" -> List("crescent", "croisant", "cruasant", "croisont", "croissante"),
-
-    // ===== French CUISINE INGREDIENTS =====
-    "zucchini" -> List("zuchini", "zukini", "zucini", "zucchinni", "zuchinni"),
-    "eggplant" -> List("egplant", "eggplnt", "eggplent", "epplant", "eplant"),
-    "tomato" -> List("tomatoe", "tomatto", "tomate", "tomaato", "tomat"),
-    "garlic" -> List("garlik", "garlick", "garlc", "garlik", "garlik"),
-    "olive oil" -> List("oliveoil", "oliv oil", "olive oyl", "oliveoyl", "oliveoill"),
-    "chicken" -> List("chiken", "chickn", "chikken", "chickenn", "chikn"),
-    "red wine" -> List("redwine", "red vine", "red whine", "redwien", "redwinee"),
-    "mushrooms" -> List("mushroms", "mushromms", "mushrms", "mushrroms", "mushroomss"),
-    "bacon" -> List("bacn", "bakon", "bcon", "baccon", "becon"),
-    "thyme" -> List("time", "thime", "thym", "thhyme", "thyyme"),
-    "butter" -> List("buter", "buttter", "buttar", "buttur", "buterr"),
-    "pastry" -> List("pastrey", "pastery", "pasty", "pastri", "paastry"),
-    "cream" -> List("creme", "creamm", "creem", "crem", "creaam"),
-    "sugar" -> List("suger", "suggar", "sugr", "sugre", "sugarr"),
-    "flour" -> List("flower", "flur", "floour", "florr", "flouer"),
-
-    // ===== EGYPTIAN CUISINE INGREDIENTS =====
-    "lentils" -> List("lentiles", "lentills", "lentls", "lentilss", "lentl"),
-    "chickpeas" -> List("chikpeas", "chickpease", "chickpeeas", "chicpeas", "chikpease"),
-    "tomato sauce" -> List("tomatosauce", "tomatoe sauce", "tomatosause", "tomatosauze", "tomatosouce"),
-    "fava beans" -> List("fava beens", "favabeans", "fava beens", "fava beanz", "favabeenz"),
-    "jute leaves" -> List("juteleaves", "jute leeves", "joot leaves", "jute leavs", "jutleaves"),
-    "coriander" -> List("coriandar", "corriander", "coriender", "corriandar", "coriandor"),
-    "spices" -> List("spyces", "spices", "spicess", "spycess", "speces"),
-    "yogurt" -> List("yoghurt", "yogourt", "yogurt", "yoghourt", "yogurtt"),
-    "semolina" -> List("semolena", "semolinaa", "semolinna", "semolna", "semolena"),
-    "coconut" -> List("cocnut", "coconutt", "cocconut", "cocunut", "coconutty"),
-    "rice" -> List("ryce", "ricce", "ricc", "rize", "ric"),
-    "cabbage" -> List("cabage", "cabbege", "cabagee", "cabbege", "cabbbage"), 
-    
-
-    // ===== GENERAL INGREDIENTS =====
-    "salt" -> List("sault", "saltt", "slt", "sallt", "saalt"),
-    "pepper" -> List("peper", "peppar", "peppr", "peppre", "peppur"),
-    "onion" -> List("onions", "onionn", "onnion", "onionns", "onion"),
-    "rice" -> List("ryce", "ris", "ricee", "ricce", "ryce"),
-    "lemon" -> List("lemmon", "lemn", "lemonn", "lemmonn", "lemonjuice"),
-    "herbs" -> List("herbbes", "herbes", "herbss", "herbz", "herbbz"),
-    "cheese" -> List("cheeze", "chese", "cheesee", "cheez", "chesee"),
-    "eggs" -> List("egs", "egges", "eggss", "egggs", "eggsy"),
-    "bread" -> List("bred", "breade", "breadd", "breaad", "brad"),
-    "carrots" -> List("carots", "carrotts", "carotts", "carots", "carrotss"),
-    "potatoes" -> List("potatos", "potattoes", "potatotes", "pottatoes", "potatoss"),
-    "lamb" -> List("lam", "lambb", "lambe", "lamby", "lambchop"),
-    "beef" -> List("beefs", "beff", "beeff", "beefy", "beefsteak"),
-    "fish" -> List("fisch", "fishh", "fishe", "fishy", "feesh"),
-    "milk" -> List("milkk", "mylk", "milke", "mylkk", "milkys")
-  )
-  val lowerInput = input.toLowerCase
-
-  // Find the correct word if the input matches any typo
-  // find is higher function for Map 
-  commonTypos.find { 
-    case (correct, typos) =>typos.foldLeft(false) { (found, typ) =>
-    if (found) true else typ.toLowerCase == lowerInput} }.map(_._1).getOrElse(input)
- }
   def greetUser(): String = {
   val currentHour = LocalTime.now.getHour
   val timeGreeting = currentHour match {
@@ -145,9 +38,10 @@ object Main  {
   }
   // taking input and checking for typos
   // and returning a valid command type and tokens
+  
   def parseInput(input: String): (String, List[String]) = {
   val tokens = input.toLowerCase.replaceAll("""[^\w\s]""", "").split("\\s+").toList
-  val correctedTokens = tokens.map(handleTypos) // Correct typos in each token
+  val correctedTokens = tokens.map(Typos.handleTypos)
   
   // Identify command type based on keywords
   val command = correctedTokens match {
@@ -155,7 +49,8 @@ object Main  {
     case t if t.contains("quiz") || t.contains("test") || t.contains("question") => "quiz"
     
     // Information requests
-    case t if (t.contains("tell") || t.contains("about") || t.contains("what") || t.contains("explain") || t.contains("describe")) && 
+    case t if (t.contains("tell") || t.contains("about") || t.contains("what") || 
+               t.contains("explain") || t.contains("describe")) && 
               (t.contains("ingredient") || t.contains("make") || t.contains("contains")) => "ingredients"
               
     case t if (t.contains("how") && t.contains("make")) || 
@@ -164,6 +59,12 @@ object Main  {
               
     case t if t.contains("knowledge") || t.contains("fact") || 
               t.contains("trivia") || t.contains("interesting") => "trivia"
+
+    // INGREDIENT SEARCH - Updated to better catch ingredient queries
+    case t if (t.contains("with") || t.contains("containing") || t.contains("has") || 
+               t.contains("uses") || t.contains("made with") || 
+               (t.contains("ingredient") && (t.contains("find") || t.contains("search") || t.contains("using")))) => 
+               "search_by_ingredient"
     
     // Dish information
     case t if (t.contains("what") || t.contains("tell") || t.contains("about")) && 
@@ -175,12 +76,37 @@ object Main  {
     case _ => "unknown"
   }
   
-  // Extract cuisine or dish name from tokens
-  val keywords = correctedTokens.filterNot(token => 
-    Set("what", "tell", "me", "about", "the", "how", "make", "recipe", 
-        "ingredients", "of", "dish", "food", "steps", "to", "prepare",
-        "knowledge", "fact", "trivia", "quiz", "test", "question").contains(token) )
-  
+  // Extract keywords while filtering out common words
+  val keywords = correctedTokens.filterNot(token =>
+    Set(
+      // Basic question words
+      "what", "which", "how", "can", "could", "would", 
+      "is", "are", "was", "were", "does", "do", "did",
+      // Request verbs
+      "tell", "give", "show", "explain", "describe", 
+      "list", "provide", "share", "know", "find",
+      // Food-related verbs
+      "make", "cook", "prepare", "create", "bake", 
+      "fry", "grill", "boil", "steam", "roast",
+      // Prepositions/articles
+      "about", "of", "for", "to", "from", "with", 
+      "without", "in", "on", "at", "the", "a", "an", "me", "as",
+      // General food terms
+      "dish", "dishes", "food", "cuisine", "meal", "recipe",
+      "ingredient", "step", "direction", "instruction",
+      // Polite terms
+      "please", "thanks", "thank", "hello", "hi",
+      // Quantifiers
+      "some", "any", "many", "few", "several",
+      // Common connectors
+      "and", "or", "but", "with", "without", "containing", "using", "contains",
+      // Ingredient search terms (added)
+      "has", "uses", "made", "find", "search",
+      // Punctuation
+      "?", "!", ".", ","
+    ).contains(token.toLowerCase)
+  )
+
   (command, keywords)
 }
     // Function to handle user input and provide responses
@@ -195,72 +121,412 @@ object Main  {
     case "bye" => 
       println("Goodbye! Happy cooking!")
     case "quiz" =>
-      //(tokens)
-    case"recipe" =>
+      Quizez.startquiz(tokens.mkString(" "),Typos.handleTypos)
+    case "recipe" =>
+      handleRecipeRequest(tokens)
+    case "ingredients" => 
+      println("I can help you with that!")
       handleRecipeRequest(tokens)
     case "trivia" =>
       println("I don't have trivia yet, but stay tuned!")
     case "dish_info" =>
       handleDishRequest(tokens)
-    case "ingredients" =>
-      handleDishRequest(tokens)
+    case "search_by_ingredient" => 
+      println("going there")
+      //handleSearchByIngredient(Left(tokens))
     case "unknown" => // yerg3 llchat tany 
-      val corrected = handleTypos(input)
+      val corrected = Typos.handleTypos(input)
       println(s"Did you mean: $corrected? Or try asking about a cuisine or type 'quiz'.") //need to handle this type pf error 
     }
   }
-   def handleRecipeRequest(tokens: List[String]): Unit = {
-  // Similar to dish request but with recipe-specific response
-  val allDishes = FoodDB.getAllDishes
-  val maybeDish = tokens.collectFirst {
-    case t => allDishes.find(_.name.toLowerCase == handleTypos(t))
-  }.flatten
-  
-  maybeDish match {
-    case Some(dish) =>
-      showRecipe(dish)
-    case None => // need to tetzabt 
-      println("Which recipe would you like?")
-      // Could show list of available dishes here
-      val dishName = scala.io.StdIn.readLine().trim
-      val corrected = handleTypos(dishName)
-      allDishes.find(_.name.toLowerCase == corrected) match {
-        case Some(d) => showRecipe(d)
-        case None => println(s"Sorry, I don't have a recipe for '$dishName'")
+  def handleCuisineRequest(tokens: List[String]): Unit = {
+  val maybeCuisine = tokens.collectFirst {
+    case t if FoodDB.categories.exists(_.name == Typos.handleTypos(t)) => Typos.handleTypos(t)
+  }
+
+  maybeCuisine match {
+    case Some(cuisine) =>
+      showCuisineInformation(cuisine)  // Show cuisine details if found
+    case None =>
+      println("Which cuisine would you like to know about?")
+      FoodDB.categories.foreach(c => println(c.name.capitalize))  // Display available cuisines
+      val cuisine = scala.io.StdIn.readLine().trim.toLowerCase
+      val corrected = Typos.handleTypos(cuisine)
+      if (FoodDB.categories.exists(_.name == corrected)) {
+        showCuisineInformation(corrected)  // Show details of the corrected cuisine
+      } else {
+        println(s"Sorry, '$cuisine' is not available.")
       }
+  }
+}
+ def analyzeRecipeRequest(tokens: List[String]): (Option[Dish], String) = 
+  {
+    val allDishes = FoodDB.getAllDishes
+
+     // 1. First try exact single-word matches using collectFirst pattern
+    // In analyzeRecipeRequest, change the exact match condition:
+    val exactMatch = tokens.collectFirst {
+      case t => allDishes.find(d => 
+        Typos.handleTypos(d.name.toLowerCase) == Typos.handleTypos(t))
+    }.flatten
+
+    if (exactMatch.isDefined) return (exactMatch, "exact") //checks if match is found returns exact match early on 
+  //isdefined , returns tuple immediatly containg (exactmatch , "string label indicatinng match")
+
+    // 2. Check for multi-word dish names (like "coq au vin")
+    if (tokens.size > 1) {  //means in token has more than 1 word 
+      val combined = tokens.mkString(" ")
+      val combinedMatch = allDishes.find(d => 
+        Typos.handleTypos(combined) == d.name.toLowerCase)
+      if (combinedMatch.isDefined) return (combinedMatch, "combined")
+    } 
+
+  // 3. Check for vegetarian requests , //
+    if (tokens.exists(t => Typos.handleTypos(t).toLowerCase == "vegetarian")) {
+      val isVegetarianRequest = tokens.foldLeft(false) { (found, token) =>
+        if (found) true else Typos.handleTypos(token).toLowerCase == "vegetarian"
+      }
+      if (isVegetarianRequest) {
+        return (None, "vegetarian")
+      }
+    }
+
+  // 4. Check for ingredient-based requests using the same pattern
+  val ingredientMatch = tokens.collectFirst {
+      case t => allDishes.find(_.ingredients.exists(i => 
+        Typos.handleTypos(i) == Typos.handleTypos(t)))
+    }.flatten
+
+    if (ingredientMatch.isDefined) return (ingredientMatch, "ingredient")
+
+  // 5. Try partial matches as fallback / when no exact matches are found 
+    val partialMatch = tokens.collectFirst {
+      case t => allDishes.find(d => 
+        d.name.toLowerCase.contains(Typos.handleTypos(t)) ||
+        d.ingredients.exists(i => i.toLowerCase.contains(Typos.handleTypos(t))))
+    }.flatten  //tries to find partial dish match or partical dish match
+
+    partialMatch match {
+      case Some(d) => (Some(d), "partial")
+      case None => (None, "unknown")
+    }
+}
+
+def handleRecipeRequest(tokens: List[String]): Unit = 
+  {
+    val (dish, searchType) = analyzeRecipeRequest(tokens)
+
+    dish match {
+      case Some(foundDish) =>
+        showRecipe(foundDish)
+        //askForFeedback(foundDish.name)
+        // Could save user preference here if needed
+      case None =>
+        searchType match {
+          case "ingredient" | "ingredients" => // Handle both singular and plural
+              if (tokens.isEmpty) {
+                println("Please specify an ingredient to search for")
+              } else {
+                println(s"🔍 Searching for dishes with: ${tokens.mkString(", ")}")
+                
+                val foundDishes = tokens.flatMap { token =>
+                  FoodDB.findDishesByIngredient(token)
+                }.distinct
+
+                if (foundDishes.nonEmpty) {
+                  println("🍴 Found these dishes:")
+                  foundDishes.foreach { dish =>
+                    val matchingIngredients = dish.ingredients.filter { ing =>
+                      tokens.exists(t => 
+                        Typos.handleTypos(ing.toLowerCase).contains(Typos.handleTypos(t.toLowerCase))
+                      )
+                    }
+                    println(s"🍽️  ${dish.name} (contains: ${matchingIngredients.mkString(", ")})")
+                  }
+                  
+                  println("\nWould you like to:")
+                  println("1. See a specific recipe")
+                  println("2. Search again")
+                  println("3. Return to main menu")
+                  
+                  readLine().trim match {
+                    case "1" =>
+                      println("Enter the exact dish name:")
+                      handleUserInput(readLine())
+                    case "2" =>
+                      println("Enter new ingredient to search:")
+                      handleUserInput(readLine())
+                    case _ => // Return to main menu
+                  }
+                } 
+                else {
+                  println(s"😕 No dishes found with ${tokens.mkString(" or ")}")
+                  
+                  // Show similar ingredients
+                  val allIngredients = FoodDB.getAllDishes.flatMap(_.ingredients).distinct
+                  tokens.foreach { token =>
+                    val similar = allIngredients.filter(_.toLowerCase.contains(token.toLowerCase))
+                    if (similar.nonEmpty) {
+                      println(s"Did you mean: ${similar.take(3).mkString(", ")}?")
+                    }
+                  }
+                }
+              }
+
+          case "vegetarian" =>
+              val vegDishes = FoodDB.getVegetarianDishes
+              if (vegDishes.isEmpty) {
+                println("🌱 We currently don't have any vegetarian dishes in our database.")
+              } else {
+                println("🌱 Here are our vegetarian dishes:")
+                vegDishes.foreach(d => println(s"🍽️  ${d.name} (Ingredients: ${d.ingredients.mkString(", ")})"))
+                
+                println("\nWould you like:")
+                println("1. See a specific recipe")
+                println("2. Get a random vegetarian suggestion")
+                println("3. Go back to main menu")
+                
+                readLine().trim match {
+                  case "1" =>
+                    println("Which recipe would you like? (Type the exact name)")
+                    handleUserInput(readLine())
+                  case "2" =>
+                    val randomDish = scala.util.Random.shuffle(vegDishes).head
+                    showRecipe(randomDish)
+                  case _ =>
+                    println("Returning to main menu...")
+                }
+              }
+
+            
+          case "unknown" =>
+            println(s"🔍 I couldn't find '${tokens.mkString(" ")}'. Did you mean one of these?")
+            showSimilarDishes(tokens)
+            println("Please try again or type 'help' for options")
+        }
+    }
+  }
+  //when no dish is found , i can suggest those dishes 
+  def showSimilarDishes(tokens: List[String]): Unit = 
+  {
+    val allDishes = FoodDB.getAllDishes
+    val similar = allDishes.filter { dish =>   //finds simliarty in dish name or ingedient 
+      tokens.exists(t => 
+        dish.name.toLowerCase.contains(Typos.handleTypos(t)) ||
+        dish.ingredients.exists(i => 
+          i.toLowerCase.contains(Typos.handleTypos(t))))
+    }
+    
+    if (similar.nonEmpty) {
+      println("🔍 I found these similar dishes:")
+      similar.take(5).foreach(d => println(s"👉 ${d.name}"))
+    } else {
+      println("🌟 Here are some popular dishes:")
+      allDishes.take(5).foreach(d => println(s"👉 ${d.name}"))
+    }
+    
+    //follow-up interaction if he wants recipe to be shown 
+    println("\nWould you like to see a recipe for one of these? (Type the dish name or 'no')")
+    val userChoice = readLine().trim
+    
+    if (userChoice.nonEmpty && Typos.handleTypos(userChoice) != "no") {
+      // Find the selected dish (with typo handling)
+      val selectedDish = similar.find(_.name.equalsIgnoreCase(userChoice))
+        .orElse(allDishes.find(_.name.equalsIgnoreCase(userChoice)))
+      
+      selectedDish match {
+        case Some(dish) => showRecipe(dish)
+        case None => println("⚠️ Dish not found. Please try again with the exact name.")
+      }
+    } else {
+      println("Okay, let me know if you change your mind!")
+    }
+  }
+  // This function would show cuisine details (for example: dishes belonging to a particular cuisine)
+  def showCuisineInformation(cuisine: String): Unit = {
+  // Find the category for the cuisine
+  val category = FoodDB.categories.find(_.name.toLowerCase == cuisine.toLowerCase)
+  
+  category match {
+    case Some(c) =>
+      println(s"Details for ${c.name.capitalize} cuisine:")
+      val dish=FoodDB.getDishesByCategory(c.name)
+      dish.foreach(d => println(s"- ${d.name}"))
+    case None =>
+      println(s"Sorry, no information available for $cuisine cuisine.")
   }
 }
   // Function to handle dish requests and show details
   // This function will be called when the user asks about a dish
   def handleDishRequest(tokens: List[String]): Unit = {
-  // Find dish name in tokens
-  // If dish is found, show details
-  val allDishes = FoodDB.getAllDishes
-  val maybeDish = tokens.collectFirst {
-    case t => allDishes.find(_.name.toLowerCase == handleTypos(t))
-  }.flatten
-  
-  maybeDish match {
+  // Try to find dish using the tokens first
+  FoodDB.getDish(tokens) match {
     case Some(dish) =>
-      showRecipe(dish)
-    case None => // need to tetzabt 
-      println("Which recipe would you like?")
-      // Could show list of available dishes here
-      val dishName = scala.io.StdIn.readLine().trim
-      val corrected = handleTypos(dishName)
-      allDishes.find(_.name.toLowerCase == corrected) match {
-        case Some(d) => showRecipe(d)
-        case None => println(s"Sorry, I don't have a recipe for '$dishName'")
+      showDishDetails(dish)
+    
+    case None =>
+      // If no dish found, show helpful suggestions
+      println(s"\nI couldn't find '${tokens.mkString(" ")}'. Here are some options:")
+      
+      // Show dishes that contain any of the tokens (up to 5)
+      val suggestions = FoodDB.getAllDishes.filter { dish =>
+        tokens.exists(token => dish.name.toLowerCase.contains(token.toLowerCase))
+      }.take(5)
+      
+      if (suggestions.nonEmpty) {
+        println("\nSimilar dishes:")
+        suggestions.foreach(dish => println(s"- ${dish.name}"))
+      } else {
+        // Fallback to showing some random dishes if no suggestions
+        println("\nSome available dishes:")
+        FoodDB.getAllDishes.take(5).foreach(dish => println(s"- ${dish.name}"))
+      }
+      
+      // Get user input with prompt
+      print("\nWhich dish would you like to know about? > ")
+      val dishName = readLine().trim.toLowerCase
+      val correctedDishName = Typos.handleTypos(dishName)
+      
+      // Try again with the corrected input
+      if (correctedDishName.nonEmpty) {
+        FoodDB.getDish(List(correctedDishName)) match {
+          case Some(dish) => showDishDetails(dish)
+          case None => println(s"\nSorry, I still couldn't find '$correctedDishName'")
+        }
       }
   }
 }
+def handleSearchByIngredient(tokens: String): Unit = {
+  // 1. Normalize and clean the input tokens
+  def handleSearchByIngredient(tokensOrInput: Either[List[String], String]): Unit = {
+  // Determine if we received pre-parsed tokens or raw input
+  val ingredients = tokensOrInput match {
+    case Left(tokens) => 
+      // Already tokenized input (from initial search)
+      tokens.map(Typos.handleTypos).map(_.toLowerCase.trim).filter(_.nonEmpty).distinct
+    
+    case Right(input) =>
+      // Raw input (from case "2" - search again)
+      input.split(",")
+        .map(_.trim)
+        .filter(_.nonEmpty)
+        .flatMap { ingredient =>
+          if (ingredient.contains(" ")) List(ingredient)
+          else ingredient.split("\\s+").toList
+        }
+        .map(Typos.handleTypos)
+        .map(_.toLowerCase.trim)
+        .distinct
+        .toList
+  }
+
+  if (ingredients.isEmpty) {
+    println("Please specify at least one ingredient to search for.")
+    return
+  }
+
+  // Rest of the function remains the same...
+  println(s"\n🔍 Searching for dishes containing: ${ingredients.mkString(", ")}")
+
+  val exactMatches = FoodDB.getAllDishes.filter { dish =>
+    ingredients.forall(ing => 
+      dish.ingredients.exists(dishIng => 
+        Typos.handleTypos(dishIng.toLowerCase) == ing
+      )
+    )
+  }
+  // 3. Find partial matches (ANY ingredients) if no exact matches
+  val partialMatches = if (exactMatches.isEmpty) {
+    FoodDB.getAllDishes.filter { dish =>
+      ingredients.exists(ing => 
+        dish.ingredients.exists(dishIng => 
+          dishIng.toLowerCase.contains(ing)
+      ) )
+    }
+  } else {
+    Nil
+  }
+
+  // 4. Display results
+  if (exactMatches.nonEmpty) {
+    println("\n🍽️ Dishes containing ALL these ingredients:")
+    exactMatches.foreach { dish =>
+      println(s"- ${dish.name} (${dish.ingredients.mkString(", ")})")
+    }
+  } else if (partialMatches.nonEmpty) {
+    println("\n🍽️ Dishes containing SOME of these ingredients:")
+    partialMatches.foreach { dish =>
+      val matchingIngredients = ingredients.filter(ing => 
+        dish.ingredients.exists(dishIng => dishIng.toLowerCase.contains(ing)))
+      println(s"- ${dish.name} (contains: ${matchingIngredients.mkString(", ")})")
+    }
+  } else {
+    println("\n😕 No dishes found with these ingredients.")
+    // Show similar ingredients
+    val allIngredients = FoodDB.getAllIngredients
+    ingredients.foreach { ing =>
+      val similar = allIngredients.filter(_.toLowerCase.contains(ing)).take(3)
+      if (similar.nonEmpty) {  // Fixed condition
+        println(s"  Similar ingredient: ${similar.mkString(", ")}")
+      }
+    }
+  }
+
+  // 5. Follow-up interaction (for both exact and partial matches)
+  if (exactMatches.nonEmpty || partialMatches.nonEmpty) {
+    println("\nWould you like to:")
+    println("1. See a recipe for one of these dishes")
+    println("2. Search again")
+    println("3. Return to main menu")
+    
+    readLine().trim match {
+      case "1" =>
+        println("Enter the dish name you're interested in:")
+        val dishName = readLine()
+        FoodDB.getDish(List(dishName)) match {
+          case Some(dish) => showRecipe(dish)
+          case None => println("Dish not found. Please try again.")
+        }
+      case "2" =>
+        println("Enter new ingredients to search (separate with commas for multi-word ingredients):")
+        val newInput = readLine()  // Store the input first
+        if (newInput.nonEmpty) {
+          handleSearchByIngredient(Right(readLine()))
+        } else {
+          println("No ingredients entered. Returning to main menu...")
+        }
+      case _ => 
+        println("Returning to main menu...")
+    }
+  } else {
+    // Only for no matches case
+    println("\nWould you like to:")
+    println("1. Search again")
+    println("2. Return to main menu") 
+    
+    readLine().trim match {
+      case "1" =>
+        println("Enter new ingredients to search (separate with commas for multi-word ingredients):")
+        val newInput = readLine()
+        if (newInput.nonEmpty) {
+          handleSearchByIngredient(Right(readLine()))
+        } else {
+          println("No ingredients entered. Returning to main menu...")
+        }
+      case _ =>
+        println("Returning to main menu...")
+    }
+  }
+}
+}
+
   def showDishDetails(dish: Dish): Unit = {
   val vegStatus = if (dish.isVegetarian) "Vegetarian" else "Non-vegetarian"
   println(s"\n◎ ${dish.name} ($vegStatus)")
   println(s"   Ingredients: ${dish.ingredients.mkString(", ")}")
   println("\nWould you like me to show you the recipe for this dish?")
   val answer = readLine().trim.toLowerCase
-  val corrected= handleTypos(answer)
+  val corrected= Typos.handleTypos(answer)
   if (corrected == "no" || corrected == "n" || corrected == "nope" || corrected == "nah") {
     println("Okay, let me know if you need anything else!")
   } else if (corrected == "yes" || corrected == "y"|| corrected == "sure"|| corrected == "yep"|| corrected=="please") {
@@ -278,7 +544,7 @@ object Main  {
   }
   println("\nWould you like a recipe link? (yes/no)")
   val answer = readLine().trim.toLowerCase
-    val corrected= handleTypos(answer)
+    val corrected= Typos.handleTypos(answer)
   if (corrected == "no" || corrected == "n" || corrected == "nope" || corrected == "nah") {
     println("Okay, let me know if you need anything else!")
   } else if (corrected == "yes" || corrected == "y"|| corrected == "sure"|| corrected == "yep"|| corrected=="please") {

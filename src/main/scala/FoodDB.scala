@@ -115,6 +115,14 @@ object FoodDB {
   case Nil => true
   case head :: tail => dishName.contains(head) && allTokensMatch(tail, dishName)
 }
+  def getAllIngredients: List[String] = {
+    val ingredients = getAllDishes.flatMap(_.ingredients).distinct.toList
+    ingredients
+}
+
+  def getVegetarianDishes: List[Dish] = {
+  getAllDishes.filter(_.isVegetarian)
+}
   }
   
 
