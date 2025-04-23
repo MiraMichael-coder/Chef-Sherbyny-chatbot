@@ -11,7 +11,7 @@
     "is" -> List("si", "iss", "iis", "s", "iz"),
     "the" -> List("teh", "th", "tge", "hte", "thhe", "da"),
     "food" -> List("fod", "foood", "fud", "foood", "fod", "fode"),
-    "cuisine" -> List("cusine", "cuisin", "cuisne", "cuisene", "cuisnie", "quisine"),
+    "cuisine" -> List("cusine", "cuisin","cusine", "cuisne", "cuisene", "cuisnie", "quisine"),
     "bye" -> List("bi","bey", "byee"),
     "vegetarian" -> List("vegitarian", "vegeterian", "veggie", "vegatarian", "veggitarian"),
     "ingredients" -> List("ingridients", "ingreedients", "ingrediants", "ingridiants", "ingrs"),

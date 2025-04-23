@@ -13,11 +13,11 @@ object Quizez
   
   val categories: List[CusineQuestions] = List(
     CusineQuestions("egyptian", s"${basePath}egyption_questions.txt"),
-    CusineQuestions("lebanese", s"${basePath}lebanese_foods.txt"),
-    CusineQuestions("korean", s"${basePath}korean_foods.txt"),
-    CusineQuestions("french", s"${basePath}french_foods.txt"),
+    CusineQuestions("lebanese", s"${basePath}lebanese_questions.txt"),
+    CusineQuestions("korean", s"${basePath}korean_questions.txt"),
+    CusineQuestions("french", s"${basePath}french_questions.txt"),
     CusineQuestions("general", s"${basePath}general_questions.txt")
-  )
+  ) 
   val quizezbyCategory: Map[String, List[QuizQuestion]] = categories.map { category =>
     category.name -> loadQuizFromFile(category.filePath)
   }.toMap
@@ -77,7 +77,7 @@ object Quizez
         question.correctAnswer== userAnswer.toLowerCase 
     }
 
-  def startquiz(cuisine: String ="general", handleTypos: String => String): Unit = {
+  def startquiz(cuisine: String, handleTypos: String => String): Unit = {
   val questions = Quizez.getQuizByCategory(cuisine)
   if (questions.isEmpty) {
     println(s"No questions available for $cuisine cuisine.")
@@ -97,7 +97,7 @@ object Quizez
         case "b" if question.choices.size > 1 => question.choices(1).toLowerCase
         case "c" if question.choices.size > 2 => question.choices(2).toLowerCase
         case "d" if question.choices.size > 3 => question.choices(3).toLowerCase
-        case _ => handleTypos(userAnswer) 
+        case _ => Typos.handleTypos(userAnswer.toLowerCase) 
       
       }
       if (normalizedAnswer == "quit") {

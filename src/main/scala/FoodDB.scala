@@ -16,27 +16,48 @@ object FoodDB {
   // Use relative paths for better portability
   private val basePath = "C:\\Users\\Mira\\Desktop\\uni\\year 2\\Semster 2\\Advanced Prog\\Project\\chatbot\\src\\main\\scala\\data\\"
   val foodTrivia: Map[String, List[String]] = Map(
-    "🇪🇬 Egyptian Cuisine" -> List(
-      "Ancient Fast Food: Taameya (Egyptian falafel) dates back to the Pharaohs!",
-      "Bread as Currency: Pyramid workers were paid in bread and beer.",
-      "Koshari’s Global Roots: Fusion of Italian, Indian, and Middle Eastern flavors."
-    ),
-    "🇰🇷 Korean Cuisine" -> List(
-      "Kimchi in Space: Specially developed for astronauts in 2008.",
-      "Bibimbap’s Lucky Leftovers: Originally a Lunar New Year cleanup dish.",
-      "Tteokbokki’s Royal Upgrade: Started as a mild palace dish."
-    ),
-    "🇫🇷 French Cuisine" -> List(
-      "Croissant Conspiracy: Actually Austrian in origin!",
-      "Cheese Drama: France has over 1,000 cheeses.",
-      "Soup for Rebels: Onion soup was 'soup of drunkards'."
-    ),
-    "🇱🇧 Lebanese Cuisine" -> List(
-      "Hummus Wars: Lebanon made a 4-ton platter to claim ownership.",
-      "Za’atar Secrets: Some blends include crushed rose petals!",
-      "Falafel’s Holy Roots: Possibly invented by Coptic Christians."
-    )
+  "🇪🇬 Egyptian Cuisine" -> List(
+    "Ancient Fast Food: Taameya (Egyptian falafel) dates back to the Pharaohs!",
+    "Bread as Currency: Pyramid workers were paid in bread and beer.",
+    "Koshari’s Global Roots: Fusion of Italian, Indian, and Middle Eastern flavors.",
+    "Molokhia Mystery: Ancient Egyptians believed it had magical healing powers.",
+    "Pigeon Perfection: Stuffed pigeon is a delicacy dating back centuries."
+  ),
+  "🇰🇷 Korean Cuisine" -> List(
+    "Kimchi in Space: Specially developed for astronauts in 2008.",
+    "Bibimbap’s Lucky Leftovers: Originally a Lunar New Year cleanup dish.",
+    "Tteokbokki’s Royal Upgrade: Started as a mild palace dish.",
+    "Fermentation Nation: Kimchi has over 200 known varieties.",
+    "Rice Cakes & Luck: Tteok is often eaten during celebrations for good fortune."
+  ),
+  "🇫🇷 French Cuisine" -> List(
+    "Croissant Conspiracy: Actually Austrian in origin!",
+    "Cheese Drama: France has over 1,000 cheeses.",
+    "Soup for Rebels: Onion soup was 'soup of drunkards'.",
+    "Michelin Mission: The Michelin Guide was created to sell more tires, not food.",
+    "Wine & Water: Some French kids drink watered-down wine with meals!"
+  ),
+  "🇱🇧 Lebanese Cuisine" -> List(
+    "Hummus Wars: Lebanon made a 4-ton platter to claim ownership.",
+    "Za’atar Secrets: Some blends include crushed rose petals!",
+    "Falafel’s Holy Roots: Possibly invented by Coptic Christians.",
+    "World Record Tabouleh: Lebanon made 3.5 tons of tabouleh in one bowl.",
+    "Arak Magic: Traditional anise drink turns white when water is added."
   )
+)
+  def getTrivia(cuisine: String): List[String] = {
+    foodTrivia.collectFirst {
+      case (key, trivia) if Typos.handleTypos(key.toLowerCase).contains(Typos.handleTypos(cuisine.toLowerCase)) => trivia
+    }.getOrElse(Nil)
+  }
+  //Helper function to get a random trivia
+    def getRandomTrivia(cuisine: String): Option[String] = {
+    val triviaList = getTrivia(cuisine)
+    if (triviaList.nonEmpty)
+      Some(scala.util.Random.shuffle(triviaList).head)
+    else
+      None
+  }
   val categories: List[CuisineCategory] = List(
     CuisineCategory("egyptian", s"${basePath}egyption_foods.txt"),
     CuisineCategory("lebanese", s"${basePath}lebanese_foods.txt"),
