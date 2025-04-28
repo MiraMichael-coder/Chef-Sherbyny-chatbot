@@ -15,6 +15,7 @@ case class CuisineCategory(name: String, filePath: String)
 object FoodDB {
   // Use relative paths for better portability
   private val basePath = "C:\\Users\\Mira\\Desktop\\uni\\year 2\\Semster 2\\Advanced Prog\\Project\\chatbot\\src\\main\\scala\\data\\"
+
   val foodTrivia: Map[String, List[String]] = Map(
   "🇪🇬 Egyptian Cuisine" -> List(
     "Ancient Fast Food: Taameya (Egyptian falafel) dates back to the Pharaohs!",
@@ -45,19 +46,31 @@ object FoodDB {
     "Arak Magic: Traditional anise drink turns white when water is added."
   )
 )
-  def getTrivia(cuisine: String): List[String] = {
-    foodTrivia.collectFirst {
-      case (key, trivia) if Typos.handleTypos(key.toLowerCase).contains(Typos.handleTypos(cuisine.toLowerCase)) => trivia
-    }.getOrElse(Nil)
-  }
-  //Helper function to get a random trivia
-    def getRandomTrivia(cuisine: String): Option[String] = {
-    val triviaList = getTrivia(cuisine)
-    if (triviaList.nonEmpty)
-      Some(scala.util.Random.shuffle(triviaList).head)
-    else
-      None
-  }
+  
+  val Foodjokes: Map[String, List[String]] = Map(
+  "🇪🇬 Egyptian Cuisine" -> List(
+    "Why did the tomato turn red? Because it saw the salad dressing!",
+    "Why did the falafel break up with the pita? It found someone a little more 'spicy'!",
+    "Why did the Egyptian chef get kicked out of school? Because he kept getting 'baked' in class!"
+  ),
+  "🇰🇷 Korean Cuisine" -> List(
+    "Why did the kimchi break up with the tofu? It found someone a little more 'fermented'!",
+    "Why did the rice cake go to therapy? It had too many 'sticky' issues!",
+    "Why did the Korean chef get kicked out of school? Because he couldn't stop 'stir-frying'!"
+  ),
+  "🇫🇷 French Cuisine" -> List(
+    "Why did the croissant go to the doctor? Because it was feeling a little 'buttery'!",
+    "Why did the French chef get kicked out of school? Because he couldn't stop 'whisking' around!",
+    "Why did the cheese break up with the bread? It found someone a little more 'grate'!"
+  ),
+  "🇱🇧 Lebanese Cuisine" -> List(
+    "Why did the hummus break up with the pita? It found someone a little more 'dip'-licious!",
+    "Why did the Lebanese chef get kicked out of school? Because he couldn't stop 'spicing' things up!",
+    "Why did the tabouleh go to therapy? It had too many 'parsley' issues!"
+  )
+)
+  
+ 
   val categories: List[CuisineCategory] = List(
     CuisineCategory("egyptian", s"${basePath}egyption_foods.txt"),
     CuisineCategory("lebanese", s"${basePath}lebanese_foods.txt"),
@@ -144,6 +157,19 @@ object FoodDB {
   def getVegetarianDishes: List[Dish] = {
   getAllDishes.filter(_.isVegetarian)
 }
+  def getTrivia(cuisine: String): List[String] = {
+    foodTrivia.collectFirst {
+      case (key, trivia) if Typos.handleTypos(key.toLowerCase).contains(Typos.handleTypos(cuisine.toLowerCase)) => trivia
+    }.getOrElse(Nil)
+  }
+  //Helper function to get a random trivia
+  def getRandomTrivia(cuisine: String): Option[String] = {
+    val triviaList = getTrivia(cuisine)
+    if (triviaList.nonEmpty)
+      Some(scala.util.Random.shuffle(triviaList).head)
+    else
+      None
+  }
   }
   
 

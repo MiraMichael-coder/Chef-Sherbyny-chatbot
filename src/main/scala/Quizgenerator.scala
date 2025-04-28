@@ -23,7 +23,7 @@ object Quizez
   }.toMap
     private def loadQuizFromFile(filePath: String): List[QuizQuestion] = {
   Try {
-    val source = Source.fromFile(filePath)
+    val source = Source.fromFile(filePath, "UTF-8")
     try {
       source.getLines()
         .filterNot(_.trim.isEmpty)
@@ -34,7 +34,7 @@ object Quizez
           QuizQuestion(
             question = parts(0),
             choices = parts(1).split(",").map(_.trim).toList,
-            correctAnswer = parts(2).toLowerCase
+            correctAnswer = parts(2).trim.toLowerCase
           )
         }.toList
     } finally {
@@ -65,7 +65,7 @@ object Quizez
     case (choice, letter) => s"$letter. $choice" 
     }
     // Step 4: Combine everything
-    val questionPart = s"Question: ${question.question}"
+    val questionPart =  question.question
     val choicesPart = formattedChoices.mkString("\n")
 
     s"$questionPart\n\n$choicesPart"
@@ -77,41 +77,73 @@ object Quizez
         question.correctAnswer== userAnswer.toLowerCase 
     }
 
-  def startquiz(cuisine: String, handleTypos: String => String): Unit = {
+  def startquiz(cuisine: String = "general", handleTypos: String => String): Unit = {
   val questions = Quizez.getQuizByCategory(cuisine)
   if (questions.isEmpty) {
     println(s"No questions available for $cuisine cuisine.")
   } else {
-    println(s"\nStarting $cuisine quiz (${questions.size} questions)...")
+    println(s"\nStarting $cuisine quiz...")
     println("Type your answer (A/B/C/D) or the full answer. Type 'quit' to exit.\n")
-    
-    // Get random questions
-    val randomQuestions = Quizez.getRandomQuestions(questions)
 
-    var score = 0
-    randomQuestions.foreach{ question =>
-      println(Quizez.formatQuestion(question))
-      val userAnswer = scala.io.StdIn.readLine("Your answer: ").toLowerCase
-      val normalizedAnswer = userAnswer.toLowerCase match {
-        case "a" if question.choices.size > 0 => question.choices(0).toLowerCase
-        case "b" if question.choices.size > 1 => question.choices(1).toLowerCase
-        case "c" if question.choices.size > 2 => question.choices(2).toLowerCase
-        case "d" if question.choices.size > 3 => question.choices(3).toLowerCase
-        case _ => Typos.handleTypos(userAnswer.toLowerCase) 
-      
-      }
-      if (normalizedAnswer == "quit") {
-        println("Exiting the quiz.")
-        println(s"Your partial score: $score/${randomQuestions.size}")
-      }
-      if (Quizez.checkAnswer(question, normalizedAnswer)) {
-        println("Correct!")
-        score += 1
-      } else {
-        println(s"Wrong! The correct answer is: ${question.correctAnswer}")
-      }
-    }
-    println(s"\nYour final score: $score/${randomQuestions.size}")
+    val randomQuestions = Quizez.getRandomQuestions(questions)
+    val totalQuestions = randomQuestions.size
+
+    // Process questions and collect results immutably
+    val (answers, finalScore) = randomQuestions.foldLeft((List.empty[Boolean], 0, 1)) {
+      case ((accAnswers, score, currentIndex), question) =>
+        println(s"Question $currentIndex:"+ Quizez.formatQuestion(question))
+        
+        val userAnswer = scala.io.StdIn.readLine("Your answer: ").toLowerCase
+        if (userAnswer == "quit") {
+          println(summarizeQuizResults(accAnswers)) // Show partial results
+            return
+        }
+
+        val normalizedAnswer = userAnswer match {
+          case "a" if question.choices.size > 0 => question.choices(0).toLowerCase
+          case "b" if question.choices.size > 1 => question.choices(1).toLowerCase
+          case "c" if question.choices.size > 2 => question.choices(2).toLowerCase
+          case "d" if question.choices.size > 3 => question.choices(3).toLowerCase
+          case _ => handleTypos(userAnswer)
+        }
+
+        val isCorrect = Quizez.checkAnswer(question, normalizedAnswer)
+        if (isCorrect) {
+          println("Deliciously correct! 🥙 Let’s keep going")
+          (accAnswers :+ true, score + 1, currentIndex + 1)
+        } else {
+          println(s"❌ Wrong! Correct answer: ${question.correctAnswer}")
+          (accAnswers :+ false, score, currentIndex + 1)
+        }
+    } match { case (ans, sc, _) => (ans, sc) }
+
+    // Show full results
+    println(summarizeQuizResults(answers))
   }
 }
+  def summarizeQuizResults(answers: List[Boolean]): String = {
+  val totalQuestions = answers.length
+  val correctCount = answers.count(_ == true)
+  val percentage = (correctCount.toDouble / totalQuestions * 100).round
+
+  val performanceFeedback = percentage match {
+    case p if p >= 80 => "🌟 Excellent! You're a culinary expert!"
+    case p if p >= 60 => "👍 Good job! You know your food well."
+    case p if p >= 40 => "🤔 Not bad! Keep exploring different cuisines."
+    case _ => "🍳 Beginner's luck! Try the quiz again to improve."
+  }
+
+  val correctRatio = s"$correctCount/$totalQuestions"
+  val percentageStr = s"$percentage%"
+  
+  s"""|Quiz Results:
+      |
+      |-----------------------------
+      |Total questions: $totalQuestions
+      |Correct answers: $correctRatio
+      |Percentage: $percentageStr
+      |
+      |$performanceFeedback
+      |""".stripMargin
+  }
 }

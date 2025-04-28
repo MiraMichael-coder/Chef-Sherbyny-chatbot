@@ -1,0 +1,236 @@
+hello:helo,hallo,heloo,hel,elo,heo,helloo,hlo,helo,gelo,hemlo,nello,helll,helko
+hi:hiii,hai,hhi,hii,hee,hy
+how:hoow,hwo,howw,ho,howare,howr,hoe,howww,ho
+are:ar,re,rae,aare,arre
+do:d,doe,dooo,doh,du,co,di,dp,dui,dy
+you:yuo,yo,yoo,yu,youu
+what:wht,waht,wat,whaat,whatt,whut
+for:fr,fpr,fir,ror,cor,dor,tor,dor,sor,kor
+is:si,iss,iis,s,iz
+the:teh,th,tge,hte,thhe,da
+food:fod,foood,fud,foood,fod,fode
+cuisine:cusine,cuisin,cusine,cuisne,cuisene,cuisnie,quisine
+bye:bi,bey,byee
+vegetarian:vegitarian,vegeterian,veggie,vegatarian,veggitarian
+ingredients:ingridients,ingreedients,ingrediants,ingridiants,ingrs
+quiz:quizz,quize,quz,quizzze,qiz
+dish:dsh,dissh,dich,dissh,dishh
+egyptian:egyption,egiptian,egiptian,egypitan,egyptian,egypitian,egypt
+french:frensh,frenche,frnch,frensh,frnch
+lebanese:lebanes,lebanesee,lebanes,lebanessee,lebanes,lebnan
+korean:koreean,koreaan,koreean,koreean,korean,koran
+quit:quitt,quitt,quitte,quitt,quit,quizt,qui,qut,qyt,qyut,uit
+sure:shure,suree,surr,shure,shur
+please:plese,pleas,pleese,pleas,plese
+thank:thx,thnks,thanx,thxk,thx
+thanks:thx,thnks,thanx,thxk,thx
+welcome:welcom,welcme,welcom,welccome,welcom
+recipe:recpie,recip,recipie,recpiee,recipie,reciepe,recipie,
+make:mak,maek,maake,mke,mae
+cook:cok,cokk,cokie,cokkk,cok
+tell:tel,tll,tll,tll,tll
+about:abou,abaut,abouut,abouut,abou
+no:noo,n,nooo,nno,nnoo,naah,nope,naw,nah,nop,nw
+yes:yea,yess,yees,yesss,ye,y,yep,yup,yeaah,yp,y,yeah
+good:god,gud,goood,gooodd,gud,godd
+bad:badd,badde,baad,bda,bd
+sorry:sory,srry,sorr,soory,soryy,sry
+ask:as,askk,aks,askc,asck,askk
+are:ar,re,rae,aare,arre
+and:ad,andd,an,andd,annd,&
+make:mak,maek,maake,mke,mae
+steps:steeps,stepes,steepss,stepp,stpes
+prepare:prepair,preapre,prepairr,prpare,preapare
+trivia:triviaa,trivai,triviaaa,trivv,trivia
+cooking:cookin,cookingg,cokkng,cokking,cooking
+fun:funn,funny,funnn,funnnn,fun
+interesting:intersting,interstingg,intresting,intrsting,intrstingg
+fact:fct,factt,fctt,factss,factt
+find:fnd,findd,finnd,finn,findd,fid
+koshari:koshary,koshare,koshari,kushari,kosheri,koshaarii,koshri,koushari
+ful medames:foul medames,ful medammes,fool medames,ful mudammes,ful mdames
+molokhia:mulukhiya,molohiya,molokhiya,mulukhia,melokhia,mouloukheia
+taameya:tameya,ta'meya,tamiya,taameia,taamya,taamia
+mahshi:mashi,mahshy,mahshe,mashy,mahshie,mhshy
+fatta:fata,fattah,fatah,fatte,fataa
+basbousa:basboosa,basbosa,basboosah,basbousah,basboussa,basboosha,basboosaa
+konafa:kunafa,kanafa,knafeh,knafa,konafah,kanefa,konapha
+hamam mahshi:hamam mashy,hamam mahshy,hamam mashshi,hamam mahshe,hamam mahshie,hamam mahchi,hamam mashie
+shakshuka:shakshouka,shakshoka,shakshukah,shakshoka,shakshukha,shakshoca,shaqshuka
+bamia:bamya,bameya,bamiya,bamyah,bameyah,bamiah,bamiaa
+fattah bil laban:fatta bil laban,fatah bil laban,fattah bi laban,fatteh bil laban,fatah bi laban,fata bil laban,fatat bil laban
+roz bel laban:ruz bel laban,roz bil laban,ruz bil laban,rooz bel laban,rooz bil laban,roze bel laban,roz bal laban
+samak mashwy:samak mashwi,samak mashawi,samak mashwey,samak mashoe,samak mashwe,samak mashue,samak mashwiya
+batates bil forno:batatis bil forno,batata bil forno,batates bel forno,batatis bel forno,batata bel forno,batatiz bil forno,batates bilforno
+lentil soup:lental soup,lentel soup,lentel soop,lentil soop,lentil suop,lentol soup,lentyl soup
+hawawshi:hawawshy,hawawshie,hawawche,hawawchy,hawawchee,hawawshee,hawawchi
+atayef:ataief,atayf,ataif,atayif,ataief,atayaff,atayev,atyf
+ratatouille:ratatoulle,ratatuil,ratatouile,ratatoille,ratatoullie,ratatoolie,ratatoulli,ratatoille,ratatoul
+coq au vin:coc au vin,coqauvain,coq auvine,coke au vin,kok au vin,coq au van,cok au vin,coq auvin,coq-o-vin
+quiche lorraine:kish lorraine,quish lorraine,quiche loraine,quiche lorain,qiche lorraine,kwiche lorraine,quiche-lorraine,quichelorraine,quiche lorein
+tarte tatin:tart tatin,tarte tatine,tartetatin,tart tatine,tarte-tatin,tartatatine,tarte tatim,tart taatin,tarte tatene
+pain au chocolat:pan au chocolat,paino chocolat,pain au chocalat,pain au choclat,pain au choco,pain au chockolat,pane au chocolat,pain-auchocolat,panochocolat
+boeuf bourguignon:beouf bourguignon,boeuf bourginon,boef bourguignon,boeuf burgignon,boeuf bourgignon,boeuf-bourguignon,beef bourguignon,boeuf borgignon,bœuf bourguignon
+croissant:crossant,croisant,croisantt,croissont,croiissant,crosant,croussant,croissaint,croiassant
+cassoulet:casoulet,cassulet,cassulet,casoulette,cassulait,cassoullet,cassoulate,cassulett,cassolay
+crème brûlée:creme brulee,creme brulay,cream brulee,cremé brûlée,creme-brulee,creme brulé,kreme brulee,crème brule,cremebrulee
+soupe à l'oignon:soup a l'oignon,soupe al oignon,soupe a loignon,soup à l'oignon,soupe-a-loignon,soupe a l onion,soupel'oignon,soup l’oignon,soupe loignon
+éclair:eclair,eclaire,éclaire,ecliar,eklair,eclari,eclere,éclai,eclairr
+salade niçoise:salad nicoise,salade nicois,salade-nicoise,salade nicsoise,salade nicoisse,salade-niçoise,salad niçois,salade niçwaise,saladnicoise
+clafoutis:clafouti,claffoutis,clafouty,clafoutie,claffouti,clafoutiss,clafutis,claffoutys,clafouti’s
+gratin dauphinois:gratin dauphinoise,gratin daphinois,gratin-dauphinois,gratin dauphinoi,graten dauphinois,gratin dauphinose,graten dophinois,gratin dauphinoisse,grattin dauphinois
+galette des rois:gallet des rois,galette desroys,galet des rois,galette-des-rois,gallate des rois,galette des roi,galette de rois,galette desroys,galeette des rois
+steak frites:steakfrite,steak-frite,steak fritt,steek frites,steak freets,steak frittes,stek frites,steak fritez,steak fritz
+crêpes:crepe,crepes,crèpes,crape,crepps,crêpe,crepés,krepes,crapés,crrepes
+mousse au chocolat:mousse o chocolat,mouse au chocolat,mousse au chocalat,mousseauchocolat,mousse au choco,moussa au chocolat,mous au chocolat,mousse-oh-chocolat,mousse chocolat
+mille-feuille:millefeuille,mille feuille,mille-foy,milfeuille,mille fuille,mil feuille,mille fouille,mille-feulie,millfeuille,milfeuile,milfuille.milliefeuy
+bibimbap:bibimpap,bibibmap,bibmbap,bibinbap,bibimmbap,bibimbup,bibinpap,bebimbap,bibimbop,bimbsb,bimbab,bimba
+kimchi:kimchee,kimchy,kimci,kymchi,kimhci,kimshi,kimhi,quimchi,kimchii
+japchae:japche,japchea,japchaee,japcha,japchei,japchay,japchey,japchye,japchaie
+bulgogi:bulgogee,bulgogii,bulgoki,bulgogey,bulghogi,bulgoji,bolgogi,bulgougi,bulgoogi
+tteokbokki:teokbokki,tteokboki,ddeokbokki,tteokboky,tteobbokki,ttekbokki,tteokbokie,ttokbokki,tteokbokkie
+samgyeopsal:samgyupsal,samgyopsal,samgyepsal,samgyopsel,samgyeopsel,samgyupsul,samgyeosalp,samgeopsal,samgyeobsal
+haemul pajeon:haemul pajun,haemool pajeon,haemul pageon,haemul-pajeon,haemul pajean,haemul pajeoen,haemulpajeon,haemul pajen,haemul pajon
+soondubu jjigae:sundubu jjigae,soondubu chigae,soondubu jjigaee,soondubu-jjigae,sundubu-jjigae,soondubujjigae,soondubo jjigae,soondubu jigae,soondubu jjjigae
+kimchi jjigae:kimchi chigae,kimchijjigae,kimchi-jjigae,kimchi jigae,kimchi jjigai,kimchi jiggae,kimchi jigai,kimchi jjjigae,kimchee jjigae
+mandu:mandoo,mando,mandou,mandhu,manndu,mandu dumplings,mandu korean,mandu’s,mandyoo
+naengmyeon:naengmyun,naengmyon,naeng-myeon,naeng myeon,naengmyoen,naegmyeon,naengmeyon,naengmyeonn,naengmyun
+dakgalbi:dakgalbee,dak galbi,dak-galbi,dakkalbi,dakgalbii,dakgalvy,dakgalpy,dakgalpi,dakalbi
+galbi:kalbi,galbee,galby,galvi,gahlbi,galbei,galbie,galbii,gallbi
+hotteok:hoddeok,hottok,hoteok,hotok,hotdeok,hotteock,hotteo,hottoek,hottoeok
+gyeran jjim:gyeranjjim,gyeran jjeem,gyeran jim,gyeran-jjim,gyerang jjim,gyeran jimm,gyeran jeem,gyeran jjime,gyeran jjmm
+hobakjuk:hobakjuk,hobagjuk,hobak jook,hobak-juk,hobakjuk,hobajuk,hobakjok,hobakjuuk,hobakjukc
+bingsu:bingsoo,bing su,bing-su,bingsuu,bingxoo,bingsue,bingshu,bingus,bingsū
+gamja jorim:gamjajorim,gamja jorrim,gamja-jorim,gamja jorime,gamja jorrime,gamja jorimm,gamja jorimn,gamza jorim,gamja jorin
+bossam:bosam,bo ssam,bossem,bossamm,bossom,bozzam,bosamm,bboossam,boszam
+tabbouleh:tabbouli,tabboulii,tabouli,tabuleh,taboule,taboulé,tabouleh,taboolah,tabbouleh’s
+hummus:hoummus,hommus,hummous,hummus dip,humus,humous,hummoush,hommous,humoush
+kibbeh:kibe,kibbi,kibbih,kebbah,kibeh,kibbah,kibbee,kibbey,kibbie
+fattoush:fatush,fattosh,fatoosh,fatush,fatushe,fattoush salad,fattoushje,fatosh,fattoshe
+shawarma:shwarma,shawerma,shawermah,shawirma,shwarma,shawarmas,shawarmae,shwarma
+mujadara:mujaddara,mojadara,mujadara,mujadara,mujderah,mujadrra,mojadarra,mujadarra,mujadrah
+kafta:kaftah,kaftan,kaftah,kaftah kebab,kafta kebab,kaftaah,kaftaaa,kafta grill,kaftash
+manakish:manakesh,manakesh,manaqish,manakiche,manakeesh,manakish bread,manakch,manakesh bread,manakishesh
+falafel:falaffel,falafell,falafel,felfel,faleffel,felafel,falaffel,falfel,faafel
+sambousek:sambousak,sambusak,sambusik,sambusak,sambosak,sambosik,sambousik,sambouseque,sambouscek
+rekakat:rikakat,riqakat,recakat,rekakat,recakat,raikat,rikkat,rekat,rekekat
+lahm bi ajeen:lahm bi ajeene,lahm bie ajeen,lahm be ajin,lahmbiajin,lahmbiajen,lahm bi ajen,lahmbiageen,lahm bih ajeen
+moghrabieh:maghrabieh,mghrabeh,mgharabieh,moghrabiye,maghrabiyyah,mghrabie,mghrabiye,mohgrabe,moghrabii
+arnabeet mekle:arnabit makleh,arnabeet mekleh,arnabeet makeleh,arnabeet makal,arnabeet mekleh,arnabeetmkleh,arnabeet meklee,arnabeetmekleh,arnabeet mekali
+batata harra:batatah harrah,batat harra,batat harrra,batata harrah,batta harra,battata harra,bata harrra,batath hara,batath harrah
+warak enab:warak anab,warak anab,warake enab,warak enabb,warak enap,warake nab,warae nab,warakenab,warakenaab
+shish tawook:shishtawook,shishtawuk,shishtawok,shishtawok,shish tawook,shish tawuq,shish tawki,sishtawook,shishtwok
+bazella w riz:bazella with riz,bazilla w riz,bazillaw riz,bazella riz,bazalla w riz,bazellaw reez,bazella wriz,bazilaw riz,bazellaz riz
+knefeh:knafa,konafa,knfa,kounafa,kenafahh,koonafa,kunafa,kounafahh
+rice:ryce,ricce,ricc,rize,ric,rise,raice,rci
+zucchini:zucchinni,zuchinni,zuchinni,zucchinni,zukini,zuchini
+eggs:egs,egges,eggss,egggs,eggsy,egg
+eggplant:egplant,eggplnt,eggpplant,eggplnate,eggnplant
+tomatoes:tomatos,tomatoe,tomatoss,tomatoe,tomatoess
+onion:onion,onionns,onionn,onins,onins
+garlic:garlik,garlc,garlics,garlikc,garli
+olive oil:oliv oil,olvie oil,olivve oil,oliv oil,olivoil
+herbs:herbbes,herbes,herbss,herbz,herbbz
+cream:creem,crema,creamz,creemz,cream
+raisins:raisinss,raisin,raisens,rasins,raisinz
+sugar:suggar,suger,sugr,sugars,suggar
+mushroom:mushroms,mushrums,mushrooms,mushroomz,mushrom,mushrm
+salt:saalt,salt,sallt,saltt,slt
+pepper:peper,peppar,peppre,peppur,peppper
+lettuce:lettucee,lettucce,lettuse,lettace,lettuice
+beef:beefy,beff,beefs,beeff,beefsteak,beefd,beffy
+carrot:carots,carrotts,carotts,carots,carrotss
+chickpeas:chickpees,chikpeas,chichpeas,chikpeass,chicpeas,cichkpees,cickpeas
+cucumber:cukmber,cucmber,cucmber,cuccumber,cucumer,kukumber
+radish:rdish,radishh,radsh,raadiish,radishs,radich,raadish
+tomato sauce:tomto sauce,tomato suce,tomaato souce,tomatosose,tometo sos
+lemon juice:lemmon juice,lemn juice,lemonn juice,lemmonn juice,lemon-juice,lemon jice,lemoun juci
+parsley:parslly,prsly,parslye,parssley,parslee,parzlee,prasli,persaly,pursley
+cilantro:cilantroo,cilantro,cilentro,cilantroh,cilantor
+spices:spyces,spices,spicess,pycess,speces
+yogurt:yoghurt,yogourt,yogurt,yoghourt,yogurtt
+semolina:semolena,semolinaa,semolinna,semolna,semolena
+sugar syrup:sugar syrp,sugr syrupp,sugrsyrp,sugar sirup,ssugaar ssirupp,sugarsyrrup
+cheese:cheeze,chese,cheesee,cheez,chesee
+lentils:lentiles,lentills,lentls,lentilss,lentl
+pasta:pastaa,paste,psta,passtaa,passta
+fried onions:fryed onions,frying onions,friedonions,frid onions,fried onion
+fava beans:fava beens,favabeans,fava beens,fava beanz,favabeenz
+coconut:cocnut,coconutt,cocconut,cocunut,coconutty
+shredded pastry:shreddedpastry,shredded pastry,shreded pastr,shreddedpastrey,shredded pasterry
+nuts:nutts,nutes,nutzs,nutz,nut
+okra:okra,okraaa,okras,okras,okrah
+lamb:lam,lambb,lambe,lamby,lambchop
+bread:bred,breade,breadd,breaad,brad
+bell peppers:bellpeppers,bell pepper,bel peppers,bel peppers,bellpepar
+crispy bread:crispybread,crispy bread,crispybred,crispy bread,crispybred
+minced meat:mince meat,minceeed meat,minsed meat,miced meat,mincemeat
+spiced minced meat:spices mincemeat,spiced mincemeat,spice minced meat,spicedminced meat,spicd minced meat
+pigeon:pidgeon,pigin,pigeons,pidgen,pidgen
+pita bread:pitabread,pita-bread,pittabread,pitabred,pitteh bread
+red wine:redwine,redwines,red-wine,redwineee,reed wine,rd win,red win
+bacon:baconn,baconb,baconn,backon,bacons,bacn
+thyme:thime,thym,tyme,thymme,thymn
+pie crust:piecrust,pie crust,crust pie,crustpie,piecrustt
+apples:applse,appless,applz,applez,applles
+butter:buter,buttr,buttere,butt,butr
+pastry:pastery,pastryy,pastrie,pastry,pastriee
+flour:flur,flwer,flourr,flouer,flouwr
+yeast:yeastt,yees,yeast,yest,yeas
+milk:milkk,mylk,milke,mylkk,milkys
+dark chocolate:darkchocolate,dark chocolate,dark choclate,darkchoco,dark choc
+water:watr,waterr,waterr,wate,wattter
+potatoes:potatos,potattoes,potatotes,pottatoes,potatoss
+steak:steaks,steaks,steek,staek,steakyy
+cinnamon:cinnemon,cinnaman,cinamon,cinnmon,cinammon
+frangipane:franjipane,frangipene,frangipain,frangipene,frangipan
+puff pastry:puffpastry,puff pastry,puffpastery,pufpastry,puffpasterry
+powdered sugar:powderedsugar,powderedsugars,powderedsuger,powderedugar,powderedsugar
+white beans:whitebeans,whitbeens,white beans,whtebeens,whitesbeans
+duck:dick,duckk,dukk,duke,duc
+sausage:sausge,sausages,sausage,sausgges,sausgees
+anchovies:anchovis,anchoevis,anchovys,anovhies,anchovys
+tuna:tunna,tonna,tunaa,tunaa,tuna
+hard-boiled eggs:hardboiledeggs,hardboiledegs,hardboiledegg,hardboildedeggs,hardboiled eggss
+spinach:spinich,spinch,spenach,spynach,spinaach
+gochujang:gochujung,gochujangh,gochujanggg,gochujangn,gochujng
+napa cabbage:nappa cabbage,napa cabage,napa cabbages,nappa cabbge,napacabbage
+ginger:gingr,gengger,gengerr,gingr,gingr,ginger,gingrr
+gochugaru:gochugaroo,gochugar,gochuguru,gochugaru,gochugura
+fish sauce:fishsauce,fsh sauce,fissh sauce,fishes sauce,fishsauces
+soy sauce:soysauce,soysauces,soysoss,soyssaue,soy sause,soysase,soyosauce
+glass noodles:glassnoodles,glass noodle,glassnoodless,glas noodles,glassnoddles
+sesame oil:sesameoil,sesameoill,sesam oil,sesamoil,sesam oil
+green onion:greenonion,grennonion,green onions,greonion,greenon
+seafood:seafoods,seafod,seefood,seafodd,seafoo,seafoodss
+soft tofu:softtofu,softtofuu,sof tofu,soft tofu,softoo tofu
+tofu:tofus,toof,tofoo,tofu,tofuu
+pork belly:porkbelly,porkbely,porkbell,porkbellyy,pork beely,pork bell,porkbellyyy
+dumpling wrappers:dumplingwrapper,dumplingwappers,dumplngwrappers,dumplingwppers,dumplingwraps
+buckwheat noodles:buckwheatnoodles,buckwheatnoodls,buckwheat noodles,buckwheatnoodls,buckwhetnoodles
+pear:pearss,peaar,per,peer,pears
+mustard:mustarrd,mustar,mustrad,mustard,mustarddd
+vinegar:vinegarrr,vineger,viner,vinega,vinegarr
+chicken:chiken,chikkens,chikens,chikeny,chikk
+sweet potato:sweetpotato,sweetpotatos,sweeet potato,sweetpotatos,sweetptoato
+ssamjang:ssamjangg,ssamjangg,ssamjang,ssamjaang,ssamjangs
+cabbage:cabbagee,cabbge,cabbahe,cabge,cubbage
+bulgur:blgur,bulgurr,bulguur,bulguer,bulgr,buljer,blgr
+green onion:green onin,grn onion,greenn onionss,gree nonionn,green onions,greenn onionss
+mint:minnts,mints,minnt,mient,mintt,mnt,miint
+tahini:tahni,tahhin,tahina,tehina,tahine,tahinah
+ground beef:grond beef,grounded beef,ground bef,gruund beefss,grnd beef
+pine nuts:pine nts,pin nuts,pinenutt,pin nuts,pinenutts,pinee nut
+crispy pita:crispy pitt,crispy pitta,crispe pita,crispy pitta,crspy pta,pita
+sumac:sumc,sumack,sumak,sumaac,summac,smac
+ground lamb:grnd lamb,ground lmb,ground laam,grond lambb,grnd lamb
+za'atar:za atar,zaatar,zattar,zaattarr,zataar
+flatbread:fltbread,flatbrads,flatberd,fslttbreadd,flt bred
+sesame seeds:sesam seeds,sesame seds,sesam seeed,ssame seed,sesame seeds
+cumin:cumn,comin,cummn,cummim,cuminn
+coriander:coriandr,corriander,corianderr,corriand,coryander
+phyllo dough:phylo dough,phyllodough,filo dough,philo dough,filodough
+cauliflower:caulflower,cauliflour,cauloflowr,caulifower,cauliflowerr
+chili:chil,chilly,chilis,chilii,chilli
+grape leaves:grap leaves,grapeleave,grape leaves,grapeleaves,grapleaves
+minced beef:minc beef,mincedbeef,mincedbeefs,mincedbeff,mincebeef
