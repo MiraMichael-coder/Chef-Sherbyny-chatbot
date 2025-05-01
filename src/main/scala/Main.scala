@@ -2,7 +2,52 @@ import java.time.LocalTime
 import scala.io.StdIn.readLine
 import scala.util.Random
 import scala.annotation.tailrec
+
+object UserState {
+  private var userName: String = "friend"
+
+  def setName(name: String): Unit = {
+    userName = name
+    println(s"Got it! I'll call you $name from now on.")
+  }
+
+  def getName: String = userName
+}
+
+object Personality {
+  private val greetings = List(
+    "Hey there!",
+    "Hello! Ready to chat about food?",
+    "Salam! What dish are you craving today?",
+    "Welcome back, hungry friend! 🍽️"
+  )
+
+  private val jokes = List(
+    "Why did the tomato turn red? Because it saw the salad dressing! 🍅",
+    "What do you call cheese that isn’t yours? Nacho cheese! 🧀",
+    "Why don’t eggs tell each other secrets? Because they might crack up! 🥚",
+    "I'm on a seafood diet. I see food and I eat it. 😆",
+    "ليش الفول بيزعل؟ عشان محدش بيقوله بحبك من غير عيش 🤣",
+    "ليه الجبنة ما بتلعبش كورة؟ عشان دايمًا بتقع في الشباك! 🧀⚽",
+  )
+
+  def respondToGreeting(): Unit = {
+    println(greetings(scala.util.Random.nextInt(greetings.length)))
+  }
+
+  def tellJoke(): Unit = {
+    println(jokes(scala.util.Random.nextInt(jokes.length)))
+  }
+
+
+  def askHowUserIs(): Unit = {
+    println(s"I’m just about keeping it together 😂 but actually doing great!")
+  }
+}
+
 object Main  {
+
+  implicit val parseForAnalytics: String => (String, List[String]) = parseInput
 
   def greetUser(): String = {
   val currentHour = LocalTime.now.getHour
@@ -52,6 +97,17 @@ object Main  {
 
   val command = cleaned match {
     case msg if (
+    (msg.startsWith("what are the ingredients") ||
+    msg.startsWith("what ingredients are in") ||
+    msg.startsWith("what is") && (
+      msg.contains("made of") ||
+      msg.contains("contains") ) ||
+    msg.startsWith("what do i need for") ||
+    msg.contains("recipe calls for")
+  )) => "ingredients"
+
+  //recipe request
+  case msg if (
   msg.startsWith("how ") && msg.contains("make") ||
   (msg.contains("recipe") || msg.contains("steps") || msg.contains("instructions") || 
    msg.contains("method") || msg.contains("way")) &&
@@ -68,21 +124,6 @@ object Main  {
   (msg.startsWith("i need to know") || msg.startsWith("i need to learn")) &&
   (msg.contains("to make") || msg.contains("to cook"))
 ) => "recipe"
-
-// Ingredients
-case msg if (
-  msg.startsWith("what is") && (
-    msg.contains("ingredient") ||
-    msg.contains("made of") ||
-    msg.contains("in it") ||
-    msg.contains("contains")
-  ) ||
-  (msg.contains("use") || msg.contains("need") || msg.contains("require")) && 
-  msg.contains("to make") ||
-  msg.contains("contain") || msg.contains("include") || msg.contains("have") || msg.contains("take") ||
-  msg.startsWith("what do i need for") ||
-  msg.contains("recipe calls for") || msg.contains("need for") || msg.contains("required for")
-) => "ingredients"
 
 // Quiz/Test
 case msg if (
@@ -149,33 +190,71 @@ case _ => "unknown"
   }
   val keywords = corrrectedTokens.filterNot(token =>
     Set(
-      // Basic question words
-      "what", "which", "how", "can", "could", "would", 
-      "is", "are", "was", "were", "does", "do", "did",
-      "has", "have", "had", "will", "shall", "may",
-      "might", "must", "should", "need", "want","yes","no","please",
-      // Request verbs
-      "tell", "give", "show", "explain", "describe", 
-      "list", "provide", "share", "know", "find","fun","fact",
-      // Food-related verbs
-      "make", "cook", "prepare", "create", "bake", 
-      "fry", "grill", "boil", "steam", "roast",
-      // Prepositions/articles
-      "about", "of", "for", "to", "from", "with", 
-      "without", "in", "on", "at", "the", "a", "an", "me", "as",
-      // General food terms
-      "dish", "dishes", "food", "cuisine", "meal", "recipe",
-      "ingredient", "step", "direction", "instruction",
-      // Polite terms
-      "please", "thanks", "thank", "hello", "hi",
-      // Quantifiers
-      "some", "any", "many", "few", "several",
-      // Common connectors
-      "and", "or", "but", "with", "without", "containing", "using", "contains",
-      // Ingredient search terms (added)
-      "has", "uses", "made", "find", "search","about","quiz","trivia","i",
-      // Punctuation
-      "?", "!", ".", ","
+     // Basic question words
+  "what", "which", "how", "can", "could", "would", 
+  "is", "are", "was", "were", "does", "do", "did",
+  "has", "have", "had", "will", "shall", "may",
+  "might", "must", "should", "need", "want", "yes", "no",
+  "what's", "whats", // Added from patterns
+
+  // Request verbs
+  "tell", "give", "show", "explain", "describe", 
+  "list", "provide", "share", "know", "find","walk",
+  "define", // Added from dish_info pattern
+  "try", "take", // Added from quiz pattern
+
+  // Food-related verbs
+  "make", "cook", "prepare", "create", "bake", 
+  "fry", "grill", "boil", "steam", "roast",
+  "require", "include", // Added from ingredients pattern
+
+  // Prepositions/articles
+  "about", "of", "for", "to", "from", "with", 
+  "without", "in", "on", "at", "the", "a", "an", 
+  "me", "as", "by", "through", // Added from patterns
+
+  // General food terms
+  "dish", "dishes", "food", "cuisine", "meal", "recipe",
+  "ingredient", "step", "steps", "direction", "instructions", "instruction",
+  "method", "way", // Added from patterns
+  "calls", "required", // Added from ingredients
+
+  // Quiz/Test terms
+  "quiz", "test", "question", "challenge", 
+  "knowledge", // Added from patterns
+
+  // Trivia terms
+  "trivia", "fact", "fun", "interesting", 
+  "did", "history", "origin", "story", "background", // Added from patterns
+
+  // Polite terms
+  "please", "thanks", "thank", "hello", "hi", "hey",
+  "greetings", "goodbye", "bye", // Added from patterns
+  "welcome", "back", // Added from greet pattern
+
+  // Response terms
+  "sure", "ok", "okay", "yeah", "yep",
+  "continue", "move", "on", "like", "love", 
+  "ready", "begin", "start", // Added from log pattern
+
+  // Pronouns/identifiers
+  "i", "we", "my", "our", "you",
+
+  // Time references
+  "now", "later", "maybe", "next", "time",
+  "today", "soon", "enough", "finished", "done",
+
+  // Quantifiers
+  "some", "any", "many", "few", "several", "all",
+
+  // Connectors
+  "and", "or", "but", "containing", "using", "contains",
+  "not", "no", // Added from exit pattern
+
+  // Special terms
+  "best", "right", "good", "day", "up", "are",
+  "exit", "quit", "see", "go", "want", "information"
+
     ).contains(token.toLowerCase)
   )
 
@@ -228,7 +307,14 @@ case _ => "unknown"
     case "dish_info" => handleDishRequest(tokens)
     case "greet" => 
       //greet function!
-      println("Hello! How can I assist you today?")
+      Personality.respondToGreeting()
+    case "log" =>
+      val logs = Analytics.getInteractionLog()
+      logs.foreach { case (seq, user, bot) =>
+        println(s"\n# $seq\n👤: $user\n🤖: $bot")
+      }
+      //botResponseBuffer.append(s"🗂 Displayed ${logs.length} interactions.")
+
       
     case "unknown" => // yerg3 llchat tany 
       val corrected = Typos.handleTypos(input)
@@ -419,6 +505,7 @@ case _ => "unknown"
     dish match {
     case Some(foundDish) =>
       showRecipe(foundDish)
+      dish_suggestion()
       // askForFeedback(foundDish.name)
       
     case None =>
@@ -453,6 +540,8 @@ case _ => "unknown"
                 case None => "🌿 *Vegetarian Menu* 🌿"
               }
             println(header)
+            Random.shuffle(vegDishes).take(5).foreach { d =>
+                println(s"🍽  ${d.name} (${d.ingredients.take(5).mkString(", ")}${if (d.ingredients.size > 5) "..." else ""})")}
             vegDishes.foreach(d => println(s"🍽️  ${d.name} (${d.ingredients.mkString(", ")})"))
             
             if (vegDishes.size == 1) showRecipe(vegDishes.head)
@@ -467,9 +556,12 @@ case _ => "unknown"
             case _ =>
               println(s"Sorry, I didn't find '$selection' in the results. Please try again.")
           }
-          
+          dish_suggestion()
         case "ingredient" =>
           handleIngredientSearchResults(tokens)
+        case "unknown" | _ =>  // Add this catch-all case
+          println(s"I couldn't find any recipes matching '${tokens.mkString(" ")}'")
+          showSimilarDishes(tokens)
       }
   }
 }
@@ -529,12 +621,280 @@ case _ => "unknown"
       println(s"👨‍🍳 *Chef's confession*: My $cuisine knowledge is still simmering!")
   }
 }
+
+    def handleDishRequest(tokens: List[String]): Unit = {
+      val userName = UserState.getName
+      val searchQuery = tokens.mkString(" ")
+      
+      // Log the initial dish search
+      Analytics.updateUserSearchLog(userName, searchQuery)
+      
+      FoodDB.getDish(tokens) match {
+        case Some(dish) =>
+          // Log successful dish found
+           Analytics.logInteraction(s"Search for dish: ${tokens.mkString(" ")}", 
+            "Processing dish request",
+            userName
+            )
+          showDishDetails(dish)
+          dish_suggestion()
+          
+        case None =>
+          // Log dish not found
+          Analytics.logInteraction(
+            s"Search for dish: $searchQuery", 
+            "Dish not found, showing alternatives", 
+            userName
+          )
+          
+          println(s"👨‍🍳 Oops! '$searchQuery' isn't in my database yet. But here are some tasty alternatives:")
+
+          val suggestions = FoodDB.getAllDishes.filter { dish =>
+            tokens.exists(token => dish.name.toLowerCase.contains(token.toLowerCase))
+          }.take(5)
+
+          if (suggestions.nonEmpty) {
+            println("\n🔍 Similar dishes you might like:")
+            suggestions.foreach(d => println(s"- ${d.name}"))
+          } else {
+            println("\n🍽️ Here are some delicious options for you:")
+            Random.shuffle(FoodDB.getAllDishes).take(5).foreach(dish => println(s"- ${dish.name}"))
+          }
+
+          // Prompt user to enter a dish or type "no"
+          print("\n👨‍🍳 Which dish would you like to explore? > ")
+          val input = scala.io.StdIn.readLine().trim.toLowerCase
+          val corrected = Typos.handleTypos(input)
+
+          // Log user's selection
+          Analytics.logInteraction(
+            s"User selected: $input", 
+            s"Corrected to: $corrected", 
+            userName
+          )
+
+          if (corrected != "no" && input.nonEmpty) {
+            val dish = FoodDB.getDish(List(corrected))
+            dish match {
+              case Some(d) => 
+                // Log successful follow-up dish found
+                Analytics.logInteraction(
+                  s"Follow-up search: $corrected", 
+                  s"Found dish: ${d.name}", 
+                  userName
+                )
+                showDishDetails(d)
+                
+              case None =>
+                // Log follow-up dish not found
+                Analytics.logInteraction(
+                  s"Follow-up search: $corrected", 
+                  "Dish not found, showing similar dishes", 
+                  userName
+                )
+                println(s"👨‍🍳 Oops! I couldn't find '$input'. Let's try again.")
+                showSimilarDishes(List(corrected))
+            }
+          } else if (corrected == "no" || corrected == "none" || corrected == "cancel" || 
+                    corrected == "exit" || corrected == "quit" || corrected == "thanks" || 
+                    input.isEmpty) {
+            // Log user exit
+            Analytics.logInteraction(
+              "User ended dish exploration", 
+              "Showing farewell message", 
+              userName
+            )
+            println("""
+              |👨‍🍳 No worries, foodie! 
+              |I'm always here to help you discover delicious dishes! 
+              |Just let me know what you'd like to explore next! 🍽️
+              |""".stripMargin)
+          } else {
+            val corrected = Typos.handleTypos(input)
+            FoodDB.getDish(List(corrected)) match {
+              case Some(dish) =>
+                // Log successful dish found after retry
+                Analytics.logInteraction(
+                  s"Retry search: $corrected", 
+                  s"Found dish: ${dish.name}", 
+                  userName
+                )
+                showDishDetails(dish)
+                
+              case None =>
+                // Log final dish not found
+                Analytics.logInteraction(
+                  s"Final search attempt: $corrected", 
+                  "Dish still not found", 
+                  userName
+                )
+                println(s"\nSorry, I still couldn't find '$input'. try to rephrase it.")
+            }
+          }
+      }
+    }
+    
+  def showDishDetails(dish: Dish): Unit = {
+    val dishtype= dish.Dish_Type match {
+      case "main" => "Main Course"
+      case "appetizer" => "Appetizer"
+      case "dessert" => "Dessert"
+      case "salad" => "Salad"
+      case "soup" => "Soup"
+      case "breakfast" => "Breakfast"
+      case _ => "Dish"
+    }
+    val vegStatus = if (dish.isVegetarian) "Vegetarian" else "Non-vegetarian"
+    println(s"\n◎ ${dish.name}: $dishtype ($vegStatus) ")
+    println(s"   Ingredients: ${dish.ingredients.mkString(", ")} ")
+    println("\nWould you like me to show you the recipe f" +
+      "or this dish?" )
+    val answer = readLine().trim.toLowerCase
+    val corrected= Typos.handleTypos(answer)
+    if (corrected == "no" || corrected == "exit" || corrected == "quit" || corrected == "thanks" || answer.isEmpty) {
+      println("Okay, let me know if you need anything else!")
+    } else if (corrected == "yes" || corrected == "y"|| corrected == "sure"|| corrected=="please") {
+      println("Fetching the recipe...")
+      showRecipe(dish)
+    } else {
+      println("I didn't understand that.Could you rephrase?") //y/n
+    }
+  }
+
+  def showRecipe(dish: Dish): Unit = {
+  // This would need actual recipe data - you could add this to your Dish case class
+  println(s"\nRecipe for ${dish.name}:")
+  dish.recipeSteps.foreach { step =>
+    println(s"• $step")
+  }
+  println("\nWould you like a recipe link? ")
+  val answer = readLine().trim.toLowerCase
+    val corrected= Typos.handleTypos(answer)
+  if (corrected == "no" || corrected == "exit" || corrected == "quit" || corrected == "thanks" || answer.isEmpty) {
+    println("👨‍🍳 No problem at all! I'm always here to share more recipes and food knowledge!")
+      
+  } else if (corrected == "yes" || corrected == "sure"|| corrected=="please") {
+    println(s"📜 Recipe link: ${dish.recipeLink}")
+  } 
+  println("Enjoy your cooking!") // after this part return to the main chat 
+}
+
+  def mainChat(): Unit = {
+ println(greetUser()) // Time-based greeting
+  Personality.respondToGreeting()
+
+  println("Before we begin, what should I call you?")
+  val name = readLine().trim
+  if (name.nonEmpty) UserState.setName(name)
+
+  Personality.askHowUserIs()
+
+  chatLoop()
+}
+
+  @tailrec
+  def chatLoop(): Unit = {
+  print(s"\n${UserState.getName.capitalize}: ")
+  val input = readLine().trim.toLowerCase
+
+  if (input.isEmpty) {
+    println("👨‍🍳 Oops! The kitchen seems quiet... Type something or 'quit' to leave!")
+    chatLoop()
+
+  } else if (input.contains("joke")) {
+    Personality.tellJoke()
+    chatLoop()
+
+  } else if (input.contains("how are you") || input.contains("what's up")) {
+    Personality.askHowUserIs()
+    chatLoop()
+
+  } else if (input.contains("analytics") || input.contains("my preferences")) {
+    val userName = UserState.getName
+    Analytics.handleUserRequestForAnalytics(userName)
+    chatLoop()
+
+  } else if (input.contains("interaction report") || input.contains("usage summary")) {
+    Analytics.analyzeInteractions()
+    chatLoop()
+
+  } else if (input.contains("chat log") || input.contains("conversation history") || input.contains("full log")) {
+    val logs = Analytics.getInteractionLog()
+    logs.foreach { case (seq, user, bot) =>
+      println(s"\n# $seq\n👤: $user\n🤖: $bot")
+    }
+    println(s"\n🗂 Displayed ${logs.length} interactions.")
+    chatLoop()
+
+  } else {
+    val (command, _) = parseInput(input)
+
+    if (command == "bye") {
+      println(s"""
+        |👋 Goodbye, ${UserState.getName.capitalize}! 
+        |Come back anytime for:
+        |🍲 More recipes
+        |🌶 Fresh trivia
+        |🍽 And a good laugh!""".stripMargin)
+    } else {
+      handleUserInput(input)
+      chatLoop()
+    }
+  }
+}
+  def dish_suggestion(initialCall: Boolean = true): Unit = {
+  val suggestions = FoodDB.getRandomDishSuggestions()
+  
+  if (initialCall) {
+    println("\nBefore you go, would you be interested in these dishes?")
+  } else {
+    println("\nHere are some more suggestions:")
+  }
+  
+  suggestions.foreach(d => println(s"🍽️ ${d.name}"))
+  
+  println("\nWould you like to know more about any of these? (enter dish name, or 'no' to exit)")
+  val answer = readLine().trim.toLowerCase
+  
+  // Check for explicit exit commands
+  val corrected = Typos.handleTypos(answer)
+  if (corrected == "no" || corrected == "n" || corrected == "exit" || corrected == "quit"|| answer =="") {
+    println("Alright, have a delicious day! 👨‍🍳")
+    return
+  } 
+  
+  // Try to find matching dish
+  val selectedDish = suggestions.find(d => 
+    Typos.handleTypos(d.name.toLowerCase) == corrected
+  )
+  
+  selectedDish match {
+    case Some(dish) =>
+      showDishDetails(dish)
+      println("\nWould you like another suggestion? (yes/no)")
+      val continue = readLine().trim.toLowerCase
+      if (Typos.handleTypos(continue) == "yes") {
+        dish_suggestion(initialCall = false)
+      } else {
+        println("Alright, have a delicious day! 👨‍🍳")
+      }
+      
+    case None =>
+      println(s"Sorry, I didn't recognize '$answer'. Here are your options:")
+      dish_suggestion(initialCall = false) // Show suggestions again
+  }
+}
+  def main(args: Array[String]): Unit = {
+ mainChat()
+  }
+}   
   // Function to handle dish requests and show details
   // This function will be called when the user asks about a dish
-  def handleDishRequest(tokens: List[String]): Unit = {
+  /*def handleDishRequest(tokens: List[String]): Unit = {
     FoodDB.getDish(tokens) match {
       case Some(dish) =>
         showDishDetails(dish)
+        dish_suggestion()
         return
       case None =>
         println(s"👨‍🍳 Oops! '${tokens.mkString(" ")}' isn't in my database yet. But here are some tasty alternatives:")
@@ -582,104 +942,4 @@ case _ => "unknown"
           }
       
   
-    }
-    
-  def showDishDetails(dish: Dish): Unit = {
-    val vegStatus = if (dish.isVegetarian) "Vegetarian" else "Non-vegetarian"
-    println(s"\n◎ ${dish.name} ($vegStatus)")
-    println(s"   Ingredients: ${dish.ingredients.mkString(", ")}")
-    println("\nWould you like me to show you the recipe for this dish?")
-    val answer = readLine().trim.toLowerCase
-    val corrected= Typos.handleTypos(answer)
-    if (corrected == "no" || corrected == "exit" || corrected == "quit" || corrected == "thanks" || answer.isEmpty) {
-      println("Okay, let me know if you need anything else!")
-    } else if (corrected == "yes" || corrected == "y"|| corrected == "sure"|| corrected=="please") {
-      println("Fetching the recipe...")
-      showRecipe(dish)
-    } else {
-      println("I didn't understand that.Could you rephrase?") //y/n
-    }
-  }
-
-  def showRecipe(dish: Dish): Unit = {
-  // This would need actual recipe data - you could add this to your Dish case class
-  println(s"\nRecipe for ${dish.name}:")
-  dish.recipeSteps.foreach { step =>
-    println(s"• $step")
-  }
-  println("\nWould you like a recipe link? ")
-  val answer = readLine().trim.toLowerCase
-    val corrected= Typos.handleTypos(answer)
-  if (corrected == "no" || corrected == "exit" || corrected == "quit" || corrected == "thanks" || answer.isEmpty) {
-    println("👨‍🍳 No problem at all! I'm always here to share more recipes and food knowledge!")
-      
-  } else if (corrected == "yes" || corrected == "sure"|| corrected=="please") {
-    println(s"📜 Recipe link: ${dish.recipeLink}")
-  } 
-  println("Enjoy your cooking!") // after this part return to the main chat 
-}
-
-
-
-def mainChat(): Unit = {
-  println(greetUser()) // Show initial greeting
-  chatLoop()
-}
-
-@tailrec
- def chatLoop(): Unit = {
-  print("\nWhat would you like to know? > ")
-  val input = readLine().trim
-  
-  if (input.isEmpty) {
-    println("""
-    |👨‍🍳 Oops! The kitchen seems quiet...
-    |Share your food curiosity or type 'quit' to leave!🍽️
-    |""".stripMargin)
-    chatLoop()
-  } else {
-    val (command, _) = parseInput(input)
-    
-    if (command == "bye") {
-      println("""
-                |👋 Until we meet again! 
-                |Next time you visit, I'll have:
-                |🍲 New recipes to share
-                |🌶️ Spicy trivia to compare
-                |👨‍🍳 More cooking tips to prepare!""".stripMargin)
-      //println(Analytics.getlog)
-    } else {
-      handleUserInput(input)
-      chatLoop()
-    }
-  }
-}
-
-  def main(args: Array[String]): Unit = {
- mainChat()
-  
-   
-    
-  }
-  }
-
- /*  def handleCuisineRequest(tokens: List[String]): Unit = {
-  val maybeCuisine = tokens.collectFirst {
-    case t if FoodDB.categories.exists(_.name == Typos.handleTypos(t)) => Typos.handleTypos(t)
-  }
-
-  maybeCuisine match {
-    case Some(cuisine) =>
-      showCuisineInformation(cuisine)  // Show cuisine details if found
-    case None =>
-      println("Which cuisine would you like to know about?")
-      FoodDB.categories.foreach(c => println(c.name.capitalize))  // Display available cuisines
-      val cuisine = scala.io.StdIn.readLine().trim.toLowerCase
-      val corrected = Typos.handleTypos(cuisine)
-      if (FoodDB.categories.exists(_.name == corrected)) {
-        showCuisineInformation(corrected)  // Show details of the corrected cuisine
-      } else {
-        println(s"Sorry, '$cuisine' is not available.")
-      }
-  }
-} */     
+    }*/

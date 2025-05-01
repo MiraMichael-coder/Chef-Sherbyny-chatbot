@@ -2,10 +2,12 @@ import scala.io.Source
 import scala.util.{Try, Success, Failure}
 import java.nio.file.{Paths, Files}
 import java.io.File
+import scala.util.Random
 
 case class Dish(
   name: String,
   isVegetarian: Boolean,
+  Dish_Type: String,
   ingredients: List[String],
   recipeSteps: List[String],
   recipeLink: String
@@ -75,8 +77,8 @@ object FoodDB {
     CuisineCategory("egyptian", s"${basePath}egyption_foods.txt"),
     CuisineCategory("lebanese", s"${basePath}lebanese_foods.txt"),
     CuisineCategory("korean", s"${basePath}korean_foods.txt"),
-    CuisineCategory("french", s"${basePath}french_foods.txt")
-    //CuisineCategory("Lebaneese", s"${basePath}lebanon_foods.txt")
+    CuisineCategory("french", s"${basePath}french_foods.txt"),
+    CuisineCategory("Italian", s"${basePath}italian_foods.txt")
   )
 
   // Load all dishes by category with error handling
@@ -99,9 +101,10 @@ object FoodDB {
             Dish(
               name = parts(0),
               isVegetarian = parts(1).toBoolean,
-              ingredients = parts(2).split(",").map(_.trim).toList,
-              recipeSteps = parts(3).split(",").map(_.trim).toList,
-              recipeLink = parts(4)
+              Dish_Type = parts(2),
+              ingredients = parts(3).split(",").map(_.trim).toList,
+              recipeSteps = parts(4).split(",").map(_.trim).toList,
+              recipeLink = parts(5)
             )
           }.toList
       } finally {
@@ -170,6 +173,12 @@ object FoodDB {
     else
       None
   }
+
+  def getRandomDishSuggestions(count : Int = 2): List[Dish]=
+    {
+      Random.shuffle(FoodDB.getAllDishes).take(count) }
+
+
   }
   
 

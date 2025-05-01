@@ -1,0 +1,26 @@
+#Format: Question | Choice1,Choice2,Choice3,Choice4 | CorrectAnswer
+What cheese is essential in Margherita Pizza? | Ricotta,Parmesan,Mozzarella,Gorgonzola | Mozzarella
+What meat is used in Spaghetti Carbonara? | Bacon,Guanciale,Ham,Salami | Guanciale
+Which Italian dish features layers of pasta, sauce, and cheese? | Risotto,Lasagna,Gnocchi,Polenta | Lasagna
+What makes Caprese Salad a classic Italian appetizer? | Fruit and cream,Cheese and tomatoes,Bread and sauce,Meat and pasta | Cheese and tomatoes
+What spice gives Risotto alla Milanese its golden color? | Turmeric,Saffron,Curry,Cinnamon | Saffron
+What kind of sauce is typically served with Gnocchi? | Cheese sauce,Meat sauce,Tomato sauce,Alfredo sauce | Tomato sauce
+What is a Frittata similar to? | Pancake,Quiche,Omelette,Crepe | Omelette
+Which dessert is made with espresso-soaked ladyfingers? | Tiramisu,Panna Cotta,Cannoli,Zabaglione | Tiramisu
+What kind of bread is used in Bruschetta? | Sourdough,Flatbread,Baguette,Toasted crusty bread | Toasted crusty bread
+What cut of meat is used in Osso Buco? | Chicken thighs,Veal shanks,Pork ribs,Beef brisket | Veal shanks
+What is the core ingredient of Arancini? | Pasta,Potatoes,Rice,Couscous | Rice
+What thickened cream dessert is Italian and gelatin-based? | Gelato,Zabaglione,Panna Cotta,Tiramisu | Panna Cotta
+Which soup includes pasta, vegetables, and beans? | Ribollita,Minestrone,Gazpacho,Brodetto | Minestrone
+Which meat is thinly sliced and served with tuna sauce in Vitello Tonnato? | Beef,Veal,Pork,Lamb | Veal
+Which pasta is traditionally used in Amatriciana sauce? | Fusilli,Spaghetti,Bucatini,Penne | Bucatini
+What grain is the main ingredient in Polenta? | Rice,Oats,Wheat,Cornmeal | Cornmeal
+What vegetable is stuffed and baked in a common appetizer? | Tomato,Potato,Zucchini,Carrot | Zucchini
+What pasta pairs with the classic Ragù alla Bolognese? | Penne,Tagliatelle,Spaghetti,Rigatoni | Tagliatelle
+What is the traditional shell filling in Cannoli? | Mascarpone,Ricotta,Pudding,Buttercream | Ricotta
+What vegetable is key in Eggplant Parmigiana? | Zucchini,Mushroom,Spinach, Eggplant | Eggplant
+What herb is central to making pesto? | Cilantro,Parsley,Basil,Oregano | Basil
+What fish is used in Baccalà alla Vicentina? | Tuna,Herring,Anchovies,Salt cod | Salt cod
+What sweet wine is used to make Zabaglione? | Marsala,Chianti,Prosecco,Lambrusco | Marsala
+Which dish is made with sweet and sour eggplant and olives? | Ratatouille,Caponata,Zabaglione,Bruschetta | Caponata
+What seafood is featured in Spaghetti alle Vongole? | Mussels,Squid,Clams,Anchovies | Clams

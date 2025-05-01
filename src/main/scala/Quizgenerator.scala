@@ -16,7 +16,8 @@ object Quizez
     CusineQuestions("lebanese", s"${basePath}lebanese_questions.txt"),
     CusineQuestions("korean", s"${basePath}korean_questions.txt"),
     CusineQuestions("french", s"${basePath}french_questions.txt"),
-    CusineQuestions("general", s"${basePath}general_questions.txt")
+    CusineQuestions("general", s"${basePath}general_questions.txt"),
+    CusineQuestions("italian", s"${basePath}italian_questions.txt")
   ) 
   val quizezbyCategory: Map[String, List[QuizQuestion]] = categories.map { category =>
     category.name -> loadQuizFromFile(category.filePath)
@@ -89,42 +90,51 @@ object Quizez
     val totalQuestions = randomQuestions.size
 
     // Process questions and collect results immutably
-    val (answers, finalScore) = randomQuestions.foldLeft((List.empty[Boolean], 0, 1)) {
-      case ((accAnswers, score, currentIndex), question) =>
-        println(s"Question $currentIndex:"+ Quizez.formatQuestion(question))
-        
-        val userAnswer = scala.io.StdIn.readLine("Your answer: ").toLowerCase
-        if (userAnswer == "quit") {
-          println(summarizeQuizResults(accAnswers)) // Show partial results
-            return
-        }
+   val (answers, finalScore) = randomQuestions.foldLeft((List.empty[Boolean], 0, 1)) {
+  case ((accAnswers, score, currentIndex), question) =>
+    println(s"Question $currentIndex: " + Quizez.formatQuestion(question))
+    val userAnswer = scala.io.StdIn.readLine("Your answer: ").toLowerCase
 
-        val normalizedAnswer = userAnswer match {
-          case "a" if question.choices.size > 0 => question.choices(0).toLowerCase
-          case "b" if question.choices.size > 1 => question.choices(1).toLowerCase
-          case "c" if question.choices.size > 2 => question.choices(2).toLowerCase
-          case "d" if question.choices.size > 3 => question.choices(3).toLowerCase
+    if (userAnswer == "quit") {
+      println(summarizeQuizResults(accAnswers, randomQuestions.take(currentIndex - 1)))
+      return
+    }
+
+        val normalizedAnswer = handleTypos(userAnswer).toLowerCase.trim match {
+          case "a" | "first" | "1" | "one" if question.choices.size > 0 => question.choices(0).toLowerCase
+          case "b" | "second" | "2" | "two" if question.choices.size > 1 => question.choices(1).toLowerCase
+          case "c" | "third" | "3" | "three" if question.choices.size > 2 => question.choices(2).toLowerCase
+          case "d" | "fourth" | "4" | "four" if question.choices.size > 3 => question.choices(3).toLowerCase
           case _ => handleTypos(userAnswer)
-        }
+      }
+          val isCorrect = Quizez.checkAnswer(question, normalizedAnswer)
 
-        val isCorrect = Quizez.checkAnswer(question, normalizedAnswer)
-        if (isCorrect) {
-          println("Deliciously correct! 🥙 Let’s keep going")
-          (accAnswers :+ true, score + 1, currentIndex + 1)
-        } else {
-          println(s"❌ Wrong! Correct answer: ${question.correctAnswer}")
-          (accAnswers :+ false, score, currentIndex + 1)
-        }
-    } match { case (ans, sc, _) => (ans, sc) }
+    /* analytics.Analytics.logQuizInteraction(
+      question.question,
+      normalizedAnswer,
+      question.correctAnswer,
+      isCorrect
+    )
+ */
+    if (isCorrect) {
+      println("Deliciously correct! 🥙 Let’s keep going")
+      (accAnswers :+ true, score + 1, currentIndex + 1)
+    } else {
+      println(s"❌ Wrong! Correct answer: ${question.correctAnswer}")
+      (accAnswers :+ false, score, currentIndex + 1)
+    }
+} match { case (ans, sc, _) => (ans, sc) }
 
-    // Show full results
-    println(summarizeQuizResults(answers))
-  }
+println(summarizeQuizResults(answers, randomQuestions))
+//analytics.Analytics.analyzeQuizPerformance()
 }
-  def summarizeQuizResults(answers: List[Boolean]): String = {
+  }
+ def summarizeQuizResults(answers: List[Boolean], questions: List[QuizQuestion]): String = {
   val totalQuestions = answers.length
   val correctCount = answers.count(_ == true)
   val percentage = (correctCount.toDouble / totalQuestions * 100).round
+  val correctRatio = s"$correctCount/$totalQuestions"
+  val percentageStr = s"$percentage%"
 
   val performanceFeedback = percentage match {
     case p if p >= 80 => "🌟 Excellent! You're a culinary expert!"
@@ -133,9 +143,16 @@ object Quizez
     case _ => "🍳 Beginner's luck! Try the quiz again to improve."
   }
 
-  val correctRatio = s"$correctCount/$totalQuestions"
-  val percentageStr = s"$percentage%"
-  
+  val missed = answers.zipWithIndex.filter(!_._1).map(_._2)
+  val missedDetails = missed.map { i =>
+    val q = questions(i)
+    s"❌ Q: ${q.question}\n   Correct answer: ${q.correctAnswer.capitalize}"
+  }
+
+  val missedSummary = 
+    if (missedDetails.nonEmpty) "\nMissed Questions:\n" + missedDetails.mkString("\n\n")
+    else "\n✅ You got everything right! No missed questions."
+
   s"""|Quiz Results:
       |
       |-----------------------------
@@ -144,6 +161,9 @@ object Quizez
       |Percentage: $percentageStr
       |
       |$performanceFeedback
+      |$missedSummary
       |""".stripMargin
-  }
+}
+//Inside startquiz(...)
+
 }
