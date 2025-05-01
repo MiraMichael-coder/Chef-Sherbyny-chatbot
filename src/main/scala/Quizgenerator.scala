@@ -108,14 +108,15 @@ object Quizez
           case _ => handleTypos(userAnswer)
       }
           val isCorrect = Quizez.checkAnswer(question, normalizedAnswer)
-
-    /* analytics.Analytics.logQuizInteraction(
+     val userName= UserState.getName
+    Analytics.logQuizInteraction(
       question.question,
       normalizedAnswer,
       question.correctAnswer,
-      isCorrect
+      isCorrect,
+      userName
     )
- */
+ 
     if (isCorrect) {
       println("Deliciously correct! 🥙 Let’s keep going")
       (accAnswers :+ true, score + 1, currentIndex + 1)

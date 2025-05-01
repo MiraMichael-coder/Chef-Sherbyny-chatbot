@@ -24,28 +24,39 @@ object Analytics {
 
   // Log user preferences (search keywords)
   def updateUserSearchLog(userName: String, searchQuery: String): Unit = {
-    val userLog = userPreferences.getOrElse(userName, Map())
-    val updatedLog = userLog + (searchQuery -> (userLog.getOrElse(searchQuery, 0) + 1))
-    userPreferences = userPreferences + (userName -> updatedLog)
-  }
+  val userLog = userPreferences.getOrElse(userName, Map())
+
+  // Smart tagging based on keywords
+  val tag = if (searchQuery.toLowerCase.contains("cuisine:")) "Cuisine" 
+            else if (searchQuery.toLowerCase.contains("dish:")) "Dish"
+            else if (searchQuery.split("\\s+").length == 1) "Dish"
+            else "General"
+
+  val key = s"$tag:${searchQuery.capitalize}"
+
+  val updatedLog = userLog + (key -> (userLog.getOrElse(key, 0) + 1))
+  userPreferences += (userName -> updatedLog)
+}
+
 
   // Analyze preferred cuisines and dishes by user
   def analyzeUserPreferences(userName: String): Unit = {
     userPreferences.get(userName) match {
       case Some(preferences) =>
         val mostSearchedCuisine = preferences.filter(_._1.contains("Cuisine")).maxByOption(_._2)
-        val mostSearchedDish = preferences.filterNot(_._1.contains("Cuisine")).maxByOption(_._2)
+        val mostSearchedDish = preferences.filter(_._1.contains("Dish")).maxByOption(_._2)
 
         println(s"\n📊 User Preferences Analytics for $userName:")
         mostSearchedCuisine match {
-          case Some((cuisine, count)) =>
-            println(s"🥇 Most Preferred Cuisine: $cuisine with $count searches.")
+           case Some((cuisine, count)) if count>0 =>
+            println(s"🥇 Most Preferred $cuisine with $count searches.")
           case None => println("No preferred cuisine data found.")
         }
 
+       
         mostSearchedDish match {
-          case Some((dish, count)) =>
-            println(s"🥇 Most Preferred Dish: $dish with $count searches.")
+          case Some((dish, count)) if count>0 =>
+            println(s"🥇 Most Preferred $dish with $count searches.")
           case None => println("No preferred dish data found.")
         }
       case None =>
@@ -93,3 +104,15 @@ object Analytics {
     }
   }
 }
+
+/* //for cuisine
+  val userName = UserState.getName
+  val capitalizedCategory = category.capitalize
+     Analytics.updateUserSearchLog(userName, s"Cuisine:${category.capitalize}")
+
+//for dishes
+  val userName = UserState.getName
+      val searchQuery = tokens.mkString(" ")
+      
+      // Log the initial dish search
+      Analytics.updateUserSearchLog(userName, s"Dish:${searchQuery.capitalize}") */  
