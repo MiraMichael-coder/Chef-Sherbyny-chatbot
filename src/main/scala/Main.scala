@@ -48,26 +48,104 @@ object Main  {
     // Handle typos
     Typos.handleTypos(token)
   }
-  Analytics.logInteraction(corrrectedTokens.mkString(" ")) // Log the interaction 
+  //Analytics.logInteraction(corrrectedTokens.mkString(" ")) // Log the interaction 
 
   val command = cleaned match {
-    case msg if msg.startsWith("how do ") ||msg.contains("make")|| msg.contains("steps") || msg.contains("prepare") || msg.contains("recipe")||
-     msg.contains("how to") || msg.contains("cook")=> "recipe"   //how do i make name dish 
+    case msg if (
+  msg.startsWith("how ") && msg.contains("make") ||
+  (msg.contains("recipe") || msg.contains("steps") || msg.contains("instructions") || 
+   msg.contains("method") || msg.contains("way")) &&
+  (msg.contains(" for ") || msg.contains(" of ") || msg.contains(" to ")) ||
+  (msg.contains("make") || msg.contains("prepare") || msg.contains("cook") || 
+   msg.contains("create") || msg.contains("do")) &&
+  (msg.contains("dish") || msg.contains("food") || msg.contains("meal")) ||
+  msg.contains("step by step") ||
+  msg.startsWith("can you show") || msg.startsWith("can you explain") ||
+  msg.startsWith("what's the best way to") || msg.startsWith("whats the best way to") || 
+  msg.startsWith("what is the best way to") || msg.startsWith("what's the right way to") ||
+  msg.startsWith("whats the right way to") || msg.startsWith("what is the right way to") ||
+  msg.contains("walk me through") ||
+  (msg.startsWith("i need to know") || msg.startsWith("i need to learn")) &&
+  (msg.contains("to make") || msg.contains("to cook"))
+) => "recipe"
 
-    case msg if msg.startsWith("what are") || msg.contains("ingredients") || msg.contains("made of")||
-    msg.contains("with") || msg.contains("containing") || msg.contains("using") => "ingredients"  //what are the ingredients of name dish 
+// Ingredients
+case msg if (
+  msg.startsWith("what is") && (
+    msg.contains("ingredient") ||
+    msg.contains("made of") ||
+    msg.contains("in it") ||
+    msg.contains("contains")
+  ) ||
+  (msg.contains("use") || msg.contains("need") || msg.contains("require")) && 
+  msg.contains("to make") ||
+  msg.contains("contain") || msg.contains("include") || msg.contains("have") || msg.contains("take") ||
+  msg.startsWith("what do i need for") ||
+  msg.contains("recipe calls for") || msg.contains("need for") || msg.contains("required for")
+) => "ingredients"
 
-    case msg if msg.contains("quiz") || msg.contains("test") || msg.contains("question") => "quiz"
+// Quiz/Test
+case msg if (
+  msg.contains("quiz") ||
+  ((msg.contains("test") || msg.contains("question") || msg.contains("challenge")) && 
+   (msg.contains("me") || msg.contains("my knowledge"))) ||
+  msg.startsWith("i want to try quiz") || msg.startsWith("i want to take quiz") ||
+  msg.startsWith("can we do quiz") || msg.startsWith("can we do test")
+) => "quiz"
 
-    case msg if msg.contains("trivia") || msg.contains("fact") || msg.contains("interesting")|| msg.contains("cusine")=>
-      "trivia" // trivia or fun fact about a name cusine 
+// Trivia/Facts
+case msg if (
+  msg.contains("trivia") || msg.contains("fact") || msg.contains("interesting") || 
+  msg.contains("fun") || msg.contains("did you know") ||
+  msg.contains("history") || msg.contains("origin") || msg.contains("story") || 
+  msg.contains("background") && msg.contains("of") ||
+  (msg.startsWith("what's the") || msg.startsWith("what is the")) && 
+  (msg.contains("story") || msg.contains("history")) ||
+  (msg.contains("know") || msg.contains("share")) && 
+  (msg.contains("about") && (msg.contains("cuisine") || msg.contains("dish")))
+) => "trivia"
 
-    case msg if msg.contains("tell me about") || msg.contains("describe")|| msg.contains("what is") => "dish_info" //tell me about name dish or what is name dish
+// Dish Information
+case msg if (
+  msg.startsWith("what is") ||
+  msg.startsWith("tell me about") ||
+  msg.contains("describe") || msg.contains("explain") || msg.contains("define") ||
+  msg.startsWith("i want to know about") ||
+  msg.contains("information") && (msg.contains("dish") || msg.contains("food"))
+) => "dish_info"
 
-    case msg if msg.contains("bye") || msg.contains("quit") || msg.contains("exit") || msg.contains("no")=> "bye"
-    case msg if msg.contains("yes")||  msg.contains("please")|| msg.contains("yeah let's go") => "log"
-    case msg if msg.contains("hello") || msg.contains("hi") || msg.contains("hey") => "greet"
-    case _ => "unknown"
+// Exit
+case msg if (
+  msg.contains("bye") || msg.contains("goodbye") || msg.contains("see you") || 
+  msg.contains("quit") || msg.contains("exit") ||
+  msg.startsWith("no") || msg.startsWith("not now") || msg.startsWith("later") || 
+  msg.startsWith("maybe next time") ||
+  (msg.startsWith("i'll go") || msg.startsWith("i will go") || msg.startsWith("i go")) ||
+  msg.contains("enough") || msg.contains("done") || msg.contains("finished")
+) => "bye"
+
+// Positive Response
+case msg if (
+  msg.contains("yes") || msg.contains("yeah") || msg.contains("yep") || 
+  msg.contains("sure") || msg.contains("ok") || msg.contains("okay") ||
+  msg.contains("please") ||
+  msg.contains("continue") || msg.contains("next") || msg.contains("move on") ||
+  (msg.startsWith("i'd like") || msg.startsWith("i would like") || 
+   msg.startsWith("i'd love") || msg.startsWith("i would love") ||
+   msg.startsWith("i'd want") || msg.startsWith("i would want")) ||
+  msg.contains("ready") || msg.contains("begin") || msg.contains("start")
+) => "log"
+
+// Greetings
+case msg if (
+  msg.contains("hello") || msg.contains("hi") || msg.contains("hey") || 
+  msg.contains("greetings") ||
+  msg.contains("what's up") || msg.contains("how are you") ||
+  msg.startsWith("good ") && msg.contains("day") ||
+  msg.contains("welcome back")
+) => "greet"
+
+case _ => "unknown"
   }
   val keywords = corrrectedTokens.filterNot(token =>
     Set(
@@ -549,7 +627,7 @@ def mainChat(): Unit = {
 }
 
 @tailrec
-private def chatLoop(): Unit = {
+ def chatLoop(): Unit = {
   print("\nWhat would you like to know? > ")
   val input = readLine().trim
   
