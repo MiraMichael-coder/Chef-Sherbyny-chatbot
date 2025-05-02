@@ -2,7 +2,9 @@ import java.time.LocalTime
 import scala.io.StdIn.readLine
 import scala.util.Random
 import scala.annotation.tailrec
-
+import scala.util.{Try, Success, Failure}
+import java.nio.file.{Paths, Files}
+import java.io.File
 object UserState {
   private var userName: String = "friend"
   private var lastTriviaCuisine: String = ""
@@ -15,16 +17,42 @@ object UserState {
   }
   def getName: String = userName
   def getLastTriviaCuisine: String = lastTriviaCuisine
-  
-}
 
+}
 object Personality {
   private val greetings = List(
-    "Hey there!",
-    "Hello! Ready to chat about food?",
-    "Salam! What dish are you craving today?",
-    "Welcome back, hungry friend! 🍽️"
-  )
+  "Hey there!",
+  "Hello! Ready to chat about food?",
+  "Salam! What dish are you craving today?",
+  "Ciao bello! Want to cook up something delizioso today? 🇮🇹",
+  "Ahla w sahla! What's on your plate today? Mezze? Croissant? Cannoli? 🥐🍰",
+  "Bonjour! Let's turn your cravings into cuisine 😍",
+  "Yo foodie! What's cooking? 😋",
+  "Greetings, fellow flavor explorer! 🌍🍲",
+  "Knock knock... who's hungry? 😄",
+  "Hey hey! If you could eat *anything* right now, what would it be?",
+  "Beep boop! Foodbot online and ready to serve! 🤖🍴",
+  "Sup, snack seeker? 😏 What's tempting your tastebuds today?",
+  "I'm back—and so is your appetite! What shall we discuss? 😁",
+  "Habibi, you came to the right kitchen. What are we cooking today? 🍳",
+
+)
+
+  val respondtohiw = List(
+  "I'm doing great, thanks for asking! How about you? 😊",
+  "Feeling fantastic! What about you? 😄",
+  "Just peachy! How's your day going? 🍑",
+  "I'm just about keeping it together 😂 but actually doing great!",
+  "I'm doing well, thanks! How about you? 😊",
+  "Beep boop 🤖 All systems operational. How's human life treating you?",
+  "I'm running at 100%—unless you count emotional RAM 😂 How about you?",
+  "I'm feeling like a Friday at 5pm 🕔—how's your vibe?",
+  "Doing so well I might need a software update to handle it! 😁",
+  "Running smooth… until someone asks me to do math 🫠",
+  "Living the dream… or at least a very convincing simulation! 😉",
+  "I'm well, thanks! Now processing your feelings... complete! How are you? 😜",
+  "Not sure if caffeinated or just hyper-coded today ☕🤖 How's your energy?"
+)
 
   private val jokes = List(
     "Why did the tomato turn red? Because it saw the salad dressing! 🍅",
@@ -45,7 +73,7 @@ object Personality {
 
 
   def askHowUserIs(): Unit = {
-    println(s"I’m just about keeping it together 😂 but actually doing great!")
+    println(respondtohiw(scala.util.Random.nextInt(respondtohiw.length)))
   }
 }
 
@@ -54,12 +82,6 @@ object Main  {
   implicit val parseForAnalytics: String => (String, List[String]) = parseInput
 
   def greetUser(): String = {
-  val currentHour = LocalTime.now.getHour
-  val timeGreeting = currentHour match {
-    case h if h >= 5 && h < 12 => "🌞 Good morning"
-    case h if h >= 12 && h < 17 => "🌤️ Good afternoon"
-    case _ => "🌙 Good evening"
-  }
 
   val availableCuisines = FoodDB.categories.map(_.name.capitalize).mkString(", ")
   val chefHat = "👨‍🍳"
@@ -67,12 +89,9 @@ object Main  {
   val fire = "🔥"
   val wave = "👋"
 
-  s"""$timeGreeting, foodie! $wave I'm *Chef Sherbyny* the Chatbot $chefHat
-  
-     |Welcome to your personal kitchen assistant! $chefHat
-     |I can whip up facts, tips, and fun about these cuisines: $availableCuisines
-     |
-     |Ask me about a dish, explore ingredients, or type 'quiz' to test your food knowledge! $fire""".stripMargin
+  s"""$wave Come habibi! It's Chef Sherbyny here—welcome to my kitchen! 🍳
+     |I've got fun facts, tasty tips, and cool stories
+     |So, what's on your mind? Ask me anything—or type 'quiz' if you're feeling adventurous!  $fire""".stripMargin
 }
   def showDishes(category: String): Unit = {
     
@@ -81,7 +100,7 @@ object Main  {
      Analytics.updateUserSearchLog(userName, s"Cuisine:${category.capitalize}")
 
   // Log the user's category search
-  Analytics.logInteraction(
+      Analytics.logInteraction(
     s"User requested dishes in category: $capitalizedCategory",
     "Searching for dishes in this category",
     userName
@@ -175,6 +194,11 @@ case msg if (
   msg.contains("information") && (msg.contains("dish") || msg.contains("food"))
 ) => "dish_info"
 
+case msg if (
+  msg.contains("preference") || msg.contains("favorite") ||
+  msg.contains("like best") || msg.contains("save as favorite")
+) => "preference"
+
 // Exit
 case msg if (
   msg.contains("bye") || msg.contains("goodbye") || msg.contains("see you") || 
@@ -221,7 +245,7 @@ case _ => "unknown"
   "what", "which", "how", "can", "could", "would", 
   "is", "are", "was", "were", "does", "do", "did",
   "has", "have", "had", "will", "shall", "may",
-  "might", "must", "should", "need", "want", "yes", "no",
+  "might", "must", "should", "need", "want", "no",
   "what's", "whats", // Added from patterns
 
   // Request verbs
@@ -248,7 +272,7 @@ case _ => "unknown"
 
   // Quiz/Test terms
   "quiz", "test", "question", "challenge", 
-  "knowledge", // Added from patterns
+  "knowledge","preference","save","favorite", // Added from patterns
 
   // Trivia terms
   "trivia", "fact", "fun", "interesting", 
@@ -305,7 +329,9 @@ case _ => "unknown"
           |🍲 New recipes to share
           |🌶️ Spicy trivia to compare
           |👨‍🍳 More cooking tips to prepare!""".stripMargin)  
+    
     case "quiz" =>
+      
       if (tokens.isEmpty) {
       if(UserState.getLastTriviaCuisine.nonEmpty &&tokens.isEmpty) {
         println(s"Let's test your knowledge about ${UserState.getLastTriviaCuisine.capitalize} cuisine.")
@@ -316,6 +342,7 @@ case _ => "unknown"
       } else {
         Quizez.startquiz(tokens.mkString(" "), Typos.handleTypos) 
       }
+    
     case "recipe" =>
       println("DEBUG:Going to reciepe")
       if (isIngredientSearch(tokens)) {
@@ -329,19 +356,35 @@ case _ => "unknown"
     case "trivia" =>
       TriviaRequest(tokens.mkString(" ").toLowerCase)
     case "dish_info" => handleDishRequest(tokens)
-    case "greet" => 
-      //greet function!
-      Personality.respondToGreeting()
-    case "ask_how_user_is" =>
-      Personality.askHowUserIs()
-    case "log" =>
-      val logs = Analytics.getInteractionLog()
-      logs.foreach { case (seq, user, bot) =>
-        println(s"\n# $seq\n👤: $user\n🤖: $bot")
+    case "greet" =>  Personality.respondToGreeting()
+    case "ask_how_user_is" => Personality.askHowUserIs()
+    case "preference" =>
+      val userName = UserState.getName
+      if (tokens.isEmpty) {
+      // Get preferences if no tokens provided
+      Analytics.getUserPreferences(userName) match {
+        case Some(pref) => 
+          println(s"Your current preference is: $pref")
+        case None =>
+          println("You haven't set any preferences yet. Try something like 'save Italian as my favorite cuisine'")
       }
-      //botResponseBuffer.append(s"🗂 Displayed ${logs.length} interactions.")
-
-      
+    } else {
+      // Set preferences if tokens provided
+      val preference = tokens.mkString(" ")
+      Analytics.storeUserPreferences(userName, preference)
+      println(s"Got it! I've saved '$preference' as your preference.")
+    }
+    
+    case "log" =>
+      println("Debug:Going to log")
+      val logs = Analytics.getInteractionLog()
+        logs.lastOption match {
+          case Some(log) =>
+            Analytics.processLastLog(log,tokens,Typos.handleTypos)
+          case None =>
+            println("No interactions logged yet.")
+  }
+      //botResponseBuffer.append(s"🗂 Displayed ${logs.length} interactions.") 
     case "unknown" => // yerg3 llchat tany 
       val corrected = Typos.handleTypos(input)
       println(s"Did you mean: $corrected? Or try asking about a cuisine or type 'quiz'.") //need to handle this type pf error 
@@ -374,7 +417,6 @@ case _ => "unknown"
       |$cuisine cuisine is known for its:
       |${"-" * (cuisine.length + 12)}
       |💡 $triviaFact
-      |
       |Pretty fascinating, right!
       |would you like a quiz to test ur knowledge?😊
       |""".stripMargin)
@@ -388,12 +430,10 @@ case _ => "unknown"
       )
     println(s"""
       |🤖 *Chef's Note* 🤖
-      |
       |Hmm, my recipe books don't seem to have fun facts about $cuisine...
       |But I know lots about:
       |${FoodDB.categories.map(_.name.capitalize).mkString(" • ")}
-      |
-      |Ask me about one of these cuisines instead! 👨‍🍳
+      |So, how about we explore one of those instead?
       |""".stripMargin)
 }
 }
@@ -728,7 +768,7 @@ case _ => "unknown"
 }
     
   //when no dish is found , i can suggest those dishes 
- def showSimilarDishes(tokens: List[String]): Unit = {
+  def showSimilarDishes(tokens: List[String]): Unit = {
   val userName = UserState.getName
   val searchQuery = tokens.mkString(" ").toLowerCase
   val allDishes = FoodDB.getAllDishes
@@ -834,13 +874,13 @@ case _ => "unknown"
 
     def handleDishRequest(tokens: List[String]): Unit = {
         val userName = UserState.getName
-      val searchQuery = tokens.mkString(" ")
+        val searchQuery = tokens.mkString(" ")
       
       // Log the initial dish search
-      Analytics.updateUserSearchLog(userName, s"Dish:${searchQuery.capitalize}")
+        Analytics.updateUserSearchLog(userName, s"Dish:${searchQuery.capitalize}")
 
       
-      FoodDB.getDish(tokens) match {
+        FoodDB.getDish(tokens) match {
         case Some(dish) =>
           // Log successful dish found
             // Log successful dish found
@@ -915,9 +955,9 @@ case _ => "unknown"
               userName
             )
             println("""
-              |👨‍🍳 No worries, foodie! 
-              |I'm always here to help you discover delicious dishes! 
-              |Just let me know what you'd like to explore next! 🍽️
+              |👨‍🍳 No worries, foodie!
+              |I'm here to help with more tasty dishes.
+              |What's next? 🍽️
               |""".stripMargin)
           } else {
             val corrected = Typos.handleTypos(input)
@@ -961,7 +1001,7 @@ case _ => "unknown"
   println(s"\n◎ ${dish.name}: $dishtype ($vegStatus) ")
   println(s"   Ingredients: ${dish.ingredients.mkString(", ")} ")
 
-  println("\nWould you like me to show you the recipe for this dish?")
+  println("\nWould you like to check out the recipe for this dish?")
   val answer = readLine().trim.toLowerCase
   val corrected = Typos.handleTypos(answer)
 
@@ -973,7 +1013,7 @@ case _ => "unknown"
   )
 
   if (Set("no", "exit", "quit", "thanks", "").contains(corrected)) {
-    println("Okay, let me know if you need anything else!")
+    println("Of course! Whenever you're hungry for more recipes or foodie knowledge, I'm right here!")
   } else if (Set("yes", "y", "sure", "please").contains(corrected)) {
     println("Fetching the recipe...")
     
@@ -1017,7 +1057,7 @@ case _ => "unknown"
       userName
     )
 
-    println("\nWould you like a recipe link? (yes/no)")
+    println("\nHow about a recipe link to keep the kitchen vibes going?")
     val answer = readLine().trim.toLowerCase
     val corrected = Typos.handleTypos(answer)
 
@@ -1028,14 +1068,14 @@ case _ => "unknown"
       userName
     )
 
-    if (corrected == "no" || corrected == "exit" || corrected == "quit" || corrected == "thanks" || answer.isEmpty) {
+    if (corrected == "no" || corrected == "exit" || corrected == "quit" || corrected == "thanks no" || answer.isEmpty) {
       // Log user declined recipe link
       Analytics.logInteraction(
         "User declined recipe link",
         "Showing closing message",
         userName
       )
-      println("👨‍🍳 No problem at all! I'm always here to share more recipes and food knowledge!")
+      println("👨‍🍳Mafish mushkila! Wana hena 3ashan nsharek al-wasafat w al-ma3lomat el-laziza!")
     } else if (corrected == "yes" || corrected == "sure" || corrected == "please") {
       // Log user requested recipe link
       Analytics.logInteraction(
@@ -1061,7 +1101,7 @@ case _ => "unknown"
       println("I didn't understand that. Please type 'yes' or 'no' next time.")
     }
     
-    println("Enjoy your cooking!")
+    //println("Enjoy your cooking!")
     
     // Log final interaction
     Analytics.logInteraction(
@@ -1074,7 +1114,7 @@ case _ => "unknown"
   def mainChat(): Unit = {
  println(greetUser()) // Time-based greeting
  
-  println("Before we begin, what should I call you?")
+  println("Ooh, what's your name, so I can shout it across the kitchen? 🍳😄")
   val name = readLine().trim
   if (name.nonEmpty) UserState.setName(name)
   chatLoop()
@@ -1083,9 +1123,9 @@ case _ => "unknown"
   def chatLoop(): Unit = {
   print(s"\n${UserState.getName.capitalize}: ")
   val input = readLine().trim.toLowerCase
-
+    
   if (input.isEmpty) {
-    println("👨‍🍳 Oops! The kitchen seems quiet... Type something or 'quit' to leave!")
+    println("👨‍🍳 Where'd ya go, chef? Drop me a message—or type 'quit' to hang up the apron")
     chatLoop()
 
   } else if (input.contains("joke")) {
@@ -1110,19 +1150,29 @@ case _ => "unknown"
     logs.foreach { case (seq, user, bot) =>
       println(s"\n# $seq\n👤: $user\n🤖: $bot")
     }
-    println(s"\n🗂 Displayed ${logs.length} interactions.")
+     println(s"\n🗂 Displayed ${logs.length} interactions.")
     chatLoop()
-
-  } else {
+  }
+    else if(input.contains("preference")||input.contains("preferences")){
+      val userName = UserState.getName
+      Analytics.getUserPreferences(userName) match {
+        case Some(pref) => 
+          println(s"Your current preference is: $pref")
+        case None =>
+          println("You haven't set any preferences yet. Try something like 'save Italian as my favorite cuisine'")
+      }
+      chatLoop()
+    }
+   else {
     val (command, _) = parseInput(input)
 
     if (command == "bye") {
       println(s"""
-        |👋 Goodbye, ${UserState.getName.capitalize}! 
-        |Come back anytime for:
-        |🍲 More recipes
-        |🌶 Fresh trivia
-        |🍽 And a good laugh!""".stripMargin)
+      |👋  See ya later, ${UserState.getName.capitalize}!  
+      |Don't be a stranger—come back for:  
+      |🍲 Tasty recipes  
+      |🌶 Spicy trivia  
+      |🍽 And a good ol' foodie laugh! 😄""".stripMargin)
     } else {
       handleUserInput(input)
       chatLoop()

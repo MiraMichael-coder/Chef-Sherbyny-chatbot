@@ -3,13 +3,8 @@ object Analytics {
   private var quizLog: List[(Int, String, String, String, Boolean, String)] = List()
   private var sequence: Int = 1
   private var userPreferences: Map[String, Map[String, Int]] = Map()
+  private var generalPreferences: Map[String, String] = Map()
 
-  // Log user messages and chatbot responses
-  /*def logInteraction(userInput: String, chatbotResponse: String): Unit = {
-    interactionLog :+= (sequence, userInput, chatbotResponse)
-    sequence += 1
-  }*/
-  // In Analytics.scala
   def logInteraction(userInput: String, chatbotResponse: String, userName: String): Unit = {
     interactionLog :+= (sequence, s"[$userName] $userInput", chatbotResponse)
     sequence += 1
@@ -37,7 +32,21 @@ object Analytics {
   val updatedLog = userLog + (key -> (userLog.getOrElse(key, 0) + 1))
   userPreferences += (userName -> updatedLog)
 }
-
+  def storeUserPreferences(userName: String, preference: String): Unit = {
+      generalPreferences += (userName -> preference)
+      // Log this preference update
+      logInteraction(s"User set preference: $preference", "Preference stored", userName)
+    }
+    def getUserPreferences(userName: String): Option[String] = {
+      generalPreferences.get(userName) match {
+        case Some(pref) => 
+          logInteraction("Requested user preferences", s"Found preferences: $pref", userName)
+          Some(pref)
+        case None =>
+          logInteraction("Requested user preferences", "No preferences found", userName)
+          None
+      }
+    }
 
   // Analyze preferred cuisines and dishes by user
   def analyzeUserPreferences(userName: String): Unit = {
@@ -103,6 +112,29 @@ object Analytics {
       println(f" - $cmd%-12s: $count")
     }
   }
+  def processLastLog(log: (Int, String, String),tokens:List[String],handleTypos: String => String): Unit = {
+  val (seq, userInput, botResponse) = log
+  println(s"\nWorking on last log #$seq:")
+  println(s"👤 User said: $userInput")
+  println(s"🤖 Bot replied: $botResponse")
+  
+  val corrected = tokens.map(handleTypos)
+  val validYesResponses = Set("yes", "sure", "ok", "okay", "yeah", "surely", "certainly")
+  if(userInput.contains("Trivia" )&& validYesResponses.exists(corrected.contains)) {
+    
+  val cuisine = userInput.toLowerCase.split(":").lastOption.map(_.trim).getOrElse("")
+  // Check if cuisine is found
+  if (cuisine.nonEmpty) {
+    println(s"🍽️ Cuisine detected: $cuisine")
+    Quizez.startquiz(cuisine, handleTypos)
+    
+  } else {
+    println("No specific cuisine or dish detected.")
+  }
+
+  
+}
+}
 }
 
 /* //for cuisine

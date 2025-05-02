@@ -79,10 +79,22 @@ object Quizez
     }
 
   def startquiz(cuisine: String = "general", handleTypos: String => String): Unit = {
+    
   val questions = Quizez.getQuizByCategory(cuisine)
-  if (questions.isEmpty) {
+  if (questions.isEmpty){
+    Analytics.logInteraction(
+        s"No quiz found for:: ${cuisine.capitalize} cuisine",
+        "ended quiz",
+        UserState.getName
+      )
+    
     println(s"No questions available for $cuisine cuisine.")
   } else {
+    Analytics.logInteraction(
+        s"User requested quiz for: ${cuisine.capitalize} cuisine",
+        "Starting quiz",
+        UserState.getName
+      )
     println(s"\nStarting $cuisine quiz...")
     println("Type your answer (A/B/C/D) or the full answer. Type 'quit' to exit.\n")
 
@@ -90,7 +102,7 @@ object Quizez
     val totalQuestions = randomQuestions.size
 
     // Process questions and collect results immutably
-   val (answers, finalScore) = randomQuestions.foldLeft((List.empty[Boolean], 0, 1)) {
+    val (answers, finalScore) = randomQuestions.foldLeft((List.empty[Boolean], 0, 1)) {
   case ((accAnswers, score, currentIndex), question) =>
     println(s"Question $currentIndex: " + Quizez.formatQuestion(question))
     val userAnswer = scala.io.StdIn.readLine("Your answer: ").toLowerCase
@@ -107,8 +119,8 @@ object Quizez
           case "d" | "fourth" | "4" | "four" if question.choices.size > 3 => question.choices(3).toLowerCase
           case _ => handleTypos(userAnswer)
       }
-          val isCorrect = Quizez.checkAnswer(question, normalizedAnswer)
-     val userName= UserState.getName
+      val isCorrect = Quizez.checkAnswer(question, normalizedAnswer)
+      val userName= UserState.getName
     Analytics.logQuizInteraction(
       question.question,
       normalizedAnswer,
@@ -126,11 +138,11 @@ object Quizez
     }
 } match { case (ans, sc, _) => (ans, sc) }
 
-println(summarizeQuizResults(answers, randomQuestions))
+    println(summarizeQuizResults(answers, randomQuestions))
 //analytics.Analytics.analyzeQuizPerformance()
 }
   }
- def summarizeQuizResults(answers: List[Boolean], questions: List[QuizQuestion]): String = {
+  def summarizeQuizResults(answers: List[Boolean], questions: List[QuizQuestion]): String = {
   val totalQuestions = answers.length
   val correctCount = answers.count(_ == true)
   val percentage = (correctCount.toDouble / totalQuestions * 100).round
@@ -165,6 +177,6 @@ println(summarizeQuizResults(answers, randomQuestions))
       |$missedSummary
       |""".stripMargin
 }
-//Inside startquiz(...)
+
 
 }

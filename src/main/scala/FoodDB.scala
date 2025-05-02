@@ -19,34 +19,57 @@ object FoodDB {
   private val basePath = "C:\\Users\\Mira\\Desktop\\uni\\year 2\\Semster 2\\Advanced Prog\\Project\\chatbot\\src\\main\\scala\\data\\"
 
   val foodTrivia: Map[String, List[String]] = Map(
-  "🇪🇬 Egyptian Cuisine" -> List(
-    "Ancient Fast Food: Taameya (Egyptian falafel) dates back to the Pharaohs!",
-    "Bread as Currency: Pyramid workers were paid in bread and beer.",
-    "Koshari’s Global Roots: Fusion of Italian, Indian, and Middle Eastern flavors.",
-    "Molokhia Mystery: Ancient Egyptians believed it had magical healing powers.",
-    "Pigeon Perfection: Stuffed pigeon is a delicacy dating back centuries."
-  ),
-  "🇰🇷 Korean Cuisine" -> List(
-    "Kimchi in Space: Specially developed for astronauts in 2008.",
-    "Bibimbap’s Lucky Leftovers: Originally a Lunar New Year cleanup dish.",
-    "Tteokbokki’s Royal Upgrade: Started as a mild palace dish.",
-    "Fermentation Nation: Kimchi has over 200 known varieties.",
-    "Rice Cakes & Luck: Tteok is often eaten during celebrations for good fortune."
-  ),
-  "🇫🇷 French Cuisine" -> List(
-    "Croissant Conspiracy: Actually Austrian in origin!",
-    "Cheese Drama: France has over 1,000 cheeses.",
-    "Soup for Rebels: Onion soup was 'soup of drunkards'.",
-    "Michelin Mission: The Michelin Guide was created to sell more tires, not food.",
-    "Wine & Water: Some French kids drink watered-down wine with meals!"
-  ),
-  "🇱🇧 Lebanese Cuisine" -> List(
-    "Hummus Wars: Lebanon made a 4-ton platter to claim ownership.",
-    "Za’atar Secrets: Some blends include crushed rose petals!",
-    "Falafel’s Holy Roots: Possibly invented by Coptic Christians.",
-    "World Record Tabouleh: Lebanon made 3.5 tons of tabouleh in one bowl.",
-    "Arak Magic: Traditional anise drink turns white when water is added."
-  )
+  "🇪🇬 Egyptian Cuisine" → List(
+"Ancient Fast Food: Taameya (Egyptian falafel) dates back to the Pharaohs!",
+ "Bread as Currency: Pyramid workers were paid in bread and beer.",
+ "Koshari's Global Roots: Fusion of Italian, Indian, and Middle Eastern flavors.",
+ "Molokhia Mystery: Ancient Egyptians believed it had magical healing powers.",
+"Pigeon Perfection: Stuffed pigeon is a delicacy dating back centuries.",
+"Feseekh Tradition: Fermented fish eaten during Sham El-Nessim dates to ancient times.",
+"Bread Obsession: Egyptians consume one of the highest per capita amounts of bread globally."
+),
+
+"🇰🇷 Korean Cuisine" → List(
+ "Kimchi in Space: Specially developed for astronauts in 2008.",
+ "Bibimbap's Lucky Leftovers: Originally a Lunar New Year cleanup dish.",
+"Tteokbokki's Royal Upgrade: Started as a mild palace dish.",
+"Fermentation Nation: Kimchi has over 200 known varieties.",
+"Rice Cakes & Luck: Tteok is often eaten during celebrations for good fortune.",
+"Banchan Bonanza: A traditional Korean meal can include 10+ small side dishes.",
+"Black Day Noodles: Koreans eat black bean noodles (jajangmyeon) on April 14 to mourn being single."
+),
+
+"🇫🇷 French Cuisine "→ List(
+"Croissant Conspiracy: Actually Austrian in origin!",
+"Cheese Drama: France has over 1,000 cheeses.",
+ "Soup for Rebels: Onion soup was 'soup of drunkards'.",
+"Michelin Mission: The Michelin Guide was created to sell more tires, not food.",
+"Wine & Water: Some French kids drink watered-down wine with meals!",
+"Baguette Law: By law, a French baguette can only contain flour, water, salt, and yeast.",
+ "Escargot Craze: France eats over 16,000 tons of snails per year."
+),
+
+"🇱🇧 Lebanese Cuisine" → List(
+ "Hummus Wars: Lebanon made a 4-ton platter to claim ownership.",
+"Za'atar Secrets: Some blends include crushed rose petals!",
+"Falafel's Holy Roots: Possibly invented by Coptic Christians.",
+ "World Record Tabouleh: Lebanon made 3.5 tons of tabouleh in one bowl.",
+"Arak Magic: Traditional anise drink turns white when water is added.",
+"Kibbeh Variety: Kibbeh has over 30 variations across Lebanon.",
+"Manakish Mornings: Flatbread with za'atar is a common breakfast street food."
+),
+
+"🇮🇹 Italian Cuisine" → List(
+"Tomato Surprise: Tomatoes weren't used in Italian cooking until the 16th century.",
+"Pizza's Humble Origins: Pizza was originally street food for Naples' poor.",
+"Pasta Shapes Galore: Italy has over 350 types of pasta!",
+"Espresso Etiquette: Italians rarely drink cappuccino after 11 a.m.",
+ "Gelato vs Ice Cream: Gelato has less fat but more flavor intensity.",
+"Cheese Crown: Parmigiano Reggiano wheels are legally stamped and aged up to 36 months.",
+ "Tiramisu Translation: 'Tiramisu' literally means 'pick me up'."
+)
+
+
 )
   
   val Foodjokes: Map[String, List[String]] = Map(
@@ -173,7 +196,7 @@ object FoodDB {
     else
       None
   }
-
+  
   def getRandomDishSuggestions(count : Int = 2): List[Dish]=
     {
       Random.shuffle(FoodDB.getAllDishes).take(count) }
