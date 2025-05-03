@@ -91,7 +91,7 @@ object Quizez
     println(s"No questions available for $cuisine cuisine.")
   } else {
     Analytics.logInteraction(
-        s"User requested quiz for: ${cuisine.capitalize} cuisine",
+        s"User requested quiz for: ${cuisine.capitalize} ",
         "Starting quiz",
         UserState.getName
       )
@@ -139,7 +139,8 @@ object Quizez
 } match { case (ans, sc, _) => (ans, sc) }
 
     println(summarizeQuizResults(answers, randomQuestions))
-//analytics.Analytics.analyzeQuizPerformance()
+
+   Analytics.analyzeQuizPerformance(UserState.getName,handleTypos)
 }
   }
   def summarizeQuizResults(answers: List[Boolean], questions: List[QuizQuestion]): String = {
@@ -176,7 +177,11 @@ object Quizez
       |$performanceFeedback
       |$missedSummary
       |""".stripMargin
-}
+
+
+
+
+  }
 
 
 }

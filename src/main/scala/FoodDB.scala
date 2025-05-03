@@ -8,6 +8,7 @@ case class Dish(
   name: String,
   isVegetarian: Boolean,
   Dish_Type: String,
+  shortDescription: String,
   ingredients: List[String],
   recipeSteps: List[String],
   recipeLink: String
@@ -125,9 +126,10 @@ object FoodDB {
               name = parts(0),
               isVegetarian = parts(1).toBoolean,
               Dish_Type = parts(2),
-              ingredients = parts(3).split(",").map(_.trim).toList,
-              recipeSteps = parts(4).split(",").map(_.trim).toList,
-              recipeLink = parts(5)
+              shortDescription = parts(3), 
+              ingredients = parts(4).split(",").map(_.trim).toList,
+              recipeSteps = parts(5).split(",").map(_.trim).toList,
+              recipeLink = parts(6)
             )
           }.toList
       } finally {

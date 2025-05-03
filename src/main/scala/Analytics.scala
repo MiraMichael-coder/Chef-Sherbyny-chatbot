@@ -1,3 +1,5 @@
+import scala.io.StdIn.readLine
+
 object Analytics {
   private var interactionLog: List[(Int, String, String)] = List()
   private var quizLog: List[(Int, String, String, String, Boolean, String)] = List()
@@ -18,7 +20,7 @@ object Analytics {
   def getInteractionLog(): List[(Int, String, String)] = interactionLog
 
   // Log user preferences (search keywords)
-  def updateUserSearchLog(userName: String, searchQuery: String): Unit = {
+   def updateUserSearchLog(userName: String, searchQuery: String): Unit = {
   val userLog = userPreferences.getOrElse(userName, Map())
 
   // Smart tagging based on keywords
@@ -27,7 +29,11 @@ object Analytics {
             else if (searchQuery.split("\\s+").length == 1) "Dish"
             else "General"
 
-  val key = s"$tag:${searchQuery.capitalize}"
+  val key = if (searchQuery.toLowerCase.startsWith(s"${tag.toLowerCase}:"))
+  searchQuery.capitalize
+else
+  s"$tag:${searchQuery.capitalize}"
+
 
   val updatedLog = userLog + (key -> (userLog.getOrElse(key, 0) + 1))
   userPreferences += (userName -> updatedLog)
@@ -74,27 +80,41 @@ object Analytics {
   }
 
   // Analyze user-specific quiz performance
-  def analyzeQuizPerformance(userName: String): Unit = {
+  def analyzeQuizPerformance(userName: String,handleTypos:String=>String): Unit = {
     val userQuizLog = quizLog.filter(_._6 == userName)
+    if (userQuizLog.nonEmpty) {
+      val totalQuestions = userQuizLog.size
+      val correctAnswers = userQuizLog.count(_._5)
+      val incorrectAnswers = totalQuestions - correctAnswers
 
-    val totalQuestions = userQuizLog.size
-    val correctAnswers = userQuizLog.count(_._5)
-    val incorrectAnswers = totalQuestions - correctAnswers
+      println(s"\n📊 Quiz Performance Analysis for $userName:")
+      println(s"Total Questions Attempted: $totalQuestions")
+      println(s"Correct Answers: $correctAnswers")
+      println(s"Incorrect Answers: $incorrectAnswers")
 
-    println(s"\n📊 Quiz Performance Analysis for $userName:")
-    println(s"Total Questions Attempted: $totalQuestions")
-    println(s"Correct Answers: $correctAnswers")
-    println(s"Incorrect Answers: $incorrectAnswers")
-
-    val correctPercentage = if (totalQuestions > 0) (correctAnswers.toDouble / totalQuestions) * 100 else 0.0
-    println(f"Correct Answer Percentage: $correctPercentage%.2f%%")
+      val correctPercentage = if (totalQuestions > 0) (correctAnswers.toDouble / totalQuestions) * 100 else 0.0
+      println(f"Correct Answer Percentage: $correctPercentage%.2f%%")
+      if (correctPercentage <= 40) {
+        println("Wanna try again")
+        val input = readLine().trim.toLowerCase
+        if (input == "yes" || input == "yeah")
+          val logs = getInteractionLog()
+          logs.lastOption match {
+            case Some(log) =>
+              processLastLog(log, tokens = input.split("\\s+").toList, Typos.handleTypos)
+            case None =>
+              println("No interactions logged yet.")
+          }
+      }
+    }
+    else
+      println("No quizez taken yet....")
   }
-
   // Show both preferences and quiz analytics
   def handleUserRequestForAnalytics(userName: String): Unit = {
     println(s"\n🧑‍💻 Showing analytics for user: $userName...")
     analyzeUserPreferences(userName)
-    analyzeQuizPerformance(userName)
+    analyzeQuizPerformance(userName,Typos.handleTypos)
   }
 
   // Show overall interaction type usage
@@ -129,11 +149,25 @@ object Analytics {
     Quizez.startquiz(cuisine, handleTypos)
     
   } else {
-    println("No specific cuisine or dish detected.")
+    println("No specific cuisine detected.")
   }
 
   
 }
+  else if(userInput.contains("quiz" )&& validYesResponses.exists(corrected.contains))
+    {
+      val cuisine = userInput.toLowerCase.split(":").lastOption.map(_.trim).getOrElse("")
+      // Check if cuisine is found
+      if (cuisine.nonEmpty) {
+        println(s"🍽️ Cuisine detected: $cuisine")
+        Quizez.startquiz(cuisine, handleTypos)
+
+      } else {
+        println("No specific cuisine detected.")
+      }
+
+
+    }
 }
 }
 
