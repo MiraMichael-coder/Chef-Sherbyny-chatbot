@@ -4,6 +4,7 @@ how:hoow,hwo,howw,ho,howare,howr,hoe,howww,ho
 are:ar,re,rae,aare,arre,r
 do:d,doe,dooo,doh,du,co,di,dp,dui,dy
 you:yuo,yo,yoo,yu,youu,yeo,yoh,yuh,
+analytics: analytic,analyti,analyt,anallitucs,anakytic,anlytics
 what:wht,waht,wat,whaat,whatt,whut,wad
 can:cn,caan,cann,can you,could you,cold you,
 for:fr,fpr,fir,ror,cor,dor,tor,dor,sor,kor
@@ -16,7 +17,7 @@ favorite: fav,favourite,farot,favorte,ffavourt,fae
 preference:pref,preferncee,prfrnce,prfrnce,prefrence,preferece,preferecnce,preferrence,prefference,preferebce,preefrence,preefrencee,prefrencee,prference,prefrenece,prefenrce,prferance,prefrnce
 best:bst,bast,perfrct,besttt,bestt,bwst,bqstm
 cuisine:cusine,cuisin,cusine,cuisne,cuisene,cuisnie,quisine
-bye:bi,bey,byee
+bye:bi,bey,byee,boyee,bayee
 would:wood,wud,woud,wild,wold
 what is:what's,whats,wat is,wut iz,whats,what s,wahts
 how to:howto,how-to,how 2,howtoo
@@ -42,8 +43,8 @@ cook:cok,cokk,cokie,cokkk,cok
 tell:tel,tll,tll,tll,tll
 about:abou,abaut,abouut,abouut,abou
 no:noo,n,nooo,nno,nnoo,naah,nope,naw,nah,nop,nw
-yes:yea,yess,yees,yesss,ye,y,yep,yup,yeaah,yp,y,yeah
-good:god,gud,goood,gooodd,gud,godd
+yes:yea,yess,yees,yesss,ye,y,yep,yup,yeaah,yp,y,yeah,yass,yaaas,yeahoo,yeah
+good:gd,gud,goood,gooodd,gud,godd,goud
 bad:badd,badde,baad,bda,bd
 sorry:sory,srry,sorr,soory,soryy,sry
 ask:as,askk,aks,askc,asck,askk
@@ -100,7 +101,7 @@ bibimbap:bibimpap,bibibmap,bibmbap,bibinbap,bibimmbap,bibimbup,bibinpap,bebimbap
 kimchi:kimchee,kimchy,kimci,kymchi,kimhci,kimshi,kimhi,quimchi,kimchii
 japchae:japche,japchea,japchaee,japcha,japchei,japchay,japchey,japchye,japchaie
 bulgogi:bulgogee,bulgogii,bulgoki,bulgogey,bulghogi,bulgoji,bolgogi,bulgougi,bulgoogi
-tteokbokki:teokbokki,tteokboki,ddeokbokki,tteokboky,tteobbokki,ttekbokki,tteokbokie,ttokbokki,tteokbokkie,tabioki
+tteokbokki:teokbokki,tteokboki,ddeokbokki,tteokboky,tteobbokki,ttekbokki,tteokbokie,ttokbokki,tteokbokkie
 samgyeopsal:samgyupsal,samgyopsal,samgyepsal,samgyopsel,samgyeopsel,samgyupsul,samgyeosalp,samgeopsal,samgyeobsal
 haemul pajeon:haemul pajun,haemool pajeon,haemul pageon,haemul-pajeon,haemul pajean,haemul pajeoen,haemulpajeon,haemul pajen,haemul pajon
 soondubu jjigae:sundubu jjigae,soondubu chigae,soondubu jjigaee,soondubu-jjigae,sundubu-jjigae,soondubujjigae,soondubo jjigae,soondubu jigae,soondubu jjjigae
@@ -190,7 +191,7 @@ pastry:pastery,pastryy,pastrie,pastry,pastriee
 flour:flur,flwer,flourr,flouer,flouwr
 yeast:yeastt,yees,yeast,yest,yeas
 milk:milkk,mylk,milke,mylkk,milkys
-dark chocolate:darkchocolate,dark chocolate,dark choclate,darkchoco,dark choc
+dark chocolate:darkchocolate,dark chocolate,dark choclate,darkchoco,dark choc, dark coca , dark choclate
 water:watr,waterr,waterr,wate,wattter
 potatoes:potatos,potattoes,potatotes,pottatoes,potatoss
 steak:steaks,steaks,steek,staek,steakyy
@@ -253,7 +254,7 @@ caprese salad:capreze salad,capresee salad,capreeze salad,caprese sald,caprese s
 risotto alla milanese:risoto alla milanese,risotto ala milanese,risotto milanese,risotto alla milaneze,risotto milaneze,risotto milanesa
 gnocchi al pomodoro:gnocci al pomodoro,gnocchi pomodoro,gnoki al pomodoro,gnocchi al pomodor,gnocchi pomodor,gnocchii al pomodoro
 frittata:fritata,fritatta,fritada,fritta,frittaa,frittata,frittataaa
-tiramisu:tiramissu,tiramisu,tiramisoo,tiramisuu,tiramizu,tiramisoo
+tiramisu:tiramissu,tiramisu,tiramisoo,tiramisuu,tiramizu,tiramisoo,tiramsu,tiramso
 bruschetta:brushetta,bruscheta,brusketta,brushetta,bruscheta,bruscheeta
 osso buco:osso bucco,osso buco,osso bucoo,osso buko,osso bucu,osso bucko
 arancini:arancini,aranccini,aranchini,arancinni,aranccinni,aransini
@@ -335,3 +336,4 @@ egg yolks:egg yolks,egg yoks,egg yolkss,egg yoks,egg yolkss,eg yolks,egg yolkk,e
 marsala wine:marsala wine,marsalla wine,marsala wyne,marsalla wyne,marsala wine,marsela wine,marsalla wynee,marsalla wyen,marsalla wene
 clams:clams,clamms,clams,clamms,clams,clammz,clames,clmms,clammss
 parsley:parslly,prsly,parslye,parssley,parslee,parsely,parselyy,parzley,parslay
+

@@ -89,9 +89,10 @@ object Quizez
       )
     
     println(s"No questions available for $cuisine cuisine.")
-  } else {
+    } 
+  else {
     Analytics.logInteraction(
-        s"User requested quiz for: ${cuisine.capitalize} ",
+        s"User requested quiz for: ${cuisine.capitalize} cuisine",
         "Starting quiz",
         UserState.getName
       )
@@ -113,10 +114,10 @@ object Quizez
     }
 
         val normalizedAnswer = handleTypos(userAnswer).toLowerCase.trim match {
-          case "a" | "first" | "1" | "one" if question.choices.size > 0 => question.choices(0).toLowerCase
-          case "b" | "second" | "2" | "two" if question.choices.size > 1 => question.choices(1).toLowerCase
-          case "c" | "third" | "3" | "three" if question.choices.size > 2 => question.choices(2).toLowerCase
-          case "d" | "fourth" | "4" | "four" if question.choices.size > 3 => question.choices(3).toLowerCase
+          case "a" | "first" | "1" | "one" | "first answer" if question.choices.size > 0 => question.choices(0).toLowerCase
+          case "b" | "second" | "2" | "two" | "second answer" if question.choices.size > 1 => question.choices(1).toLowerCase
+          case "c" | "third" | "3" | "three" | "third answer" if question.choices.size > 2 => question.choices(2).toLowerCase
+          case "d" | "fourth" | "4" | "four" | "fourth answer" if question.choices.size > 3 => question.choices(3).toLowerCase
           case _ => handleTypos(userAnswer)
       }
       val isCorrect = Quizez.checkAnswer(question, normalizedAnswer)
@@ -139,8 +140,7 @@ object Quizez
 } match { case (ans, sc, _) => (ans, sc) }
 
     println(summarizeQuizResults(answers, randomQuestions))
-
-   Analytics.analyzeQuizPerformance(UserState.getName,handleTypos)
+//analytics.Analytics.analyzeQuizPerformance()
 }
   }
   def summarizeQuizResults(answers: List[Boolean], questions: List[QuizQuestion]): String = {
@@ -177,11 +177,7 @@ object Quizez
       |$performanceFeedback
       |$missedSummary
       |""".stripMargin
-
-
-
-
-  }
+}
 
 
 }

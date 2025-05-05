@@ -1,84 +1,61 @@
 // 1. Starts with "how" + contains "make"
 "How do I make spaghetti carbonara?"  
-"How to make vegan pancakes?"
+"How to make vegan pancakes?"  
+"Show me how to prepare beef Wellington"
 
 // 2. Contains recipe/instructions + purpose
 "I need the recipe for chicken curry"  
 "Steps to prepare tiramisu"  
-"Best method for making sourdough bread"
+"Best method for making sourdough bread"  
+"Instructions for authentic ramen"
 
 // 3. Cooking verbs + food terms
-"Can you cook a vegetarian dish?"  
-"How do I prepare a seafood meal?"  
-"I want to create a dessert"
+"Can you cook a vegetarian lasagna?"  
+"How do I prepare a seafood paella?"  
+"I want to create a chocolate soufflé"  
+"Guide me to bake macarons"
 
 // 4. Step-by-step requests
-"Show me step by step for ramen"  
-"Walk me through making bagels"
+"Show me step by step for homemade pasta"  
+"Walk me through making bagels"  
+"Break down how to make croissants"
 
 // 5. Direct explanation requests
 "Can you show how to make pizza dough?"  
 "Explain the way to prepare pho"  
-"What's the best way to make croissants?"
+"What's the best way to make French toast?"
+
 
 // 1. Starts with "what is" + ingredients
-"What is the ingredient list for pho?"
-"What is pad thai made of?"
-"What is in a Caesar salad?"
+"What is the ingredient list for pho?"  
+"What is pad thai made of?"  
+"What is in a traditional gazpacho?"
 
 // 2. Needs/requirements
-"What do I need to make biryani?"
-"Which ingredients are required for ramen?"
-"What does this recipe call for?"
+"What do I need to make biryani?"  
+"Which ingredients are required for ramen?"  
+"What does this recipe call for?"  
+"What's essential for a margarita?"
 
 // 3. Containment questions
-"Does carbonara contain eggs?"
-"What ingredients does tiramisu have?"
+"Does carbonara contain eggs?"  
+"What ingredients does tiramisu have?"  
+"Is there dairy in this dish?"  
+"List components of a Caprese salad"
 
-// 1. Direct quiz requests
-"Let's do a food quiz"
-"Test my cooking knowledge"
-"I want to try a quiz about Italian food"
+// 1. Starts with "what is" + ingredients
+"What is the ingredient list for pho?"  
+"What is pad thai made of?"  
+"What is in a traditional gazpacho?"
 
-// 2. Challenge me
-"Give me a kitchen challenge"
-"Question me about baking"
+// 2. Needs/requirements
+"What do I need to make biryani?"  
+"Which ingredients are required for ramen?"  
+"What does this recipe call for?"  
+"What's essential for a margarita?"
 
-// 1. Direct trivia
-"Tell me food trivia"
-"Share a fun fact about sushi"
-"Did you know pizza facts?"
-
-// 2. History/origin
-"What's the history of tacos?"
-"Tell me the origin story of croissants"
-"Share the background of kimchi"
-
-// 3. About specific dishes
-"I want to know about ramen culture"
-"Share something about French cuisine"
-
-// 1. Basic questions
-"What is bouillabaisse?"
-"Tell me about bibimbap"
-
-// 2. Explanation requests
-"Describe how pho is served"
-"Define what constitutes a curry"
-
-// 3. Information seeking
-"I want to know about dim sum"
-"Give me information about tapas"
-// 1. Direct goodbyes
-"Goodbye!"
-"See you later"
-"I'm done for now"
-
-// 2. Negative responses
-"No thanks"
-"Not now"
-"Maybe next time"
-
-// 3. Leaving
-"I'll go now"
-"I will exit"
+// 3. Containment questions
+"Does carbonara contain eggs?"  
+"What ingredients does tiramisu have?"  
+"Is there dairy in this dish?"  
+"List components of a Caprese salad" 

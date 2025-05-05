@@ -136,15 +136,62 @@ object Main  {
     Typos.handleTypos(token)
   }
     val cleaned= corrrectedTokens.mkString(" ")
-  //Analytics.logInteraction(corrrectedTokens.mkString(" ")) // Log the interaction 
+
 
   val command = cleaned match {
     case msg if (
-    (msg.startsWith("what are the ingredients") ||
-    msg.startsWith("what ingredients are in") ||
-    msg.startsWith("what do i need for") ||
-    msg.contains("recipe calls for")
-  )) => "ingredients"
+      msg.contains("cuisine") || msg.contains("category") ||
+      msg.contains("dish") || msg.contains("dishes") ||
+      msg.contains("food") || msg.contains("meal") ||
+      msg.startsWith("show me") || msg.startsWith("give me") ||
+      msg.startsWith("tell me") || msg.startsWith("list")
+    ) => "Cusine"
+  case msg if (
+  // Direct ingredient questions
+  (msg.startsWith("what are the ingredients") ||
+  msg.startsWith("what ingredients are in") ||
+  msg.startsWith("what do i need for") ||
+  msg.startsWith("what does it take to make") ||
+  msg.startsWith("items needed for") ||
+  msg.startsWith("components of") ||
+  msg.startsWith("elements in") ||
+  
+  // "What is X made of" variations
+  (msg.startsWith("what is") && (
+    msg.contains("made of") ||
+    msg.contains("made with") ||
+    msg.contains("made from") ||
+    msg.contains("contains") ||
+    msg.contains("comprises") ||
+    msg.contains("consists of") ||
+    msg.contains("include") ||
+    msg.contains("involve") ||
+    msg.contains("require")
+  )) ||
+  
+  // Recipe requirements
+  msg.contains("recipe calls for") ||
+  msg.contains("recipe requires") ||
+  msg.contains("recipe ingredients") ||
+  msg.contains("ingredients list") ||
+  msg.contains("list of ingredients") ||
+  msg.contains("what goes into") ||
+  msg.contains("what goes in") ||
+  
+  // Dish composition questions
+  msg.contains("made up of") ||msg.contains("composition of") ||msg.contains("what's inside") ||
+  msg.contains("whats in") || msg.contains("what is in") ||
+  // Finding dishes by ingredient
+  msg.contains("dishes with") ||msg.contains("meals with") ||msg.contains("recipes with") ||
+  msg.contains("food with") ||msg.contains("meals using") ||msg.contains("dishes containing") ||
+  msg.contains("what has") ||msg.contains("what can i make with") ||msg.contains("what uses") ||
+  msg.contains("contains") ||
+  // Shopping/preparation questions
+  msg.contains("grocery list for") ||
+  msg.contains("items to buy for") ||
+  msg.contains("prep for") 
+) )=> "ingredients"
+
 
   //recipe request
   case msg if (
@@ -175,7 +222,7 @@ case msg if (
 ) => "quiz"
 
 // Trivia/Facts
-case msg if (
+case msg if(
   msg.contains("trivia") || msg.contains("fact") || msg.contains("interesting") || 
   msg.contains("fun") || msg.contains("did you know") ||
   msg.contains("history") || msg.contains("origin") || msg.contains("story") || 
@@ -192,8 +239,7 @@ case msg if (
   msg.startsWith("tell me about") ||
   msg.contains("describe") || msg.contains("explain") || msg.contains("define") ||
   msg.startsWith("i want to know about") ||
-  msg.contains("information") && (msg.contains("dish") || msg.contains("food"))||msg.startsWith("what is") && (
-    msg.contains("made of") ||msg.contains("contains") )
+  msg.contains("information") && (msg.contains("dish") || msg.contains("food"))
 ) => "dish_info"
 
 case msg if (
@@ -256,24 +302,25 @@ case _ => "unknown"
   "tell", "give", "show", "explain", "describe", 
   "list", "provide", "share", "know", "find","walk",
   "define", // Added from dish_info pattern
-  "try", "take", // Added from quiz pattern
+  "try", "take","uses","grocery","whats", // Added from quiz pattern
 
   // Food-related verbs
   "make", "cook", "prepare", "create", "bake", 
   "fry", "grill", "boil", "steam", "roast",
-  "require", "include","save","add","like", // Added from recipe pattern
+  "save","add","like","require", "include", "use", "uses",
+  "add", "contain", "contains", "made", "calls", "required", // Added from recipe pattern
    // Added from ingredients pattern
 
   // Prepositions/articles
   "about", "of", "for", "to", "from", "with", 
-  "without", "in", "on", "at", "the", "a", "an", 
+  "without", "in", "on", "at", "the", "a", "an", "it",
   "me", "as", "by", "through", // Added from patterns
 
   // General food terms
   "dish", "dishes", "food", "cuisine", "meal", "recipe",
   "ingredient", "step", "steps", "direction", "instructions", "instruction",
   "method", "way", // Added from patterns
-  "calls", "required", // Added from ingredients
+  "calls", "required","ingredients","ingredient", // Added from ingredients
 
   // Quiz/Test terms
   "quiz", "test", "question", "challenge", 
@@ -348,7 +395,14 @@ case _ => "unknown"
       }else {
         Quizez.startquiz(tokens.mkString(" "), Typos.handleTypos) 
       }
-    
+    case "Cusine" =>
+      println("DEBUG:Going to cusine")
+      if (tokens.isEmpty) {
+        println("Please specify a cuisine category!")
+      } else {
+        val category = tokens.mkString(" ")
+        showCuisineInformation(category)
+      }
     case "recipe" =>
       println("DEBUG:Going to reciepe")
       if (isIngredientSearch(tokens)) {
@@ -502,7 +556,32 @@ case _ => "unknown"
   def handleIngredientSearchResults(tokens: List[String]): Unit = {
     val userName = UserState.getName
     val searchQuery = tokens.mkString(" ")
+     //To search for dishe's Ingrdient
+    //What is fatta made of for example
+    FoodDB.getDish(tokens) match {
+      case Some(dish) =>
+        println(s"\n◎ ${dish.name}: ${if (dish.isVegetarian) "Vegetarian" else "Non-vegetarian"}")
+        println(s"   Ingredients: ${dish.ingredients.mkString(", ")}")
+        println(s"Would you like to see the recipe for this dish?")
+        val answer = scala.io.StdIn.readLine().trim.toLowerCase
+        if (Set("yes", "y", "sure", "ok", "please").contains(answer)) {
+          showRecipe(dish)
+        } else {
+          println("No problem! Let me know if you need another dish or ingredients.")
+        }
+        return 
+      case None => // No exact dish match found
+    }
+
     
+    // Log the initial ingredient search
+    Analytics.updateUserSearchLog(userName, s"Dish:${searchQuery.capitalize}")
+    
+    Analytics.logInteraction(
+      s"Ingredient search: $searchQuery",
+      "Processing ingredient search request",
+      userName
+    )
     // Log the initial ingredient search
     Analytics.updateUserSearchLog(userName, s"Dish:${searchQuery.capitalize}")
     
@@ -575,6 +654,7 @@ case _ => "unknown"
         println(s"Sorry, I didn't find '$selection' in the results. Please try again.")
         handleIngredientSearchResults(tokens) // Retry
     }
+
   }
 
   // Function to analyze recipe requests and return dish or vegetarian request
@@ -1013,11 +1093,11 @@ case _ => "unknown"
     val recipeAnswer = readLine().trim.toLowerCase
     val correctedRecipe = Typos.handleTypos(recipeAnswer)
 
-    Analytics.logInteraction(
+/*     Analytics.logInteraction(
       s"Asked for recipe: ${dish.name}",
       s"User responded: $recipeAnswer (corrected: $correctedRecipe)",
       userName
-    )
+    ) */
 
     if (Set("yes", "y", "sure", "please").contains(correctedRecipe)) {
       println("Fetching the recipe...")
@@ -1090,8 +1170,8 @@ case _ => "unknown"
     } else {
       // Log invalid response
       Analytics.logInteraction(
+         s"User entered: $answer",
         "Invalid response for recipe link",
-        s"User entered: $answer",
         userName
       )
       println("I didn't understand that. Please type 'yes' or 'no' next time.")
@@ -1118,21 +1198,22 @@ case _ => "unknown"
   @tailrec
   def chatLoop(): Unit = {
   print(s"\n${UserState.getName.capitalize}: ")
-  val input = readLine().trim.toLowerCase
-    
+  val l = readLine().trim.toLowerCase
+  val input= Typos.handleTypos(l)
   if (input.isEmpty) {
     println("👨‍🍳 Where'd ya go, chef? Drop me a message—or type 'quit' to hang up the apron")
     chatLoop()
 
   } else if (input.contains("joke")) {
-    Personality.jokes.foreach(joke => println(s"😂 $joke"))
+    Personality.tellJoke()
     chatLoop()
 
-  } else if (input.contains("how are you") || input.contains("what's up")) {
+  } /* else if (input.contains("how are you") || input.contains("what's up")) {
     Personality.askHowUserIs()
     chatLoop()
 
-  } else if (input.contains("analytics") || input.contains("my preferences")) {
+  } */ 
+    else if (input.contains("analytics") || input.contains("show analytics")) {
     val userName = UserState.getName
     Analytics.handleUserRequestForAnalytics(userName)
     chatLoop()
@@ -1142,7 +1223,7 @@ case _ => "unknown"
     chatLoop()
 
   } else if (input.contains("chat log") || input.contains("conversation history") || input.contains("full log")) {
-    val logs = Analytics.getInteractionLog()
+    val logs = Analytics.getInteractionLog().reverse
     logs.foreach { case (seq, user, bot) =>
       println(s"\n# $seq\n👤: $user\n🤖: $bot")
     }
