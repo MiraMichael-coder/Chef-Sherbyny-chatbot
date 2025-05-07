@@ -111,7 +111,8 @@ object FoodDB {
   category => (category.name, loadDishesFromFile(category.filePath)) 
 }
 
-  private def loadDishesFromFile(filePath: String): List[Dish] = {
+  private def loadDishesFromFile(filePath: String): List[Dish] = 
+    {
     Try {
       val source = Source.fromFile(filePath)
       try {
@@ -199,11 +200,21 @@ object FoodDB {
       None
   }
   
-  def getRandomDishSuggestions(count : Int = 2): List[Dish]=
-    {
-      Random.shuffle(FoodDB.getAllDishes).take(count) }
-
-
+  def getRandomDishSuggestions(count: Int = 2): List[Dish] = {
+    Random.shuffle(getAllDishes).take(count)
   }
+
+  def detectMultiWordIngredients(tokens: List[String]): List[String] = 
+  {
+    val maxPhraseLength = 3 // Adjust based on your longest ingredient (e.g., "extra virgin olive oil")
+    val normalizedIngredients = getAllIngredients.map(_.toLowerCase)
+
+    (2 to maxPhraseLength).flatMap { n =>
+        tokens.sliding(n).map { window =>
+            window.mkString(" ")
+        }.filter(phrase => normalizedIngredients.contains(phrase.toLowerCase))
+    }.toList.distinct
+  }
+}
   
 

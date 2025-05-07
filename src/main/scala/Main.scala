@@ -63,7 +63,12 @@ object Personality {
     "ليه الجبنة ما بتلعبش كورة؟ عشان دايمًا بتقع في الشباك! 🧀⚽",
     " 🤣 مره لمونة جريت مالجامع كانت خايفة من صلاة العصر",
     " Soda مره بيبسى و كوكاكولا اتخانقوا واحده قالت للتانية هخلى ليلتك",
-     "مره واحد سوداني وقع اتقشر"
+    "Why did the hummus break up with the pita? It found someone a little more 'dip'-licious!",
+    "Why did the Lebanese chef get kicked out of school? Because he couldn't stop 'spicing' things up!",
+    "Why did the tabouleh go to therapy? It had too many 'parsley' issues!",
+    "Why did the kimchi break up with the tofu? It found someone a little more 'fermented'!",
+    "Why did the rice cake go to therapy? It had too many 'sticky' issues!"
+
   )
 
   def respondToGreeting(): Unit = {
@@ -83,7 +88,9 @@ object Personality {
 object Main  {
 
   implicit val parseForAnalytics: String => (String, List[String]) = parseInput
-
+  val rules = Prase.loadRules("C:\\Users\\Mira\\Desktop\\uni\\year 2\\Semster 2\\Advanced Prog\\Project\\chatbot\\src\\main\\scala\\data\\command.csv")
+  //commands need to be all checked and added to the file
+  
   def greetUser(): String = {
 
   val availableCuisines = FoodDB.categories.map(_.name.capitalize).mkString(", ")
@@ -148,14 +155,18 @@ object Main  {
     ) => "Cusine"
   case msg if (
   // Direct ingredient questions
-  (msg.startsWith("what are the ingredients") ||
-  msg.startsWith("what ingredients are in") ||
-  msg.startsWith("what do i need for") ||
-  msg.startsWith("what does it take to make") ||
-  msg.startsWith("items needed for") ||
-  msg.startsWith("components of") ||
-  msg.startsWith("elements in") ||
-  
+  ( msg.contains("ingredients") ||
+    msg.startsWith("what do i need") ||
+    msg.contains("items needed") ||
+    msg.contains("components of") ||
+    msg.contains("what does it take to make") ||
+    msg.startsWith("what's in") ||
+    msg.contains("what are the contents") ||
+    msg.contains("what goes into") ||
+    msg.contains("what is needed for") ||
+    msg.contains("what are the items required") ||
+    msg.contains("what do you need to make"))||
+
   // "What is X made of" variations
   (msg.startsWith("what is") && (
     msg.contains("made of") ||
@@ -190,7 +201,7 @@ object Main  {
   msg.contains("grocery list for") ||
   msg.contains("items to buy for") ||
   msg.contains("prep for") 
-) )=> "ingredients"
+) => "ingredients"
 
 
   //recipe request
@@ -250,8 +261,7 @@ case msg if (
 // Exit
 case msg if (
   msg.contains("bye") || msg.contains("goodbye") || msg.contains("see you") || 
-  msg.contains("quit") || msg.contains("exit") ||
-  msg.startsWith("no") || msg.startsWith("not now") || msg.startsWith("later") || 
+  msg.contains("quit") || msg.contains("exit") || msg.startsWith("later") || 
   msg.startsWith("maybe next time") ||
   (msg.startsWith("i'll go") || msg.startsWith("i will go") || msg.startsWith("i go")) ||
   msg.contains("enough") || msg.contains("done") || msg.contains("finished")
@@ -371,16 +381,13 @@ case _ => "unknown"
   
   def handleUserInput(input: String): Unit = 
   {
-  val (command, tokens) = parseInput(input)
-  println( s" DEBUG:Command: $command, Tokens: ${tokens}") // Debugging line to check command and tokens
+  val (command, tokens) = Prase.parseInput(input,rules) // csv files
+  //val (command, tokens) = parseInput(input)      //using prase function
+  println( s" DEBUG from filess:Command: $command, Tokens: ${tokens}") // Debugging line to check command and tokens
   command match {
     case "bye" => 
-       println("""
-          |👋 Until we meet again! 
-          |Next time you visit, I'll have:
-          |🍲 New recipes to share
-          |🌶️ Spicy trivia to compare
-          |👨‍🍳 More cooking tips to prepare!""".stripMargin)  
+      
+      println(" ")
     
     case "quiz" =>
       
@@ -515,6 +522,15 @@ case _ => "unknown"
     val allDishes = FoodDB.getAllDishes
     val normalizedTokens = tokens.map(t => Typos.handleTypos(t.toLowerCase))
     
+    // Detect multi-word ingredients and filter out those from tokens
+    val detectedPhrases = FoodDB.detectMultiWordIngredients(tokens)
+    val searchTerms = detectedPhrases ++ tokens.filterNot(token => 
+        detectedPhrases.exists(_.split(" ").contains(token))
+    )
+    val normalizedTerms = searchTerms.map(t => Typos.handleTypos(t.toLowerCase))
+
+
+
     // Precompute normalized ingredients for each dish
     val dishesWithNormalized = allDishes.map { dish =>
       (dish, dish.ingredients.map(i => Typos.handleTypos(i.toLowerCase)))
@@ -522,10 +538,10 @@ case _ => "unknown"
 
     // Check matches in order of specificity
     val exactAll = dishesWithNormalized.filter { case (_, dishIngs) =>
-      normalizedTokens.forall(token => dishIngs.contains(token))
+        normalizedTerms.forall(term => dishIngs.contains(term))
     }
-    //returns all the dishes that have all the ingredients in the list
     if (exactAll.nonEmpty) return (exactAll.map(_._1), "exact-all-ingredients")
+   
 
     val exactAny = dishesWithNormalized.filter { case (_, dishIngs) =>
       normalizedTokens.exists(token => dishIngs.contains(token))
@@ -552,39 +568,37 @@ case _ => "unknown"
     else 
       (Nil, "no-matches-found")
   }
-
-  def handleIngredientSearchResults(tokens: List[String]): Unit = {
-    val userName = UserState.getName
-    val searchQuery = tokens.mkString(" ")
-     //To search for dishe's Ingrdient
-    //What is fatta made of for example
-    FoodDB.getDish(tokens) match {
+  def dish_ingredients(tokens:List[String]):Boolean=
+    {
+      FoodDB.getDish(tokens) match {
       case Some(dish) =>
+        Analytics.updateUserSearchLog(UserState.getName, s"Dish:${tokens.mkString(" ").capitalize}")
         println(s"\n◎ ${dish.name}: ${if (dish.isVegetarian) "Vegetarian" else "Non-vegetarian"}")
         println(s"   Ingredients: ${dish.ingredients.mkString(", ")}")
         println(s"Would you like to see the recipe for this dish?")
         val answer = scala.io.StdIn.readLine().trim.toLowerCase
-        if (Set("yes", "y", "sure", "ok", "please").contains(answer)) {
+        val corrected = Typos.handleTypos(answer)
+        if (Set("yes", "sure", "ok", "please").contains(corrected)) {
           showRecipe(dish)
+          
         } else {
           println("No problem! Let me know if you need another dish or ingredients.")
-        }
-        return 
-      case None => // No exact dish match found
-    }
 
+        }
+        true
+      case None => false    // No exact dish match found
+}
+
+    }
+  def handleIngredientSearchResults(tokens: List[String]): Unit = {
+    val userName = UserState.getName
+    val searchQuery = tokens.mkString(" ")
     
+    if(dish_ingredients(tokens)) return // If a dish is found, exit the function
+
     // Log the initial ingredient search
-    Analytics.updateUserSearchLog(userName, s"Dish:${searchQuery.capitalize}")
     
-    Analytics.logInteraction(
-      s"Ingredient search: $searchQuery",
-      "Processing ingredient search request",
-      userName
-    )
-    // Log the initial ingredient search
-    Analytics.updateUserSearchLog(userName, s"Dish:${searchQuery.capitalize}")
-    
+
     Analytics.logInteraction(
       s"Ingredient search: $searchQuery",
       "Processing ingredient search request",
@@ -631,7 +645,7 @@ case _ => "unknown"
       |
       |${dishes.map(d => 
           s"◎ ${d.name} (${if (d.isVegetarian) "Vegetarian" else "Non-vegetarian"})\n" +
-          s"   Ingredients: ${d.ingredients.take(5).mkString(", ")}${if (d.ingredients.size > 5) "..." else ""}"
+          s"   Ingredients: ${d.ingredients.mkString(", ")}}"
         ).mkString("\n\n")}
       |
       |Type the exact name of the dish you want, or 'none' to cancel.
@@ -654,7 +668,6 @@ case _ => "unknown"
         println(s"Sorry, I didn't find '$selection' in the results. Please try again.")
         handleIngredientSearchResults(tokens) // Retry
     }
-
   }
 
   // Function to analyze recipe requests and return dish or vegetarian request
@@ -1086,18 +1099,24 @@ case _ => "unknown"
 
   println(s"\n◎ ${dish.name}: $dishtype ($vegStatus)")
   println(s"   ${dish.shortDescription}")
-  println(s"   Ingredients: ${dish.ingredients.mkString(", ")}")
 
+  println("\nWould you like to see the ingredients?")
+  val ingredientAnswer = readLine().trim.toLowerCase
+  val correctedIngredient = Typos.handleTypos(ingredientAnswer)
 
-    println("\nWould you like to check out the recipe for this dish?")
+  
+
+  if (Set("yes", "y", "sure", "please").contains(correctedIngredient)) {
+    println(s"   Ingredients: ${dish.ingredients.mkString(", ")}")
+    Analytics.logInteraction(
+      s"Ingredients requested for: ${dish.name}",
+      "Showing ingredients",
+      userName
+    )
+    println("\nWould you like to check out the recipe too?")
     val recipeAnswer = readLine().trim.toLowerCase
     val correctedRecipe = Typos.handleTypos(recipeAnswer)
 
-/*     Analytics.logInteraction(
-      s"Asked for recipe: ${dish.name}",
-      s"User responded: $recipeAnswer (corrected: $correctedRecipe)",
-      userName
-    ) */
 
     if (Set("yes", "y", "sure", "please").contains(correctedRecipe)) {
       println("Fetching the recipe...")
@@ -1110,7 +1129,14 @@ case _ => "unknown"
     } else {
       println("Alright! Let me know if you get curious or hungry later.")
     }
+
+  } else {
+    println("No problem! Let me know if you'd like to explore something else.")
+  }
 }
+
+
+
   def showRecipe(dish: Dish): Unit = {
     val userName = UserState.getName
     
@@ -1152,7 +1178,7 @@ case _ => "unknown"
         userName
       )
       println("👨‍🍳Mafish mushkila! Wana hena 3ashan nsharek al-wasafat w al-ma3lomat el-laziza!")
-    } else if (corrected == "yes" || corrected == "sure" || corrected == "please") {
+    } else if (corrected.contains("yes")|| corrected.contains("sure") || corrected.contains("please")) {
       // Log user requested recipe link
       Analytics.logInteraction(
         "User requested recipe link",
@@ -1269,14 +1295,14 @@ case _ => "unknown"
     )
 
     if (initialCall) {
-        println("\nBefore you go, would you be interested in these dishes?")
+        println("\nBefore you head out, curious about these dishes?")
     } else {
         println("\nHere are some more suggestions:")
     }
     
     suggestions.foreach(d => println(s"🍽️ ${d.name}"))
     
-    println("\nWould you like to know more about any of these? (enter dish name, or 'no' to exit)")
+    println("\nWould you like to know more about any of these?")
     val answer = readLine().trim.toLowerCase
     
     // Log user response
@@ -1343,13 +1369,12 @@ case _ => "unknown"
                 s"User entered: $answer",
                 userName
             )
-            println(s"Sorry, I didn't recognize '$answer'. Here are your options:")
-            dish_suggestion(initialCall = false) // Show suggestions again
+            println(s"Sorry, I didn't recognize '$answer'. Try to rephrase")
+            //dish_suggestion(initialCall = false) // Show suggestions again
     }
   }
   def main(args: Array[String]): Unit = {
   
     mainChat()
-    //println("مرحبا، هذا اختبار للغة العربية!")
   }
 }   
