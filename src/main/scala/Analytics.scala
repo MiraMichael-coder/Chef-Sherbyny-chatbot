@@ -1,4 +1,9 @@
 import scala.io.StdIn.readLine
+  
+import java.nio.file.{Paths, Files}
+import scala.io.Source
+import scala.util.{Try, Success, Failure}
+import java.io.{PrintWriter, FileWriter}
 
 object Analytics {
   private var interactionLog: List[(Int, String, String)] = List()
@@ -6,6 +11,156 @@ object Analytics {
   private var sequence: Int = 1
   private var userPreferences: Map[String, Map[String, Int]] = Map()
   private var generalPreferences: Map[String, String] = Map()
+
+
+  val preferencesFilePath = "C:\\Users\\Mira\\Desktop\\uni\\year 2\\Semster 2\\Advanced Prog\\Project\\chatbot\\src\\main\\scala\\data\\user_data.txt"
+
+ def loadPreferencesFromFile(): Unit = {
+    Try {
+      generalPreferences = Map()
+      userPreferences = Map()
+      
+      if (Files.exists(Paths.get(preferencesFilePath))) {
+        val source = Source.fromFile(preferencesFilePath)
+        try {
+          source.getLines().drop(1).foreach { line =>
+            val parts = line.split("\\|", -1).map(_.trim)
+            if (parts.length >= 3) {
+              val userName = parts(0)
+              val dishPrefs = parts(1).split(",").map(_.trim).filter(_.nonEmpty)
+              val cuisinePrefs = parts(2).split(",").map(_.trim).filter(_.nonEmpty)
+              
+              // Reconstruct generalPreferences
+              val prefStrings = List(
+                dishPrefs.map(d => s"Favorite Dish: $d"),
+                cuisinePrefs.map(c => s"Favorite Cuisine: $c")
+              ).flatten
+              
+              if (prefStrings.nonEmpty) {
+                generalPreferences += (userName -> prefStrings.mkString("; "))
+              }
+              
+              // Reconstruct userPreferences counts
+              val currentCounts = userPreferences.getOrElse(userName, Map())
+              val updatedCounts = currentCounts ++ Map(
+                "dish" -> (currentCounts.getOrElse("dish", 0) + dishPrefs.length),
+                "cuisine" -> (currentCounts.getOrElse("cuisine", 0) + cuisinePrefs.length)
+              )
+              userPreferences += (userName -> updatedCounts)
+            }
+          }
+        } finally {
+          println(s"Loaded ${generalPreferences.size} user preferences")
+          source.close()
+        }
+      }
+    } match {
+      case Failure(e) => 
+        println(s"Error loading preferences: ${e.getMessage}")
+        if (!Files.exists(Paths.get(preferencesFilePath))) {
+          savePreferencesToFile() // Create empty file if doesn't exist
+        }
+      case Success(_) => 
+    }
+  }
+   // Save all preferences (maintains existing data)
+  def savePreferencesToFile(): Unit = {
+    Try {
+      val writer = new PrintWriter(preferencesFilePath)
+      try {
+        writer.println("name|dishpref|cuisinepref")
+        
+        generalPreferences.foreach { case (userName, prefs) =>
+          val dishPrefs = prefs.split(";")
+            .filter(_.trim.startsWith("Favorite Dish:"))
+            .map(_.split(":").last.trim)
+            .mkString(",")
+          
+          val cuisinePrefs = prefs.split(";")
+            .filter(_.trim.startsWith("Favorite Cuisine:"))
+            .map(_.split(":").last.trim)
+            .mkString(",")
+          
+          writer.println(s"$userName|$dishPrefs|$cuisinePrefs")
+        }
+        println(s"Successfully saved ${generalPreferences.size} preferences")
+      } finally {
+        writer.close()
+      }
+    }.recover {
+      case e => println(s"Error saving preferences: ${e.getMessage}")
+    }
+  }
+
+  // Append or update single user's preferences
+ def appendOrUpdateUserPreferences(userName: String): Unit = {
+  loadPreferencesFromFile()
+  
+  generalPreferences.get(userName) match {
+    case Some(_) =>
+      // User exists - update the file completely
+      savePreferencesToFile()
+      println(s"Updated preferences for $userName")
+    
+    case None =>
+      // New user - append to file
+      generalPreferences.get(userName) match {
+        case Some(prefs) =>
+          Try {
+            val writer = new FileWriter(preferencesFilePath, true)
+            try {
+              // Check if file is empty to write header
+              if (Files.size(Paths.get(preferencesFilePath)) == 0) {
+                writer.write("name|dishpref|cuisinepref\n")
+              }
+              
+              val dishPrefs = prefs.split(";")
+                .filter(_.trim.startsWith("Favorite Dish:"))
+                .map(_.split(":").last.trim)
+                .mkString(",")
+              
+              val cuisinePrefs = prefs.split(";")
+                .filter(_.trim.startsWith("Favorite Cuisine:"))
+                .map(_.split(":").last.trim)
+                .mkString(",")
+              
+              writer.write(s"$userName|$dishPrefs|$cuisinePrefs\n")
+            } finally {
+              writer.close()
+            }
+            println(s"Appended preferences for $userName")
+          }.recover {
+            case e => println(s"Error appending preferences: ${e.getMessage}")
+          }
+        case None =>
+          println(s"No preferences found for $userName to append")
+      }
+  }
+}
+
+  // Add or update single user's preferences
+  def updateUserPreferences(userName: String, newPrefs: String): Unit = {
+    // Update in-memory preferences
+    val currentPrefs = generalPreferences.getOrElse(userName, "")
+    val updatedPrefs = if (currentPrefs.contains(newPrefs)) {
+      currentPrefs
+    } else {
+      if (currentPrefs.isEmpty) newPrefs else s"$currentPrefs; $newPrefs"
+    }
+    generalPreferences += (userName -> updatedPrefs)
+    
+    // Update counts
+    val prefType = if (newPrefs.toLowerCase.contains("cuisine")) "cuisine" 
+                  else if (newPrefs.toLowerCase.contains("dish")) "dish"
+                  else "general"
+    val currentCounts = userPreferences.getOrElse(userName, Map())
+    userPreferences += (userName -> (currentCounts + (prefType -> (currentCounts.getOrElse(prefType, 0) + 1))))
+    
+    // Save to file
+    appendOrUpdateUserPreferences(userName)
+  }
+
+
 
   def logInteraction(userInput: String, chatbotResponse: String, userName: String): Unit = {
     interactionLog :+= (sequence, s"[$userName] $userInput", chatbotResponse)
@@ -38,11 +193,53 @@ else
   val updatedLog = userLog + (key -> (userLog.getOrElse(key, 0) + 1))
   userPreferences += (userName -> updatedLog)
 }
+
+
+
+
+
   def storeUserPreferences(userName: String, preference: String): Unit = {
-      generalPreferences += (userName -> preference)
-      // Log this preference update
-      logInteraction(s"User set preference: $preference", "Preference stored", userName)
+  // Get existing preferences
+  val currentPrefs = generalPreferences.getOrElse(userName, "")
+  
+  // Append new preference (avoid duplicates)
+  val updatedPrefs = if (currentPrefs.contains(preference)) {
+    currentPrefs
+  } else {
+    if (currentPrefs.isEmpty) preference else s"$currentPrefs; $preference"
+  }
+  
+  generalPreferences += (userName -> updatedPrefs)
+  
+  // Track in user preferences map
+  val prefType = if (preference.toLowerCase.contains("cuisine")) "cuisine" 
+                else if (preference.toLowerCase.contains("dish")) "dish"
+                else "general"
+  
+  val currentCounts = userPreferences.getOrElse(userName, Map())
+  val updatedCounts = currentCounts + (prefType -> (currentCounts.getOrElse(prefType, 0) + 1))
+  userPreferences += (userName -> updatedCounts)
+  
+  logInteraction(s"User updated $prefType preferences", s"Stored: $preference", userName)
+}
+  // Retrieve user preferences
+  def getFavoriteCuisine(userName: String): Option[String] = {
+  generalPreferences.get(userName).flatMap { prefs =>
+    prefs.split(";").collectFirst {
+      case pref if pref.toLowerCase.contains("cuisine") => 
+        pref.split(":").last.trim
     }
+  }
+}
+
+  def getFavoriteDishes(userName: String): List[String] = {
+  generalPreferences.get(userName).map { prefs =>
+    prefs.split(";").collect {
+      case pref if pref.toLowerCase.contains("dish") => 
+        pref.split(":").last.trim
+    }.toList
+  }.getOrElse(Nil)
+}
     def getUserPreferences(userName: String): Option[String] = {
       generalPreferences.get(userName) match {
         case Some(pref) => 
@@ -55,6 +252,7 @@ else
     }
 
   // Analyze preferred cuisines and dishes by user
+
   def analyzeUserPreferences(userName: String): Unit = {
     userPreferences.get(userName) match {
       case Some(preferences) =>
@@ -62,22 +260,25 @@ else
         val mostSearchedDish = preferences.filter(_._1.contains("Dish")).maxByOption(_._2)
 
         println(s"\n📊 User Preferences Analytics for $userName:")
-        mostSearchedCuisine match {
-           case Some((cuisine, count)) if count>0 =>
+        (mostSearchedCuisine, mostSearchedDish) match {
+          case (Some((cuisine, count)), None) =>
             println(s"🥇 Most Preferred $cuisine with $count searches.")
-          case None => println("No preferred cuisine data found.")
-        }
-
-       
-        mostSearchedDish match {
-          case Some((dish, count)) if count>0 =>
+          
+          case (None, Some((dish, count))) =>
             println(s"🥇 Most Preferred $dish with $count searches.")
-          case None => println("No preferred dish data found.")
-        }
+
+          case (Some((cuisine, count1)), Some((dish, count2))) =>
+            println(s"🥇 Most Preferred $cuisine with $count1 searches.")
+            println(s"🥇 Most Preferred $dish with $count2 searches.")
+            
+          case (None, None) =>
+            println(s"No search data found for user: $userName")
+    }
       case None =>
         println(s"No search data found for user: $userName")
     }
   }
+
 
   // Analyze user-specific quiz performance
   def analyzeQuizPerformance(userName: String,handleTypos:String=>String): Unit = {

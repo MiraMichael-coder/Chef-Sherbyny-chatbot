@@ -1,0 +1,3 @@
+name|dishpref|cuisinepref
+Jana|mandu,fatta|italian,Egyptian
+Mira|koshari,dakgalbi|French

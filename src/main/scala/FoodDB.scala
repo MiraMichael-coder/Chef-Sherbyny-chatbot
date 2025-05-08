@@ -203,6 +203,17 @@ object FoodDB {
   def getRandomDishSuggestions(count: Int = 2): List[Dish] = {
     Random.shuffle(getAllDishes).take(count)
   }
+   def isValidCuisine(cuisine: String): Boolean = {
+    categories.exists(_.name.equalsIgnoreCase(Typos.handleTypos(cuisine)))
+  }
+
+  def isValidDish(dishName: String): Boolean = {
+    getAllDishes.exists(d => Typos.handleTypos(d.name.toLowerCase) == Typos.handleTypos(dishName.toLowerCase))
+  }
+
+  def getDishByName(dishName: String): Option[Dish] = {
+    getAllDishes.find(d => Typos.handleTypos(d.name.toLowerCase) == Typos.handleTypos(dishName.toLowerCase))
+  }
 
   def detectMultiWordIngredients(tokens: List[String]): List[String] = 
   {

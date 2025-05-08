@@ -92,8 +92,6 @@ object Main  {
   //commands need to be all checked and added to the file
   
   def greetUser(): String = {
-
-  val availableCuisines = FoodDB.categories.map(_.name.capitalize).mkString(", ")
   val chefHat = "👨‍🍳"
   val sparkles = "🌟"
   val fire = "🔥"
@@ -425,23 +423,7 @@ case _ => "unknown"
     case "dish_info" => handleDishRequest(tokens)
     case "greet" =>  Personality.respondToGreeting()
     case "ask_how_user_is" => Personality.askHowUserIs()
-    case "preference" =>
-      val userName = UserState.getName
-      if (tokens.isEmpty) {
-      // Get preferences if no tokens provided
-      Analytics.getUserPreferences(userName) match {
-        case Some(pref) => 
-          println(s"Your current preference is: $pref")
-        case None =>
-          println("You haven't set any preferences yet. Try something like 'save Italian as my favorite cuisine'")
-      }
-    } else {
-      // Set preferences if tokens provided
-      val preference = tokens.mkString(" ")
-      Analytics.storeUserPreferences(userName, preference)
-      println(s"Got it! I've saved '$preference' as your preference.")
-    }
-    
+    case "preference" => prefrence(tokens)
     case "log" =>
       println("Debug:Going to log")
       val logs = Analytics.getInteractionLog()
@@ -504,6 +486,81 @@ case _ => "unknown"
       |""".stripMargin)
 }
 }
+
+  def prefrence(tokens:List[String]):Unit={
+   val userName = UserState.getName
+      val input = tokens.mkString(" ").toLowerCase
+  
+    if (tokens.isEmpty) {
+    // Show current preferences
+    Analytics.getUserPreferences(userName) match {
+      case Some(pref) => 
+        val formattedPrefs = pref.split(";").map(_.trim).mkString("\n- ")
+        println(s"🌟 Your current preferences:\n- $formattedPrefs")
+      case None =>
+        println("You haven't set any preferences yet. Try commands like:")
+        println("- 'I love Egyptian cuisine'")
+        println("- 'Add Koshari to my favorites'")
+        println("- 'Save pasta as my favorite dish'")
+    }
+  } else {
+    // Enhanced natural language preference handling
+        // Handle cuisine preferences
+        val possibleCuisine = tokens.find(t => FoodDB.isValidCuisine(t))
+        val possibleDish = FoodDB.getAllDishes.find(d => 
+          tokens.exists(t => Typos.handleTypos(d.name.toLowerCase).contains(Typos.handleTypos(t.toLowerCase))))
+        (possibleCuisine,possibleDish) match {
+          //cusine only
+          case (Some(cuisine), None) =>
+            Analytics.storeUserPreferences(userName, s"Favorite Cuisine: ${cuisine.capitalize}")
+            println(s"🌍 Wonderful! I've noted your love for ${cuisine.capitalize} cuisine.")
+            
+            // Suggest dishes from this cuisine
+            val dishes = FoodDB.getDishesByCategory(cuisine.toString()).take(3)
+            if (dishes.nonEmpty) {
+              println(s"\nYou might enjoy these ${cuisine.capitalize} dishes:")
+              dishes.foreach(d => println(s"- ${d.name}"))
+              println("\nAsk me about any of them!")
+            }
+            //dish only
+          case (None, Some(dish)) =>
+            Analytics.storeUserPreferences(userName, s"Favorite Dish: ${dish.name}")
+            println(s"🍽️ Excellent choice! I've added ${dish.name} to your favorites.")
+            
+            // Show dish details if they want
+            println(s"Would you like to see details about ${dish.name}? (yes/no)")
+            val input = readLine().trim.toLowerCase 
+            val corrected = Typos.handleTypos(input)
+            if(corrected.contains("yes")|| corrected.contains("please")||corrected.contains("sure")) 
+              showDishDetails(dish)
+              else println("No problem! It's saved for future reference.")
+
+          //cusine and dish
+          case(Some(cuisine), Some(dish)) =>
+            println(s"🍽️ I've noted your love for ${cuisine.capitalize} cuisine and ${dish.name} dish.")
+            Analytics.storeUserPreferences(userName, s"Favorite Cuisine: ${cuisine.capitalize}")
+            Analytics.storeUserPreferences(userName, s"Favorite Dish: ${dish.name}")
+            println("Would you like to see details about this dish? (yes/no)")
+            val input = readLine().trim.toLowerCase 
+            val corrected = Typos.handleTypos(input)
+            if(corrected.contains("yes")|| corrected.contains("please")||corrected.contains("sure")) 
+              showDishDetails(dish)
+              else println("No problem! It's saved for future reference.")
+          
+          // No valid cuisine or dish found
+          case (None, None) =>
+            println("I couldn't identify a valid cuisine in your message. Available cuisines are:")
+            println(FoodDB.categories.map(_.name.capitalize).mkString(", "))
+            println("I couldn't find that dish or that cusine in our database. Try something like:")
+            println("- 'Add Koshari to my favorites'")
+            println("- 'Save Italian cusine as my favorite'")
+        }
+        
+     
+    }
+  }
+
+  // Function to check if the user is looking for a specific ingredient or not
 // it checks all ingredents in the database and returns true if any of them match the token 
   // it also handles typos in the ingredient names
   // this function is used in the handleIngredientSearchResults function to check if the user is looking for a specific ingredient or not 
@@ -671,6 +728,7 @@ case _ => "unknown"
   }
 
   // Function to analyze recipe requests and return dish or vegetarian request
+
   def analyzeRecipeRequest(tokens: List[String]): (Option[Dish], String) = 
     {
       val allDishes = FoodDB.getAllDishes
@@ -1170,7 +1228,7 @@ case _ => "unknown"
       userName
     )
 
-    if (corrected == "no" || corrected == "exit" || corrected == "quit" || corrected == "thanks no" || answer.isEmpty) {
+    if (corrected.contains("no") || corrected.contains("exit") || corrected.contains( "quit") || corrected.contains("thanks") || answer.isEmpty) {
       // Log user declined recipe link
       Analytics.logInteraction(
         "User declined recipe link",
@@ -1214,8 +1272,8 @@ case _ => "unknown"
   }
 
   def mainChat(): Unit = {
- println(greetUser()) // Time-based greeting
- 
+    Analytics.loadPreferencesFromFile()
+ println(greetUser())
   println("Ooh, what's your name, so I can shout it across the kitchen? 🍳😄")
   val name = readLine().trim
   if (name.nonEmpty) UserState.setName(name)
@@ -1223,6 +1281,7 @@ case _ => "unknown"
 }
   @tailrec
   def chatLoop(): Unit = {
+    
   print(s"\n${UserState.getName.capitalize}: ")
   val l = readLine().trim.toLowerCase
   val input= Typos.handleTypos(l)
@@ -1234,11 +1293,7 @@ case _ => "unknown"
     Personality.tellJoke()
     chatLoop()
 
-  } /* else if (input.contains("how are you") || input.contains("what's up")) {
-    Personality.askHowUserIs()
-    chatLoop()
-
-  } */ 
+  } 
     else if (input.contains("analytics") || input.contains("show analytics")) {
     val userName = UserState.getName
     Analytics.handleUserRequestForAnalytics(userName)
@@ -1256,16 +1311,6 @@ case _ => "unknown"
      println(s"\n🗂 Displayed ${logs.length} interactions.")
     chatLoop()
   }
-    else if(input.contains("preference")||input.contains("preferences")){
-      val userName = UserState.getName
-      Analytics.getUserPreferences(userName) match {
-        case Some(pref) => 
-          println(s"Your current preference is: $pref")
-        case None =>
-          println("You haven't set any preferences yet. Try something like 'save Italian as my favorite cuisine'")
-      }
-      chatLoop()
-    }
    else {
     val (command, _) = parseInput(input)
 
@@ -1276,12 +1321,18 @@ case _ => "unknown"
       |🍲 Tasty recipes  
       |🌶 Spicy trivia  
       |🍽 And a good ol' foodie laugh! 😄""".stripMargin)
+      Analytics.logInteraction(
+        "User exited chat",
+        "Goodbye message displayed",
+        UserState.getName
+      )
+      Analytics.savePreferencesToFile()
     } else {
       handleUserInput(input)
       chatLoop()
     }
   }
-}
+  }
   def dish_suggestion(initialCall: Boolean = true): Unit = 
   {
     val userName = UserState.getName
@@ -1350,7 +1401,7 @@ case _ => "unknown"
                 userName
             )
             
-            if (Typos.handleTypos(continue) == "yes") {
+            if (Typos.handleTypos(continue) == "yes"|| Typos.handleTypos(continue) =="please"|| Typos.handleTypos(continue) == "sure") {
                 dish_suggestion(initialCall = false)
             } else {
                 // Log final exit
@@ -1376,5 +1427,6 @@ case _ => "unknown"
   def main(args: Array[String]): Unit = {
   
     mainChat()
+    
   }
-}   
+}

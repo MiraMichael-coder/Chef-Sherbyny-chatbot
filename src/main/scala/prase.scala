@@ -96,7 +96,22 @@ object Prase {
 
   // Special terms
   "best", "right", "good", "day", "up", "are",
-  "exit", "quit", "see", "go", "want", "information","made","like best","like","favorite"
+  "exit", "quit", "see", "go", "want", "information","made","like best","like","favorite",
+    "prefer", "like", "love", "adore", "enjoy", "save", "add", "remember", 
+  "choose", "select", "pick", "go for", "opt for", "fancy", "dig",
+  
+  // Nouns
+  "preference", "favorite", "choice", "dish", "cuisine", "food", "meal",
+  
+  // Phrases
+  "i'm", "i am", "i'd", "i would", "i usually", "i normally", "i generally",
+  "i mostly", "i typically", "as my", "to my", "that i", "please", "could you",
+  "can you", "would you", "make a note", "keep as", "store as", "mark as",
+  "note as", "nothing beats", "crazy about", "obsessed with", "fond of",
+  "partial to", "not a fan of", "don't care for", "avoid", "pass on", "skip",
+  
+  // Connectors
+  "as", "to", "for", "about", "with", "of"
 
     )
     
@@ -129,7 +144,7 @@ object Prase {
     }
   }.map(_.command).getOrElse("unknown")
 
-   println(s"DEBUG: Final command: $command") // Debug 4
+    println(s"DEBUG: Final command: $command") // Debug 4
  
     val keywords = extractKeywords(cleaned)
     (command, keywords)
