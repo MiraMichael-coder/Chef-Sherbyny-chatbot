@@ -1346,7 +1346,7 @@ case _ => "unknown"
     )
 
     if (initialCall) {
-        println("\nBefore you head out, curious about these dishes?")
+        println("\nBefore you head out, curious about these dishes? just write down their name  if any of them sound good!!")
     } else {
         println("\nHere are some more suggestions:")
     }
@@ -1365,7 +1365,7 @@ case _ => "unknown"
     
     // Check for explicit exit commands
     val corrected = Typos.handleTypos(answer)
-    if (corrected == "no" || corrected == "n" || corrected == "exit" || corrected == "quit" || answer == "") {
+    if (corrected.contains("no") || corrected.contains("exit") || corrected .contains( "quit")||corrected.contains("thanks") || answer == "") {
         // Log user exit
         Analytics.logInteraction(
             "User exited suggestions",
