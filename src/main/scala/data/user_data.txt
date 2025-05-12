@@ -1,3 +1,5 @@
 name|dishpref|cuisinepref
-Jana|mandu,fatta|italian,Egyptian
-Mira|koshari,dakgalbi|French
+Jana|mandu,fatta,coq au vin|italian,Egyptian
+Mira|koshari,dakgalbi,fatta,pain au chocolat|French
+M|koshari,fatta,coq au vin,pesto pasta,pain au chocolat,éclair,cassoulet|
+Miraa|batates bil forno,batata harra|

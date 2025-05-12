@@ -12,10 +12,11 @@ object Analytics {
   private var userPreferences: Map[String, Map[String, Int]] = Map()
   private var generalPreferences: Map[String, String] = Map()
 
-
+  //change file path to your own
   val preferencesFilePath = "C:\\Users\\Mira\\Desktop\\uni\\year 2\\Semster 2\\Advanced Prog\\Project\\chatbot\\src\\main\\scala\\data\\user_data.txt"
 
- def loadPreferencesFromFile(): Unit = {
+  // Load user preferences from file
+  def loadPreferencesFromFile(): Unit = {
     Try {
       generalPreferences = Map()
       userPreferences = Map()
@@ -50,7 +51,7 @@ object Analytics {
             }
           }
         } finally {
-          println(s"Loaded ${generalPreferences.size} user preferences")
+          //println(s"Loaded ${generalPreferences.size} user preferences")
           source.close()
         }
       }
@@ -93,14 +94,14 @@ object Analytics {
   }
 
   // Append or update single user's preferences
- def appendOrUpdateUserPreferences(userName: String): Unit = {
+  def appendOrUpdateUserPreferences(userName: String): Unit = {
   loadPreferencesFromFile()
   
   generalPreferences.get(userName) match {
     case Some(_) =>
       // User exists - update the file completely
       savePreferencesToFile()
-      println(s"Updated preferences for $userName")
+      //println(s"Updated preferences for $userName")
     
     case None =>
       // New user - append to file
@@ -161,7 +162,7 @@ object Analytics {
   }
 
 
-
+  // Log user interactions with username
   def logInteraction(userInput: String, chatbotResponse: String, userName: String): Unit = {
     interactionLog :+= (sequence, s"[$userName] $userInput", chatbotResponse)
     sequence += 1
@@ -189,15 +190,12 @@ object Analytics {
 else
   s"$tag:${searchQuery.capitalize}"
 
-
+  // Update the log with the new search
   val updatedLog = userLog + (key -> (userLog.getOrElse(key, 0) + 1))
   userPreferences += (userName -> updatedLog)
 }
 
-
-
-
-
+  // Log user preferences (general)
   def storeUserPreferences(userName: String, preference: String): Unit = {
   // Get existing preferences
   val currentPrefs = generalPreferences.getOrElse(userName, "")
@@ -222,7 +220,7 @@ else
   
   logInteraction(s"User updated $prefType preferences", s"Stored: $preference", userName)
 }
-  // Retrieve user preferences
+  // Retrieve user preferences Cusine 
   def getFavoriteCuisine(userName: String): Option[String] = {
   generalPreferences.get(userName).flatMap { prefs =>
     prefs.split(";").collectFirst {
@@ -231,7 +229,7 @@ else
     }
   }
 }
-
+  // Retrieve user preferences Dish
   def getFavoriteDishes(userName: String): List[String] = {
   generalPreferences.get(userName).map { prefs =>
     prefs.split(";").collect {
@@ -240,6 +238,7 @@ else
     }.toList
   }.getOrElse(Nil)
 }
+    // Retrieve user preferences (general)
     def getUserPreferences(userName: String): Option[String] = {
       generalPreferences.get(userName) match {
         case Some(pref) => 
@@ -319,7 +318,7 @@ else
   }
 
   // Show overall interaction type usage
-  def analyzeInteractions()(implicit parseFunc: String => (String, List[String])): Unit = {
+  def analyzeInteractions()(implicit parseFunc:String => (String, List[String])): Unit = {
     println(s"\n📊 Total interactions: ${interactionLog.length}")
 
     val processed = interactionLog.map { case (_, _, userMsg) =>
@@ -333,6 +332,11 @@ else
       println(f" - $cmd%-12s: $count")
     }
   }
+  // Proccess the last log entry
+  // This function takes the last log entry, user input, and bot response
+  // It checks if the user input contains Trivia or last quiz then if the user input contains a valid response
+  // It extracts the cuisine from the user input and starts a quiz based on that cuisine
+  // If no specific cuisine is detected, it prints a message
   def processLastLog(log: (Int, String, String),tokens:List[String],handleTypos: String => String): Unit = {
   val (seq, userInput, botResponse) = log
   println(s"\nWorking on last log #$seq:")
@@ -371,15 +375,3 @@ else
     }
 }
 }
-
-/* //for cuisine
-  val userName = UserState.getName
-  val capitalizedCategory = category.capitalize
-     Analytics.updateUserSearchLog(userName, s"Cuisine:${category.capitalize}")
-
-//for dishes
-  val userName = UserState.getName
-      val searchQuery = tokens.mkString(" ")
-      
-      // Log the initial dish search
-      Analytics.updateUserSearchLog(userName, s"Dish:${searchQuery.capitalize}") */  

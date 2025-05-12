@@ -1,3 +1,7 @@
+cuisine: cusine, cuisin, cuisne, cuisnie, cusiine, cuisien, cuisinae, cuisiine, cusinie, cusiinee, cuizine, cuisibe, cujsine, cuisjne, cuixine, cuiisine, c0isine, cuis9ne, cuisin3
+food: fod, foood, fodo, foud, foof, fod, fode, fooood, f0od, fo0d, foox, fopd, fodd, fo9d, fo8d, fo3d, fooe, foode, fooxd, fooj
+that: that, thaat, tht, thaat, thaat, thhat, taht, tthat, thqt, thwt, thzt, thad, thaw, thax, thatd, thatw, thatx
+absolutely: absolutly, absoultely, absolutley, absloutely, absolutelly, absoutely, absolutelly, abssolutely, absoulutely, absoloutely, abssolutly, absoluttely, abs0lutely, abso9utely, abso8utely, aboslutely, absoluely, absilutely, absolutel, absolutlye
 a: aa, ay, ah, ae, ai, aq, @  
 about: abowt, abot, abou, abaut, abouut, abt, abt., abtut, aboit, abvut, abuot, ab9ut, abiyt  
 add: ad, addd, da, ads, atayaff, aadd, aad, addt, adf, asd, qdd, add4  
@@ -6,7 +10,7 @@ an: aan, ann, ain, anm, an., an1, an0, xn, am
 and: annd, adn, &, andd, qnd, amd, ajd, abd, andz, andx  
 any: anie, eny, ani, anny, ayni, amy, anay, anyy, angy  
 are: ar, r, re, rae, aare, arre, aee, aer, aree, arew  
-as: az, ass, aes, ase, qs, aS, azz, axs  
+as: az, ass, aes, ase, qs, aS, azz, axs,as, a, s, az, qs, ws, zs, ad, aw, ax, asd, asw  
 ask: as, askk, aks, askc, asck, asq, azk, asj, ak, akz  
 at: att, aat, qt, @t, at., at1, a7  
 back: bak, baack, bac, bck, bakk, backk, bacl, bjck, bqck  
@@ -33,7 +37,7 @@ define: defin, defyne, defnie, defne, d3fine, deffine, defune, defie
 describe: describ, discribe, desribe, desccribe, decribe, dscribe, derscribe, descibe  
 did: didd, didit, diid, djd, dix, d8d, ddid, d9d  
 direction: directon, direccion, diection, directiob, dirrection, direktion, d1rection, dirextion  
-dish: dsh, dissh, dich, dishh, disj, diwh, dush, disg  
+dish: dsh, dissh, dich, dishh, disj, diwh, dush, disg , dis, dihs, dsh, dishh, dissh, dsi, dhis, dihh, d8sh, d9sh, d1sh, diash, diish, dsih, ddish, dshh, dishe, disj, dshh
 dishes: dishess, dishs, dishesss, dishez, dishees, dishz, dushez  
 do: d, doe, dooo, doh, du, co, di, dp, dui, dy, do9, d0  
 does: doez, doos, doess, dos, doeas, doesz, d0es  
@@ -69,16 +73,15 @@ history: historie, histore, histry, histiry, historee, histiry, hsitory
 how: hoow, hwo, howw, ho, howare, howr, hoe, howww, howe, hoq, howz  
 how do: howto, howd, how does, how 2, howdo, ho do, hou do, how-do  
 how to: howto, how-to, how 2, howtoo, howto., how t0, ho to, ho2  
-i: eye, aye, 1, !, i., i', ii  
 in: inn, in, iin, ib, im, ij, i.n, ijn  
 include: includ, inclood, inclde, incldue, incluse, incliude, inlcude  
-information: informacion, informashon, inf0rmation, informtion, informayion, infurmation, informashun  
+information: informacion, informashon, inf0rmation, informtion, informayion, infurmation, informashun ,info,inf
 ingredient: ingrediant, ingridient, ingreedien, ingridiant, ingreediant, ingreedeint, ingr, ingrdnt  
 ingredients: ingridients, ingreedients, ingrediants, ingridiants, ingrs, ingrdients, ingredeints  
 interesting: intersting, interstingg, intresting, intrsting, intrstingg, interesing, intereztin, itneresting  
 is: si, iss, iis, s, iz, isz, ix, js  
 it: itt, ti, iit, iy, ir, it., it,, itz  
-italian: iitalina, italina, otalian, utalian, iralian, igalian, iyalian, italiam, italiah, italiab, italy, itali, talia, italjan, italuan  
+italian: iitalina, italina, otalian, utalian, iralian, igalian, iyalian, italiam, italiah, italiab, italy, itali, talia, italjan, italuan ,itlian 
 know: kno, now, kniw, kknow, kn9w, knpw, kniw, knoq, knoe  
 knowledge: knowlege, knowladge, knowlidge, knoledge, knawledge, knwledge, knoledje, knowledgee, knollage  
 later: lator, lateer, laater, laterr, latr, latear, layter, l8r  
@@ -90,7 +93,7 @@ make: mak, maek, maake, mke, mae, mqke, makee, maoe
 many: manie, meny, mny, mani, manny, maany, maney  
 may: mae, mayy, msy, mzy, nay, ma7, maq ,mat 
 me: mee, m, mel, ml, mr, mw, md, ms, mg, ne, meee  
-meal: meel, mele, meall, mial, meaal, mael, meql, mear  
+meal: mial, mael,mear, meel, mele, mael, meall ,meil, meeal, meaal, meail, meahl, mealll, meapl, mewl, meql, mekl, mee4, mee3, me9l, me8l  
 method: methode, methud, methd, methot, methid, methop, mefhod, methhod  
 might: mite, mightt, migth, mighty, mights, migt, mjght  
 move: moov, muve, m0ve, mive, mkve, mobe, movw  
@@ -143,7 +146,7 @@ thanks:thankes, thnaks, thankss, thanxs, thnks, thks, thx, thanx, thankz, thx!, 
 the:teh, th, tge, hte, thhe, da, dha, theh, theee, tee, tje, tghe, rhe, th3, tthe, tye
 through:thru, throu, throuh, throgh, throug, throo, thruu, thurgh, thorugh, thrgh, throuhg, throuhg, thrugh, thrue, throuw
 time:tiem, timme, tmie, tim, tieme, ttime, timm, tme, tmie, timne, tume, tine, timw, timr, timd
-to:too, tew, ot, tto, tw, oto, ta, tou, tio, tpo, t, tooo, t9o, yoo, t9o, t-o
+to:too, tew, ot, tw, oto, ta, tou, tio, tpo, t, tooo, t9o, yoo, t9o, t-o, to, t0, t9, t8, t3, t4, tto, too, t, ot, ta
 today:todae, todie, todya, todai, tooday, tday, todday, todyaa, todya, tody, todau, todauy, todqy, 2day, todya, tdoay
 trivia:triviaa, trivai, triviaaa, trivv, trivya, trivvia, triv, travia, tarvaia, trivviaa, triviah, trivica, trivja, trivioa, trivvia, trivviaa
 try:tri, trie, tryy, tyr, tyry, trei, trry, tryi, trye, trhy, tr7y, tryh, tryu, try7, rty, tryt
@@ -163,7 +166,7 @@ with:wit,whith,wth,wiht,wih,wifth,wity,witth,wihth,wihh
 without:withot,withoot,wihout,witout,wthout,withou,withut,wihthout,w/o,wout
 would:wood,wud,woud,wild,wold,wuld,woudl,wopuld,wouod,w0uld
 yes:yea,yess,yees,yesss,ye,y,yep,yup,yeah,yass,yaaas,yahoo,yis,yas,yus,yessss,yeees,yeeah
-you:yuo,yo,yoo,yu,youu,yeo,yoh,yuh,yoy,y7ou,yiu,yhou,ypu,y9u
+you:yuo,yo,yoo,yu,youu,yeo,yoh,yuh,yoy,y7ou,yiu,yhou,ypu,y9u,u
 your:yor,yoour,yr,yur,youre,yorue,y0ur,y9ur,yoir,yaor
 analytics:analytic,analyti,analyt,anallitucs,anakytic,anlytics,analyics,analytcs,analytix,analytiks,analtyics,anallytics,analyitcs
 joke:jok,jooke,jke,jkoe,jokee,jokke,jokey,jokie,jowk,juke,jok3,jpke,jkoke,joek
@@ -214,7 +217,7 @@ tarte tatin:tart tatin,tarte tatine,tartetatin,tart tatine,tarte-tatin,tartatati
 pain au chocolat:pan au chocolat,paino chocolat,pain au chocalat,pain au choclat,pain au choco,pain au chockolat,pane au chocolat,pain-auchocolat,panochocolat,pain o chocolat,pain achocolat,pain achocolat,pain achocolat
 boeuf bourguignon:beouf bourguignon,boeuf bourginon,boef bourguignon,boeuf burgignon,boeuf bourgignon,boeuf-bourguignon,beef bourguignon,boeuf borgignon,bœuf bourguignon,boeuf bourguinon,boeuf bourguinon,boeuf bourguinon
 croissant:crossant,croisant,croisantt,croissont,croiissant,crosant,croussant,croissaint,croiassant,croissante,croissante,croissante
-Cassoulet:cassoulet,casoulet,cassulet,casoulette,cassulait,cassoullet,cassoulate,cassulett,cassolay,cassoulette,cassouley,cassoullay,cassoula,cassouli,cassouly
+cassoulet:cassoulet,casoulet,cassulet,casoulette,cassulait,cassoullet,cassoulate,cassulett,cassolay,cassoulette,cassouley,cassoullay,cassoula,cassouli,cassouly
 crème brûlée:creme brulee,creme brulay,cream brulee,cremé brûlée,creme-brulee,creme brulé,kreme brulee,crème brule,cremebrulee,creme brulle,creme brullee,crem brulee,crembrulee
 soupe à l'oignon:soup a l'oignon,soupe al oignon,soupe a loignon,soup à l'oignon,soupe-a-loignon,soupe a l onion,soupel'oignon,soup l’oignon,soupe loignon,soupa loignon,soupal'oignon,soupeal'oignon,soupaloignon
 éclair:eclair,eclaire,éclaire,ecliar,eklair,eclari,eclere,éclai,eclairr,eclare,eclayr,eclere,eclaier,ecliar
@@ -231,7 +234,6 @@ Chocolate cake: choclate cake, chocolat cake, choc cake, choclate cak, chocolate
 Rice cakes: rice cake, rice caks, rice ckaes, rice caek, rice ckae
 Tofu stew: tofu stue, tofu steww, tofu stw, tofu stue, tofu stewe
 Bulgogi: boolgogi, bulgoggi, bulgoi, bulgoggi, bulgogi
-//Cooking Terms
 Mise en place: meez en place, mize en place, mise en plas, mise en plase, mise en plac
 Sous vide: soo vide, sous vied, sous vide, sous vide, sous vide
 Fermentation: fermentaion, fermantation, fermentashun, fermentaion, fermentaion
@@ -477,7 +479,6 @@ egg yolks:egg yolks,egg yoks,egg yolkss,egg yoks,egg yolkss,eg yolks,egg yolkk,e
 marsala wine:marsala wine,marsalla wine,marsala wyne,marsalla wyne,marsala wine,marsela wine,marsalla wynee,marsalla wyen,marsalla wene,marsala wyne,marsalla winee,marsalawine,marssala wine,marsalaa wine
 clams:clams,clamms,clams,clamms,clams,clammz,clames,clmms,clammss,claams,clammess,clamez,clammesss,clamezz
 parsley:parslly,prsly,parslye,parssley,parslee,parsely,parselyy,parzley,parslay,parzlee,parssly,parzely,parslyee,parslley,parsleee
-i: i, ii, ii, i', i1, i9, i8, i0, i;, i.
 love: lvoe, loev, lov, lve, lvo, lloev, lovve, lvoe, loove, lveo, l9ve, l8ve, loe, lov3, l1ve, llove, lovw, lov4, loce
 like: liek, lkie, lke, lik, liike, lijke, likke, likr, lioe, lkike, lik3, l1ke, lkke, likw, lik4, liky, lkke, lioe, loke
 prefer: preffer, prefr, preferr, prefe, prfeer, perfer, preefer, preffr, prref, prfeer, prefor, prefrt, pprefer, prefe3, pre4er, prefee, preder, preger, preher
@@ -488,11 +489,3 @@ choose: choos, chosse, chooce, choise, chosoe, chooese, chooze, chosse, chhosse,
 enjoy: enjyo, enoy, enj, enjjoy, enjy, enjyo, enjioy, enjo, enoyj, enjooy, enjoe, enjooy, enjjy, enjo4, enjo3, enj9y, enj8y, ennjoy, enjoj
 preference: prefernce, preferance, prefference, prefrence, prefeence, preferene, preferenc, preferenece, preferece, preferenece, prreference, prefe4ence, prefe3ence, prefereence, prefrance, prefrnce, prferenc, ppreference, preferencce, prefrencee
 favorite: favourte, favorte, favrite, favortie, faavorite, favotie, favouriite, fvorite, favoite, faborite, faavorite, favoorite, favoirte, favortee, favorote, favortiee, fav0rite, fav9rite, fav8rite
-dish: dis, dihs, dsh, dishh, dissh, dsi, dhis, dihh, d8sh, d9sh, d1sh, diash, diish, dsih, ddish, dshh, dishe, disj, dshh
-cuisine: cusine, cuisin, cuisne, cuisnie, cusiine, cuisien, cuisinae, cuisiine, cusinie, cusiinee, cuizine, cuisibe, cujsine, cuisjne, cuixine, cuiisine, c0isine, cuis9ne, cuisin3
-food: fod, foood, fodo, foud, foof, fod, fode, fooood, f0od, fo0d, foox, fopd, fodd, fo9d, fo8d, fo3d, fooe, foode, fooxd, fooj
-meal: meel, mele, mael, meall, mele, meil, meeal, meaal, meail, meahl, mealll, meapl, mewl, meql, mekl, mee4, mee3, me9l, me8l
-as: as, a, s, az, qs, ws, zs, ad, aw, ax, asd, asw
-to: to, t0, t9, t8, t3, t4, tto, too, t, ot, ta
-that: that, thaat, tht, thaat, thaat, thhat, taht, tthat, thqt, thwt, thzt, thad, thaw, thax, thatd, thatw, thatx
-absolutely: absolutly, absoultely, absolutley, absloutely, absolutelly, absoutely, absolutelly, abssolutely, absoulutely, absoloutely, abssolutly, absoluttely, abs0lutely, abso9utely, abso8utely, aboslutely, absoluely, absilutely, absolutel, absolutlye

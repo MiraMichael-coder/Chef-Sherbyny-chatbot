@@ -8,8 +8,13 @@ object Typos {
   val filename = "C:\\Users\\Mira\\Desktop\\uni\\year 2\\Semster 2\\Advanced Prog\\Project\\chatbot\\src\\main\\scala\\data\\typos.txt"
 
   case class WordWithTypos(correctWord: String, commonTypos: List[String])
-
-  // Improved with more detailed error handling
+  
+  // Load typos from a file
+  // This function reads a file containing common typos and their correct forms.
+  // Each line should be in the format "correctWord: typo1, typo2, ..."
+  // It returns a list of WordWithTypos objects.
+  // If the file is not found or an error occurs, it returns an empty list.
+  // The function also handles empty lines and comments (lines starting with #).
   def loadTyposFromFile(filePath: String): List[WordWithTypos] = {
     // First check if file exists
     val file = new File(filePath)
@@ -55,14 +60,15 @@ object Typos {
         List.empty
     }.get
   }
-
+  val loadedTypos: List[WordWithTypos] = loadTyposFromFile(filename)
   def handleTypos(input: String): String = {
-    val commonTypos = loadTyposFromFile(filename)
+    val commonTypos = loadedTypos
     if (commonTypos.isEmpty) {
       //println("Warning: No typos loaded - returning original input")
       return input
     }
-    
+   
+
     val lowerInput = input.toLowerCase
     commonTypos.collectFirst {
       case WordWithTypos(correct, typos) if typos.contains(lowerInput) => correct

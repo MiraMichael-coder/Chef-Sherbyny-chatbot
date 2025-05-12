@@ -14,9 +14,14 @@ case class Dish(
   recipeLink: String
 )
 case class CuisineCategory(name: String, filePath: String)
-
+// This object is responsible for loading food data from files
+// and providing functionality to get dishes by category, ingredient, and trivia. 
+// It uses a list of categories, each with a name and a file path to the dishes.
+// The food trivia is hardcoded in a map, and the object provides methods
+// to get trivia, random dish suggestions, and check if a cuisine or dish is valid.
 object FoodDB {
-  // Use relative paths for better portability
+
+  //change file path to your own
   private val basePath = "C:\\Users\\Mira\\Desktop\\uni\\year 2\\Semster 2\\Advanced Prog\\Project\\chatbot\\src\\main\\scala\\data\\"
 
   val foodTrivia: Map[String, List[String]] = Map(
@@ -73,30 +78,7 @@ object FoodDB {
 
 )
   
-  val Foodjokes: Map[String, List[String]] = Map(
-  "🇪🇬 Egyptian Cuisine" -> List(
-    "Why did the tomato turn red? Because it saw the salad dressing!",
-    "Why did the falafel break up with the pita? It found someone a little more 'spicy'!",
-    "Why did the Egyptian chef get kicked out of school? Because he kept getting 'baked' in class!"
-  ),
-  "🇰🇷 Korean Cuisine" -> List(
-    "Why did the kimchi break up with the tofu? It found someone a little more 'fermented'!",
-    "Why did the rice cake go to therapy? It had too many 'sticky' issues!",
-    "Why did the Korean chef get kicked out of school? Because he couldn't stop 'stir-frying'!"
-  ),
-  "🇫🇷 French Cuisine" -> List(
-    "Why did the croissant go to the doctor? Because it was feeling a little 'buttery'!",
-    "Why did the French chef get kicked out of school? Because he couldn't stop 'whisking' around!",
-    "Why did the cheese break up with the bread? It found someone a little more 'grate'!"
-  ),
-  "🇱🇧 Lebanese Cuisine" -> List(
-    "Why did the hummus break up with the pita? It found someone a little more 'dip'-licious!",
-    "Why did the Lebanese chef get kicked out of school? Because he couldn't stop 'spicing' things up!",
-    "Why did the tabouleh go to therapy? It had too many 'parsley' issues!"
-  )
-)
-  
- 
+  // Define the categories and their corresponding file paths
   val categories: List[CuisineCategory] = List(
     CuisineCategory("egyptian", s"${basePath}egyption_foods.txt"),
     CuisineCategory("lebanese", s"${basePath}lebanese_foods.txt"),
@@ -110,7 +92,7 @@ object FoodDB {
   val dishesByCategory: List[(String, List[Dish])] = categories.map { 
   category => (category.name, loadDishesFromFile(category.filePath)) 
 }
-
+  // This function loads dishes from a file and returns a list of Dish objects
   private def loadDishesFromFile(filePath: String): List[Dish] = 
     {
     Try {
@@ -147,6 +129,7 @@ object FoodDB {
       acc ++ dishes
     }
   }
+  // Function to get all dishes by category
   def getDishesByCategory(category: String): List[Dish] = {
   dishesByCategory.find {
     case (cat, _) => cat.equalsIgnoreCase(category)
@@ -157,7 +140,8 @@ object FoodDB {
       List.empty
   }
 }
-
+  // Function to get all dishes by ingredient
+  // This function checks if the ingredient exists in any dish's ingredients
   def findDishesByIngredient(ingredient: String): List[Dish] = {
     val dishes=getAllDishes.filter(_.ingredients.exists(_.equalsIgnoreCase(ingredient))).toList
      dishes
@@ -174,18 +158,24 @@ object FoodDB {
 }
   }
 }
+  // Helper function to check if all tokens are present in the dish name
+  // This function checks if all tokens are present in the dish name
+  // It uses recursion to check each token against the dish name
   def allTokensMatch(tokens: List[String], dishName: String): Boolean = tokens match {
   case Nil => true
   case head :: tail => dishName.contains(head) && allTokensMatch(tail, dishName)
 }
+  //Return all ingredients from all dishes
   def getAllIngredients: List[String] = {
-    val ingredients = getAllDishes.flatMap(_.ingredients).distinct.toList
-    ingredients
-}
-
+    getAllDishes.foldLeft(List.empty[String]) { (acc, dish) =>
+      acc ++ dish.ingredients
+    }.distinct
+  }
+  // Return all dishes that are vegetarian
   def getVegetarianDishes: List[Dish] = {
   getAllDishes.filter(_.isVegetarian)
 }
+  //function to return trivia based on cuisine
   def getTrivia(cuisine: String): List[String] = {
     foodTrivia.collectFirst {
       case (key, trivia) if Typos.handleTypos(key.toLowerCase).contains(Typos.handleTypos(cuisine.toLowerCase)) => trivia
@@ -199,33 +189,81 @@ object FoodDB {
     else
       None
   }
-  
+  // Function to get a random selection of dishes
   def getRandomDishSuggestions(count: Int = 2): List[Dish] = {
     Random.shuffle(getAllDishes).take(count)
   }
+  // Function to check if a cuisine is valid
    def isValidCuisine(cuisine: String): Boolean = {
     categories.exists(_.name.equalsIgnoreCase(Typos.handleTypos(cuisine)))
   }
-
+  // Function to check if a dish name is valid
   def isValidDish(dishName: String): Boolean = {
-    getAllDishes.exists(d => Typos.handleTypos(d.name.toLowerCase) == Typos.handleTypos(dishName.toLowerCase))
+    getAllDishes.exists(d => d.name == Typos.handleTypos(dishName.toLowerCase))
   }
-
+// Function to retrive the dish by name
+  // This function checks if the dish name matches any dish in the database
   def getDishByName(dishName: String): Option[Dish] = {
     getAllDishes.find(d => Typos.handleTypos(d.name.toLowerCase) == Typos.handleTypos(dishName.toLowerCase))
   }
 
-  def detectMultiWordIngredients(tokens: List[String]): List[String] = 
-  {
-    val maxPhraseLength = 3 // Adjust based on your longest ingredient (e.g., "extra virgin olive oil")
-    val normalizedIngredients = getAllIngredients.map(_.toLowerCase)
+  def detectMultiWordIngredients(tokens: List[String]): List[String] = {
+  val ingredientSet = getAllIngredients.map(_.toLowerCase)  
 
-    (2 to maxPhraseLength).flatMap { n =>
-        tokens.sliding(n).map { window =>
-            window.mkString(" ")
-        }.filter(phrase => normalizedIngredients.contains(phrase.toLowerCase))
-    }.toList.distinct
+  // Tail-recursive helper with pattern matching
+  @annotation.tailrec
+  def extractPhrases( n: Int,remaining: List[String],acc: List[String] = Nil ): List[String] = 
+  remaining match {
+    case Nil => acc.reverse  // Base case: no more words
+    case _ if(remaining.length < n ) => acc.reverse  // Base case: not enough words left
+    case head :: tail =>
+      val phrase = (head :: tail.take(n - 1)).mkString(" ").toLowerCase // Combine n words
+
+      val newAcc = if (ingredientSet.contains(phrase)) phrase :: acc else acc
+
+      extractPhrases(n, tail, newAcc)  // Move window by 1
+  }
+
+  // Combine 2-word and 3-word matches, then deduplicate
+  (extractPhrases(2, tokens) ++ extractPhrases(3, tokens)).distinct
+}
+def detectMultiWordDishes(tokens: List[String]): List[String] = {
+  val dishSet = FoodDB.getAllDishes.map(_.name) // Preload dish names
+
+  // Tail-recursive helper to find n-word phrases
+  @annotation.tailrec
+  def extractPhrases(n: Int, remaining: List[String], acc: List[String] = Nil): List[String] =
+    remaining match {
+      case Nil => acc.reverse  // Base case: no more words
+      case _ if( remaining.length < n )=> acc.reverse  // Not enough words left
+      case _ =>
+        val phrase = remaining.take(n).mkString(" ").toLowerCase
+        val newAcc = if (dishSet.contains(phrase)) phrase :: acc else acc
+        extractPhrases(n, remaining.tail, newAcc)  // Slide window by 1 word
+    }
+
+  // Check for 1-word, 2-word, and 3-word dish names (prioritizing longer matches)
+  val maxPhraseLength = 3  // Adjust based on your longest dish name (e.g., "beef wellington")
+  
+  (extractPhrases(2, tokens) ++ extractPhrases(3, tokens)).distinct
+
+}  
+def findBestDishMatch(tokens: List[String]): Option[Dish] = {
+  detectMultiWordDishes(tokens).foldLeft(Option.empty[Dish]) {
+    case (None, dishName) => FoodDB.getAllDishes.find(_.name.equalsIgnoreCase(dishName))
+    case (found, _) => found  // Keep first found result
+  }.orElse {
+    // Fall back to partial matching
+    FoodDB.getAllDishes.find { dish =>
+      val dishWords = dish.name.split(" ")
+      tokens.exists { token =>
+        dishWords.exists(dw => dw.contains(token) || token.contains(dw))
+      }
+    }
   }
 }
   
+  
+}
+
 
