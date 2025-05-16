@@ -133,10 +133,10 @@ object Quizez
     }
         val resolvedAnswer = normalizedAnswer match { // Normalize the answer
            // Normalize the answer 
-          case "a" | "first" | "1" | "one" | "first answer" if question.choices.size > 0 => question.choices(0).toLowerCase
-          case "b" | "second" | "2" | "two" | "second answer" if question.choices.size > 1 => question.choices(1).toLowerCase
-          case "c" | "third" | "3" | "three" | "third answer" if question.choices.size > 2 => question.choices(2).toLowerCase
-          case "d" | "fourth" | "4" | "four" | "fourth answer" if question.choices.size > 3 => question.choices(3).toLowerCase
+          case "a" | "first" | "1" | "one" | "first answer" if question.choices.size > 0 => question.choices(0).toLowerCase.trim
+          case "b" | "second" | "2" | "two" | "second answer" if question.choices.size > 1 => question.choices(1).toLowerCase.trim
+          case "c" | "third" | "3" | "three" | "third answer" if question.choices.size > 2 => question.choices(2).toLowerCase.trim
+          case "d" | "fourth" | "4" | "four" | "fourth answer" if question.choices.size > 3 => question.choices(3).toLowerCase.trim
           case _ => handleTypos(userAnswer)
       }
       val isCorrect = Quizez.checkAnswer(question, resolvedAnswer)

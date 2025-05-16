@@ -60,8 +60,8 @@ object Personality {
 
    val jokes = List( // List of jokes
     "Why did the tomato turn red? Because it saw the salad dressing! 🍅",
-    "What do you call cheese that isn’t yours? Nacho cheese! 🧀",
-    "Why don’t eggs tell each other secrets? Because they might crack up! 🥚",
+    "What do you call cheese that isn't yours? Nacho cheese! 🧀",
+    "Why don't eggs tell each other secrets? Because they might crack up! 🥚",
     "I'm on a seafood diet. I see food and I eat it. 😆",
     "ليش الفول بيزعل؟ عشان محدش بيقوله بحبك من غير عيش 🤣",
     "ليه الجبنة ما بتلعبش كورة؟ عشان دايمًا بتقع في الشباك! 🧀⚽",

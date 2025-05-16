@@ -11,7 +11,7 @@ An AI-powered culinary assistant serving up recipes, food trivia, and cultural s
 
 💬 Smart NLP: Understands typos and casual speech (e.g., "humus" → "hummus").
 
-🎯 Interactive Quizzes: Adaptive trivia challenges based on user performance.
+🎯 Interactive Quizzes: Adaptive trivia challenges based on user choice.
 
 🎭 Cultural Banter: Code-switching between Arabic & English with local humor.
 
