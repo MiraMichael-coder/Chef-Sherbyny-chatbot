@@ -1,0 +1,202 @@
+[
+  {
+    "question": "What is the main ingredient in Koshari?",
+    "options": [
+      "Rice",
+      "Lentils",
+      "Potatoes",
+      "Beans"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Which of these Egyptian dishes is always vegetarian?",
+    "options": [
+      "Molokhia",
+      "Hamam Mahshi",
+      "Taameya",
+      "Sayadeya"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What protein is used in Molokhia?",
+    "options": [
+      "Beef",
+      "Chicken",
+      "Fish",
+      "Lamb"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which dish contains fried onions as a key ingredient?",
+    "options": [
+      "Koshari",
+      "Ful Medames",
+      "Bamia",
+      "Shakshuka"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What is the base ingredient of Ful Medames?",
+    "options": [
+      "Chickpeas",
+      "Lentils",
+      "Fava Beans",
+      "Peas"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which Egyptian dish features stuffed vegetables?",
+    "options": [
+      "Mahshi",
+      "Fatta",
+      "Shakshuka",
+      "Batates bil Forno"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Which of these is NOT typically vegetarian?",
+    "options": [
+      "Taameya",
+      "Ful Medames",
+      "Hamam Mahshi",
+      "Mahshi"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which of these is NOT an ingredient in traditional Koshari?",
+    "options": [
+      "Rice",
+      "Pasta",
+      "Chickpeas",
+      "Eggplant"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Which of these is NOT usually sweet?",
+    "options": [
+      "Basbousa",
+      "Konafa",
+      "Atayef",
+      "Fatta"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Which of these is NOT a main protein source in Egyptian cuisine?",
+    "options": [
+      "Pigeon",
+      "Fava Beans",
+      "Chicken",
+      "Fish"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which of these is NOT typically served during Ramadan?",
+    "options": [
+      "Ful Medames",
+      "Qatayef",
+      "Konafa",
+      "Hamam Mahshi"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "What gives Molokhia its distinctive texture?",
+    "options": [
+      "Jute Leaves",
+      "Okra",
+      "Spinach",
+      "Eggplant"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Which herb is essential in Taameya?",
+    "options": [
+      "Parsley",
+      "Basil",
+      "Mint",
+      "Oregano"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What makes Basbousa moist?",
+    "options": [
+      "Yogurt",
+      "Milk",
+      "Honey",
+      "Butter"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Which spice is prominent in Hawawshi?",
+    "options": [
+      "Cumin",
+      "Cinnamon",
+      "Turmeric",
+      "Paprika"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What is the crispy element in Fattah bil Laban?",
+    "options": [
+      "Fried Onions",
+      "Toasted Bread",
+      "Fried Garlic",
+      "Nuts"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What's the difference between Taameya and Falafel?",
+    "options": [
+      "Same thing",
+      "Egyptian vs Lebanese",
+      "Egyptian uses fava beans",
+      "No difference"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "How does Egyptian Koshari differ from Indian Khichdi?",
+    "options": [
+      "Uses pasta",
+      "More spicy",
+      "No lentils",
+      "Sweeter"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What distinguishes Egyptian Ful from Lebanese Ful?",
+    "options": [
+      "Creamier texture",
+      "No garlic",
+      "Served cold",
+      "No lemon"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What makes street food Taameya different from restaurant versions?",
+    "options": [
+      "Smaller size",
+      "More herbs",
+      "Fried longer",
+      "No garlic"
+    ],
+    "answer": 1
+  }
+]

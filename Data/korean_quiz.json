@@ -1,0 +1,202 @@
+[
+  {
+    "question": "What is the main ingredient in Bibimbap?",
+    "options": [
+      "Rice",
+      "Noodles",
+      "Tofu",
+      "Seaweed"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Which Korean dish is always vegetarian?",
+    "options": [
+      "Japchae",
+      "Bulgogi",
+      "Gyeran Jjim",
+      "Hotteok"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "What protein is commonly used in Bulgogi?",
+    "options": [
+      "Pork",
+      "Beef",
+      "Chicken",
+      "Tofu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which dish features glass noodles?",
+    "options": [
+      "Japchae",
+      "Tteokbokki",
+      "Bibimbap",
+      "Kimchi Jjigae"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What is the spicy red paste used in many Korean dishes?",
+    "options": [
+      "Doenjang",
+      "Gochujang",
+      "Ssamjang",
+      "Soy Sauce"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which dish is a soft tofu stew?",
+    "options": [
+      "Kimchi Jjigae",
+      "Doenjang Jjigae",
+      "Soondubu Jjigae",
+      "Galbi"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What ingredient gives Kimchi its spiciness?",
+    "options": [
+      "Chili Powder",
+      "Pepper Paste",
+      "Gochugaru",
+      "Sriracha"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which of these is a Korean pancake with seafood?",
+    "options": [
+      "Hotteok",
+      "Haemul Pajeon",
+      "Gyeran Mari",
+      "Tteok"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which dish is typically eaten cold?",
+    "options": [
+      "Kimchi Jjigae",
+      "Naengmyeon",
+      "Galbi",
+      "Bibimbap"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What gives Bingsu its sweetness?",
+    "options": [
+      "Soy Sauce",
+      "Red Bean",
+      "Condensed Milk",
+      "Chili Paste"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What is used to wrap meat in Samgyeopsal?",
+    "options": [
+      "Seaweed",
+      "Napa Cabbage",
+      "Lettuce",
+      "Rice Paper"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which Korean dish includes sweet rice cakes?",
+    "options": [
+      "Tteokbokki",
+      "Bingsu",
+      "Gamja Jorim",
+      "Dakgalbi"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What kind of noodles are used in Japchae?",
+    "options": [
+      "Udon",
+      "Glass Noodles",
+      "Rice Noodles",
+      "Buckwheat"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which dish contains fermented cabbage?",
+    "options": [
+      "Kimchi",
+      "Samgyeopsal",
+      "Dakgalbi",
+      "Naengmyeon"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What dessert is made from shaved ice?",
+    "options": [
+      "Hotteok",
+      "Bingsu",
+      "Bokkeumbap",
+      "Hobakjuk"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which of these dishes is typically grilled?",
+    "options": [
+      "Galbi",
+      "Gamja Jorim",
+      "Kimchi Jjigae",
+      "Hobakjuk"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What kind of stew is made with aged kimchi and pork?",
+    "options": [
+      "Soondubu Jjigae",
+      "Kimchi Jjigae",
+      "Doenjang Jjigae",
+      "Galbitang"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which of these dishes is commonly eaten for breakfast?",
+    "options": [
+      "Gyeran Jjim",
+      "Bulgogi",
+      "Dakgalbi",
+      "Tteokbokki"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What is the filling in Mandu usually made of?",
+    "options": [
+      "Tofu",
+      "Beef",
+      "Pork and Veggies",
+      "Only Rice"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which of these is NOT typically spicy?",
+    "options": [
+      "Bingsu",
+      "Kimchi",
+      "Bulgogi",
+      "Tteokbokki"
+    ],
+    "answer": 0
+  }
+]
