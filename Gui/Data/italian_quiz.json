@@ -1,0 +1,252 @@
+[
+  {
+    "question": "What cheese is essential in Margherita Pizza?",
+    "options": [
+      "Ricotta",
+      "Parmesan",
+      "Mozzarella",
+      "Gorgonzola"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What meat is used in Spaghetti Carbonara?",
+    "options": [
+      "Bacon",
+      "Guanciale",
+      "Ham",
+      "Salami"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which Italian dish features layers of pasta, sauce, and cheese?",
+    "options": [
+      "Risotto",
+      "Lasagna",
+      "Gnocchi",
+      "Polenta"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What makes Caprese Salad a classic Italian appetizer?",
+    "options": [
+      "Fruit and cream",
+      "Cheese and tomatoes",
+      "Bread and sauce",
+      "Meat and pasta"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What spice gives Risotto alla Milanese its golden color?",
+    "options": [
+      "Turmeric",
+      "Saffron",
+      "Curry",
+      "Cinnamon"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What kind of sauce is typically served with Gnocchi?",
+    "options": [
+      "Cheese sauce",
+      "Meat sauce",
+      "Tomato sauce",
+      "Alfredo sauce"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What is a Frittata similar to?",
+    "options": [
+      "Pancake",
+      "Quiche",
+      "Omelette",
+      "Crepe"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which dessert is made with espresso-soaked ladyfingers?",
+    "options": [
+      "Tiramisu",
+      "Panna Cotta",
+      "Cannoli",
+      "Zabaglione"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What kind of bread is used in Bruschetta?",
+    "options": [
+      "Sourdough",
+      "Flatbread",
+      "Baguette",
+      "Toasted crusty bread"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "What cut of meat is used in Osso Buco?",
+    "options": [
+      "Chicken thighs",
+      "Veal shanks",
+      "Pork ribs",
+      "Beef brisket"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What is the core ingredient of Arancini?",
+    "options": [
+      "Pasta",
+      "Potatoes",
+      "Rice",
+      "Couscous"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What thickened cream dessert is Italian and gelatin-based?",
+    "options": [
+      "Gelato",
+      "Zabaglione",
+      "Panna Cotta",
+      "Tiramisu"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which soup includes pasta, vegetables, and beans?",
+    "options": [
+      "Ribollita",
+      "Minestrone",
+      "Gazpacho",
+      "Brodetto"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which meat is thinly sliced and served with tuna sauce in Vitello Tonnato?",
+    "options": [
+      "Beef",
+      "Veal",
+      "Pork",
+      "Lamb"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which pasta is traditionally used in Amatriciana sauce?",
+    "options": [
+      "Fusilli",
+      "Spaghetti",
+      "Bucatini",
+      "Penne"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What grain is the main ingredient in Polenta?",
+    "options": [
+      "Rice",
+      "Oats",
+      "Wheat",
+      "Cornmeal"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "What vegetable is stuffed and baked in a common appetizer?",
+    "options": [
+      "Tomato",
+      "Potato",
+      "Zucchini",
+      "Carrot"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What pasta pairs with the classic Ragù alla Bolognese?",
+    "options": [
+      "Penne",
+      "Tagliatelle",
+      "Spaghetti",
+      "Rigatoni"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What is the traditional shell filling in Cannoli?",
+    "options": [
+      "Mascarpone",
+      "Ricotta",
+      "Pudding",
+      "Buttercream"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What vegetable is key in Eggplant Parmigiana?",
+    "options": [
+      "Zucchini",
+      "Mushroom",
+      "Spinach",
+      "Eggplant"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "What herb is central to making pesto?",
+    "options": [
+      "Cilantro",
+      "Parsley",
+      "Basil",
+      "Oregano"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What fish is used in Baccalà alla Vicentina?",
+    "options": [
+      "Tuna",
+      "Herring",
+      "Anchovies",
+      "Salt cod"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "What sweet wine is used to make Zabaglione?",
+    "options": [
+      "Marsala",
+      "Chianti",
+      "Prosecco",
+      "Lambrusco"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Which dish is made with sweet and sour eggplant and olives?",
+    "options": [
+      "Ratatouille",
+      "Caponata",
+      "Zabaglione",
+      "Bruschetta"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What seafood is featured in Spaghetti alle Vongole?",
+    "options": [
+      "Mussels",
+      "Squid",
+      "Clams",
+      "Anchovies"
+    ],
+    "answer": 2
+  }
+]

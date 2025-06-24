@@ -1,0 +1,202 @@
+[
+  {
+    "question": "What is the main ingredient in Tabbouleh?",
+    "options": [
+      "Bulgur",
+      "Parsley",
+      "Lettuce",
+      "Cucumber"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which dip is made from chickpeas and tahini?",
+    "options": [
+      "Baba Ghanoush",
+      "Hummus",
+      "Labneh",
+      "Moutabal"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What type of meat is traditionally used in Kibbeh?",
+    "options": [
+      "Chicken",
+      "Beef",
+      "Fish",
+      "Lamb"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which salad features crispy pita chips?",
+    "options": [
+      "Fattoush",
+      "Tabbouleh",
+      "Caesar",
+      "Greek"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What is typically served with Shawarma?",
+    "options": [
+      "Rice",
+      "Bread",
+      "Pickles",
+      "All of the above"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "What is a key protein in Mujadara?",
+    "options": [
+      "Beef",
+      "Lentils",
+      "Chicken",
+      "Fish"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What is Kafta usually made from?",
+    "options": [
+      "Chicken",
+      "Lamb",
+      "Beef",
+      "Fish"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What herb is essential in Manakish Za’atar?",
+    "options": [
+      "Thyme",
+      "Mint",
+      "Oregano",
+      "Basil"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Which Lebanese dish is made from ground chickpeas and deep-fried?",
+    "options": [
+      "Sambousek",
+      "Falafel",
+      "Kafta",
+      "Manakish"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What type of filling is commonly found in Sambousek?",
+    "options": [
+      "Cheese",
+      "Spinach",
+      "Ground Meat",
+      "Tomatoes"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which dish uses za’atar and flatbread?",
+    "options": [
+      "Kafta",
+      "Manakish",
+      "Hummus",
+      "Fattoush"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What is a common ingredient in Lebanese garlic sauce (toum)?",
+    "options": [
+      "Egg",
+      "Garlic",
+      "Onion",
+      "Yogurt"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What gives Fattoush its tangy flavor?",
+    "options": [
+      "Sumac",
+      "Lemon zest",
+      "Vinegar",
+      "Pomegranate"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Which Lebanese dish is shaped like a torpedo and fried or baked?",
+    "options": [
+      "Kafta",
+      "Kibbeh",
+      "Shawarma",
+      "Falafel"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What makes Hummus creamy?",
+    "options": [
+      "Butter",
+      "Olive Oil",
+      "Tahini",
+      "Milk"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which dish combines lentils and bulgur topped with fried onions?",
+    "options": [
+      "Mujadara",
+      "Kafta",
+      "Kibbeh",
+      "Fattoush"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What is traditionally sprinkled over Manakish?",
+    "options": [
+      "Sumac",
+      "Za’atar",
+      "Cumin",
+      "Paprika"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What bread is commonly served with Lebanese meals?",
+    "options": [
+      "Naan",
+      "Pita",
+      "Baguette",
+      "Focaccia"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What is a typical Lebanese dessert made with semolina and syrup?",
+    "options": [
+      "Konafa",
+      "Baklava",
+      "Basbousa",
+      "Mahalabia"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which of these is NOT usually vegetarian?",
+    "options": [
+      "Falafel",
+      "Hummus",
+      "Fattoush",
+      "Kafta"
+    ],
+    "answer": 3
+  }
+]

@@ -1,0 +1,419 @@
+[
+  {
+    "name": "ratatouille",
+    "is_vegetarian": true,
+    "type": "main",
+    "short_description": "A veggie rainbow in a pot!",
+    "ingredients": [
+      "zucchini",
+      "eggplant",
+      "tomato",
+      "pepper",
+      "onion",
+      "garlic",
+      "olive oil",
+      "herbs"
+    ],
+    "recipe_steps": [
+      "Chop all vegetables",
+      "Sauté onions and garlic in olive oil",
+      "Add remaining vegetables and herbs",
+      "Simmer until tender",
+      "Serve warm or chilled"
+    ],
+    "recipe_link": "https://www.loveandlemons.com/ratatouille-recipe/"
+  },
+  {
+    "name": "coq au vin",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Chicken takes a wine bath.",
+    "ingredients": [
+      "chicken",
+      "red wine",
+      "mushrooms",
+      "onion",
+      "garlic",
+      "bacon",
+      "thyme"
+    ],
+    "recipe_steps": [
+      "Marinate chicken in red wine overnight",
+      "Sear chicken with bacon",
+      "Add vegetables and cook until soft",
+      "Pour in wine marinade and simmer until chicken is tender"
+    ],
+    "recipe_link": "https://www.simplyrecipes.com/recipes/coq_au_vin/"
+  },
+  {
+    "name": "quiche lorraine",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Bacon and egg pie? Oui, s’il vous plaît!",
+    "ingredients": [
+      "eggs",
+      "cream",
+      "bacon",
+      "cheese",
+      "pie crust"
+    ],
+    "recipe_steps": [
+      "Pre-bake pie crust",
+      "Fry bacon until crisp",
+      "Whisk eggs and cream",
+      "Layer bacon and cheese in crust",
+      "Pour egg mixture over and bake until golden"
+    ],
+    "recipe_link": "https://www.onceuponachef.com/recipes/quiche-lorraine.html"
+  },
+  {
+    "name": "tarte tatin",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "An upside-down apple delight.",
+    "ingredients": [
+      "apples",
+      "sugar",
+      "butter",
+      "pastry"
+    ],
+    "recipe_steps": [
+      "Caramelize sugar and butter in pan",
+      "Add sliced apples and cook until soft",
+      "Top with pastry and bake",
+      "Flip onto plate to serve"
+    ],
+    "recipe_link": "https://sallysbakingaddiction.com/pear-tarte-tatin/"
+  },
+  {
+    "name": "pain au chocolat",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Chocolate wrapped in flaky heaven.",
+    "ingredients": [
+      "flour",
+      "butter",
+      "yeast",
+      "sugar",
+      "salt",
+      "milk",
+      "dark chocolate"
+    ],
+    "recipe_steps": [
+      "Prepare croissant dough and chill",
+      "Roll and fold with butter several times",
+      "Cut into rectangles",
+      "Add chocolate and roll",
+      "Let rise and bake until golden"
+    ],
+    "recipe_link": "https://www.kingarthurbaking.com/recipes/pain-au-chocolat-recipe"
+  },
+  {
+    "name": "boeuf bourguignon",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Red wine stew to impress any guest.",
+    "ingredients": [
+      "beef",
+      "red wine",
+      "carrots",
+      "onions",
+      "garlic",
+      "mushrooms",
+      "thyme"
+    ],
+    "recipe_steps": [
+      "Brown beef in batches",
+      "Sauté vegetables",
+      "Add wine and herbs",
+      "Simmer slowly until beef is tender",
+      "Add mushrooms near the end"
+    ],
+    "recipe_link": "https://cafedelites.com/beef-bourguignon/"
+  },
+  {
+    "name": "croissant",
+    "is_vegetarian": true,
+    "type": "breakfast",
+    "short_description": "Layers of buttery flake magic.",
+    "ingredients": [
+      "flour",
+      "butter",
+      "yeast",
+      "sugar",
+      "salt",
+      "milk"
+    ],
+    "recipe_steps": [
+      "Make dough and rest",
+      "Fold in butter with several turns",
+      "Chill between turns",
+      "Cut into triangles and roll",
+      "Proof and bake until golden"
+    ],
+    "recipe_link": "https://sallysbakingaddiction.com/homemade-croissants/"
+  },
+  {
+    "name": "cassoulet",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "A hearty bean and meat bake.",
+    "ingredients": [
+      "white beans",
+      "duck",
+      "sausage",
+      "garlic",
+      "onion",
+      "carrot",
+      "herbs"
+    ],
+    "recipe_steps": [
+      "Soak beans overnight",
+      "Brown duck and sausage",
+      "Sauté vegetables",
+      "Combine all in a pot and bake slowly until tender and flavorful"
+    ],
+    "recipe_link": "https://www.seriouseats.com/traditional-french-cassoulet-recipe"
+  },
+  {
+    "name": "crème brûlée",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Creamy custard with a crackly top.",
+    "ingredients": [
+      "cream",
+      "egg yolks",
+      "sugar",
+      "vanilla"
+    ],
+    "recipe_steps": [
+      "Whisk yolks and sugar",
+      "Heat cream with vanilla",
+      "Temper yolks with warm cream",
+      "Pour into ramekins and bake in water bath",
+      "Chill and brûlée the sugar top"
+    ],
+    "recipe_link": "https://www.biggerbolderbaking.com/creme-brulee/"
+  },
+  {
+    "name": "soupe à l'oignon",
+    "is_vegetarian": true,
+    "type": "soup",
+    "short_description": "Soup that turns onions into stars.",
+    "ingredients": [
+      "onions",
+      "beef broth",
+      "bread",
+      "cheese",
+      "butter",
+      "thyme"
+    ],
+    "recipe_steps": [
+      "Caramelize onions in butter",
+      "Add broth and thyme",
+      "Simmer",
+      "Toast bread slices",
+      "Pour soup into bowls",
+      "Top with bread and cheese",
+      "Broil until cheese melts"
+    ],
+    "recipe_link": "https://www.thekitchn.com/french-onion-soup-recipe-23624006"
+  },
+  {
+    "name": "éclair",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Pastry tubes filled with joy.",
+    "ingredients": [
+      "flour",
+      "butter",
+      "eggs",
+      "water",
+      "chocolate",
+      "cream"
+    ],
+    "recipe_steps": [
+      "Make choux pastry and pipe into logs",
+      "Bake until puffed and golden",
+      "Fill with pastry cream",
+      "Top with chocolate glaze"
+    ],
+    "recipe_link": "https://www.kingarthurbaking.com/recipes/classic-eclairs-recipe"
+  },
+  {
+    "name": "salade niçoise",
+    "is_vegetarian": false,
+    "type": "salad",
+    "short_description": "A sunny salad from the French Riviera.",
+    "ingredients": [
+      "lettuce",
+      "tuna",
+      "hard-boiled eggs",
+      "green beans",
+      "potatoes",
+      "tomatoes",
+      "olives",
+      "anchovies",
+      "vinaigrette"
+    ],
+    "recipe_steps": [
+      "Boil potatoes and green beans",
+      "Arrange lettuce on plate",
+      "Add vegetables",
+      "tuna",
+      "eggs",
+      "and anchovies",
+      "Drizzle with vinaigrette"
+    ],
+    "recipe_link": "https://www.simplyrecipes.com/recipes/salade_nicoise/"
+  },
+  {
+    "name": "clafoutis",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Batter meets cherries in a warm hug.",
+    "ingredients": [
+      "cherries",
+      "eggs",
+      "flour",
+      "milk",
+      "sugar",
+      "butter",
+      "vanilla"
+    ],
+    "recipe_steps": [
+      "Butter dish and add cherries",
+      "Mix batter with eggs",
+      "flour",
+      "milk",
+      "sugar",
+      "and vanilla",
+      "Pour over cherries and bake until golden"
+    ],
+    "recipe_link": "https://www.davidlebovitz.com/cherry-clafoutis-recipe/"
+  },
+  {
+    "name": "gratin dauphinois",
+    "is_vegetarian": true,
+    "type": "side",
+    "short_description": "Creamy potatoes baked to golden bliss.",
+    "ingredients": [
+      "potatoes",
+      "cream",
+      "garlic",
+      "butter",
+      "cheese",
+      "salt",
+      "pepper"
+    ],
+    "recipe_steps": [
+      "Slice potatoes thinly",
+      "Rub dish with garlic",
+      "Layer potatoes with cream and cheese",
+      "Bake until tender and golden"
+    ],
+    "recipe_link": "https://www.seriouseats.com/gratin-dauphinois-recipe"
+  },
+  {
+    "name": "galette des rois",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "The royal puff pastry crown.",
+    "ingredients": [
+      "puff pastry",
+      "almond cream (frangipane)",
+      "egg yolk"
+    ],
+    "recipe_steps": [
+      "Roll pastry",
+      "Spread frangipane",
+      "Cover with second pastry layer",
+      "Seal edges",
+      "Brush with egg yolk",
+      "Bake until golden"
+    ],
+    "recipe_link": "https://www.kingarthurbaking.com/recipes/galette-des-rois-recipe"
+  },
+  {
+    "name": "steak frites",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Steak + fries = timeless combo.",
+    "ingredients": [
+      "steak",
+      "potatoes",
+      "salt",
+      "pepper",
+      "oil",
+      "butter",
+      "herbs"
+    ],
+    "recipe_steps": [
+      "Season and sear steak to desired doneness",
+      "Slice potatoes and fry until crispy",
+      "Serve together with herbs"
+    ],
+    "recipe_link": "https://www.seriouseats.com/steak-frites-french-recipe"
+  },
+  {
+    "name": "crêpes",
+    "is_vegetarian": true,
+    "type": "breakfast",
+    "short_description": "Thin pancakes with endless fillings.",
+    "ingredients": [
+      "flour",
+      "eggs",
+      "milk",
+      "butter",
+      "sugar",
+      "salt"
+    ],
+    "recipe_steps": [
+      "Whisk batter with all ingredients",
+      "Heat pan and lightly butter",
+      "Pour batter",
+      "Cook until golden",
+      "Flip and fill as desired"
+    ],
+    "recipe_link": "https://www.bbcgoodfood.com/recipes/basic-crepes"
+  },
+  {
+    "name": "mousse au chocolat",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Rich, fluffy, and chocolatey perfection.",
+    "ingredients": [
+      "dark chocolate",
+      "eggs",
+      "sugar",
+      "cream",
+      "salt"
+    ],
+    "recipe_steps": [
+      "Melt chocolate",
+      "Whisk yolks with sugar",
+      "Beat whites to stiff peaks",
+      "Fold everything gently",
+      "Chill until set"
+    ],
+    "recipe_link": "https://www.julieoliver.com/recipe/chocolate-mousse/"
+  },
+  {
+    "name": "mille-feuille",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Crisp layers with creamy dreams.",
+    "ingredients": [
+      "puff pastry",
+      "pastry cream",
+      "powdered sugar"
+    ],
+    "recipe_steps": [
+      "Bake puff pastry until golden and crisp",
+      "Cut into layers",
+      "Prepare pastry cream and spread it on the layers",
+      "Stack layers and top with powdered sugar"
+    ],
+    "recipe_link": "https://www.kingarthurbaking.com/recipes/mille-feuille-recipe"
+  }
+]

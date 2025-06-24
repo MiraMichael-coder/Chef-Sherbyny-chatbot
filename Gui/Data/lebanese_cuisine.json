@@ -1,0 +1,372 @@
+[
+  {
+    "name": "tabbouleh",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Parsley salad that’s lemon-fresh!",
+    "ingredients": [
+      "parsley",
+      "bulgur",
+      "tomato",
+      "green onion",
+      "mint",
+      "lemon juice",
+      "olive oil"
+    ],
+    "recipe_steps": [
+      "Soak bulgur",
+      "chop vegetables",
+      "mix all with lemon juice and olive oil."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=tj7HF_iMO5U"
+  },
+  {
+    "name": "hummus",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Creamy dip loved by the world.",
+    "ingredients": [
+      "chickpeas",
+      "tahini",
+      "garlic",
+      "lemon juice",
+      "olive oil",
+      "salt"
+    ],
+    "recipe_steps": [
+      "Blend chickpeas",
+      "tahini",
+      "garlic",
+      "lemon juice",
+      "and salt. Drizzle with olive oil."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=EsZFJEjANiA"
+  },
+  {
+    "name": "kibbeh",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Crispy bulgur and beef croquettes.",
+    "ingredients": [
+      "bulgur",
+      "ground beef",
+      "onion",
+      "spices",
+      "pine nuts"
+    ],
+    "recipe_steps": [
+      "Soak bulgur",
+      "mix with meat and spices",
+      "form balls with filling",
+      "fry or bake."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=0Yk6ffx_TU8"
+  },
+  {
+    "name": "fattoush",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Crunchy pita meets garden freshness.",
+    "ingredients": [
+      "lettuce",
+      "radish",
+      "tomato",
+      "cucumber",
+      "crispy pita",
+      "lemon juice",
+      "sumac"
+    ],
+    "recipe_steps": [
+      "Chop vegetables",
+      "toast pita",
+      "toss all with lemon juice and sumac."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=2VwJwYxK5IM"
+  },
+  {
+    "name": "shawarma",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Middle Eastern meat wrap heaven.",
+    "ingredients": [
+      "beef",
+      "garlic",
+      "yogurt",
+      "spices",
+      "onion",
+      "olive oil"
+    ],
+    "recipe_steps": [
+      "Marinate beef",
+      "grill or pan-fry",
+      "serve in wrap or over rice."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=lrb_cJBPzLM"
+  },
+  {
+    "name": "mujadara",
+    "is_vegetarian": true,
+    "type": "main",
+    "short_description": "Lentils and onions, power couple.",
+    "ingredients": [
+      "lentils",
+      "bulgur",
+      "onion",
+      "olive oil",
+      "spices"
+    ],
+    "recipe_steps": [
+      "Cook lentils and bulgur",
+      "caramelize onions",
+      "combine and season."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=95w1kIOlGLg"
+  },
+  {
+    "name": "kafta",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Herby lamb logs grilled to perfection.",
+    "ingredients": [
+      "ground lamb",
+      "parsley",
+      "onion",
+      "spices"
+    ],
+    "recipe_steps": [
+      "Mix all",
+      "shape into logs",
+      "grill or bake until cooked through."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=EVDxpYm6Q_E"
+  },
+  {
+    "name": "manakish",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Flatbread with za’atar zing.",
+    "ingredients": [
+      "za'atar",
+      "olive oil",
+      "flatbread",
+      "sesame seeds"
+    ],
+    "recipe_steps": [
+      "Mix za’atar and oil",
+      "spread on dough",
+      "bake until golden."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=2ksinmdFNvE"
+  },
+  {
+    "name": "falafel",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Crispy chickpea bites of joy.",
+    "ingredients": [
+      "chickpeas",
+      "parsley",
+      "onion",
+      "garlic",
+      "cumin",
+      "coriander"
+    ],
+    "recipe_steps": [
+      "Blend ingredients",
+      "shape into balls",
+      "fry until crispy."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=NZcWedPKysk"
+  },
+  {
+    "name": "sambousek",
+    "is_vegetarian": false,
+    "type": "appetizer",
+    "short_description": "Meaty pastries with pine nut crunch.",
+    "ingredients": [
+      "ground meat",
+      "onion",
+      "spices",
+      "pine nuts",
+      "pastry dough"
+    ],
+    "recipe_steps": [
+      "Cook filling",
+      "stuff dough",
+      "fold and seal",
+      "fry or bake."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=Nn5EKGlUDB4"
+  },
+  {
+    "name": "rekakat",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Cheesy rolls in crispy coats.",
+    "ingredients": [
+      "phyllo dough",
+      "cheese",
+      "parsley"
+    ],
+    "recipe_steps": [
+      "Fill phyllo with cheese and parsley",
+      "roll tightly",
+      "bake or fry until golden."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=SyTpHl82zSY"
+  },
+  {
+    "name": "lahm bi ajeen",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Mini meat pizzas from the Levant.",
+    "ingredients": [
+      "flatbread",
+      "minced meat",
+      "tomato",
+      "onion",
+      "spices"
+    ],
+    "recipe_steps": [
+      "Mix meat filling",
+      "spread on dough",
+      "bake until golden."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=k5DBnAjA0P0"
+  },
+  {
+    "name": "moghrabieh",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Couscous stew worth the wait.",
+    "ingredients": [
+      "chicken",
+      "chickpeas",
+      "onions",
+      "pearl couscous",
+      "spices"
+    ],
+    "recipe_steps": [
+      "Boil chicken with spices",
+      "cook couscous",
+      "combine with chickpeas and onion sauce."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=ULlIMkkQFvU"
+  },
+  {
+    "name": "arnabeet mekle",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Cauliflower meets tahini greatness.",
+    "ingredients": [
+      "cauliflower",
+      "garlic",
+      "lemon juice",
+      "tahini",
+      "olive oil"
+    ],
+    "recipe_steps": [
+      "Fry cauliflower",
+      "mix garlic",
+      "lemon",
+      "and tahini",
+      "serve together."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=dUMk-q4VmeU"
+  },
+  {
+    "name": "batata harra",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Spicy potatoes with a cilantro kick.",
+    "ingredients": [
+      "potatoes",
+      "garlic",
+      "cilantro",
+      "chili",
+      "olive oil"
+    ],
+    "recipe_steps": [
+      "Fry or roast potatoes",
+      "toss with sautéed garlic",
+      "chili",
+      "and cilantro."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=LWC2DDKfA30"
+  },
+  {
+    "name": "warak enab",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Tiny wraps with big lemony flavor.",
+    "ingredients": [
+      "grape leaves",
+      "rice",
+      "tomato",
+      "parsley",
+      "lemon juice",
+      "olive oil"
+    ],
+    "recipe_steps": [
+      "Stuff grape leaves with rice mixture",
+      "roll",
+      "cook in lemony broth."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=MeRTO3XZQkM"
+  },
+  {
+    "name": "shish tawook",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Juicy grilled chicken skewers.",
+    "ingredients": [
+      "chicken",
+      "garlic",
+      "yogurt",
+      "lemon juice",
+      "spices"
+    ],
+    "recipe_steps": [
+      "Marinate chicken",
+      "skewer",
+      "grill until cooked."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=qY9DJyoIRn8"
+  },
+  {
+    "name": "bazella w riz",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Peas and carrots, Lebanese-style.",
+    "ingredients": [
+      "peas",
+      "carrots",
+      "tomato sauce",
+      "minced beef",
+      "rice"
+    ],
+    "recipe_steps": [
+      "Cook meat and veggies in tomato sauce",
+      "serve with rice."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=i5SoVzqWf78"
+  },
+  {
+    "name": "knefeh",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Cheesy semolina dream in syrup.",
+    "ingredients": [
+      "semolina",
+      "cheese",
+      "sugar syrup",
+      "butter"
+    ],
+    "recipe_steps": [
+      "Layer semolina and cheese",
+      "bake until golden",
+      "drizzle with syrup."
+    ],
+    "recipe_link": "https://www.youtube.com/watch?v=dMWSd7g2vFM"
+  }
+]

@@ -1,0 +1,425 @@
+[
+  {
+    "name": "bibimbap",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "A rice bowl rainbow with spice.",
+    "ingredients": [
+      "rice",
+      "beef",
+      "egg",
+      "spinach",
+      "carrot",
+      "zucchini",
+      "gochujang"
+    ],
+    "recipe_steps": [
+      "Cook rice",
+      "Sauté beef with garlic and soy sauce",
+      "Blanch spinach and other vegetables",
+      "Fry egg sunny-side up",
+      "Arrange vegetables and beef over rice",
+      "Top with egg and gochujang"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/bibimbap/"
+  },
+  {
+    "name": "kimchi",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "The soul of Korean cuisine, fermented.",
+    "ingredients": [
+      "napa cabbage",
+      "radish",
+      "garlic",
+      "ginger",
+      "gochugaru",
+      "fish sauce"
+    ],
+    "recipe_steps": [
+      "Salt napa cabbage and let it sit to wilt",
+      "Rinse and drain",
+      "Make paste with garlic",
+      "ginger",
+      "gochugaru",
+      "and fish sauce",
+      "Mix with chopped radish",
+      "Coat cabbage with the paste",
+      "Pack in jars and ferment for a few days"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/mak-kimchi-simple-kimchi/"
+  },
+  {
+    "name": "japchae",
+    "is_vegetarian": true,
+    "type": "main",
+    "short_description": "Sweet potato noodles in a savory swirl.",
+    "ingredients": [
+      "glass noodles",
+      "spinach",
+      "carrot",
+      "onion",
+      "mushroom",
+      "soy sauce"
+    ],
+    "recipe_steps": [
+      "Boil glass noodles and rinse with cold water",
+      "Sauté vegetables separately",
+      "Mix soy sauce and sugar",
+      "Stir-fry noodles with sauce",
+      "Add vegetables and combine well"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/japchae-korean-glass-noodles-stir/"
+  },
+  {
+    "name": "bulgogi",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Beef that’s sweet, juicy, and grilled.",
+    "ingredients": [
+      "beef",
+      "soy sauce",
+      "sesame oil",
+      "garlic",
+      "onion",
+      "sugar"
+    ],
+    "recipe_steps": [
+      "Slice beef thinly",
+      "Marinate in soy sauce",
+      "sesame oil",
+      "sugar",
+      "garlic",
+      "and onion",
+      "Let sit for at least 30 minutes",
+      "Grill or pan-fry until cooked"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/bulgogi-korean-bbq-beef/"
+  },
+  {
+    "name": "tteokbokki",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Chewy rice cakes in spicy red sauce.",
+    "ingredients": [
+      "rice cakes",
+      "gochujang",
+      "sugar",
+      "garlic",
+      "green onion"
+    ],
+    "recipe_steps": [
+      "Soak rice cakes in warm water",
+      "Make sauce with gochujang",
+      "sugar",
+      "and garlic",
+      "Simmer rice cakes in sauce until soft and thick",
+      "Garnish with chopped green onion"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/tteokbokki-spicy-stir-fried-rice-cakes/"
+  },
+  {
+    "name": "samgyeopsal",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Grill-your-own pork belly party!",
+    "ingredients": [
+      "pork belly",
+      "garlic",
+      "sesame oil",
+      "salt",
+      "pepper"
+    ],
+    "recipe_steps": [
+      "Slice pork belly",
+      "Grill on hot plate with garlic",
+      "Dip grilled meat in sesame oil with salt and pepper",
+      "Serve with lettuce and ssamjang"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/samgyupsal-gui-grilled-pork-belly-and/"
+  },
+  {
+    "name": "haemul pajeon",
+    "is_vegetarian": false,
+    "type": "appetizer",
+    "short_description": "Savory pancake with seafood delight.",
+    "ingredients": [
+      "green onion",
+      "flour",
+      "egg",
+      "seafood",
+      "soy sauce"
+    ],
+    "recipe_steps": [
+      "Mix flour",
+      "egg",
+      "and water into batter",
+      "Arrange green onions on pan",
+      "Pour batter and top with seafood",
+      "Fry until golden",
+      "Serve with soy dipping sauce"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/haemul-pajeon/"
+  },
+  {
+    "name": "soondubu jjigae",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Spicy tofu stew that hugs your soul.",
+    "ingredients": [
+      "soft tofu",
+      "seafood",
+      "gochujang",
+      "egg",
+      "green onion",
+      "garlic"
+    ],
+    "recipe_steps": [
+      "Sauté garlic in pot",
+      "Add seafood and cook briefly",
+      "Add water and gochujang",
+      "Bring to boil and add soft tofu",
+      "Simmer and crack in an egg before serving",
+      "Garnish with green onion"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/kimchi-soondubu-jjigae-soft-tofu-stew-kimchi/"
+  },
+  {
+    "name": "kimchi jjigae",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Kimchi stew that warms your belly.",
+    "ingredients": [
+      "kimchi",
+      "pork belly",
+      "tofu",
+      "onion",
+      "garlic",
+      "gochugaru"
+    ],
+    "recipe_steps": [
+      "Sauté pork belly and garlic",
+      "Add kimchi and onion",
+      "Pour in water and bring to boil",
+      "Add tofu and simmer until flavors meld"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/kimchi-jjigae-kimchi-stew/"
+  },
+  {
+    "name": "mandu",
+    "is_vegetarian": false,
+    "type": "appetizer",
+    "short_description": "Juicy dumplings with flavor bombs.",
+    "ingredients": [
+      "ground pork",
+      "tofu",
+      "garlic",
+      "green onion",
+      "ginger",
+      "soy sauce",
+      "dumpling wrappers"
+    ],
+    "recipe_steps": [
+      "Mix pork",
+      "tofu",
+      "garlic",
+      "green onion",
+      "ginger",
+      "and soy sauce",
+      "Place filling in wrappers and seal",
+      "Boil",
+      "steam",
+      "or pan-fry until cooked"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/mandu-korean-dumplings/"
+  },
+  {
+    "name": "naengmyeon",
+    "is_vegetarian": true,
+    "type": "main",
+    "short_description": "Chilly noodles with crunchy toppings.",
+    "ingredients": [
+      "buckwheat noodles",
+      "cucumber",
+      "pear",
+      "boiled egg",
+      "mustard",
+      "vinegar"
+    ],
+    "recipe_steps": [
+      "Cook buckwheat noodles and rinse with cold water",
+      "Prepare broth and chill",
+      "Serve noodles in cold broth topped with cucumber",
+      "pear",
+      "and boiled egg",
+      "Add mustard and vinegar to taste"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/mul-naengmyeon-korean-cold-noodles/"
+  },
+  {
+    "name": "dakgalbi",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Sweet, spicy, and sizzling chicken.",
+    "ingredients": [
+      "chicken",
+      "cabbage",
+      "sweet potato",
+      "rice cakes",
+      "gochujang",
+      "garlic"
+    ],
+    "recipe_steps": [
+      "Marinate chicken in gochujang and garlic",
+      "Stir-fry chicken with cabbage",
+      "sweet potato",
+      "and rice cakes until cooked through"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/dakgalbi-spicy-stir-fried-chicken/"
+  },
+  {
+    "name": "galbi",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "BBQ ribs made for feasting.",
+    "ingredients": [
+      "beef short ribs",
+      "soy sauce",
+      "sugar",
+      "garlic",
+      "sesame oil",
+      "green onion"
+    ],
+    "recipe_steps": [
+      "Marinate beef ribs in soy sauce",
+      "sugar",
+      "garlic",
+      "sesame oil",
+      "and green onion",
+      "Grill until caramelized and cooked through"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/la-galbi-korean-bbq-short-ribs/"
+  },
+  {
+    "name": "hotteok",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Sweet pancakes with gooey centers.",
+    "ingredients": [
+      "flour",
+      "sugar",
+      "cinnamon",
+      "yeast",
+      "brown sugar",
+      "nuts"
+    ],
+    "recipe_steps": [
+      "Prepare dough with flour and yeast",
+      "Let it rise",
+      "Fill with brown sugar",
+      "cinnamon",
+      "and nuts",
+      "Flatten and pan-fry until golden"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/hotteok-sweet-korean-pancakes/"
+  },
+  {
+    "name": "gyeran jjim",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Steamed eggs that melt in your mouth.",
+    "ingredients": [
+      "eggs",
+      "water",
+      "salt",
+      "green onion",
+      "sesame oil"
+    ],
+    "recipe_steps": [
+      "Beat eggs with water and salt",
+      "Pour into a bowl and steam until set",
+      "Garnish with chopped green onion and sesame oil"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/gyeran-jjim-korean-steamed-egg/"
+  },
+  {
+    "name": "hobakjuk",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Pumpkin porridge that feels like a hug.",
+    "ingredients": [
+      "pumpkin",
+      "glutinous rice flour",
+      "sugar",
+      "salt"
+    ],
+    "recipe_steps": [
+      "Boil pumpkin until soft and mash",
+      "Mix with glutinous rice flour to make porridge",
+      "Sweeten with sugar and season with salt"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/hobakjuk-korean-pumpkin-porridge/"
+  },
+  {
+    "name": "bingsu",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Shaved ice topped with sweet magic.",
+    "ingredients": [
+      "shaved ice",
+      "sweetened condensed milk",
+      "red beans",
+      "fruits",
+      "rice cakes"
+    ],
+    "recipe_steps": [
+      "Shave ice into a bowl",
+      "Top with sweetened condensed milk",
+      "red beans",
+      "fruits",
+      "and rice cakes"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/patbingsu-korean-shaved-ice-dessert/"
+  },
+  {
+    "name": "gamja jorim",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Sweet soy potatoes that steal the show.",
+    "ingredients": [
+      "potatoes",
+      "soy sauce",
+      "sugar",
+      "garlic",
+      "sesame oil"
+    ],
+    "recipe_steps": [
+      "Cut potatoes into chunks",
+      "Simmer in soy sauce",
+      "sugar",
+      "and garlic until tender",
+      "Drizzle with sesame oil before serving"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/gamja-jorim-braised-potatoes/"
+  },
+  {
+    "name": "bossam",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Wrap your pork belly like a pro.",
+    "ingredients": [
+      "pork belly",
+      "napa cabbage",
+      "garlic",
+      "ginger",
+      "soybean paste"
+    ],
+    "recipe_steps": [
+      "Boil pork belly with garlic",
+      "ginger",
+      "and soybean paste until tender",
+      "Slice and serve with napa cabbage leaves and condiments"
+    ],
+    "recipe_link": "https://www.koreanbapsang.com/bossam-boiled-pork-wraps/"
+  }
+]

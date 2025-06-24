@@ -1,0 +1,255 @@
+{
+  "commands": [
+    {
+      "priority": 1,
+      "command": "greet",
+      "patterns": [
+        "^hello",
+        "^hi",
+        "^hey",
+        "^greetings",
+        "^marhaba",
+        "^salam",
+        "^ciao",
+        "^bonjour",
+        "^hola",
+        "^namaste",
+        "^konnichiwa",
+        "^ola"
+      ]
+    },
+    {
+      "priority": 2,
+      "command": "ask_how_user_is",
+      "patterns": [
+        "^how are you",
+        "^how are u",
+        "^good wbu",
+        "^how are you doing",
+        "^how u doing",
+        "^how is it going",
+        "^how is everything",
+        "^how is everything",
+        "^how is life",
+        "^what's up",
+        "^whats up",
+        "^what is up",
+        "^what up",
+        "what's up",
+        "whats up"
+      ]
+    },
+    {
+      "priority": 3,
+      "command": "bye",
+      "patterns": [
+        "bye",
+        "goodbye",
+        "see you",
+        "quit",
+        "exit",
+        "i'll go",
+        "i will go",
+        "i go",
+        "enough",
+        "done",
+        "finished"
+      ]
+    },
+    {
+      "priority": 4,
+      "command": "joke",
+      "patterns": [
+        "^tell me a joke",
+        "^give me a joke",
+        "^make me laugh",
+        "^say something",
+        "joke",
+        "jokes",
+        "funny story"
+      ]
+    },
+    {
+      "priority": 5,
+      "command": "log",
+      "patterns": [
+        "yes",
+        "^sure",
+        "^ok",
+        "^okay",
+        "^please",
+        "^continue",
+        "^move on",
+        "^i'd like",
+        "^i would like",
+        "^i'd love",
+        "^i would love",
+        "^i'd want",
+        "^i would want",
+        "^begin",
+        "^start"
+      ]
+    },
+    {
+      "priority": 6,
+      "command": "preference",
+      "patterns": [
+        "preference",
+        "favorite",
+        "like best",
+        "add to",
+        "save",
+        "like",
+        "remember",
+        "love",
+        "adore",
+        "enjoy",
+        "crazy about",
+        "choice",
+        "obsessed",
+        "prefer",
+        "into",
+        "fond",
+        "choose",
+        "go for",
+        "select",
+        "pick",
+        "fancy",
+        "dig",
+        "nothing beats",
+        "preferred",
+        "liked",
+        "^note as best"
+      ]
+    },
+    {
+      "priority": 7,
+      "command": "quiz",
+      "patterns": [
+        "quiz",
+        "test knowledge",
+        "challenge me",
+        "play quiz"
+      ]
+    },
+    {
+      "priority": 8,
+      "command": "trivia",
+      "patterns": [
+        "trivia",
+        "fact",
+        "interesting",
+        "did you know",
+        "history",
+        "origin of",
+        "story of",
+        "background of",
+        "^do you know about",
+        "^share about"
+      ]
+    },
+    {
+      "priority": 9,
+      "command": "dish_info",
+      "patterns": [
+        "about",
+        "describe",
+        "explain",
+        "define",
+        "dish information",
+        "food information",
+        "^what is"
+      ]
+    },
+    {
+      "priority": 10,
+      "command": "recipe",
+      "patterns": [
+        "make",
+        "prepare",
+        "recipe steps",
+        "recipe instructions",
+        "recipe method",
+        "recipe way",
+        "step by step",
+        "best way",
+        "right way",
+        "walk me through",
+        "need to know",
+        "need to learn cook",
+        "cook",
+        "recipe for",
+        "way to make",
+        "method preparing"
+      ]
+    },
+    {
+      "priority": 11,
+      "command": "ingredients",
+      "patterns": [
+        "ingredients",
+        "^what do i need",
+        "items needed",
+        "components of",
+        "^what's in",
+        "^what is in",
+        "contents",
+        "goes into",
+        "needed for",
+        "items required",
+        "^what do you need to make",
+        "made of",
+        "made with",
+        "made from",
+        "contains",
+        "comprises",
+        "consists of",
+        "include",
+        "involve",
+        "require",
+        "recipe calls for",
+        "recipe requires",
+        "recipe ingredients",
+        "ingredients list",
+        "list of ingredients",
+        "what goes in",
+        "made up of",
+        "composition of",
+        "what's inside",
+        "whats in",
+        "dishes with",
+        "meals with",
+        "recipes with",
+        "food with",
+        "meals using",
+        "dishes containing",
+        "^what has",
+        "^what have",
+        "^what can i make with",
+        "^what uses",
+        "grocery list for",
+        "items to buy for",
+        "prep for"
+      ]
+    },
+    {
+      "priority": 12,
+      "command": "cuisine",
+      "patterns": [
+        "^cuisine",
+        "category",
+        "food",
+        "meal",
+        "^show me",
+        "^give me",
+        "tell me",
+        "^list",
+        "italian cuisine",
+        "french cuisine",
+        "korean cuisine",
+        "egyptian cuisine",
+        "lebanese cuisine"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,252 @@
+[
+  {
+    "question": "What is the main vegetable in Ratatouille?",
+    "options": [
+      "Carrot",
+      "Potato",
+      "Zucchini",
+      "Spinach"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What meat is used in Coq au Vin?",
+    "options": [
+      "Duck",
+      "Chicken",
+      "Beef",
+      "Pork"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which dish includes wine as a key cooking ingredient?",
+    "options": [
+      "Boeuf Bourguignon",
+      "Crème Brûlée",
+      "Tarte Tatin",
+      "Croissant"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Which of these is not a dessert?",
+    "options": [
+      "Tarte Tatin",
+      "Croissant",
+      "Crème Brûlée",
+      "Cassoulet"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "What is a key feature of Crème Brûlée?",
+    "options": [
+      "Flaky crust",
+      "Creamy filling",
+      "Caramelized sugar top",
+      "Chopped nuts"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which dish is famously caramelized upside down?",
+    "options": [
+      "Crème Brûlée",
+      "Tarte Tatin",
+      "Croissant",
+      "Quiche Lorraine"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What is the main ingredient in a Croissant dough?",
+    "options": [
+      "Eggs",
+      "Sugar",
+      "Butter",
+      "Yeast"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which of these French dishes typically uses onions as the main ingredient?",
+    "options": [
+      "Cassoulet",
+      "Tarte Tatin",
+      "Soupe à l'oignon",
+      "Boeuf Bourguignon"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What ingredient gives Quiche Lorraine its creaminess?",
+    "options": [
+      "Milk",
+      "Yogurt",
+      "Cream",
+      "Butter"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What makes French onion soup unique?",
+    "options": [
+      "Cold broth",
+      "Raw onions",
+      "Caramelized onions and cheese",
+      "No seasoning"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which French dish is often eaten during colder months?",
+    "options": [
+      "Ratatouille",
+      "Tarte Tatin",
+      "Cassoulet",
+      "Crème Brûlée"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What makes Croissants flaky?",
+    "options": [
+      "Rolling technique",
+      "Egg wash",
+      "Sugar content",
+      "Baking temperature"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Which French dessert is torched before serving?",
+    "options": [
+      "Crème Brûlée",
+      "Tarte Tatin",
+      "Quiche Lorraine",
+      "Pain au Chocolat"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Which French dish is known for being caramelized in sugar and butter before baking?",
+    "options": [
+      "Ratatouille",
+      "Tarte Tatin",
+      "Croissant",
+      "Boeuf Bourguignon"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "What kind of beans are used in Cassoulet?",
+    "options": [
+      "Black beans",
+      "Pinto beans",
+      "White beans",
+      "Red kidney beans"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What makes the top of Crème Brûlée crispy?",
+    "options": [
+      "Ice",
+      "Caramel drizzle",
+      "Baking powder",
+      "Blow-torched sugar"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "What does “au vin” mean in French?",
+    "options": [
+      "With cream",
+      "With cheese",
+      "With wine",
+      "With herbs"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which is a typical flavoring in Ratatouille?",
+    "options": [
+      "Vanilla",
+      "Thyme",
+      "Cinnamon",
+      "Curry"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Which of these is a breakfast pastry?",
+    "options": [
+      "Cassoulet",
+      "Boeuf Bourguignon",
+      "Pain au Chocolat",
+      "Tarte Tatin"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What is the best way to describe Cassoulet?",
+    "options": [
+      "Light and crunchy",
+      "Cold and sweet",
+      "Hearty and rich",
+      "Spicy and fried"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which ingredient do you NOT find in Crème Brûlée?",
+    "options": [
+      "Egg yolks",
+      "Vanilla",
+      "Cream",
+      "Flour"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "How are croissants shaped?",
+    "options": [
+      "Rectangles",
+      "Circles",
+      "Crescents",
+      "Triangles"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which dish requires slow cooking for several hours?",
+    "options": [
+      "Boeuf Bourguignon",
+      "Pain au Chocolat",
+      "Tarte Tatin",
+      "Crème Brûlée"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "What is the purpose of laminating croissant dough?",
+    "options": [
+      "Add color",
+      "Add flavor",
+      "Create layers",
+      "Make it rise"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "What kind of chocolate is used in Pain au Chocolat?",
+    "options": [
+      "Milk chocolate",
+      "White chocolate",
+      "Dark chocolate",
+      "Hazelnut chocolate"
+    ],
+    "answer": 2
+  }
+]

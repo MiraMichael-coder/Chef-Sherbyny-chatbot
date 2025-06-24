@@ -1,0 +1,511 @@
+[
+  {
+    "name": "margherita pizza",
+    "is_vegetarian": true,
+    "type": "main",
+    "short_description": "The pizza that started it all.",
+    "ingredients": [
+      "pizza dough",
+      "tomato sauce",
+      "mozzarella",
+      "basil",
+      "olive oil"
+    ],
+    "recipe_steps": [
+      "Spread tomato sauce on dough",
+      "Add mozzarella and basil",
+      "Drizzle with olive oil",
+      "Bake until crust is golden"
+    ],
+    "recipe_link": "https://www.italianrecipebook.com/margherita-pizza/"
+  },
+  {
+    "name": "spaghetti carbonara",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Creamy, cheesy pasta without cream!",
+    "ingredients": [
+      "spaghetti",
+      "eggs",
+      "pecorino romano",
+      "guanciale",
+      "black pepper"
+    ],
+    "recipe_steps": [
+      "Cook spaghetti",
+      "Fry guanciale",
+      "Mix eggs and cheese",
+      "Combine everything with pasta and pepper"
+    ],
+    "recipe_link": "https://www.seriouseats.com/spaghetti-alla-carbonara-recipe"
+  },
+  {
+    "name": "lasagna",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Layered heaven in a baking dish.",
+    "ingredients": [
+      "lasagna noodles",
+      "meat sauce",
+      "béchamel",
+      "mozzarella",
+      "parmesan"
+    ],
+    "recipe_steps": [
+      "Layer noodles with sauces and cheese",
+      "Repeat layers",
+      "Bake until golden and bubbly"
+    ],
+    "recipe_link": "https://www.simplyrecipes.com/recipes/lasagna/"
+  },
+  {
+    "name": "caprese salad",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Mozzarella, tomato, basil — that’s it!",
+    "ingredients": [
+      "tomatoes",
+      "mozzarella",
+      "basil",
+      "olive oil",
+      "salt"
+    ],
+    "recipe_steps": [
+      "Slice tomatoes and mozzarella",
+      "Layer with basil",
+      "Drizzle olive oil and sprinkle salt"
+    ],
+    "recipe_link": "https://www.delish.com/cooking/recipe-ideas/a19665851/caprese-salad-recipe/"
+  },
+  {
+    "name": "risotto alla milanese",
+    "is_vegetarian": true,
+    "type": "main",
+    "short_description": "Golden rice gets the royal saffron treatment.",
+    "ingredients": [
+      "arborio rice",
+      "saffron",
+      "onion",
+      "butter",
+      "parmesan",
+      "white wine"
+    ],
+    "recipe_steps": [
+      "Sauté onion in butter",
+      "Add rice and wine",
+      "Gradually add broth with saffron",
+      "Stir until creamy",
+      "Add parmesan"
+    ],
+    "recipe_link": "https://www.lacucinaitaliana.com/recipe/first-course/saffron-risotto"
+  },
+  {
+    "name": "gnocchi al pomodoro",
+    "is_vegetarian": true,
+    "type": "main",
+    "short_description": "Pillowy dumplings in red sauce bliss.",
+    "ingredients": [
+      "potatoes",
+      "flour",
+      "egg",
+      "tomato sauce",
+      "basil",
+      "parmesan"
+    ],
+    "recipe_steps": [
+      "Make gnocchi dough and shape",
+      "Boil until they float",
+      "Toss in tomato sauce",
+      "Serve with basil and parmesan"
+    ],
+    "recipe_link": "https://www.recipesfromitaly.com/potato-gnocchi/"
+  },
+  {
+    "name": "frittata",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Eggs and veggies, Italian-style omelette.",
+    "ingredients": [
+      "eggs",
+      "vegetables",
+      "cheese",
+      "salt",
+      "pepper"
+    ],
+    "recipe_steps": [
+      "Whisk eggs",
+      "Mix with sautéed vegetables and cheese",
+      "Cook in pan until set"
+    ],
+    "recipe_link": "https://www.loveandlemons.com/frittata/"
+  },
+  {
+    "name": "tiramisu",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Coffee-soaked dessert dreams.",
+    "ingredients": [
+      "ladyfingers",
+      "espresso",
+      "mascarpone",
+      "eggs",
+      "sugar",
+      "cocoa powder"
+    ],
+    "recipe_steps": [
+      "Dip ladyfingers in espresso",
+      "Layer with mascarpone mixture",
+      "Repeat layers",
+      "Chill and dust with cocoa"
+    ],
+    "recipe_link": "https://www.simplyrecipes.com/recipes/tiramisu/"
+  },
+  {
+    "name": "bruschetta",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Toasty bread with juicy tomato joy.",
+    "ingredients": [
+      "bread",
+      "tomatoes",
+      "garlic",
+      "basil",
+      "olive oil",
+      "salt"
+    ],
+    "recipe_steps": [
+      "Toast bread",
+      "Rub with garlic",
+      "Top with diced tomatoes and basil",
+      "Drizzle olive oil"
+    ],
+    "recipe_link": "https://www.loveandlemons.com/bruschetta/"
+  },
+  {
+    "name": "osso buco",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Fall-off-the-bone comfort food.",
+    "ingredients": [
+      "veal shanks",
+      "carrots",
+      "onion",
+      "celery",
+      "tomatoes",
+      "white wine",
+      "broth"
+    ],
+    "recipe_steps": [
+      "Brown veal",
+      "Sauté vegetables",
+      "Add wine and broth",
+      "Simmer until meat is tender"
+    ],
+    "recipe_link": "https://www.simplyrecipes.com/recipes/osso_buco/"
+  },
+  {
+    "name": "arancini",
+    "is_vegetarian": false,
+    "type": "appetizer",
+    "short_description": "Crispy stuffed rice balls of joy.",
+    "ingredients": [
+      "rice",
+      "meat sauce",
+      "mozzarella",
+      "breadcrumbs",
+      "egg",
+      "flour"
+    ],
+    "recipe_steps": [
+      "Form rice balls with filling",
+      "Coat in flour",
+      "egg",
+      "and breadcrumbs",
+      "Fry until golden"
+    ],
+    "recipe_link": "https://www.seriouseats.com/arancini-sicilian-rice-balls-recipe"
+  },
+  {
+    "name": "panna cotta",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Silky smooth cream in a cup.",
+    "ingredients": [
+      "cream",
+      "sugar",
+      "vanilla",
+      "gelatin"
+    ],
+    "recipe_steps": [
+      "Heat cream with sugar and vanilla",
+      "Add gelatin",
+      "Pour into molds",
+      "Chill until set"
+    ],
+    "recipe_link": "https://www.biggerbolderbaking.com/panna-cotta/"
+  },
+  {
+    "name": "minestrone",
+    "is_vegetarian": true,
+    "type": "soup",
+    "short_description": "The soup with everything inside.",
+    "ingredients": [
+      "vegetables",
+      "beans",
+      "pasta",
+      "broth",
+      "tomatoes"
+    ],
+    "recipe_steps": [
+      "Sauté vegetables",
+      "Add broth and tomatoes",
+      "Simmer with beans and pasta"
+    ],
+    "recipe_link": "https://www.simplyrecipes.com/recipes/minestrone_soup/"
+  },
+  {
+    "name": "vitello tonnato",
+    "is_vegetarian": false,
+    "type": "appetizer",
+    "short_description": "Cold veal, creamy tuna. Trust it.",
+    "ingredients": [
+      "veal",
+      "tuna",
+      "mayonnaise",
+      "capers",
+      "lemon juice"
+    ],
+    "recipe_steps": [
+      "Cook veal and slice thinly",
+      "Blend tuna with mayo",
+      "lemon",
+      "and capers",
+      "Serve sauce over meat"
+    ],
+    "recipe_link": "https://www.saveur.com/vitello-tonnato-recipe/"
+  },
+  {
+    "name": "bucatini all'amatriciana",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Pasta with a spicy porky punch.",
+    "ingredients": [
+      "bucatini",
+      "guanciale",
+      "tomatoes",
+      "pecorino",
+      "chili"
+    ],
+    "recipe_steps": [
+      "Fry guanciale",
+      "Add tomatoes and chili",
+      "Cook pasta and toss with sauce",
+      "Top with cheese"
+    ],
+    "recipe_link": "https://www.seriouseats.com/bucatini-all-amatriciana-recipe"
+  },
+  {
+    "name": "polenta",
+    "is_vegetarian": true,
+    "type": "side",
+    "short_description": "Golden mush made delicious.",
+    "ingredients": [
+      "cornmeal",
+      "water",
+      "salt",
+      "butter",
+      "parmesan"
+    ],
+    "recipe_steps": [
+      "Boil water with salt",
+      "Whisk in cornmeal",
+      "Cook until thick",
+      "Stir in butter and cheese"
+    ],
+    "recipe_link": "https://www.delish.com/cooking/recipe-ideas/a24668036/how-to-make-polenta-recipe/"
+  },
+  {
+    "name": "stuffed zucchini",
+    "is_vegetarian": true,
+    "type": "appetizer",
+    "short_description": "Zucchini boats stuffed to perfection.",
+    "ingredients": [
+      "zucchini",
+      "breadcrumbs",
+      "cheese",
+      "garlic",
+      "herbs",
+      "olive oil"
+    ],
+    "recipe_steps": [
+      "Hollow zucchini",
+      "Mix stuffing",
+      "Fill and drizzle with oil",
+      "Bake until tender"
+    ],
+    "recipe_link": "https://www.cookingclassy.com/stuffed-zucchini/"
+  },
+  {
+    "name": "tagliatelle al ragù",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Bolognese’s fancier cousin with ribbons.",
+    "ingredients": [
+      "tagliatelle",
+      "ground beef",
+      "tomato paste",
+      "carrot",
+      "onion",
+      "celery",
+      "wine"
+    ],
+    "recipe_steps": [
+      "Sauté vegetables",
+      "Add meat and wine",
+      "Stir in tomato paste",
+      "Simmer until thick",
+      "Serve over pasta"
+    ],
+    "recipe_link": "https://www.recipesfromitaly.com/tagliatelle-al-ragu/"
+  },
+  {
+    "name": "cannoli",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Crunchy shells with creamy filling.",
+    "ingredients": [
+      "flour",
+      "sugar",
+      "ricotta",
+      "chocolate chips",
+      "cinnamon",
+      "oil"
+    ],
+    "recipe_steps": [
+      "Make dough and form tubes",
+      "Fry until crisp",
+      "Fill with sweet ricotta and chips"
+    ],
+    "recipe_link": "https://www.kingarthurbaking.com/recipes/cannoli-recipe"
+  },
+  {
+    "name": "eggplant parmigiana",
+    "is_vegetarian": true,
+    "type": "main",
+    "short_description": "Crispy eggplant layered with love.",
+    "ingredients": [
+      "eggplant",
+      "tomato sauce",
+      "mozzarella",
+      "parmesan",
+      "breadcrumbs"
+    ],
+    "recipe_steps": [
+      "Slice and fry eggplant",
+      "Layer with sauce and cheese",
+      "Bake until bubbly"
+    ],
+    "recipe_link": "https://www.seriouseats.com/eggplant-parmesan-recipe"
+  },
+  {
+    "name": "pesto pasta",
+    "is_vegetarian": true,
+    "type": "main",
+    "short_description": "Bright green pesto magic on pasta.",
+    "ingredients": [
+      "basil",
+      "pine nuts",
+      "garlic",
+      "parmesan",
+      "olive oil",
+      "pasta"
+    ],
+    "recipe_steps": [
+      "Blend pesto ingredients",
+      "Boil pasta",
+      "Toss together and serve"
+    ],
+    "recipe_link": "https://www.simplyrecipes.com/recipes/fresh_basil_pesto/"
+  },
+  {
+    "name": "baccala alla vicentina",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Salt cod in creamy onion heaven.",
+    "ingredients": [
+      "salt cod",
+      "onion",
+      "milk",
+      "anchovies",
+      "olive oil",
+      "flour"
+    ],
+    "recipe_steps": [
+      "Soak cod",
+      "Sauté onion and anchovies",
+      "Add cod",
+      "milk",
+      "and flour",
+      "Simmer until tender"
+    ],
+    "recipe_link": "https://www.greatitalianchefs.com/recipes/baccala-alla-vicentina-recipe"
+  },
+  {
+    "name": "zabaglione",
+    "is_vegetarian": true,
+    "type": "dessert",
+    "short_description": "Fluffy wine custard in a glass.",
+    "ingredients": [
+      "egg yolks",
+      "sugar",
+      "marsala wine"
+    ],
+    "recipe_steps": [
+      "Whisk yolks and sugar",
+      "Add wine",
+      "Cook over steam until thick and foamy"
+    ],
+    "recipe_link": "https://www.simplyrecipes.com/recipes/zabaglione/"
+  },
+  {
+    "name": "caponata",
+    "is_vegetarian": true,
+    "type": "side",
+    "short_description": "Sweet and sour Sicilian veggie stew.",
+    "ingredients": [
+      "eggplant",
+      "tomato",
+      "celery",
+      "olives",
+      "capers",
+      "vinegar"
+    ],
+    "recipe_steps": [
+      "Fry eggplant",
+      "Sauté other ingredients",
+      "Combine and simmer",
+      "Chill before serving"
+    ],
+    "recipe_link": "https://www.seriouseats.com/sicilian-eggplant-caponata-recipe"
+  },
+  {
+    "name": "spaghetti alle vongole",
+    "is_vegetarian": false,
+    "type": "main",
+    "short_description": "Clams and spaghetti — beach dinner!",
+    "ingredients": [
+      "spaghetti",
+      "clams",
+      "garlic",
+      "olive oil",
+      "parsley",
+      "chili"
+    ],
+    "recipe_steps": [
+      "Sauté garlic and chili",
+      "Add clams until open",
+      "Toss with cooked pasta and parsley"
+    ],
+    "recipe_link": "https://www.seriouseats.com/spaghetti-alle-vongole-recipe"
+  }
+]
