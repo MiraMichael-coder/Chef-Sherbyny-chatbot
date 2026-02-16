@@ -38,6 +38,8 @@ save [dish] – Bookmark favorite recipes
 
 #change file paths before running 
 
+or try it out here==> https://miramichael-coder.github.io/Chef-Sherbyny-chatbot/
+
 # Clone repository
 git clone https://github.com/MiraMichael-coder/chatbot
 
