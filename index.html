@@ -1,0 +1,2805 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef Cherbeny - Food Chat Bot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'chef-blue': {
+                            '50': '#ebf5fb',
+                            '100': '#d4e7fb',
+                            '200': '#add9fa',
+                            '300': '#85cbf8',
+                            '400': '#5ebcf7',
+                            '500': '#38adf6',
+                            '600': '#319ddb',
+                            '700': '#298cbc',
+                            '800': '#21779c',
+                            '900': '#195f79',
+                            'peachy': 'rgba(255, 215, 180, 0.815)',
+                            'peachy': {
+                                'light': '#FFE5C4',
+                                'dark': '#3d2b1f',
+                                'DEFAULT': '#FFDAB9',
+                            },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        .text-peachy {
+            color: rgba(255, 215, 180, 0.815) !important;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('Gui/Data/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .bg-peachy {
+            background-color: rgba(255, 215, 180, 0.87);
+            /* your peachy shade */
+        }
+
+
+        .sidebar {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .chat-container {
+            height: calc(100vh - 160px);
+        }
+
+        .message {
+            max-width: 80%;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        :root {
+            --veg-green: #d4edda;
+            --fruit-red: #f8d7da;
+            --grain-yellow: #fff3cd;
+            --protein-blue: #d1ecf1;
+            --dairy-orange: #ffe5b4;
+            --sweet-purple: #d8c1f8;
+            --highlight-gold: #e6b800;
+        }
+
+        /* Bot Message: Vegetables (Green) */
+        .bot-message {
+            background-color: var(--veg-green);
+            border-left: 5px solid #28a745;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
+            color: #1b3c1b;
+        }
+
+        .user-message {
+
+            background-color: rgba(255, 215, 180, 0.815);
+            /* soft peach tone */
+            border-right: 4px solid #ffa14a;
+            /* light peach border */
+            color: #3d2b1f;
+            /* dark brown text for contrast */
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cuisine-btn {
+            transition: all 0.2s ease;
+        }
+
+        .cuisine-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #f85252;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+            }
+
+            30% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .ingredient-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .ingredient-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredient-list li:before {
+            content: "•";
+            color: #ffcd05;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -0.3rem;
+        }
+
+        .quiz-option {
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            background-color: rgba(255, 215, 0, 0.2);
+        }
+
+        .quiz-option:hover:not(:disabled) {
+            transform: translateY(-2px);
+            background-color: rgba(255, 215, 0, 0.4);
+        }
+
+        .quiz-option.correct {
+            background-color: rgba(0, 200, 0, 0.3) !important;
+            border-color: #00c000;
+        }
+
+        .quiz-option.incorrect {
+            background-color: rgba(200, 0, 0, 0.3) !important;
+            border-color: #c00000;
+        }
+
+        .quiz-option:disabled {
+            cursor: default;
+            opacity: 1;
+        }
+
+
+        .quiz-progress {
+            background-color: #186d31e0;
+            /* Tailwind gray-200 */
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .quiz-progress-bar {
+            background-color: #8ce0ac;
+            /* Tailwind green-400 */
+            height: 100%;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .quiz-score {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 1rem 0;
+            color: #e6b800;
+        }
+
+        .suggestion-item {
+            transition: all 0.2s ease;
+        }
+
+        .suggestion-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Decline button styles */
+        button[onclick="declineSuggestion()"] {
+            background-color: #6b7e15;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button[onclick="declineSuggestion()"]:hover {
+            background-color: #380f0f;
+        }
+
+        #quit-quiz-btn {
+            transition: all 0.2s ease;
+        }
+
+        #quit-quiz-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #quit-quiz-btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-emerald-950 bg-opacity-90 text-white">
+    <div class="container mx-auto max-w-6xl p-4">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-6 p-4 bg-emerald-900 rounded-lg shadow-lg">
+            <div class="flex items-center space-x-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-700 flex items-center justify-center">
+                    <i class="fas fa-utensils text-3xl text-lime-100"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-lime-100">Chef Cherbeny</h1>
+                    <p class="text-lime-400">Your personal culinary assistant</p>
+                </div>
+            </div>
+            <!-- Analytics Button with warm red accent -->
+            <button id="analytics-btn" style="background-color: rgba(255, 215, 180, 0.815);"
+                class="text-yellow-900 px-4 py-2 rounded-lg flex items-center space-x-2 transition shadow">
+                <i class="fas fa-chart-line"></i>
+                <span>Analytics</span>
+            </button>
+        </header>
+
+        <div class="flex space-x-4">
+            <!-- Sidebar -->
+            <aside id="sidebar"
+                class="sidebar w-64 bg-emerald-950 bg-opacity-90 rounded-lg p-4 fixed left-0 top-0 h-full z-50 shadow-2xl text-green-50">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-peachy">Your Analytics</h2>
+                    <button id="close-sidebar" class="text-peachy hover:text-white">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="mb-6">
+                    <h3 class="font-semibold mb-2 text-peachy">
+                        User Profile
+                    </h3>
+                    <div class="bg-emerald-800 bg-opacity-50 p-3 rounded-lg">
+                        <p id="sidebar-username" class="font-medium">
+                            Username: <span class="text-peachy">Username:</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="font-semibold mb-2 text-peachy">Interaction History</h3>
+                    <div id="interaction-history"
+                        class="bg-emerald-800 bg-opacity-50 p-3 rounded-lg max-h-48 overflow-y-auto">
+                        <p class="text-lime-200 italic">No interactions yet</p>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="font-semibold mb-2 text-peachy">Cuisine Preferences</h3>
+                    <div id="cuisine-stats" class="bg-emerald-800 bg-opacity-50 p-3 rounded-lg">
+                        <p class="text-lime-200 italic">No cuisine preferences recorded</p>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="font-semibold mb-2 text-peachy">Quiz Performance</h3>
+                    <div id="quiz-stats" class="bg-emerald-800 bg-opacity-50 p-3 rounded-lg">
+                        <p class="text-lime-200 italic">No quiz attempts yet</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold mb-2 text-peachy">Dish Preferences:</h3>
+                    <div class="bg-emerald-800 bg-opacity-50 p-3 rounded-lg">
+                        <p class="text-sm">You've asked about <span id="total-questions"
+                                class="font-bold text-lime-100">0</span> recipes so far!</p>
+                        <p class="text-sm mt-2">Your favorite dish: <span id="favorite-dish"
+                                class="italic text-lime-300">None yet</span></p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <!-- Main Chat Area -->
+        <main class="flex-1">
+            <!-- Welcome Modal -->
+            <div id="welcome-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+                <div class="bg-emerald-900 rounded-lg p-6 max-w-md w-full mx-4 shadow-2xl">
+                    <div class="text-center mb-6">
+                        <div
+                            class="w-20 h-20 rounded-full bg-emerald-700 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-utensils text-3xl text-peachy"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold mb-2 text-peachy">Welcome to Chef Cherbeny!</h2>
+                        <p class="text-emerald-300">Hello! Hungry for knowledge?</p>
+                    </div>
+                    <div class="mb-4">
+                        <label for="username" class="block text-emerald-400 mb-2">What should I call you?</label>
+                        <input type="text" id="username" placeholder="Your name"
+                            class="w-full px-4 py-2 rounded-lg bg-emerald-800 border border-emerald-700 focus:outline-none focus:ring-2 focus:ring-peachy text-peachy" />
+                    </div>
+                    <button id="start-chat"
+                        class="w-full bg-emerald-700 hover:bg-emerald-600 text-peachy font-bold py-2 px-4 rounded-lg transition">
+                        Start Cooking with Chef!
+                    </button>
+
+                </div>
+            </div>
+        </main>
+        <div class="bg-emerald-950 bg-opacity-70 rounded-lg shadow-lg overflow-hidden">
+            <!-- Chat Messages -->
+            <div id="chat-messages" class="chat-container p-4 overflow-y-auto text-lime-100">
+                <!-- Messages will be added here dynamically -->
+            </div>
+        </div>
+
+        <!-- Cuisine Quick Select -->
+        <div id="cuisine-selector"
+            class="px-4 py-3 bg-emerald-950 bg-opacity-80 flex flex-wrap gap-2 rounded-b-lg border-t border-emerald-700">
+            <button data-cuisine="korean"
+                class="cuisine-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm flex items-center shadow-md">
+                <i class="fas fa-pepper-hot mr-1"></i> Korean
+            </button>
+            <button data-cuisine="egyptian"
+                class="cuisine-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm flex items-center shadow-md">
+                <i class="fas fa-mosque mr-1"></i> Egyptian
+            </button>
+            <button data-cuisine="french"
+                class="cuisine-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm flex items-center shadow-md">
+                <i class="fas fa-bread-slice mr-1"></i> French
+            </button>
+            <button data-cuisine="italian"
+                class="cuisine-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm flex items-center shadow-md">
+                <i class="fas fa-pizza-slice mr-1"></i> Italian
+            </button>
+            <button data-cuisine="lebanese"
+                class="cuisine-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm flex items-center shadow-md">
+                <i class="fas fa-leaf mr-1"></i> Lebanese
+            </button>
+            <button data-cuisine="joke"
+                class="cuisine-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm flex items-center shadow-md">
+                <i class="fas fa-laugh-squint mr-1"></i> Food Joke
+            </button>
+            <button data-cuisine="quiz"
+                class="cuisine-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm flex items-center shadow-md">
+                <i class="fas fa-question-circle mr-1"></i> Quiz Me
+            </button>
+            <button data-cuisine="trivia"
+                class="cuisine-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm flex items-center shadow-md">
+                <i class="fas fa-lightbulb mr-1"></i> Trivia
+            </button>
+        </div>
+        <!-- Trivia submenu (hidden by default) -->
+        <div id="trivia-options"
+            class="px-4 py-3 bg-emerald-950 bg-opacity-80 flex flex-wrap gap-2 rounded-b-lg border-t border-emerald-700 hidden">
+            <button data-trivia="egyptian"
+                class="cuisine-btn trivia-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm">
+                Egyptian
+            </button>
+            <button data-trivia="lebanese"
+                class="cuisine-btn trivia-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm">
+                Lebanese
+            </button>
+            <button data-trivia="french"
+                class="cuisine-btn trivia-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm">
+                French
+            </button>
+            <button data-trivia="korean"
+                class="cuisine-btn trivia-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm">
+                Korean
+            </button>
+            <button data-trivia="italian"
+                class="cuisine-btn trivia-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm">
+                Italian
+            </button>
+            <!-- direct link to your JSON for debugging -->
+            <a href="Gui/Data/trivia.json" target="_blank" class="text-green-200 underline self-center">
+                View trivia.json
+            </a>
+        </div>
+        <!-- Modal Overlay -->
+        <div id="goodbye-popup"
+            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 transition-opacity duration-300 ease-out">
+            <!-- Modal Content -->
+            <div id="goodbye-content"
+                class="bg-white rounded-2xl shadow-xl p-6 max-w-md w-full text-center transform scale-95 opacity-0 transition-all duration-300 ease-out">
+                <p id="goodbye-message" class="text-lg text-gray-700 mb-4"></p>
+                <div class="flex justify-center space-x-4">
+                    <button id="stay-btn"
+                        class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-500">Stay</button>
+                    <button id="leave-btn"
+                        class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-500">Leave</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="p-4 bg-emerald-950 bg-opacity-90 border-t border-emerald-800 rounded-b-lg">
+            <div class="flex space-x-2">
+                <input type="text" id="user-input" placeholder="Ask about recipes, ingredients..."
+                    class="flex-1 px-4 py-2 rounded-lg bg-emerald-900 text-lime-100 placeholder-lime-400 border border-emerald-700 focus:outline-none focus:ring-2 focus:ring-lime-500">
+                <button id="send-btn"
+                    class="bg-lime-600 hover:bg-lime-500 text-white px-4 py-2 rounded-lg transition shadow-md">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                <button id="exit-btn"
+                    class="bg-[#f4755a] hover:bg-[#FF9E6C] text-white px-4 py-2 rounded-lg transition shadow-md">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+                <button id="clear-chat-btn"
+                    class="bg-[#FFB07C] hover:bg-[#FF9E6C] text-white px-4 py-2 rounded-lg transition shadow-md">Clear
+                    chat</button>
+
+            </div>
+        </div>
+
+        <script>
+            // DOM Elements
+            const welcomeModal = document.getElementById('welcome-modal');
+            const usernameInput = document.getElementById('username');
+            const startChatBtn = document.getElementById('start-chat');
+            const chatMessages = document.getElementById('chat-messages');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const analyticsBtn = document.getElementById('analytics-btn');
+            const sidebar = document.getElementById('sidebar');
+            const closeSidebar = document.getElementById('close-sidebar');
+            const sidebarUsername = document.getElementById('sidebar-username');
+            const interactionHistory = document.getElementById('interaction-history');
+            const cuisineStats = document.getElementById('cuisine-stats');
+            const quizStats = document.getElementById('quiz-stats');
+            const totalQuestions = document.getElementById('total-questions');
+            const favoriteDishElement = document.getElementById('favorite-dish');
+            const cuisineButtons = document.querySelectorAll('.cuisine-btn');
+            const exitBtn = document.getElementById('exit-btn');
+            const goodbyePopup = document.getElementById('goodbye-popup');
+            const goodbyeContent = document.getElementById('goodbye-content');
+            const clearBtn = document.getElementById("clear-chat-btn");
+            const stayBtn = document.getElementById('stay-btn');
+            const leaveBtn = document.getElementById('leave-btn');
+            const goodbyeMessage = document.getElementById('goodbye-message');
+            const triviaOptions = document.getElementById('trivia-options');
+
+            const jokes = [
+                "Why did the tomato turn red? Because it saw the salad dressing!",
+                "What do you call cheese that isn't yours? Nacho cheese!",
+                "Why don't eggs tell jokes? They'd crack each other up!",
+                "What's a vampire's favorite fruit? A blood orange!",
+                "Why did the baker stop making donuts? He got tired of the hole thing!",
+                "What do you call a fake noodle? An impasta!",
+                "Why did the coffee file a police report? It got mugged!",
+                "What's the best thing to put into a pie? Your teeth!",
+                "Why did the grape stop in the middle of the road? Because it ran out of juice!",
+                "What do you call a bear with no teeth? A gummy bear!"
+            ];
+            const greetings = [
+                "Hello, my friend! What can I cook up for you today? 🍽️",
+                "Hey there!",
+                "Hello! Ready to chat about food?",
+                "Salam! What dish are you craving today?",
+                "Ciao bello! Want to cook up something delizioso today? 🇮🇹",
+                "Ahla w sahla! What's on your plate today? Mezze? Croissant? Cannoli? 🥐🍰",
+                "Bonjour! Let's turn your cravings into cuisine 😍",
+                "Yo foodie! What's cooking? 😋",
+                "Greetings, fellow flavor explorer! 🌍🍲",
+                "Knock knock... who's hungry? 😄",
+                "Hey hey! If you could eat *anything* right now, what would it be?",
+                "Beep boop! Foodbot online and ready to serve! 🤖🍴",
+                "Sup, snack seeker? 😏 What's tempting your tastebuds today?",
+                "I'm back—and so is your appetite! What shall we discuss? 😁",
+                "Habibi, you came to the right kitchen. What are we cooking today? 🍳",
+
+            ];
+            const farewells = [
+                "Bon appétit! Until next time!",
+                "Happy cooking! Come back soon!",
+                "May your meals be delicious! Goodbye!",
+                "That's all for now! Enjoy your culinary adventures!",
+                "Farewell! Don't forget to share your cooking creations!"
+            ];
+            const howAreYou = [
+                "I'm doing great, thanks for asking! How about you? 😊",
+                "Feeling fantastic! What about you? 😄",
+                "Just peachy! How's your day going? 🍑",
+                "I'm just about keeping it together 😂 but actually doing great!",
+                "I'm doing well, thanks! How about you? 😊",
+                "Beep boop 🤖 All systems operational. How's human life treating you?",
+                "I'm running at 100%—unless you count emotional RAM 😂 How about you?",
+                "I'm feeling like a Friday at 5pm 🕔—how's your vibe?",
+                "Doing so well I might need a software update to handle it! 😁",
+                "Running smooth… until someone asks me to do math 🫠",
+                "Living the dream… or at least a very convincing simulation! 😉",
+                "I'm well, thanks! Now processing your feelings... complete! How are you? 😜",
+                "Not sure if caffeinated or just hyper-coded today ☕🤖 How's your energy?"
+            ];
+
+            // State
+            let username = '';
+            let interactions = [];
+            let cuisineCounts = {
+                korean: 0,
+                egyptian: 0,
+                french: 0,
+                italian: 0,
+                lebanese: 0,
+                joke: 0,
+                quiz: 0
+            };
+            let totalQuestionsAsked = 0;
+            let favoriteDish = null; // Single source of truth
+            let quizStatsData = {
+                totalQuizzes: 0,
+                correctAnswers: 0,
+                incorrectAnswers: 0,
+                byCuisine: {}
+            };
+            let lastContext = null;
+            let quizSession = null;
+            let lastIngredientSearch = null; // stores dishes array for follow-up
+
+            // Recipe and Quiz Databases
+            const recipes = {
+                egyptian: {},
+                lebanese: {},
+                french: {},
+                korean: {},
+                italian: {}
+            };
+
+            const quizQuestions = {
+                egyptian: [],
+                lebanese: [],
+                french: [],
+                korean: [],
+                italian: []
+            };
+            let cuisineTrivia = {};
+
+            let typoMap = {};
+            fetch('Gui/Data/typos.json')
+                .then(res => res.json())
+                .then(originalTypoMap => {
+                    // 2. Invert the mapping to create typo→correct lookup
+                    const invertedMap = {};
+
+                    for (const [correctWord, typos] of Object.entries(originalTypoMap)) {
+                        typos.forEach(typo => {
+                            invertedMap[typo] = correctWord;
+                        });
+                    }
+
+                    // 3. Merge with any direct mappings (if your JSON has both formats)
+                    typoMap = { ...invertedMap };
+                    console.log("Typo map ready with", Object.keys(typoMap).length, "corrections");
+                });
+            let commands = {};
+            ["egyptian", "lebanese", "french", "korean", "italian"].forEach(cuisine => {
+                // Recipes
+                fetch(`Gui/Data/${cuisine}_cuisine.json`)
+                    .then(res => res.json())
+                    .then(data => {
+                        recipes[cuisine] = {};
+                        data.forEach(dish => {
+                            let rawType = (dish.type || 'Main Dish').toLowerCase();
+                            let formattedType = rawType === 'main'
+                                ? 'Main Dish'
+                                : rawType.charAt(0).toUpperCase() + rawType.slice(1);
+                            recipes[cuisine][dish.name.toLowerCase()] = {
+                                name: dish.name,
+                                isVegetarian: dish.is_vegetarian || false,
+                                type: formattedType,
+                                description: dish.short_description || "",
+                                ingredients: dish.ingredients || [],
+                                instructions: (dish.recipe_steps || []),
+                                recipeLink: dish.recipe_link || '',
+                                origin: dish.origin || cuisine
+                            };
+                        });
+                        console.log(`✅ ${cuisine} recipes loaded`);
+                        updateCuisineSelector();
+                    })
+                    .catch(err => console.error(`❌ ${cuisine} recipe load failed`, err));
+
+                // Quizzes
+                fetch(`Gui/Data/${cuisine}_quiz.json`)
+                    .then(res => res.json())
+                    .then(data => {
+                        quizQuestions[cuisine] = data.map(q => ({
+                            question: q.question,
+                            options: q.options,
+                            answer: q.answer
+                        }));
+                        console.log(`✅ ${cuisine} quiz loaded`);
+                    })
+                    .catch(err => console.error(`❌ ${cuisine} quiz load failed`, err));
+            });
+
+            //fetch trivia
+            fetch('Gui/Data/trivia.json')
+                .then(res => res.json())
+                .then(data => {
+                    cuisineTrivia = data;
+                    console.log("✅ Trivia loaded:", cuisineTrivia);
+                })
+                .catch(err => console.error("❌ Trivia loading failed:", err));
+
+            //fetch commands
+            fetch('Gui/Data/commands.json')
+                .then(res => res.json())
+                .then(data => {
+                    commands = data;
+                    console.log("✅ Commands loaded:", commands);
+                })
+                .catch(err => console.error("❌ Commands loading failed:", err));
+
+
+
+
+            let startupSound;
+
+            function loadStartupSound() {
+                try {
+                    // Relative path from your HTML file to the sound file
+                    startupSound = new Audio('Gui/Data/Intro.wav');
+                    startupSound.preload = 'auto';
+                    startupSound.load();
+
+                    // Optional: Set volume (0.0 to 1.0)
+                    startupSound.volume = 0.7;
+
+                    console.log("🔊 Startup sound loaded successfully");
+                } catch (error) {
+                    console.error("🔇 Failed to load startup sound:", error);
+                }
+            }
+
+            function playStartupSound() {
+                if (!startupSound) {
+                    loadStartupSound();
+                }
+
+                // Small delay to ensure it loads before playing (optional safeguard)
+                setTimeout(() => {
+                    try {
+                        startupSound.currentTime = 0;
+                        startupSound.play()
+                            .then(() => console.log("🔊 Playing startup sound"))
+                            .catch(error => {
+                                if (error.name === 'NotAllowedError') {
+                                    console.log("🔇 Playback blocked by browser (needs user interaction)");
+                                } else {
+                                    console.error("🔇 Playback failed:", error);
+                                }
+                            });
+                    } catch (error) {
+                        console.error("🔇 Sound playback error:", error);
+                    }
+                });
+            }
+            function getAllIngredients() {
+                const ingredientSet = new Set();
+
+                for (const cuisine in recipes) {
+                    for (const dish in recipes[cuisine]) {
+                        const ingredients = recipes[cuisine][dish].ingredients;
+                        ingredients.forEach(ing => ingredientSet.add(ing.toLowerCase()));
+                    }
+                }
+
+                return Array.from(ingredientSet);
+            }
+            function getAllDishes() {
+                const all = [];
+
+                for (const cuisine in recipes) {
+                    for (const key in recipes[cuisine]) {
+                        const dish = recipes[cuisine][key];
+
+                        all.push({
+                            name: dish.name || key,  // fallback in case .name is missing
+                            cuisine: cuisine,
+                            ingredients: (dish.ingredients || []).map(i => i.toLowerCase().trim()),
+                            isVegetarian: dish.isVegetarian || false,
+                            type: dish.type || "Main Dish",
+                            description: dish.description || "",
+                            instructions: dish.instructions || [],
+                            recipeLink: dish.recipeLink || '',
+                            origin: dish.origin || cuisine
+                        });
+                    }
+                }
+
+                return all;
+
+            }
+            function detectMultiWordIngredients(tokens) {
+                const ingredientSet = new Set(
+                    getAllIngredients().map(ing => ing.toLowerCase())
+                );
+
+                // Helper to extract multi-word phrases of length `n`
+                function extractPhrases(n, words) {
+                    const phrases = [];
+                    for (let i = 0; i <= words.length - n; i++) {
+                        const phrase = words.slice(i, i + n).join(" ").toLowerCase();
+                        if (ingredientSet.has(phrase)) {
+                            phrases.push(phrase);
+                        }
+                    }
+                    return phrases;
+                }
+
+                // Combine and deduplicate 2-word and 3-word phrase matches
+                const phrases2 = extractPhrases(2, tokens);
+                const phrases3 = extractPhrases(3, tokens);
+
+                // Return unique phrases
+                return [...new Set([...phrases2, ...phrases3])];
+            }
+
+            function getRandomDishSuggestions(count = 3) {
+                const allDishes = getAllDishes();
+                const shuffled = [...allDishes].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            }
+
+            function showDishSuggestions(context = 'default', currentDish = null) {
+                // Show loading indicator
+                const loadingIndicator = document.createElement('div');
+                loadingIndicator.className = 'message bot-message p-3 rounded-lg mb-2 flex items-center';
+                loadingIndicator.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+                chatMessages.appendChild(loadingIndicator);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                setTimeout(() => {
+                    chatMessages.removeChild(loadingIndicator);
+
+                    // Validate currentDish
+                    if (context === 'post-recipe') {
+                        if (!currentDish?.cuisine) {
+                            console.error("Missing cuisine for dish:", currentDish);
+                            currentDish.cuisine = 'egyptian'; // Force Egyptian as fallback
+                        }
+                    }
+
+                    const allDishes = getAllDishes();
+                    let suggestions = [];
+
+                    if (context === 'post-recipe' && currentDish) {
+                        // Get 3 random dishes from same cuisine (excluding current dish)
+                        suggestions = allDishes.filter(dish =>
+                            dish.cuisine.toLowerCase() === currentDish.cuisine.toLowerCase() &&
+                            dish.name.toLowerCase() !== currentDish.name.toLowerCase()
+                        );
+
+                        // If not enough, add random dishes
+                        if (suggestions.length < 3) {
+                            const extraDishes = allDishes.filter(dish =>
+                                dish.name.toLowerCase() !== currentDish.name.toLowerCase()
+                            );
+                            suggestions = [...suggestions, ...extraDishes];
+                        }
+
+                        suggestions = suggestions.slice(0, 3);
+                    } else {
+                        // Default random suggestions
+                        suggestions = allDishes.sort(() => 0.5 - Math.random()).slice(0, 3);
+                    }
+                    // Build and display message
+                    const message = `
+            <div class="mt-6 pt-4 border-t border-emerald-700">
+                <h4 class="font-bold text-green mb-3">
+                    ${context === 'post-recipe'
+                            ? `You might also enjoy these ${currentDish.cuisine} dishes:`
+                            : 'Here are some delicious suggestions:'}
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    ${suggestions.map(dish => `
+                        <div class="suggestion-item bg-emerald-800 bg-opacity-70 p-3 rounded-lg cursor-pointer hover:bg-emerald-700 transition-colors border border-emerald-600"
+                             onclick="handleSuggestionSelection('${dish.name.replace(/'/g, "\\'")}')">
+                            <strong class="text-black">${dish.name.charAt(0).toUpperCase() + dish.name.slice(1).toLowerCase()}</strong>
+                            <p class="text-sm text-lime-200 mt-1">${dish.description || ''}</p>
+                            <div class="flex gap-1 mt-2">
+                                <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-900 text-emerald-100">
+                                    ${dish.cuisine.charAt(0).toUpperCase() + dish.cuisine.slice(1)}
+                                </span>
+                                ${dish.isVegetarian ? '<span class="text-xs px-1.5 py-0.5 rounded bg-green-800 text-green-100">Vegetarian</span>' : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="mt-4 flex justify-center">
+                    <button onclick="declineSuggestion()" 
+                            class="px-4 py-2 bg-red-600 hover:bg-lime-700 text-white rounded-lg transition-colors">
+                        No thanks, nothing looks good   
+                    </button>
+                </div>
+                <p class="text-sm text-black-200 mt-2">
+                    Click on a dish to see the recipe!
+                </p>
+            </div>
+        `;
+
+                    addBotMessage(message);
+                    lastContext = {
+                        type: 'dish-suggestions',
+                        suggestions: suggestions,
+                        context: context,
+                        currentDish: currentDish
+                    };
+                }, 800);
+            }
+
+            function declineSuggestion() {
+                // Remove the suggestions message
+                const messages = document.querySelectorAll('.message.bot-message');
+                if (messages.length > 0) {
+                    const lastMessage = messages[messages.length - 1];
+                    if (lastMessage.innerHTML.includes('suggestions') ||
+                        lastMessage.innerHTML.includes('might also enjoy')) {
+                        chatMessages.removeChild(lastMessage);
+                    }
+                }
+
+                // Add a response
+                addBotMessage("No problem! What would you like to explore instead?");
+
+                // Clear the suggestion context
+                lastContext = null;
+
+                // Log the interaction
+                interactions.push({
+                    type: 'user',
+                    content: 'Declined suggestions',
+                    timestamp: new Date().toISOString()
+                });
+            }
+
+            function handleSuggestionSelection(dishName) {
+                // Find the full dish details from all available dishes
+                const allDishes = getAllDishes();
+                const selectedDish = allDishes.find(d =>
+                    d.name.toLowerCase() === dishName.toLowerCase()
+                );
+
+                if (!selectedDish) {
+                    console.error("Dish not found:", dishName);
+                    addBotMessage("Sorry, I couldn't find that dish. Please try again.");
+                    return;
+                }
+
+                // Remove the suggestions message from chat
+                const messages = document.querySelectorAll('.message.bot-message');
+                if (messages.length > 0) {
+                    const lastMessage = messages[messages.length - 1];
+                    if (lastMessage.innerHTML.includes('suggestions') ||
+                        lastMessage.innerHTML.includes('might also enjoy')) {
+                        chatMessages.removeChild(lastMessage);
+                    }
+                }
+
+                // Show loading indicator while fetching recipe
+                const loadingIndicator = document.createElement('div');
+                loadingIndicator.className = 'message bot-message p-3 rounded-lg mb-2 flex items-center';
+                loadingIndicator.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+                chatMessages.appendChild(loadingIndicator);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Simulate loading delay
+                setTimeout(() => {
+                    // Remove loading indicator
+                    chatMessages.removeChild(loadingIndicator);
+
+                    // Show the selected dish's recipe
+                    showRecipe(selectedDish);
+
+                    // Log the selection
+                    interactions.push({
+                        type: 'user',
+                        content: `Selected dish: ${selectedDish.name}`,
+                        timestamp: new Date().toISOString()
+                    });
+
+                    // Update analytics
+                    totalQuestionsAsked++;
+                    cuisineCounts[selectedDish.cuisine] = (cuisineCounts[selectedDish.cuisine] || 0) + 1;
+                    updateStatsDisplay();
+
+                }, 800);
+            }
+
+            //ingredents: 
+            function searchByIngredient(tokens) {
+                if (!tokens || tokens.length === 0) {
+                    return { dishes: [], matchType: "no-ingredients-specified" };
+                }
+
+                // Normalize and typo-correct tokens
+                const normalizedTokens = tokens.map(t => handleTypos(t.toLowerCase().trim()));
+
+                // Detect multi-word ingredients
+                const detectedPhrases = detectMultiWordIngredients(tokens);
+                const searchTerms = [
+                    ...detectedPhrases,
+                    ...tokens.filter(token =>
+                        !detectedPhrases.some(phrase => phrase.split(" ").includes(token))
+                    )
+                ];
+                const normalizedTerms = searchTerms.map(t => handleTypos(t.toLowerCase().trim()));
+
+                // Get dishes with normalized ingredients
+                const allDishes = getAllDishes();
+                const dishesWithNormalized = allDishes.map(dish => ({
+                    dish,
+                    ingredients: dish.ingredients.map(i => i.toLowerCase().trim())
+                }));
+
+                // Special behavior if exactly 2 ingredients: require both to match (exact-all)
+                if (normalizedTerms.length === 2) {
+                    const exactAll = dishesWithNormalized.filter(({ ingredients }) =>
+                        normalizedTerms.every(term => ingredients.includes(term))
+                    );
+                    if (exactAll.length > 0) {
+                        return {
+                            dishes: exactAll.map(entry => entry.dish),
+                            matchType: "exact-all-ingredients-2-items"
+                        };
+                    }
+                }
+
+                // Usual search fallback (original code)
+
+                // Exact ALL match for any number of ingredients
+                const exactAll = dishesWithNormalized.filter(({ ingredients }) =>
+                    normalizedTerms.every(term => ingredients.includes(term))
+                );
+                if (exactAll.length > 0) {
+                    return {
+                        dishes: exactAll.map(entry => entry.dish),
+                        matchType: "exact-all-ingredients"
+                    };
+                }
+
+                // Exact ANY match
+                const exactAny = dishesWithNormalized.filter(({ ingredients }) =>
+                    normalizedTerms.some(term => ingredients.includes(term))
+                );
+                if (exactAny.length > 0) {
+                    return {
+                        dishes: exactAny.map(entry => entry.dish),
+                        matchType: "exact-any-ingredient"
+                    };
+                }
+
+                // Partial ALL match
+                const partialAll = dishesWithNormalized.filter(({ dish, ingredients }) =>
+                    normalizedTerms.every(term =>
+                        ingredients.some(ing => ing.includes(term)) ||
+                        correctTypos(dish.name.toLowerCase()).includes(term)
+                    )
+                );
+                if (partialAll.length > 0) {
+                    return {
+                        dishes: partialAll.map(entry => entry.dish),
+                        matchType: "partial-all-ingredients"
+                    };
+                }
+
+                // Partial ANY match
+                const partialAny = dishesWithNormalized.filter(({ dish, ingredients }) =>
+                    normalizedTerms.some(term =>
+                        ingredients.some(ing => ing.includes(term)) ||
+                        correctTypos(dish.name.toLowerCase()).includes(term)
+                    )
+                );
+                if (partialAny.length > 0) {
+                    return {
+                        dishes: partialAny.map(entry => entry.dish),
+                        matchType: "partial-any-ingredient"
+                    };
+                }
+
+                // No matches
+                return {
+                    dishes: [],
+                    matchType: "no-matches-found"
+                };
+            }
+            function handleIngredientSearchResults(tokens) {
+                const searchQuery = tokens.join(" ");
+
+                // Identify known ingredients after typo correction
+                const ingredients = tokens.filter(token => {
+                    const normalizedToken = handleTypos(token.toLowerCase());
+                    return getAllIngredients().some(ing =>
+                        handleTypos(ing.toLowerCase()) === normalizedToken
+                    );
+                });
+
+                // If no ingredients matched, try fallback to recipe name search
+                if (ingredients.length === 0) {
+                    for (const cuisine in recipes) {
+                        for (const dishName in recipes[cuisine]) {
+                            if (tokens.join(" ").toLowerCase().includes(dishName.toLowerCase())) {
+                                const ingList = recipes[cuisine][dishName].ingredients.map(i => `<li>${i}</li>`).join('');
+                                addBotMessage(`
+                        <strong>Ingredients for ${dishName} (${cuisine})</strong>
+                        <ul class="ingredient-list mt-2">${ingList}</ul>
+                        <p class="mt-2">Would you like the preparation instructions as well?</p>
+                    `);
+                                lastContext = { type: 'recipe-only', cuisine, recipeName: dishName, dish: recipes[cuisine][dishName] };
+                                return;
+                            }
+                        }
+                    }
+                    addBotMessage("I couldn't identify any ingredients or known dishes. Try rephrasing.");
+                    return;
+                }
+
+                const { dishes, matchType } = searchByIngredient(tokens);
+
+                if (dishes.length === 0) {
+                    addBotMessage("No dishes found with the specified ingredients.");
+                    return;
+                }
+
+                let header = "";
+                if (matchType === "no-ingredients-specified") {
+                    addBotMessage("Please specify ingredients you'd like to search for!");
+                    return;
+                } else if (matchType === "exact-all-ingredients") {
+                    header = `🍽️ Dishes with ${ingredients.join(" and ")} 🍽️`;
+
+                } else if (matchType === "exact-any-ingredient") {
+                    header = `🍴 Dishes containing ${ingredients.join(" or ")} 🍴`;
+
+                } else if (matchType === "partial-ingredient-match") {
+                    header = `🔍 Partial matches for ${ingredients.join(", ")} 🔍`;
+                }
+                else {
+                    header = `🔍 Possible matches for ${ingredients.join(", ")} 🔍`;
+                }
+
+
+                // Create the results list with proper dish names and cuisines
+                const results = dishes.map(dish =>
+                    `<div class="mb-3">
+            <strong>${dish.name.charAt(0).toUpperCase() + dish.name.slice(1)}</strong> (${dish.cuisine.charAt(0).toUpperCase() + dish.cuisine.slice(1)})<br>
+            <span class="text-sm">${dish.isVegetarian ? 'Vegetarian' : 'Non-vegetarian'}</span><br>
+            <span class="text-sm">Ingredients: ${dish.ingredients.join(", ")}</span>
+        </div>`
+                ).join("");
+
+                addBotMessage(`
+        ${header}
+        <div class="mt-3">
+            ${results}
+        </div>
+        <p class="mt-2">Type the dish name to see its recipe or say 'none' to cancel.</p>
+    `);
+                lastIngredientSearch = { dishes };
+            }
+
+            //quiz
+            function formatQuestion(question) {
+                const choiceLetters = ['A', 'B', 'C', 'D'];
+                const formattedChoices = question.options.map((choice, index) => {
+                    return `
+        <button class="quiz-option w-full text-left px-4 py-2 rounded-lg transition-all
+bg-peachy bg-opacity-50 hover:bg-peachy-dark
+focus:outline-none focus:ring-2 focus:ring-peachy"
+data-index="${index}">
+            ${choiceLetters[index]}. ${choice}
+        </button>`;
+                });
+
+
+                return `
+        <div class="quiz-question mb-4">
+            <p class="font-bold mb-4 text-lg">${question.question}</p>
+            <div class="quiz-options space-y-2">
+                ${formattedChoices.join('')}
+            </div>
+        </div>
+    `;
+            }
+            function askQuizQuestion() {
+
+                // Clear any previous quiz UI
+                const existingQuiz = document.querySelector('.quiz-question');
+                if (existingQuiz) {
+                    existingQuiz.remove();
+                }
+
+                const q = quizSession.questions[quizSession.current];
+                const progress = ((quizSession.current) / quizSession.questions.length) * 100;
+                quizSession.current + 1;
+                const progressBar = `
+        <div class="quiz-progress mb-4">
+        <div class="quiz-progress-bar bg-green-500 h-2 rounded" style="width: ${progress}%;"></div>
+            <div class="text-m text-right mt-1 text-white">
+                Question ${quizSession.current + 1} of ${quizSession.questions.length}
+            </div>
+        </div>
+        </div>
+    `;
+
+                // Create fresh quiz question element
+                const quizElement = document.createElement('div');
+                quizElement.className = 'quiz-question';
+                quizElement.innerHTML = `
+        ${progressBar}
+        ${formatQuestion(q)}
+        <div class="flex justify-end mt-4">
+            <button id="quit-quiz-btn" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition">
+                Quit Quiz
+            </button>
+        </div>
+    `;
+
+                // Add event listener for quit button
+                quizElement.querySelector('#quit-quiz-btn').addEventListener('click', quitQuiz);
+
+
+                // Add to chat
+                chatMessages.appendChild(quizElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            function startQuiz(cuisine) {
+                if (!quizQuestions[cuisine] || quizQuestions[cuisine].length === 0) {
+                    addBotMessage(`No quiz questions loaded for ${cuisine}.`);
+                    return;
+                }
+
+                // Get all available questions for this cuisine
+                const allQuestions = [...quizQuestions[cuisine]];
+
+                // Shuffle the questions and pick first 5
+                const selectedQuestions = shuffleArray(allQuestions).slice(0, 5);
+
+                quizSession = {
+                    cuisine,
+                    questions: selectedQuestions,
+                    current: 0,
+                    answers: []
+                };
+                askQuizQuestion();
+            }
+            function quitQuiz() {
+                if (!quizSession) return;
+
+                // Calculate stats for completed questions only
+                const completedQuestions = quizSession.questions.slice(0, quizSession.current);
+                const completedAnswers = quizSession.answers;
+
+                // Show partial results
+                addBotMessage(`
+        <div class="quiz-results">
+            <strong>Quiz Abandoned</strong><br><br>
+            You completed ${completedAnswers.length} of ${quizSession.questions.length} questions.<br>
+            ${summarizeQuizResults(completedAnswers, completedQuestions)}
+        </div>
+    `);
+                updateQuizAnalytics(completedAnswers, completedQuestions);
+                // Clear quiz session
+                quizSession = null;
+
+                // Remove quiz UI
+                const existingQuiz = document.querySelector('.quiz-question');
+                if (existingQuiz) existingQuiz.remove();
+            }
+            function shuffleArray(array) {
+                const newArray = [...array];
+                for (let i = newArray.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+                }
+                return newArray;
+            }
+            function checkAnswer(question, userAnswer) {
+                const normalizedAnswer = userAnswer.toLowerCase().trim();
+                if (/^[a-d]$/i.test(normalizedAnswer)) {
+                    const answerIndex = normalizedAnswer.charCodeAt(0) - 'a'.charCodeAt(0);
+                    return answerIndex === question.answer;
+                }
+                if (/^[1-4]$/.test(normalizedAnswer)) {
+                    return parseInt(normalizedAnswer) - 1 === question.answer;
+                }
+                const correctOption = question.options[question.answer].toLowerCase();
+                return correctOption.includes(normalizedAnswer) ||
+                    normalizedAnswer.includes(correctOption);
+            }
+            function summarizeQuizResults(answers, questions) {
+                const totalQuestions = questions.length;
+                const answeredQuestions = answers.length;
+                const correctCount = answers.filter(a => a).length;
+
+                let percentage = 0;
+                if (answeredQuestions > 0) {
+                    percentage = Math.round((correctCount / answeredQuestions) * 100);
+                }
+
+                let performanceFeedback;
+                if (percentage >= 80) {
+                    performanceFeedback = "🌟 Excellent! You're a culinary expert!";
+                } else if (percentage >= 60) {
+                    performanceFeedback = "👍 Good job! You know your food well.";
+                } else if (percentage >= 40) {
+                    performanceFeedback = "🤔 Not bad! Keep exploring different cuisines.";
+                } else {
+                    performanceFeedback = "🍳 Beginner's luck! Try the quiz again to improve.";
+                }
+
+                const missedDetails = answers.map((correct, index) => {
+                    if (!correct) {
+                        const q = questions[index];
+                        return `❌ Q: ${q.question}<br>   Correct answer: ${q.options[q.answer]}`;
+                    }
+                    return null;
+                }).filter(detail => detail !== null);
+
+                const missedSummary = missedDetails.length > 0
+                    ? `<br><strong>Missed Questions:</strong><br>${missedDetails.join('<br><br>')}`
+                    : "<br>✅ You got everything right! No missed questions.";
+
+                return `
+        <div class="quiz-results">
+            <strong>Questions completed: ${answeredQuestions}/${totalQuestions}</strong>
+            ${answeredQuestions > 0 ? `
+                <br><br>
+                Correct answers: ${correctCount}/${answeredQuestions}<br>
+                Accuracy: ${percentage}%<br>
+                ${performanceFeedback}
+                ${missedSummary}
+            ` : '<br><br>You didn\'t answer any questions.'}
+        </div>
+    `;
+            }
+            function endQuizSession() {
+
+                addBotMessage(summarizeQuizResults(quizSession.answers, quizSession.questions));
+                updateQuizAnalytics(quizSession.answers, quizSession.questions);
+                quizSession = null;
+                const existingQuiz = document.querySelector('.quiz-question');
+                if (existingQuiz) {
+                    existingQuiz.remove();
+                }
+            }
+            function updateQuizStatsDisplay() {
+                if (quizStatsData.totalQuizzes > 0) {
+                    let statsHTML = `
+            <div class="mb-2">
+                <p class="text-sm">Total quizzes taken: <span class="font-bold">${quizStatsData.totalQuizzes}</span></p>
+                <p class="text-sm">Correct answers: <span class="font-bold text-green-500">${quizStatsData.correctAnswers}</span></p>
+                <p class="text-sm">Incorrect answers: <span class="font-bold text-red-500">${quizStatsData.incorrectAnswers}</span></p>
+                <p class="text-sm">Overall Accuracy: <span class="font-bold">${(quizStatsData.correctAnswers + quizStatsData.incorrectAnswers) > 0
+                            ? Math.min(
+                                100,
+                                (quizStatsData.correctAnswers / (quizStatsData.correctAnswers + quizStatsData.incorrectAnswers)) * 100
+                            ).toFixed(1)
+                            : 0
+                        }%</span></p>
+            </div>
+        `;
+
+                    let cuisineStatsHTML = '<p class="text-sm font-semibold mb-1">By cuisine:</p>';
+                    let hasCuisineStats = false;
+
+                    for (const cuisine in quizStatsData.byCuisine) {
+                        if (quizStatsData.byCuisine[cuisine].total > 0) {
+                            hasCuisineStats = true;
+                            const accuracy = Math.min(
+                                100,
+                                (quizStatsData.byCuisine[cuisine].correct / quizStatsData.byCuisine[cuisine].total) * 100
+                            );
+
+                            cuisineStatsHTML += `
+                    <div class="mb-1">
+                        <div class="flex justify-between text-xs">
+                            <span style="color: #db8c58;">${cuisine.charAt(0).toUpperCase() + cuisine.slice(1)}</span>
+                            <span style="color: #db8c58;">${quizStatsData.byCuisine[cuisine].correct}/${quizStatsData.byCuisine[cuisine].total} (${Math.round(accuracy)}%)</span>
+                        </div>
+                        <div class="w-full rounded-full h-1.5" style="background-color: #ffe4c7;">
+                            <div class="h-1.5 rounded-full" style="width: ${accuracy}%; background-color: #ff9e6d;"></div>
+                        </div>
+                    </div>
+                `;
+                        }
+                    }
+
+                    if (hasCuisineStats) statsHTML += cuisineStatsHTML;
+                    quizStats.innerHTML = statsHTML;
+                } else {
+                    quizStats.innerHTML = '<p class="text-gray-400 italic">No quiz attempts yet</p>';
+                }
+            }
+            function handleQuizUserAnswer(selectedIndex) {
+                const q = quizSession.questions[quizSession.current];
+                const isCorrect = selectedIndex === q.answer;
+                quizSession.answers.push(isCorrect);
+
+                // Get all option buttons
+                const optionButtons = document.querySelectorAll('.quiz-option');
+
+                // Disable all buttons to prevent multiple answers
+                optionButtons.forEach(button => {
+                    button.disabled = true;
+                    const buttonIndex = parseInt(button.getAttribute('data-index'));
+
+                    // Only apply classes after answer is selected
+                    if (buttonIndex === q.answer) {
+                        button.classList.add('correct');
+                        button.classList.remove('hover:bg-chef-blue-700');
+                    } else if (buttonIndex === selectedIndex) {
+                        button.classList.add('incorrect');
+                        button.classList.remove('hover:bg-chef-blue-700');
+                    }
+                });
+
+                // Show feedback only after answer is selected
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = `quiz-result ${isCorrect ? 'correct' : 'incorrect'} mt-4`;
+                feedbackDiv.innerHTML = isCorrect ?
+                    '✅ Correct!' :
+                    `❌ Incorrect. The correct answer was: ${q.options[q.answer]}`;
+
+                // Add feedback after the options
+                document.querySelector('.quiz-options').appendChild(feedbackDiv);
+
+                // Move to next question after delay
+                setTimeout(() => {
+                    quizSession.current++;
+                    if (quizSession.current < quizSession.questions.length) {
+                        askQuizQuestion();
+                    } else {
+                        endQuizSession();
+                    }
+                }, 2000);
+            }
+            function handleQuizRequest(message, keywords, quizQuestions, startQuiz, setResponse, setContext) {
+                const availableCuisines = Object.keys(quizQuestions).filter(
+                    cuisine => quizQuestions[cuisine].length >= 5
+                );
+
+                if (availableCuisines.length === 0) {
+                    setResponse("I don't have enough quiz questions loaded (need at least 5 per cuisine). Please load more quiz data first!");
+                    return;
+                }
+
+                const selectedCuisine =
+                    availableCuisines.find(c =>
+                        keywords.some(kw => kw.toLowerCase() === c.toLowerCase())
+                    ) ||
+                    availableCuisines.find(c =>
+                        message.toLowerCase().includes(c.toLowerCase())
+                    );
+
+                if (selectedCuisine) {
+                    startQuiz(selectedCuisine);
+                    return;
+                } else {
+                    const options = availableCuisines
+                        .map(c => c.charAt(0).toUpperCase() + c.slice(1))
+                        .join(', ');
+                    setResponse(`Which cuisine would you like to be quizzed on? Available options: ${options}`);
+                    setContext({ type: 'quiz-selection' });
+                }
+            }
+            function updateQuizAnalytics(answers, questions) {
+                if (!quizSession || answers.length === 0) return;
+
+                const correctCount = answers.filter(a => a).length;
+                const totalQuestions = answers.length;
+
+                // Update global stats
+                quizStatsData.totalQuizzes++;
+                quizStatsData.correctAnswers += correctCount;
+                quizStatsData.incorrectAnswers += (totalQuestions - correctCount);
+
+                // Update cuisine-specific stats
+                if (!quizStatsData.byCuisine[quizSession.cuisine]) {
+                    quizStatsData.byCuisine[quizSession.cuisine] = {
+                        total: 0,
+                        correct: 0
+                    };
+                }
+                quizStatsData.byCuisine[quizSession.cuisine].total += totalQuestions;
+                quizStatsData.byCuisine[quizSession.cuisine].correct += correctCount;
+
+                // Save and update display
+                localStorage.setItem('chefCherbenyQuizStats', JSON.stringify(quizStatsData));
+                updateQuizStatsDisplay();
+            }
+
+
+            //sats updates
+            function updateInteractionHistory() {
+                if (interactions.length === 0) {
+                    interactionHistory.innerHTML = '<p class="text-gray-400 italic">No interactions yet</p>';
+                    return;
+                }
+                interactionHistory.innerHTML = '';
+                const recentInteractions = interactions.slice(-5).reverse();
+                recentInteractions.forEach(interaction => {
+                    const interactionElement = document.createElement('div');
+                    interactionElement.className = 'mb-2 pb-2 border-b border-chef-blue-700';
+                    const typeBadge = interaction.type === 'user'
+                        ? '<span class="bg-peachy text-xs px-2 py-1 rounded mr-2" style="color: #3d2b1f;">You</span>'
+                        : '<span class="bg-emerald-300 text-xs px-2 py-1 rounded mr-2 text-gray-800">Chef</span>';
+                    const truncatedContent = interaction.content.length > 30
+                        ? interaction.content.substring(0, 30) + '...'
+                        : interaction.content;
+                    interactionElement.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        ${typeBadge}
+                        <span class="text-xs text-gray-400">${new Date(interaction.timestamp).toLocaleTimeString()}</span>
+                    </div>
+                    <p class="text-sm mt-1">${truncatedContent}</p>
+                `;
+                    interactionHistory.appendChild(interactionElement);
+                });
+            }
+            function updateStatsDisplay() {
+                totalQuestions.textContent = totalQuestionsAsked;
+                favoriteDishElement.textContent = favoriteDish
+                    ? `${favoriteDish.name} (${favoriteDish.cuisine})`
+                    : 'None yet';
+                if (totalQuestionsAsked > 0) {
+                    let statsHTML = '';
+                    for (const cuisine in cuisineCounts) {
+                        if (cuisineCounts[cuisine] > 0 && cuisine !== 'quiz' && cuisine !== 'joke') {
+                            const percentage = Math.round((cuisineCounts[cuisine] / totalQuestionsAsked) * 100);
+                            statsHTML += `
+                            <div class="mb-1">
+                                <div class="flex justify-between text-sm">
+                                    <span>${cuisine.charAt(0).toUpperCase() + cuisine.slice(1)}</span>
+                                    <span>${cuisineCounts[cuisine]} (${percentage}%)</span>
+                               </div>
+<div class="w-full bg-emerald-800 rounded-full h-2">
+  <div class="bg-peachy h-2 rounded-full" style="width: ${percentage}%"></div>
+</div>
+                        `;
+                        }
+                    }
+                    cuisineStats.innerHTML = statsHTML || '<p class="text-gray-400 italic">No cuisine preferences recorded</p>';
+                }
+            }
+            function askForJoke() {
+                cuisineCounts.joke++;
+                totalQuestionsAsked++;
+                const joke = jokes[Math.floor(Math.random() * jokes.length)];
+                addBotMessage(joke);
+                interactions.push({
+                    type: 'bot',
+                    content: joke,
+                    timestamp: new Date().toISOString()
+                });
+                updateStatsDisplay();
+                localStorage.setItem('chefCherbenyStats', JSON.stringify({
+                    cuisineCounts,
+                    totalQuestions: totalQuestionsAsked
+                }));
+            }
+            function capitalize(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1);
+            }
+            //recipe
+            function showRecipe(dish) {
+                // 1. First, ensure we have valid data
+                if (!dish) {
+                    addBotMessage("Sorry, I couldn't find that recipe.");
+                    return;
+                }
+
+                // 2. Safely parse instructions from the dish
+                const instructions = Array.isArray(dish.instructions)
+                    ? dish.instructions
+                    : typeof dish.instructions === 'string'
+                        ? dish.instructions.split('\n')
+                        : [];
+
+                // 3. Format instructions as list items
+                const instructionsList = instructions
+                    .filter(step => step.trim())
+                    .map(step => `<li>${step.trim()}</li>`)
+                    .join('');
+                const capitalizedType = dish.type
+                    ? dish.type.charAt(0).toUpperCase() + dish.type.slice(1).toLowerCase()
+                    : 'Not specified';
+
+                const capitalizedName = dish.name.charAt(0).toUpperCase() + dish.name.slice(1).toLowerCase();
+                // 4. Build the full message
+                const message = `
+    <div class="recipe-box">
+      <h3><strong>${capitalizedName}</strong></h3>
+      <p>${dish.isVegetarian ? '🥕 Vegetarian' : '🍖 Non-vegetarian'}</p>
+      <p class="text-emerald-600">🍽️ Type: <span class="font-medium">${capitalizedType || 'Not specified'}</span></p>
+      <h4><strong>Instructions:</strong></h4>
+      <ul>${instructionsList}</ul>
+      ${dish.recipeLink ?
+                        `<p class="mt-2"><a href="${dish.recipeLink}" target="_blank" class="text-emerald-600 underline hover:text-emerald-300 transition">View full recipe →</a></p>`
+                        : ''}
+    </div>
+  `;
+
+                // 5. Add to chat
+                addBotMessage(message);
+
+                // 6. After a delay, show similar dish suggestions
+                setTimeout(() => {
+                    if (!dish.cuisine) {
+                        // Try to determine cuisine if missing
+                        for (const cuisine in recipes) {
+                            if (recipes[cuisine][dish.name]) {
+                                dish.cuisine = cuisine;
+                                break;
+                            }
+                        }
+                        dish.cuisine = dish.cuisine || 'egyptian'; // Final fallback
+                    }
+                    // Show dish suggestions
+                    showDishSuggestions('post-recipe', {
+                        name: dish.name,
+                        cuisine: dish.cuisine,
+                        isVegetarian: dish.isVegetarian,
+                        type: dish.type
+                    });
+                }, 1500);
+            }
+
+            let lastSuggestedDishes = [];  // Stores dishes from last suggestion list
+
+            function handleRecipeRequest(keywords, recipes, cuisineCounts) {
+                let recipeFound = false;
+                const lowerMessage = keywords.join(' ');
+                const lowerKeywords = keywords.map(k => k.toLowerCase());
+
+                // First check if user is selecting from last suggestions:
+                const matchedFromSuggestions = lastSuggestedDishes.find(dish =>
+                    dish.name.toLowerCase() === lowerMessage.trim()
+                );
+                if (matchedFromSuggestions) {
+                    showRecipe(matchedFromSuggestions);
+                    totalQuestionsAsked++;
+                    cuisineCounts[matchedFromSuggestions.cuisine] = (cuisineCounts[matchedFromSuggestions.cuisine] || 0) + 1;
+                    lastSuggestedDishes = []; // clear suggestions after user picks one
+                    return '';
+                }
+
+                // Normal search logic:
+                for (const cuisineType in recipes) {
+                    for (const recipeName in recipes[cuisineType]) {
+                        const recipeNameLower = recipeName.toLowerCase();
+
+                        if (
+                            lowerKeywords.some(kw =>
+                                recipeNameLower.includes(kw) || kw.includes(recipeNameLower)
+                            ) || lowerMessage.includes(recipeNameLower)
+                        ) {
+                            showRecipe(recipes[cuisineType][recipeName]);
+                            totalQuestionsAsked++;
+                            cuisineCounts[cuisineType] = (cuisineCounts[cuisineType] || 0) + 1;
+                            lastSuggestedDishes = [];  // clear suggestions on exact match
+                            recipeFound = true;
+                            break;
+                        }
+                    }
+                    if (recipeFound) break;
+                }
+
+                if (!recipeFound) {
+                    const allDishes = getAllDishes();
+                    const possibleMatches = allDishes.filter(dish =>
+                        lowerKeywords.some(kw =>
+                            dish.name.toLowerCase().includes(kw) ||
+                            dish.description.toLowerCase().includes(kw)
+                        )
+                    );
+
+                    if (possibleMatches.length > 0) {
+                        lastSuggestedDishes = possibleMatches.slice(0, 3);  // Save for next input
+                        let response = "I'm not sure exactly which recipe you want, but here are some possibilities:\n";
+                        lastSuggestedDishes.forEach(dish => {
+                            response += `- ${dish.name} (${dish.cuisine})\n`;
+                        });
+                        response += "\nPlease specify which one you'd like the recipe for.";
+                        return response;
+                    } else {
+                        lastSuggestedDishes = [];
+                        return "I couldn't find that recipe. Try being more specific or mention the dish name.";
+                    }
+                }
+
+                return '';
+            }
+            // similar dishes
+            function suggestSimilarDishes(displayedDish) {
+                if (!displayedDish || !displayedDish.name || !displayedDish.cuisine || !recipes[displayedDish.cuisine]) {
+                    console.warn("SuggestSimilarDishes: Invalid displayedDish or missing cuisine data.", displayedDish);
+                    return;
+                }
+
+                const cuisine = displayedDish.cuisine;
+                // Ensure recipes[cuisine] exists and is an object before calling Object.values
+                const cuisineRecipes = recipes[cuisine];
+                if (typeof cuisineRecipes !== 'object' || cuisineRecipes === null) {
+                    console.warn(`No recipes found for cuisine: ${cuisine} in suggestSimilarDishes`);
+                    return;
+                }
+                const allDishesInCuisine = Object.values(cuisineRecipes);
+
+                const similarDishes = allDishesInCuisine.filter(dish =>
+                    dish.name && displayedDish.name && // Ensure names exist for comparison
+                    dish.name.toLowerCase() !== displayedDish.name.toLowerCase()
+                );
+
+                if (similarDishes.length === 0) {
+                    return;
+                }
+
+                const shuffledSimilar = shuffleArray(similarDishes); // Ensure shuffleArray function is defined
+                const suggestions = shuffledSimilar.slice(0, 2);
+
+                if (suggestions.length > 0) {
+                    let suggestionMessage = `<div class="mt-4 p-3 rounded-lg bg-emerald-800 bg-opacity-40">
+            <p class="text-lime-300 italic">If you liked ${displayedDish.name}, you might also enjoy these from ${cuisine.charAt(0).toUpperCase() + cuisine.slice(1)} cuisine:</p>
+            <ul class="list-disc list-inside mt-1 text-lime-100">`;
+
+                    suggestions.forEach(sugg => {
+                        if (sugg.name && cuisine) { // Ensure suggestion has a name and cuisine
+                            const safeSuggName = String(sugg.name).replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                            const safeCuisine = String(cuisine).replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                            suggestionMessage += `<li class="hover:text-peachy text-lime-200 cursor-pointer" onclick="handleSuggestedDishClick('<span class="math-inline">\{safeSuggName\}', '</span>{safeCuisine}')">${sugg.name}</li>`;
+                        }
+                    });
+                    suggestionMessage += `</ul><p class="text-xs text-lime-400 mt-1 italic">Click a name to learn more, or ask about something else!</p></div>`;
+
+                    setTimeout(() => {
+                        addBotMessage(suggestionMessage);
+                        // No specific lastContext needed here as clicks are direct actions
+                    }, 1200);
+                }
+            }
+
+            function handleSuggestedDishClick(dishName, cuisineName) {
+                const normalizedDishName = dishName.toLowerCase();
+                if (recipes[cuisineName] && recipes[cuisineName][normalizedDishName]) {
+                    const dish = recipes[cuisineName][normalizedDishName];
+                    // Simulate user asking for the dish to maintain conversation flow via processUserMessage
+                    userInput.value = `recipe for ${dish.name}`; // Set input field
+                    sendMessage(); // Trigger send, which calls addUserMessage and processUserMessage
+                    // This will also clear lastContext naturally if processUserMessage handles the new query.
+                } else {
+                    console.error(`Suggested dish not found in handleSuggestedDishClick: ${dishName} in ${cuisineName}`);
+                    addBotMessage(`Sorry, I couldn't fetch details for ${dishName} right now.`);
+                }
+            }
+            // handle typos 
+            function handleTypos(token) {
+                if (!token) return token;
+
+                const [word, punctuation] = splitWordAndPunctuation(token);
+                const lowerWord = word.toLowerCase();
+
+                // Check both exact match and lowercase match
+                return typoMap[word] || typoMap[lowerWord] || word + punctuation;
+            }
+            function splitWordAndPunctuation(word) {
+                const match = word.match(/^([a-zA-Z']+)([^a-zA-Z']*)$/);
+                if (match) {
+                    return [match[1], match[2]];
+                }
+                return [word, ''];
+            }
+            // command matching 
+            function parseInput(input) {
+                // Clean the input
+                const ingredientPhrases = input.match(/"([^"]+)"/g) || [];
+                const ingredientList = ingredientPhrases.map(phrase => phrase.replace(/"/g, '').trim());
+                const cleanedInput = input.replace(/"([^"]+)"/g, '').trim();
+                const clean = input.toLowerCase().replace(/[^\w\s]/g, '').trim();
+                const tokens = clean.split(/\s+/);
+
+                // Handle typos - you'll need to implement this function
+                const correctedTokens = tokens.map(token => handleTypos(token));
+                const cleaned = correctedTokens.join(' ');
+
+                // Determine the command type
+                let command = 'unknown';
+
+                if (
+                    cleaned.startsWith('cuisine') ||
+                    cleaned.includes('food') || cleaned.includes('meal') ||
+                    cleaned.startsWith('show me') || cleaned.startsWith('give me') ||
+                    cleaned.startsWith('tell me') || cleaned.startsWith('list')
+                ) {
+                    command = 'cuisine';
+                }
+                else if (
+                    // Direct ingredient questions
+                    (cleaned.includes('ingredients') ||
+                        cleaned.startsWith('what do i need') ||
+                        cleaned.includes('items needed') ||
+                        cleaned.includes('components of') ||
+                        cleaned.includes('what does it take to make') ||
+                        cleaned.startsWith('what\'s in') ||
+                        cleaned.includes('what are the contents') ||
+                        cleaned.includes('what goes into') ||
+                        cleaned.includes('what is needed for') ||
+                        cleaned.includes('what are the items required') ||
+                        cleaned.includes('what do you need to make')) ||
+
+                    // "What is X made of" variations
+                    (cleaned.startsWith('what is') && (
+                        cleaned.includes('made of') ||
+                        cleaned.includes('made with') ||
+                        cleaned.includes('made from') ||
+                        cleaned.includes('contains') ||
+                        cleaned.includes('comprises') ||
+                        cleaned.includes('consists of') ||
+                        cleaned.includes('include') ||
+                        cleaned.includes('involve') ||
+                        cleaned.includes('require')
+                    ) ||
+
+                        // Recipe requirements
+                        cleaned.includes('recipe calls for') ||
+                        cleaned.includes('recipe requires') ||
+                        cleaned.includes('recipe ingredients') ||
+                        cleaned.includes('ingredients list') ||
+                        cleaned.includes('list of ingredients') ||
+                        cleaned.includes('what goes into') ||
+                        cleaned.includes('what goes in') ||
+
+                        // Dish composition questions
+                        cleaned.includes('made up of') || cleaned.includes('composition of') ||
+                        cleaned.includes('what\'s inside') ||
+                        cleaned.includes('whats in') || cleaned.includes('what is in') ||
+
+                        // Finding dishes by ingredient
+                        cleaned.startsWith('dishes with') || cleaned.includes('meals with') ||
+                        cleaned.startsWith('recipes with') ||
+                        cleaned.startsWith('food with') || cleaned.includes('meals using') ||
+                        cleaned.startsWith('dishes containing') ||
+                        cleaned.includes('what has') || cleaned.includes('what can i make with') ||
+                        cleaned.includes('what uses') ||
+                        cleaned.includes('contains') ||
+
+                        // Shopping/preparation questions
+                        cleaned.includes('grocery list for') ||
+                        cleaned.includes('items to buy for') ||
+                        cleaned.includes('prep for')
+                    )) {
+                    command = 'ingredients';
+                }
+                else if (
+                    // Recipe request
+                    (cleaned.startsWith('how ') && cleaned.includes('make')) ||
+                    (cleaned.includes('recipe') || cleaned.includes('steps') ||
+                        cleaned.includes('instructions') || cleaned.includes('method') ||
+                        cleaned.includes('way')) &&
+                    (cleaned.includes(' for ') || cleaned.includes(' of ') || cleaned.includes(' to ')) ||
+                    (cleaned.includes('make') || cleaned.includes('prepare') || cleaned.includes('cook') ||
+                        cleaned.includes('create') || cleaned.includes('do')) &&
+                    (cleaned.includes('dish') || cleaned.includes('food') || cleaned.includes('meal')) ||
+                    cleaned.includes('step by step') ||
+                    cleaned.startsWith('can you show') || cleaned.startsWith('can you explain') ||
+                    cleaned.startsWith('what\'s the best way to') || cleaned.startsWith('whats the best way to') ||
+                    cleaned.startsWith('what is the best way to') || cleaned.startsWith('what\'s the right way to') ||
+                    cleaned.startsWith('whats the right way to') || cleaned.startsWith('what is the right way to') ||
+                    cleaned.includes('walk me through') ||
+                    (cleaned.startsWith('i need to know') || cleaned.startsWith('i need to learn')) &&
+                    (cleaned.includes('to make') || cleaned.includes('to cook'))
+                ) {
+                    command = 'recipe';
+                }
+                else if (
+                    cleaned.includes('quiz') ||
+                    ((cleaned.includes('test') || cleaned.includes('question') || cleaned.includes('challenge')) &&
+                        (cleaned.includes('me') || cleaned.includes('my knowledge'))) ||
+                    cleaned.startsWith('i want to try quiz') || cleaned.startsWith('i want to take quiz') ||
+                    cleaned.startsWith('can we do quiz on') || cleaned.startsWith('can we do test')
+                ) {
+                    command = 'quiz';
+                }
+                else if (
+                    cleaned.includes('trivia') || cleaned.includes('fact') || cleaned.includes('interesting') ||
+                    cleaned.includes('fun') || cleaned.includes('did you know') ||
+                    cleaned.includes('history') || cleaned.includes('origin') || cleaned.includes('story') ||
+                    cleaned.includes('background') && cleaned.includes('of') ||
+                    (cleaned.startsWith('what\'s the') || cleaned.startsWith('what is the')) &&
+                    (cleaned.includes('story') || cleaned.includes('history')) ||
+                    (cleaned.includes('know') || cleaned.includes('share')) &&
+                    (cleaned.includes('about') && (cleaned.includes('cuisine') || cleaned.includes('dish')))
+                ) {
+                    command = 'trivia';
+                }
+                else if (
+                    cleaned.startsWith('what is') ||
+                    cleaned.startsWith('tell me about') ||
+                    cleaned.includes('describe') || cleaned.includes('explain') || cleaned.includes('define') ||
+                    cleaned.startsWith('i want to know about') ||
+                    cleaned.includes('information') && (cleaned.includes('dish') || cleaned.includes('food'))
+                ) {
+                    command = 'dish_info';
+                }
+                else if (
+                    cleaned.includes('preference') || cleaned.includes('favorite') ||
+                    cleaned.includes('like best') || cleaned.includes('save as favorite') ||
+                    cleaned.includes('add to favorites') || cleaned.includes('save') || cleaned.includes('like')
+                ) {
+                    command = 'preference';
+                }
+                else if (
+                    cleaned.includes('bye') || cleaned.includes('goodbye') || cleaned.includes('see you') ||
+                    cleaned.includes('quit') || cleaned.includes('exit') || cleaned.startsWith('later') ||
+                    cleaned.startsWith('maybe next time') ||
+                    (cleaned.startsWith('i\'ll go') || cleaned.startsWith('i will go') || cleaned.startsWith('i go')) ||
+                    cleaned.includes('enough') || cleaned.includes('done') || cleaned.includes('finished')
+                ) {
+                    command = 'bye';
+                }
+                else if (
+                    cleaned.includes('yes') || cleaned.includes('yeah') || cleaned.includes('yep') ||
+                    cleaned.includes('sure') || cleaned.includes('ok') || cleaned.includes('okay') ||
+                    cleaned.includes('please') ||
+                    cleaned.includes('continue') || cleaned.includes('next') || cleaned.includes('move on') ||
+                    (cleaned.startsWith('i\'d like') || cleaned.startsWith('i would like') ||
+                        cleaned.startsWith('i\'d love') || cleaned.startsWith('i would love') ||
+                        cleaned.startsWith('i\'d want') || cleaned.startsWith('i would want')) ||
+                    cleaned.includes('ready') || cleaned.includes('begin') || cleaned.includes('start')
+                ) {
+                    command = 'log';
+                }
+                else if (
+                    cleaned.includes('hello') || cleaned.includes('hi') || cleaned.includes('hey') ||
+                    cleaned.includes('greetings') || cleaned.includes('marhaba') || cleaned.includes('salam') ||
+                    cleaned.includes('ciao') || cleaned.includes('bonjour') || cleaned.includes('hola') ||
+                    cleaned.includes('namaste') || cleaned.includes('konnichiwa') || cleaned.includes('ola')
+                ) {
+                    command = 'greet';
+                }
+                else if (
+                    cleaned.includes('how are you') || cleaned.includes('how are u') || cleaned.includes('good wbu') ||
+                    cleaned.includes('how are you doing') || cleaned.includes('how are u doing') ||
+                    cleaned.includes('how\'s it going') || cleaned.includes('how is it going') ||
+                    cleaned.includes('how\'s everything') || cleaned.includes('how is everything') ||
+                    cleaned.includes('how\'s life') || cleaned.includes('how is life') ||
+                    cleaned.includes('what\'s up') || cleaned.includes('whats up') ||
+                    cleaned.includes('what\'s new') || cleaned.includes('whats new')
+                ) {
+                    command = 'ask_how_user_is';
+                }
+                else if (
+                    cleaned.includes('joke') || cleaned.includes('funny') || cleaned.includes('laugh') ||
+                    cleaned.includes('tell me a joke') || cleaned.includes('make me laugh') ||
+                    cleaned.includes('crack me up') || cleaned.includes('humor me') ||
+                    cleaned.includes('lighten the mood') || cleaned.includes('bring on the laughs') ||
+                    cleaned.includes('give me a laugh')
+                ) {
+                    command = 'joke';
+                }
+
+                // Filter out common words to get keywords
+                const commonWords = new Set([
+                    // Basic question words
+                    "what", "which", "how", "can", "could", "would",
+                    "is", "are", "was", "were", "does", "do", "did",
+                    "has", "have", "had", "will", "shall", "may",
+                    "might", "must", "should", "need", "want", "no",
+                    "what's", "whats", "items", "item", "preparing", "needed", "components", "say", "something",
+
+                    // Request verbs
+                    "tell", "give", "show", "explain", "describe", "funny",
+                    "list", "provide", "share", "know", "find", "walk",
+                    "define",
+                    "try", "take", "uses", "grocery", "whats",
+
+                    // Food-related verbs
+                    "make", "cook", "prepare", "create", "bake",
+                    "fry", "grill", "boil", "steam", "roast",
+                    "save", "add", "like", "require", "include", "use", "uses",
+                    "add", "contain", "contains", "made", "calls", "required",
+
+                    // Prepositions/articles
+                    "about", "of", "for", "to", "from", "with",
+                    "without", "in", "on", "at", "the", "a", "an", "it",
+                    "me", "as", "by", "through",
+
+                    // General food terms
+                    "dish", "dishes", "food", "cuisine", "meal", "recipe",
+                    "ingredient", "step", "steps", "direction", "instructions", "instruction",
+                    "method", "way",
+                    "calls", "required", "ingredients", "ingredient", "buy", "prep",
+
+                    // Quiz/Test terms
+                    "quiz", "test", "question", "challenge",
+                    "knowledge", "preference", "save", "favorite",
+
+                    // Trivia terms
+                    "trivia", "fact", "fun", "interesting",
+                    "did", "history", "origin", "story", "background",
+
+                    // Polite terms
+                    "please", "thanks", "thank", "hello", "hi", "hey",
+                    "greetings", "goodbye", "bye",
+                    "welcome", "back",
+
+                    // Response terms
+                    "sure", "ok", "okay", "yeah", "yep",
+                    "continue", "move", "on", "like", "love",
+                    "ready", "begin", "start",
+
+                    // Pronouns/identifiers
+                    "i", "we", "my", "our", "you",
+
+                    // Time references
+                    "now", "later", "maybe", "next", "time",
+                    "today", "soon", "enough", "finished", "done",
+
+                    // Quantifiers
+                    "some", "any", "many", "few", "several", "all",
+
+                    // Connectors
+                    "and", "or", "but", "containing", "using", "contains", "laugh",
+                    "not", "no",
+
+                    // Special terms
+                    "best", "right", "good", "day", "up", "are",
+                    "exit", "quit", "see", "go", "want", "information", "made", "like best", "like", "favorite",
+                    "prefer", "love", "adore", "enjoy", "remember",
+                    "choose", "select", "pick", "go for", "opt for", "fancy", "dig",
+
+                    // Nouns
+                    "preference", "favorite", "choice", "dish", "cuisine", "food", "meal",
+
+                    // Phrases
+                    "i'm", "i am", "i'd", "i would", "i usually", "i normally", "i generally",
+                    "i mostly", "i typically", "as my", "to my", "that i", "please", "could you",
+                    "can you", "would you", "make a note", "keep as", "store as", "mark as",
+                    "note as", "nothing beats", "crazy about", "obsessed with", "fond of",
+                    "partial to", "not a fan of", "don't care for", "avoid", "pass on", "skip",
+
+                    // Connectors
+                    "as", "to", "for", "about", "with", "of", "new", "this", "that", "these", "those"
+                ]);
+
+                const keywords = correctedTokens.filter(token =>
+                    !commonWords.has(token.toLowerCase())
+                );
+
+                return { command, keywords };
+            }
+
+            //Main message proccesing function
+            function processUserMessage(message) {
+
+                // if asking about some dish from ingredient search 
+                if (lastIngredientSearch && Array.isArray(lastIngredientSearch.dishes)) {
+                    const selection = handleTypos(message.trim().toLowerCase());
+
+                    if (["none", "no", "exit", "cancel", "thanks"].some(word => selection.includes(word))) {
+                        addBotMessage("No problem! Let me know if you need anything else.");
+                        lastIngredientSearch = null; // Clear context
+                        return;
+                    }
+
+                    const matchedDish = lastIngredientSearch.dishes.find(d =>
+                        handleTypos(d.name.toLowerCase()) === selection
+                    );
+
+                    if (matchedDish) {
+                        lastIngredientSearch = null;
+                        showRecipe(matchedDish)
+                        return;
+                    } else {
+                        addBotMessage(`Sorry, I couldn't find "${message}" in the results. Please try again.`);
+                        return;
+                    }
+                }
+                if (lastSuggestedDishes.length > 0) {
+                    const matchedDish = lastSuggestedDishes.find(dish => dish.name.toLowerCase() === cleanedMessage);
+                    if (matchedDish) {
+                        showRecipe(matchedDish);
+                        // Update stats if you use them
+                        totalQuestionsAsked++;
+                        cuisineCounts[matchedDish.cuisine] = (cuisineCounts[matchedDish.cuisine] || 0) + 1;
+                        lastSuggestedDishes = []; // clear suggestions after selection
+                        return;
+                    }
+                }
+
+                // Show typing indicator
+                const typingIndicator = document.createElement('div');
+                typingIndicator.className = 'message bot-message p-3 rounded-lg mb-2 flex items-center';
+                typingIndicator.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+                chatMessages.appendChild(typingIndicator);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+
+                // Parse the input
+                const { command, keywords } = parseInput(message);
+                console.log(command)
+
+                // Simulate processing delay
+                setTimeout(() => {
+                    // Remove typing indicator
+                    chatMessages.removeChild(typingIndicator);
+
+                    if (lastContext?.type === 'post-recipe-suggestions') {
+                        const corrected = handleTypos(message.toLowerCase());
+                        const selectedDish = lastContext.suggestions.find(d =>
+                            handleTypos(d.name.toLowerCase()) === corrected
+                        );
+                        // Clean the message for comparison
+                        const cleanMsg = message.trim().toLowerCase();
+                        if (selectedDish) {
+                            showRecipe(selectedDish);
+                            return;
+                        } else if (lastContext?.type === 'dish-suggestions' &&
+                            (cleanMsg === 'no' || cleanMsg === 'no thanks' || cleanMsg.includes('dont like'))) {
+                            declineSuggestion();
+                            return;
+                        }
+                        // If no match found, continue with normal processing
+                    }
+
+                    // =============================================
+                    // NEW: Handle dish suggestion contexts
+                    // =============================================
+                    if (lastContext) {
+                        switch (lastContext.type) {
+                            case 'dish-suggestions':
+                                handleSuggestionResponse(message);
+                                return;
+                            case 'more-suggestions':
+                                const response = handleTypos(message.toLowerCase());
+                                if (response === "yes" || response === "please" || response === "sure") {
+                                    showDishSuggestions(false);
+                                } else {
+                                    addBotMessage(farewells[Math.floor(Math.random() * farewells.length)]);
+                                }
+                                return;
+                            case 'ingredients-only':
+                                const reply = message.toLowerCase();
+                                if (["yes", "sure", "show", "show ingredients", "please"].includes(reply)) {
+                                    handleIngredientSearchResults(lastContext.recipeName.split(" "));
+                                    return;
+                                } else {
+                                    addBotMessage("No problem! Let me know if you'd like to see a recipe or search again.");
+                                    return;
+                                }
+                                return;
+                            case 'recipe-only':
+                                const rep = message.toLowerCase().trim();
+
+                                if (rep.includes('recipe') || rep.includes('instruction') ||
+                                    rep === 'yes' || rep === 'show recipe') {
+
+                                    // Show full recipe
+                                    showRecipe(lastContext.dish);
+                                    lastContext = {
+                                        type: 'post-recipe',
+                                        cuisine: lastContext.cuisine,
+                                        recipeName: lastContext.recipeName
+                                    };
+                                    return;
+                                }
+                        }
+                    }
+
+                    // Quiz session answer handling
+                    if (quizSession) {
+                        return;
+                    }
+
+                    let response = '';
+                    let cuisine = '';
+                    let isIngredientQuery = command === 'ingredients';
+                    let availableCuisines;
+
+                    // Handle based on command type
+                    switch (command) {
+                        /*case  'suggest' | 'suggestions' | 'recommend' | 'ideas' | 'options' | 'what else':
+                            showDishSuggestions('suggestions', keywords);
+                            return;*/
+                        case 'ask_how_user_is':
+                            response = howAreYou[Math.floor(Math.random() * howAreYou.length)];
+                            break;
+                        case 'greet':
+                            response = greetings[Math.floor(Math.random() * greetings.length)];
+                            break;
+
+                        case 'bye':
+                            response = farewells[Math.floor(Math.random() * farewells.length)];
+                            break;
+
+                        case 'joke':
+                            askForJoke();
+                            return;
+                        case 'ingredients':
+                            const ingredientPhrases = message.match(/"([^"]+)"/g) || [];
+                            const remainingText = ingredientPhrases.reduce((text, phrase) =>
+                                text.replace(phrase, ''), message);
+
+                            const singleWords = remainingText.split(/[, ]+/)
+                                .filter(word => word.trim().length > 0);
+
+                            const allIngredients = [
+                                ...ingredientPhrases.map(phrase => phrase.replace(/"/g, '').trim()),
+                                ...singleWords
+                            ].filter(ing => ing.length > 0);
+
+                            if (allIngredients.length === 0) {
+                                addBotMessage("Please specify ingredients you'd like to search for!");
+                                return;
+                            }
+
+                            // Show searching message
+                            addBotMessage(`Searching for recipes with: ${allIngredients.map(ing => `"${ing}"`).join(', ')}...`);
+
+                            // Process the search
+                            handleIngredientSearchResults(allIngredients);
+
+                            break;
+                        case 'recipe':
+                            response = handleRecipeRequest(keywords, recipes, cuisineCounts);
+
+                            break;
+                        case 'quiz':
+                            availableCuisines = Object.keys(quizQuestions).filter(c => quizQuestions[c].length >= 5);
+                            if (availableCuisines.length === 0) {
+                                response = "I don't have enough quiz questions loaded (need at least 5 per cuisine). Please load more quiz data first!";
+                                // break;  // exit the quiz case here if no quizzes loaded
+                            }
+                            const selectedCuisine = availableCuisines.find(c =>
+                                keywords.some(kw => kw.toLowerCase() === c.toLowerCase())
+                            ) ||
+                                availableCuisines.find(c => message.toLowerCase().includes(c));
+                            if (selectedCuisine) {
+                                startQuiz(selectedCuisine);
+                                return;  // early exit from processUserMessage to start quiz immediately
+                            } else {
+                                response = `Which cuisine would you like to be quizzed on? Available options: ${availableCuisines.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ')}`;
+                                lastContext = { type: 'quiz-selection' };
+                            }
+                            break;
+
+                        case 'trivia':
+                            if (!cuisineTrivia || Object.keys(cuisineTrivia).length === 0) {
+                                response = "I don't have any food trivia loaded yet. Please ensure `trivia.json` is loaded correctly.";
+                                break;
+                            }
+
+                            const availableCuisinesWithTrivia = Object.keys(cuisineTrivia).filter(
+                                c => cuisineTrivia[c] && cuisineTrivia[c].length > 0
+                            );
+
+                            if (availableCuisinesWithTrivia.length === 0) {
+                                response = "No trivia facts are currently available in `trivia.json`.";
+                                break;
+                            }
+
+                            const triviaCuisine = availableCuisinesWithTrivia[
+                                Math.floor(Math.random() * availableCuisinesWithTrivia.length)
+                            ];
+                            const randomFact = cuisineTrivia[triviaCuisine][
+                                Math.floor(Math.random() * cuisineTrivia[triviaCuisine].length)
+                            ];
+
+                            response = `
+        <div class="flex items-start">
+            <span class="emoji mr-2" style="color: var(--highlight-gold);">🧠</span>
+            <div class="text-emerald-100">
+                <strong class="font-semibold text-peachy">
+                    <span class="math-inline">{triviaCuisine.charAt(0).toUpperCase() + triviaCuisine.slice(1)} Trivia:</span>
+                </strong>
+                <p class="mt-1">${randomFact}</p>
+            </div>
+        </div>
+        <p class="mt-3 bg-emerald- italic">
+            That was fun! Would you like to take a quiz on ${triviaCuisine} cuisine, or perhaps get recipe ideas from ${triviaCuisine}?
+        </p>
+    `;
+                            lastContext = {
+                                type: 'trivia_followup_quiz_or_recipe', // New context type
+                                cuisine: triviaCuisine
+                            };
+                            totalQuestionsAsked++;
+                            cuisineCounts[triviaCuisine] = (cuisineCounts[triviaCuisine] || 0) + 1;
+                            break;
+
+                        case 'cuisine':
+                            // Handle cuisine information requests
+                            let availableCuisine = Object.keys(recipes);
+                            const requestedCuisine = availableCuisine.find(c => {
+                                const lcCuisine = c.toLowerCase();
+                                return keywords.some(kw => lcCuisine.includes(kw.toLowerCase()) || kw.toLowerCase().includes(lcCuisine)) ||
+                                    message.toLowerCase().includes(lcCuisine)
+                            });
+
+
+                            if (requestedCuisine) {
+                                const recipeNames = Object.keys(recipes[requestedCuisine]);
+                                response = `
+                    <p class="mb-1">Here are some popular <strong>${requestedCuisine}</strong> dishes I can tell you about:</p>
+                    <ul class="list-disc list-inside text-sm mt-1">
+                        ${recipeNames.map(name => `<li>${name}</li>`).join('')}
+                    </ul>
+                    <p class="mt-2">Ask about any of them for detailed recipes!</p>
+                `;
+
+                                totalQuestionsAsked++;
+                                cuisineCounts[requestedCuisine] = (cuisineCounts[requestedCuisine] || 0) + 1;
+                            } else {
+                                response = `I know about these cuisines: ${availableCuisine.join(', ')}. Which one interests you?`;
+                            }
+                            break;
+
+                        case 'dish_info':
+                            // Handle dish information requests
+                            let dishFound = false;
+                            for (const cuisineType in recipes) {
+                                for (const dishName in recipes[cuisineType]) {
+                                    if (keywords.some(kw => dishName.includes(kw)) ||
+                                        message.toLowerCase().includes(dishName)) {
+                                        const recipe = recipes[cuisineType][dishName];
+                                        response = `
+                            <strong class="text-lg text-emerald-800 font-semibold">
+                                🍽️ ${dishName.charAt(0).toUpperCase() + dishName.slice(1)} 
+                                <span class="text-sm text-emerald-600">(${cuisineType.charAt(0).toUpperCase() + cuisineType.slice(1)})</span>
+                            </strong>
+                            <p class="text-sm text-gray-700 italic mt-1">
+                                "${recipe.description}"
+                            </p>
+                            <p class="text-sm text-gray-800 mt-2">
+                                🧾 <strong>Type:</strong> ${recipe.type} 
+                                ${recipe.isVegetarian
+                                                ? '<span class="ml-1 text-green-700">🥕 Vegetarian</span>'
+                                                : '<span class="ml-1 text-red-600">🍖 Non-vegetarian</span>'}
+                            </p>
+                            <p class="text-sm text-gray-700 mt-2">
+                                🌍 <strong>Origin:</strong> ${recipe.origin || 'A traditional dish with a rich history.'}
+                            </p>
+                            <p class="text-sm text-emerald-800 mt-4"> Curious about the ingredients? </p>
+                        `;
+                                        lastContext = {
+                                            type: 'ingredients-only',
+                                            cuisine: cuisineType,
+                                            recipeName: recipe.name
+                                        }
+                                        dishFound = true;
+                                        totalQuestionsAsked++;
+                                        cuisineCounts[cuisineType] = (cuisineCounts[cuisineType] || 0) + 1;
+                                        break;
+                                    }
+                                }
+                                if (dishFound) break;
+                            }
+
+                            if (!dishFound) {
+                                response = "I'm not sure which dish you're asking about. Can you be more specific?";
+                            }
+                            break;
+
+                        case 'preference':
+                            // Handle preference saving
+                            let prefDish = null;
+                            for (const cuisineType in recipes) {
+                                for (const recipeName in recipes[cuisineType]) {
+                                    if (keywords.some(kw => recipeName.includes(kw)) ||
+                                        message.toLowerCase().includes(recipeName)) {
+                                        prefDish = {
+                                            name: recipeName,
+                                            cuisine: cuisineType
+                                        };
+                                        break;
+                                    }
+                                }
+                                if (prefDish) break;
+                            }
+
+                            if (prefDish) {
+                                favoriteDish = prefDish;
+                                response = `I've noted that you like ${prefDish.name} from ${prefDish.cuisine} cuisine! I'll remember that for future recommendations.`;
+                                favoriteDishElement.textContent = `${prefDish.name}(${prefDish.cuisine})`;
+                                updateStatsDisplay();
+                            } else {
+                                response = "I'm not sure which dish you're referring to. Can you be more specific?";
+                            }
+                            break;
+
+                        case 'log':
+                            // Handle follow-up responses
+                            if (lastContext) {
+                                switch (lastContext.type) {
+                                    case 'trivia_quiz_proposal': // This is the new case block
+                                        const userResponseLower = message.toLowerCase();
+                                        if (userResponseLower === 'yes' || userResponseLower === 'ok' || userResponseLower === 'sure' || userResponseLower.includes('quiz')) {
+                                            if (quizQuestions[lastContext.cuisine] && quizQuestions[lastContext.cuisine].length >= 5) {
+                                                startQuiz(lastContext.cuisine);
+                                                response = ''; // startQuiz handles its own messages, so no bot response needed here
+                                            } else {
+                                                response = `I'd love to quiz you on ${lastContext.cuisine} cuisine, but I don't have enough questions for it right now.`;
+                                            }
+                                        } else if (userResponseLower === 'no' || userResponseLower.includes('nope') || userResponseLower.includes('negative')) {
+                                            response = "Alright. What else can I help you with today?";
+                                        } else {
+                                            response = `Sorry, I didn't quite catch that. If you want to try the ${lastContext.cuisine} quiz later, just ask!`;
+                                        }
+                                        break; // Don't forget the break for this new case!
+                                    case 'ingredients-only':
+                                        const { cuisine, recipeName } = lastContext;
+                                        const recipe = recipes[cuisine][recipeName];
+                                        showRecipe(recipe)
+                                    // response = `
+                                    //     <strong>Instructions for ${recipeName.charAt(0).toUpperCase() + recipeName.slice(1)}:</strong>
+                                    //     <p class="mt-2">${recipe.instructions}</p>
+                                    //     ${recipe.recipeLink ? `<p class="mt-2"><a href="${recipe.recipeLink}" target="_blank" class="text-chef-blue-400 hover:text-chef-blue-300">View full recipe online →</a></p>` : ''}
+                                    // `;
+                                    // break;
+
+                                    case 'trivia_followup_quiz_or_recipe':
+                                        const userResponseText = message.toLowerCase(); // 'message' is the current user input
+                                        const contextCuisine = lastContext.cuisine;
+
+                                        if (userResponseText.includes('quiz')) {
+                                            if (quizQuestions[contextCuisine] && quizQuestions[contextCuisine].length >= 5) {
+                                                startQuiz(contextCuisine);
+                                                // startQuiz() adds its own messages, so no 'response' needed here.
+                                                // The processUserMessage function should ideally not try to addBotMessage(response) if response is empty.
+                                            } else {
+                                                response = `I'd love to quiz you on ${contextCuisine}, but I don't have enough questions for it right now.`;
+                                            }
+                                        } else if (userResponseText.includes('recipe') || userResponseText.includes('ideas')) {
+                                            const recipeNames = Object.keys(recipes[contextCuisine] || {});
+                                            if (recipeNames.length > 0) {
+                                                response = `Great! For ${contextCuisine} cuisine, I know these recipes: ${recipeNames.map(name => name.charAt(0).toUpperCase() + name.slice(1)).join(', ')}. Which one are you interested in?`;
+                                                // Set a new context if you want to specifically handle the next input as a recipe name selection
+                                                lastContext = { type: 'recipe_selection_from_trivia', cuisine: contextCuisine };
+                                            } else {
+                                                response = `I don't have specific recipes listed for ${contextCuisine} at the moment.`;
+                                            }
+                                        } else if (userResponseText === 'yes' || userResponseText === 'ok' || userResponseText === 'sure') {
+                                            response = `Okay! For ${contextCuisine} cuisine, did you want a "quiz" or "recipe ideas"? Please be specific.`;
+                                            // Re-set context to ask again
+                                            lastContext = { type: 'trivia_followup_quiz_or_recipe', cuisine: contextCuisine };
+                                        } else if (userResponseText.includes('no')) {
+                                            response = "Alright. What else can I help you with today?";
+                                            // lastContext will be nulled after this 'log' case finishes
+                                        } else {
+                                            response = `Sorry, I didn't catch that. For ${contextCuisine}, were you interested in a "quiz" or "recipes"?`;
+                                            lastContext = { type: 'trivia_followup_quiz_or_recipe', cuisine: contextCuisine }; // Re-prompt
+                                        }
+                                        break;
+
+                                    case 'quiz-selection':
+                                        const quizCuisine = keywords.find(kw =>
+                                            Object.keys(quizQuestions).includes(kw)
+                                        ) ||
+                                            Object.keys(quizQuestions).find(c => message.toLowerCase().includes(c));
+
+                                        if (quizCuisine) {
+                                            startQuiz(quizCuisine);
+                                            return;
+                                        } else {
+                                            response = "I'm not sure which cuisine you selected. Please try again.";
+                                        }
+                                        break;
+
+                                    default:
+                                        response = "What would you like to know more about?";
+                                }
+                                lastContext = null;
+                            } else {
+                                response = "What would you like to know more about?";
+                            }
+                            break;
+                        case 'dish-followup':
+                            const affirmativeText = message.toLowerCase(); // 'message' is the current user input
+
+                            if (!lastContext.cuisine || !lastContext.recipeName ||
+                                !recipes[lastContext.cuisine] || !recipes[lastContext.cuisine][lastContext.recipeName.toLowerCase()]) { // Ensure recipeName is checked case-insensitively if stored that way
+                                response = "I'm sorry, I've forgotten which dish we were discussing. Could you remind me by asking for the dish again?";
+                                break; // Exit this case
+                            }
+
+                            const dishDetails = recipes[lastContext.cuisine][lastContext.recipeName.toLowerCase()]; // Assuming recipeName in context is reliable
+
+                            if (affirmativeText.includes("ingredient")) {
+                                const ingList = (dishDetails.ingredients || []).map(i => `<li>${i}</li>`).join('');
+                                response = `
+                        <strong>Ingredients for <span class="math-inline">\{dishDetails\.name\} \(</span>{dishDetails.cuisine.charAt(0).toUpperCase() + dishDetails.cuisine.slice(1)}):</strong>
+                        <ul class="ingredient-list mt-2">${ingList}</ul>
+                        <p class="mt-2 text-emerald-300 italic">Need the preparation instructions too?</p>`;
+                                lastContext = { type: 'ingredients-only', cuisine: dishDetails.cuisine, recipeName: dishDetails.name };
+                            } else if (affirmativeText.includes("instruction") || affirmativeText.includes("recipe") || affirmativeText.includes("step") || affirmativeText.includes("how to make")) {
+                                showRecipe(dishDetails); // showRecipe adds its own message
+                            } else if (affirmativeText === 'yes' || affirmativeText === 'ok' || affirmativeText === 'sure') {
+                                response = `Okay! For ${lastContext.recipeName}, did you want the "ingredients" or the full "recipe/instructions"? Please specify.`;
+                                lastContext = { type: 'dish-followup', cuisine: lastContext.cuisine, recipeName: lastContext.recipeName }; // Keep context
+                            } else if (affirmativeText.includes('no') || affirmativeText.includes('neither')) {
+                                response = "Alright. What else can I help you with?";
+                            } else {
+                                response = `For ${lastContext.recipeName}, I can provide "ingredients" or the "recipe/instructions". What would you like?`;
+                                lastContext = { type: 'dish-followup', cuisine: lastContext.cuisine, recipeName: lastContext.recipeName }; // Keep context
+                            }
+                            break;
+                        case 'unknown':
+                            response = `I'm not sure what you're asking about. I can help with recipes from these cuisines: ${availableCuisines.join(', ')}. Try asking about a specific dish or cuisine!`;
+
+                            break;
+                    }
+                    if (response.trim()) {
+                        addBotMessage(response);
+                    }
+
+                    // Add to interaction history
+                    interactions.push({
+                        type: 'bot',
+                        content: response,
+                        timestamp: new Date().toISOString()
+                    });
+
+                    // Update stats
+                    updateStatsDisplay();
+                    localStorage.setItem('chefCherbenyStats', JSON.stringify({
+                        cuisineCounts,
+                        totalQuestions: totalQuestionsAsked,
+                        favoriteDish: favoriteDish ? `${favoriteDish.name} (${favoriteDish.cuisine})` : ''
+                    }));
+
+                }, 1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+            }
+            // Add user message to chat
+            function addUserMessage(message) {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message user-message p-3 rounded-lg mb-2 ml-auto';
+                messageElement.textContent = message;
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            // Add bot message to chat
+            function addBotMessage(message) {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message bot-message p-3 rounded-lg mb-2';
+                messageElement.innerHTML = message;
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            // Send message handler
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (!message) return;
+                addUserMessage(message);
+                interactions.push({
+                    type: 'user',
+                    content: message,
+                    timestamp: new Date().toISOString()
+                });
+                processUserMessage(message);
+                userInput.value = '';
+                localStorage.setItem('chefCherbenyInteractions', JSON.stringify(interactions));
+                updateInteractionHistory();
+            }
+
+            // File loading handlers (showLoadMenu, handleFoodFileUpload, handleQuizFileUpload)
+            //HER WAS HANDLINGFILEUPLOAD
+            function updateCuisineSelector() {
+                document.querySelectorAll('.cuisine-btn').forEach(btn => {
+                    const cuisine = btn.dataset.cuisine;
+                    // MODIFIED LINE: Add 'trivia' to the list of cuisines that should NOT be disabled by this logic
+                    if (cuisine && cuisine !== 'joke' && cuisine !== 'quiz' && cuisine !== 'trivia') {
+                        btn.disabled = !recipes[cuisine] || Object.keys(recipes[cuisine]).length === 0;
+                    }
+                });
+            }
+
+
+            // App initialization
+            function initApp() {
+
+                const savedUsername = localStorage.getItem('chefCherbenyUsername');
+                const savedInteractions = localStorage.getItem('chefCherbenyInteractions');
+                const savedStats = localStorage.getItem('chefCherbenyStats');
+                const savedQuizStats = localStorage.getItem('chefCherbenyQuizStats');
+                if (savedUsername) {
+                    username = savedUsername;
+                    welcomeModal.classList.add('hidden');
+                    sidebarUsername.innerHTML = `Username: <span style="color: #3d2b1f; background-color: #ffdab3; padding: 2px 6px; border-radius: 4px;">${username}</span>`;
+
+                    addBotMessage(greetings[Math.floor(Math.random() * greetings.length)]);
+                }
+                if (savedInteractions) interactions = JSON.parse(savedInteractions);
+                if (savedStats) {
+                    const stats = JSON.parse(savedStats);
+                    cuisineCounts = stats.cuisineCounts || cuisineCounts;
+                    totalQuestionsAsked = stats.totalQuestions || 0;
+                    favoriteJokeText = stats.favoriteJoke || '';
+                }
+                if (savedQuizStats) quizStatsData = JSON.parse(savedQuizStats);
+                updateInteractionHistory();
+                updateStatsDisplay();
+                updateQuizStatsDisplay();
+            }
+
+            // Event listeners
+            function setupEventListeners() {
+                startChatBtn.addEventListener('click', () => {
+
+                    username = usernameInput.value.trim();
+
+                    if (username) {
+                        //playStartupSound();
+                        localStorage.setItem('chefCherbenyUsername', username);
+                        sidebarUsername.innerHTML = `Username: <span class="text-peachy-300">${username}</span>`;
+                        welcomeModal.classList.add('hidden');
+                        addBotMessage(`Welcome, ${username}! ${greetings[Math.floor(Math.random() * greetings.length)]}`);
+                        playStartupSound();
+                    }
+                });
+
+                sendBtn.addEventListener('click', () => {
+                    const msg = userInput.value.trim();
+                    if (!msg) return;
+                    addUserMessage(msg);
+                    processUserMessage(msg);
+                    userInput.value = '';
+                });
+                userInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const msg = userInput.value.trim();
+                        if (!msg) return;
+                        addUserMessage(msg);
+                        processUserMessage(msg);
+                        userInput.value = '';
+                    }
+                });
+                if (exitBtn && goodbyePopup && goodbyeMessage) {
+                    exitBtn.addEventListener('click', () => {
+                        goodbyeMessage.innerText = `Thanks for chatting, ${username || 'friend'}! Want to leave or stay?`;
+                        showGoodbyePopup();
+                    });
+                }
+
+                if (stayBtn) {
+                    stayBtn.addEventListener('click', hideGoodbyePopup);
+                }
+
+                if (leaveBtn) {
+                    leaveBtn.addEventListener('click', () => {
+                        // Hide goodbye popup with animation
+                        hideGoodbyePopup();
+
+                        // Clear saved username
+                        localStorage.removeItem('chefCherbenyUsername');
+                        username = '';
+
+                        // Show the welcome modal again
+                        welcomeModal.classList.remove('hidden');
+                        // Optionally clear the chat/messages if needed:
+                        resetStats();
+                    });
+                }
+
+                analyticsBtn.addEventListener('click', () => sidebar.classList.add('open'));
+                closeSidebar.addEventListener('click', () => sidebar.classList.remove('open'));
+
+
+                cuisineButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+
+                        if (button.classList.contains('trivia-btn')) return;
+
+                        const cuisine = button.getAttribute('data-cuisine');
+                        console.log("Button clicked:", cuisine);
+
+                        if (cuisine === 'joke') {
+                            askForJoke();
+                        } else if (cuisine === 'quiz') {
+                            const cuisines = Object.keys(quizQuestions);
+                            const randomIndex = Math.floor(Math.random() * cuisines.length);
+                            const randomCuisine = cuisines[randomIndex];
+                            userInput.value = `can we do quiz on ${randomCuisine} cuisine`;
+                            sendMessage();
+                        } else if (cuisine === 'trivia') {
+                            // Toggle visibility of trivia options and main selector
+                            triviaOptions.classList.toggle('hidden');
+                            cuisineSelector.classList.toggle('hidden');
+                            // Crucially, do NOT set userInput.value or call sendMessage() here
+                        } else {
+                            userInput.value = `Show me ${cuisine} cuisine`;
+                            sendMessage();
+                        }
+                    });
+                });
+
+                const suggestionButton = document.createElement('button');
+                suggestionButton.dataset.cuisine = 'suggest';
+                suggestionButton.className = 'cuisine-btn bg-emerald-800 hover:bg-emerald-700 text-lime-100 px-3 py-1 rounded-full text-sm flex items-center shadow-md';
+                suggestionButton.innerHTML = '<i class="fas fa-lightbulb mr-1"></i> Suggest Dishes';
+                suggestionButton.addEventListener('click', () => showDishSuggestions());
+                //loaddatabtn
+
+            }
+
+
+            //loaddatabtn
+            document.querySelectorAll('#trivia-options > .cuisine-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const triviaCuisine = e.currentTarget.getAttribute('data-trivia');
+                    console.log("Trivia submenu button clicked:", triviaCuisine);
+
+                    if (cuisineTrivia && cuisineTrivia[triviaCuisine] && cuisineTrivia[triviaCuisine].length > 0) {
+                        const randomFact = cuisineTrivia[triviaCuisine][
+                            Math.floor(Math.random() * cuisineTrivia[triviaCuisine].length)
+                        ];
+                        const formattedCuisine = triviaCuisine.charAt(0).toUpperCase() + triviaCuisine.slice(1);
+
+                        const triviaMessage = `
+                <div class="flex items-start">
+                    <span class="emoji mr-2" style="color: var(--highlight-gold);">🧠</span>
+                    <div>
+                        <strong class="font-semibold text-emerald">${formattedCuisine} Trivia:</strong>
+                        <p class="mt-1">${randomFact}</p>
+                        ${quizQuestions[triviaCuisine] && quizQuestions[triviaCuisine].length >= 5
+                                ? `<p class="mt-3 italic">That was fun! Want to try a quiz?</p>
+                               <button onclick="startQuiz('${triviaCuisine}')" 
+                                       class="mt-2 px-3 py-1 bg-peachy text-black rounded hover:bg-emerald-600">
+                                   Yes, quiz me!
+                               </button>`
+                                : `<p class="mt-3 italic">Trivia only available right now for ${formattedCuisine}.</p>`
+                            }
+                    </div>
+                </div>
+            `;
+                        addBotMessage(triviaMessage);
+                    } else {
+                        addBotMessage(`Sorry, I don't have any trivia for ${triviaCuisine} cuisine right now.`);
+                    }
+
+                    // Hide trivia options, show back cuisine selector
+                    triviaOptions.classList.add('hidden');
+                    cuisineSelector.classList.remove('hidden');
+                });
+            });
+
+
+            document.addEventListener('DOMContentLoaded', () => {
+                initApp();
+                setupEventListeners();
+            });
+
+            // Add click event handling for quiz options
+            // Add this near your other event listeners
+            document.addEventListener('click', function (e) {
+                const quizOption = e.target.closest('.quiz-option');
+                if (quizOption && quizSession && !quizOption.disabled) {
+                    const selectedIndex = parseInt(quizOption.getAttribute('data-index'));
+                    handleQuizUserAnswer(selectedIndex);
+                }
+            });
+
+            //restart
+            function resetStats() {
+                totalQuestionsAsked = 0;
+                favoriteJokeText = '';
+                chatMessages.innerHTML = '';
+                quizStatsData = '';
+                favoriteJokeText = '';
+                cuisineStatsHTML = '';
+                cuisineCounts = 0;
+                interactions = [];
+                // Reset all cuisine counts to zero
+                for (const cuisine in cuisineCounts) {
+                    cuisineCounts[cuisine] = 0;
+                }
+
+
+                updateStatsDisplay();
+                updateQuizStatsDisplay();
+                updateInteractionHistory();
+                cuisineStats.innerHTML = '<p class="text-gray-400 italic">No cuisine preferences recorded</p>';
+            }
+            function showGoodbyePopup() {
+                goodbyePopup.classList.remove('hidden');
+                // Trigger reflow for animation
+                void goodbyeContent.offsetWidth;
+                goodbyeContent.classList.remove('scale-95', 'opacity-0');
+                goodbyeContent.classList.add('scale-100', 'opacity-100');
+            }
+
+            function hideGoodbyePopup() {
+                goodbyeContent.classList.remove('scale-100', 'opacity-100');
+                goodbyeContent.classList.add('scale-95', 'opacity-0');
+
+                // Hide after animation ends (300ms)
+                setTimeout(() => {
+                    goodbyePopup.classList.add('hidden');
+                }, 300);
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                // Preload the sound when page loads
+                loadStartupSound();
+
+                // Play when user first interacts (to comply with autoplay policies)
+                document.body.addEventListener('click', function firstInteraction() {
+                    //playStartupSound();
+                    // Remove after first interaction to avoid repeated plays
+                    document.body.removeEventListener('click', firstInteraction);
+                });
+            });
+            exitBtn.addEventListener('click', () => {
+                goodbyeMessage.innerText = `Thanks for chatting, ${username || 'friend'}! Want to leave or stay?`;
+                goodbyePopup.classList.remove('hidden');
+            });
+
+            function hideGoodbye() {
+                goodbyePopup.classList.add('hidden');
+            }
+            function exitChat() {
+                welcomeModal.classList.remove('hidden');
+                chatMessages.innerHTML = "";
+                goodbyePopup.classList.add('hidden');
+                showGoodbye();
+            }
+            document.getElementById("clear-chat-btn").addEventListener("click", () => {
+                chatMessages.innerHTML = ""; // clear messages from chat
+                interactions = [];           // clear from memory
+                updateInteractionHistory();  // refresh sidebar
+            });
+
+        </script>
+    </div>
+    </div>
+</body>
+
+</html>
